@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Sridhar Pooja
+
+<img src="images/wowwwp.png" width="200px">
+
+[[github](http://github.com/wowwwp)]
+[[portfolio](team/wowwwp.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
+
 ### Felicia Hwang
 
 <img src="images/feliciahmq.png" width="200px">
