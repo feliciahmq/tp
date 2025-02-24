@@ -13,10 +13,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Felicia Hwang
 
-<img src="images/feliciahmq.png" width="200px">
+<img src="images/johannsenlum.png" width="200px">
 
-[[linkedin](https://www.linkedin.com/in/feliciahmq/)]
-[[github](https://github.com/feliciahmq)]
-[[portfolio](team/feliciahmq.md)]
+[[linkedin](https://www.linkedin.com/in/johannsenlum/)]
+[[github](https://github.com/johannsenlum)]
+[[portfolio](team/johannsenlum.md)]
 
 * Role: Documentation
