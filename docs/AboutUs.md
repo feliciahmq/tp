@@ -19,4 +19,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/codebreaker64)]
 [[portfolio](team/kaijie.md)]
 
-* Role: Code Quality
+* Role: Developer
+* Responsibilities: Code Quality
