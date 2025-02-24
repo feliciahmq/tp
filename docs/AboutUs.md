@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Johannsen Lum
+
+<img src="images/johannsenlum.png" width="200px">
+
+[[linkedin](https://www.linkedin.com/in/johannsenlum/)]
+[[github](https://github.com/johannsenlum)]
+[[portfolio](team/johannsenlum.md)]
+
+* Role: Documentation
+
 ### Kai Jun
 
 <img src="images/kaidama97.png" width="200px">
@@ -23,12 +33,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * In charge of: `commands`
 
 ### Basil
-
 <img src="images/basil-boh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/basil-boh-81933b18b/)]
+[[github](https://github.com/basil-boh)]
+[[portfolio](team/basil-boh.md)]
+
+* Role: Goat
+* Responsibilities: Ensure project deliverables are done on time and in the right format
 
 ### Fong Kai Jie
 
@@ -39,7 +51,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kaijie.md)]
 
 * Role: Developer
-* Responsibilities: Ensure project deliverables are done on time and in the right format
 * Responsibilities: Code Quality
 
 ### Sridhar Pooja
@@ -61,4 +72,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/feliciahmq.md)]
 
 * Role: Documentation
-
