@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Felicia Hwang
+### Johannsen Lum
 
 <img src="images/johannsenlum.png" width="200px">
 
