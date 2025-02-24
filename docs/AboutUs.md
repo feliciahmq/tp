@@ -11,6 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Basil
+
+<img src="images/basil-boh.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
 ### Fong Kai Jie
 
 <img src="images/codebreaker64.png" width="200px">
@@ -20,6 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kaijie.md)]
 
 * Role: Developer
+* Responsibilities: Ensure project deliverables are done on time and in the right format
 * Responsibilities: Code Quality
 
 ### Sridhar Pooja
