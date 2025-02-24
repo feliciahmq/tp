@@ -11,6 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Fong Kai Jie
+
+<img src="images/codebreaker64.png" width="200px">
+
+[[homepage](https://www.linkedin.com/in/fong-kai-jie/)]
+[[github](https://github.com/codebreaker64)]
+[[portfolio](team/kaijie.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
 ### Sridhar Pooja
 
 <img src="images/wowwwp.png" width="200px">
@@ -30,3 +41,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/feliciahmq.md)]
 
 * Role: Documentation
+
