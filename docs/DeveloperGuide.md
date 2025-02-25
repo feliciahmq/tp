@@ -300,31 +300,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ReserveMate` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Create a New Reservation**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new reservation with customer name, number of diners, contact number, and date-time.
+2.  ReserveMate validates the input.
+3.  ReserveMate adds the reservation and confirms success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Invalid customer name.
+    * 2a1. ReserveMate shows an error message:
+        * `Invalid customer name: Name cannot contain numbers.` (if it contains numerical values)
+        * `Invalid customer name: Name must not exceed 50 characters.` (if it exceeds 50 characters)
+    * Use case resumes at step 1.
 
-  Use case ends.
+* 2b. Invalid number of diners.
+    * 2b1. ReserveMate shows an error message:
+        * `Invalid reservation: Maximum number of diners is 10.` (if >10)
+        * `Invalid reservation: Number of diners must be at least 1.` (if <1)
+    * Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+* 2c. Invalid contact number.
+    * 2c1. ReserveMate shows an error message:
+        * `Invalid contact number: Must start with country code '65'.` (if it does not start with "65")
+        * `Invalid contact number: Must contain exactly 10 digits.` (if it is not exactly 10 digits long)
+        * `Invalid contact number: Must start with '65' followed by 8 or 9.` (if the third digit is not 8 or 9)
+    * Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 2d. Invalid date and time.
+    * 2d1. ReserveMate shows an error message:
+        * `Invalid date format: Must be in YYYY-MM-DD HHmm format.` (if the format is incorrect)
+        * `Invalid reservation time: Restaurant operates between 10:00 and 22:00.` (if outside restaurant hours)
+        * `Invalid date: Cannot check or reserve dates beyond allowed range.` (if it is in the past beyond the allowed range)
+    * Use case resumes at step 1.
 
-      Use case resumes at step 2.
-
+ 
 *{More to be added}*
 
 ### Non-Functional Requirements
