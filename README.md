@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103-F08-1/tp/actions)
 
 [![codecov](https://codecov.io/gh/AY2425S2-CS2103-F08-1/tp/graph/badge.svg?token=8D3EDHO8BA)](https://codecov.io/gh/AY2425S2-CS2103-F08-1/tp)
 
@@ -10,6 +10,7 @@
 1. [Introduction](#introduction)
 2. [Features](#features)
 3. [Command Summary](#command-summary)
+4. [Acknowledgement](#acknowledgement)
 
 ## Introduction
 Welcome to **ReserveMate**, your go-to application for managing reservations efficiently. ReserveMate helps you track **reservations, schedules, and customer details**. This guide provides instructions on how to use ReserveMate effectively.
@@ -93,4 +94,7 @@ Find Bobby
 | View Schedule | `schedule` | View the entire reservation schedule |
 | Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information |
 
+
+### Acknowledgement
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
