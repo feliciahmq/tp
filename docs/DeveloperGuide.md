@@ -300,9 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ReserveMate` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Create a New Reservation**
+**Use case: UC02 - Create A New Reservation**
 
 **MSS**
 
