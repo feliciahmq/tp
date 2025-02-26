@@ -63,7 +63,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 1a. User enters an invalid command.
 
   * 1a1. ReserveMate shows an error message.
-  
+
   Use Case ends.
 
 * 2a. The list is empty.
@@ -120,7 +120,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 **MSS**
 
 1. User requests to view all available commands by entering "list" (not case-sensitive).
-2. ReserveMate displays the list of available commands to user. 
+2. ReserveMate displays the list of available commands to user.
 
     Use case ends.
 
