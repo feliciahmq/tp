@@ -156,14 +156,14 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 *{More to be added}*
 
 
-### Non-Functional Requirements 
-1) The system should be primarily command-line based. 
+### Non-Functional Requirements
+1) The system should be primarily command-line based.
 2) A user who can type fast should be able to accomplish tasks faster through this system compared to using 
-one which relies on the mouse. 
+one which relies on the mouse.
 3) The system can be used by a user who can understand and write english easily with a minimal learning curve.
 4) The system should use Gradle as a build automation tool, and it must run on any OS which has Java 17.
 5) All reservation details will be stored in a file saved locally which should allow read and write access to the
 system.
-6) The maximum number of reservation the system can hold is 100. 
+6) The maximum number of reservation the system can hold is 100.
 7) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
 8) The system is designed for a single-user. 
