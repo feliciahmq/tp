@@ -115,6 +115,23 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
         * `Invalid reservation time: Restaurant operates between 10:00 and 21:00.` (if outside restaurant hours, considering last reservation at 21:00)
     * Use case resumes at step 1.
 
+
+**Use case: UC04 - Delete Reservation**
+
+**MSS**
+
+1. User requests to delete a reservation by providing an index
+2. ReserveMate deletes the particular reservation 
+
+    Use case ends.
+
+**Extensions**
+* 1a. The index is invalid
+  * 1a1. ReserveMate prompts the user to enter a valid index
+  
+    Use case resumes at step 1.
+
+
 **Use case: UC05 - View Schedule**
 
 **MSS**
