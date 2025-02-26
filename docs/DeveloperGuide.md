@@ -47,8 +47,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 (For all use cases below, the **System** is the `ReserveMate` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: View Schedule Details**
-Use case: UC01 - View Schedule Details
+**Use case: UC01 - View Schedule Details**
 
 **MSS**
 
@@ -56,6 +55,8 @@ Use case: UC01 - View Schedule Details
 2.  ReserveMate displays the schedule list
 3.  User requests to view a specific schedule details in the list
 4.  ReserveMate displays the schedule details in a popup box
+
+    Use case ends.
 
 **Extensions**
 
@@ -75,8 +76,46 @@ Use case: UC01 - View Schedule Details
 
       Use case resumes at step 2.
 
-**Use case: View Schedule**
-Use case: UC05 - View Schedule
+**Use case: UC02 - Create A New Reservation**
+
+**MSS**
+
+1.  User requests to add a new reservation with customer name, number of diners, contact number, and date-time.
+2.  ReserveMate validates the input.
+3.  ReserveMate adds the reservation and confirms success.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid customer name.
+    * 2a1. ReserveMate shows an error message:
+        * `Invalid customer name: Name cannot contain numbers.` (if it contains numerical values)
+        * `Invalid customer name: Name must not exceed 50 characters.` (if it exceeds 50 characters)
+    * Use case resumes at step 1.
+
+* 2b. Invalid number of diners.
+    * 2b1. ReserveMate shows an error message:
+        * `Invalid reservation: Maximum number of diners is 10.` (if >10)
+        * `Invalid reservation: Number of diners must be at least 1.` (if <1)
+    * Use case resumes at step 1.
+
+* 2c. Invalid contact number.
+    * 2c1. ReserveMate shows an error message:
+        * `Invalid contact number: Must start with country code '65'.` (if it does not start with "65")
+        * `Invalid contact number: Must contain exactly 10 digits.` (if it is not exactly 10 digits long)
+        * `Invalid contact number: Must start with '65' followed by 8 or 9.` (if the third digit is not 8 or 9)
+    * Use case resumes at step 1.
+
+* 2d. Invalid date and time.
+    * 2d1. ReserveMate shows an error message:
+        * `Invalid date format: Must be in YYYY-MM-DD HHmm format.` (if the format is incorrect)
+        * `Invalid date: Cannot check or reserve dates beyond allowed range.` (if it is in the past beyond the allowed range)
+        * `Invalid date: Nonexistent date entered (e.g., 29, 30, 31 February).` (if an invalid date is provided)
+        * `Invalid reservation time: Restaurant operates between 10:00 and 21:00.` (if outside restaurant hours, considering last reservation at 21:00)
+    * Use case resumes at step 1.
+
+**Use case: UC05 - View Schedule**
 
 **MSS**
 
