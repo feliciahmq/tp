@@ -115,6 +115,22 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
         * `Invalid reservation time: Restaurant operates between 10:00 and 21:00.` (if outside restaurant hours, considering last reservation at 21:00)
     * Use case resumes at step 1.
 
+**Use case: UC03 - Listing Commands**
+
+**MSS**
+
+1. User requests to view all available commands by entering "list" (not case-sensitive).
+2. ReserveMate displays the list of available commands to user. 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command format.
+
+    * 1a1. ReserveMate shows the error message: "Invalid command entered!"
+    
+      Use case ends.
 
 **Use case: UC04 - Delete Reservation**
 
@@ -167,3 +183,22 @@ system.
 6) The maximum number of reservation the system can hold is 100.
 7) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
 8) The system is designed for a single-user. 
+
+### Glossary
+
+1. **Index**: A whole number representing the position of a reservation in the system, ranging from 1 to the total number of reservations.
+
+
+2. **Contact Number**: A Singapore phone number hatt must start with "65" and be exactly 10 digits long, with the third digit being 8 or 9.
+
+
+3. **Reservation**: A booking made by a customer to accommodate 1 - 10 diners at a specific date and time.
+
+
+4. **Customer Name**: The full name of the individual making the reservation. It must not contain numbers, special symbols and should be between 2 - 50 characters.
+
+
+5. **Find**: A feature that allows users to search for reservations based on a customer’s name.
+
+
+6. **User**: Restaurant manager using ReserveMates 
