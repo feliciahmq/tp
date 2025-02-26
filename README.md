@@ -20,7 +20,7 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 ### Feature: Reservation details
 **Purpose:** Show details of a specific reservation to user.
 
-**Command format:** `show/Show <INDEX>`
+**Command format:** `show <INDEX>`
 
 **Example commands:**
 ```
@@ -31,7 +31,7 @@ Show 1
 ### Feature: Create a new reservation
 **Purpose:** The create function will enable users to add new reservations to reserve by capturing relevant details such as name, number of diners, contact information, date and time of reservation.
 
-**Command format:** `add/Add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>`
+**Command format:** `add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>`
 
 **Example commands:**
 ```
@@ -42,7 +42,7 @@ Add JOHN DOE,2,6591234567,2025-02-23 1800
 ### Feature: List
 **Purpose:** Display the available list of commands to the user.
 
-**Command format:** `list/List`
+**Command format:** `list`
 
 **Example commands:**
 ```
@@ -53,7 +53,7 @@ List
 ### Feature: Delete reservation by reservation number
 **Purpose:** To delete a reservation.  
 
-**Command format:** `delete/Delete <INDEX>`
+**Command format:** `delete <INDEX>`
 
 **Example commands:**
 ```
@@ -64,7 +64,7 @@ Delete 2
 ### Feature: View Schedule
 **Purpose:** Allow the user to view the entire reservation schedule without specifying a date range.
 
-**Command format:** `schedule/Schedule`
+**Command format:** `schedule`
 
 **Example commands:**
 ```
@@ -75,7 +75,7 @@ Schedule
 ### Feature: Find reservation by name
 **Purpose:** Get customer information easily
 
-**Command format:** `find/Find <CUSTOMER NAME>`
+**Command format:** `find <CUSTOMER NAME>`
 
 **Example commands:**
 ```
@@ -86,11 +86,11 @@ Find Bobby
 ## Command Summary
 | Feature | Command Format | Purpose |
 |---------|---------------|---------|
-| Reservation details | `show/Show <INDEX>` | Show details of reservation to user |
-| Create a new reservation | `add/Add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>` | Add new reservations to the address book |
-| List | `list/List` | Display the available list of commands to the user |
-| Delete reservation | `delete/Delete <INDEX>` | Remove a reservation from the system |
-| View Schedule | `schedule/Schedule` | View the entire reservation schedule |
-| Find reservation by name | `find/Find <CUSTOMER NAME>` | Retrieve customer reservation information |
+| Reservation details | `show <INDEX>` | Show details of reservation to user |
+| Create a new reservation | `add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>` | Add new reservations to the address book |
+| List | `list` | Display the available list of commands to the user |
+| Delete reservation | `delete <INDEX>` | Remove a reservation from the system |
+| View Schedule | `schedule` | View the entire reservation schedule |
+| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information |
 
 
