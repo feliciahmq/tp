@@ -64,7 +64,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
   * 1a1. ReserveMate shows an error message.
   
-    Use Case ends.
+  Use Case ends.
 
 * 2a. The list is empty.
 
@@ -129,7 +129,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 1a. User enters an invalid command format.
 
     * 1a1. ReserveMate shows the error message: "Invalid command entered!"
-    
+
       Use case ends.
 
 **Use case: UC04 - Delete Reservation**
@@ -144,7 +144,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 **Extensions**
 * 1a. The index is invalid.
   * 1a1. ReserveMate prompts the user to enter a valid index.
-  
+
     Use case resumes at step 1.
 
 
@@ -152,7 +152,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 **MSS**
 
-1.  User requests to view schedule 
+1.  User requests to view schedule
 2.  ReserveMate retrieves and displays all existing reservations
 
     Use case ends.
@@ -162,19 +162,19 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 1a. User enters an invalid command.
 
   * 1a1. ReserveMate shows an error message.
-  
+
     Use Case ends.
 
 * 2a. The list is empty.
 
   Use case ends.
-    
+
 *{More to be added}*
 
 
 ### Non-Functional Requirements
 1) The system should be primarily command-line based.
-2) A user who can type fast should be able to accomplish tasks faster through this system compared to using 
+2) A user who can type fast should be able to accomplish tasks faster through this system compared to using
 one which relies on the mouse.
 3) The system can be used by a user who can understand and write english easily with a minimal learning curve.
 4) The system should use Gradle as a build automation tool, and it must run on any OS which has Java 17.
@@ -182,7 +182,7 @@ one which relies on the mouse.
 system.
 6) The maximum number of reservation the system can hold is 100.
 7) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
-8) The system is designed for a single-user. 
+8) The system is designed for a single-user.
 
 ### Glossary
 
@@ -201,4 +201,4 @@ system.
 5. **Find**: A feature that allows users to search for reservations based on a customer’s name.
 
 
-6. **User**: Restaurant manager using ReserveMates 
+6. **User**: Restaurant manager using ReserveMates
