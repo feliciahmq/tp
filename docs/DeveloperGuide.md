@@ -336,8 +336,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2d. Invalid date and time.
     * 2d1. ReserveMate shows an error message:
         * `Invalid date format: Must be in YYYY-MM-DD HHmm format.` (if the format is incorrect)
-        * `Invalid reservation time: Restaurant operates between 10:00 and 22:00.` (if outside restaurant hours)
-        * `Invalid date: Cannot check or reserve dates beyond allowed range.` (if it is in the past beyond the allowed range)
+          `Invalid date: Cannot check or reserve dates beyond allowed range.` (if it is in the past beyond the allowed range)
+          `Invalid date: Nonexistent date entered (e.g., 29, 30, 31 February).` (if an invalid date is provided)
+          `Invalid reservation time: Restaurant operates between 10:00 and 21:00.` (if outside restaurant hours, considering last reservation at 21:00)
+        * 
     * Use case resumes at step 1.
 
  
