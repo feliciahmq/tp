@@ -4,6 +4,24 @@
   pageNav: 3
 ---
 
+# Developer Guide
+
+**Team**: F08-1
+
+**Name**: ReserveMate
+
+**Target User Profile**: Our application is designed for small restaurant owners who have to manage numerous customer reservations and contact details. These users often operate in fast-paced environments and need a simple yet effective system to organize all reservations.
+
+
+**Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to customer contact details.
+
+# Table of Contents
+1. [User stories](#user-stories)
+2. [User cases](#use-cases)
+3. [Non-functional Requirements](#non-functional-requirements)
+4. [Glossary](#glossary)
+
+
 ### User stories
 
 Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Extension) - `*`
@@ -152,8 +170,8 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 **MSS**
 
-1.  User requests to view schedule
-2.  ReserveMate retrieves and displays all existing reservations
+1.  User requests to view schedule.
+2.  ReserveMate retrieves and displays all existing reservations.
 
     Use case ends.
 
@@ -168,6 +186,36 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 2a. The list is empty.
 
   Use case ends.
+
+**Use case: UC06 - Find Reservation by Name**
+
+**MSS**
+
+1.  User enters name to find reservation.
+
+2.  ReserveMate shows a list of reservation where customer name contains the input name.
+
+
+Use case ends.
+
+**Extensions**
+
+* 1a. ReserveMate detects an error in the entered data. 
+
+  * 1a1. ReserveMate requests for the correct data.
+
+  * 1a2. User enters new data.
+  
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+  
+  Use case resumes from step 2.
+
+* 1b. ReserveMate found no matches.
+
+  * 1b1. ReserveMate shows No reservation found for NAME.
+  
+  Use case ends.
+
 
 *{More to be added}*
 
