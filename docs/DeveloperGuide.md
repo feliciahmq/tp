@@ -237,7 +237,7 @@ system.
 1. **Index**: A whole number representing the position of a reservation in the system, ranging from 1 to the total number of reservations.
 
 
-2. **Contact Number**: A Singapore phone number hatt must start with "65" and be exactly 10 digits long, with the third digit being 8 or 9.
+2. **Contact Number**: A Singapore phone number that must start with "65" and be exactly 10 digits long, with the third digit being 8 or 9.
 
 
 3. **Reservation**: A booking made by a customer to accommodate 1 - 10 diners at a specific date and time.
