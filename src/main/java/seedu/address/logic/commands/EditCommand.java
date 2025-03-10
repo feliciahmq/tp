@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
@@ -23,6 +25,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -43,10 +47,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS] "
+            + "[" + PREFIX_DATE_TIME + "DATETIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_NUMBER_OF_DINERS + "5 "
+            + PREFIX_DATE_TIME + "2021-12-31 1800 ";
 
     public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -101,9 +109,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
         Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
         Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
+        Diners updateDiners = editCustomerDescriptor.getDiners().orElse(customerToEdit.getDiners());
+        DateTime updateDateTime = editCustomerDescriptor.getDateTime().orElse(customerToEdit.getDateTime());
         Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updateDiners, updateDateTime, updatedTags);
     }
 
     @Override
@@ -139,6 +150,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Diners diners;
+        private DateTime dateTime;
         private Set<Tag> tags;
 
         public EditCustomerDescriptor() {}
@@ -152,6 +165,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setDiners(toCopy.diners);
+            setDateTime(toCopy.dateTime);
             setTags(toCopy.tags);
         }
 
@@ -159,7 +174,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, diners, dateTime, tags);
         }
 
         public void setName(Name name) {
@@ -192,6 +207,22 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setDiners(Diners diners) {
+            this.diners = diners;
+        }
+
+        public Optional<Diners> getDiners() {
+            return Optional.ofNullable(diners);
+        }
+
+        public void setDateTime(DateTime dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public Optional<DateTime> getDateTime() {
+            return Optional.ofNullable(dateTime);
         }
 
         /**
@@ -227,6 +258,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditCustomerDescriptor.phone)
                     && Objects.equals(email, otherEditCustomerDescriptor.email)
                     && Objects.equals(address, otherEditCustomerDescriptor.address)
+                    && Objects.equals(diners, otherEditCustomerDescriptor.diners)
+                    && Objects.equals(dateTime, otherEditCustomerDescriptor.dateTime)
                     && Objects.equals(tags, otherEditCustomerDescriptor.tags);
         }
 
@@ -237,6 +270,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("diners", diners)
+                    .add("dateTime", dateTime)
                     .add("tags", tags)
                     .toString();
         }
