@@ -9,9 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, it should be 10 digits long,"
-                    + "start with 65 and the third digit should be 8 or 9";
-    public static final String VALIDATION_REGEX = "^65[89]\\d{7}$";
+        "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+    public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 
     /**

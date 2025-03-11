@@ -21,7 +21,7 @@ import seedu.address.model.customer.exceptions.DuplicateCustomerException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Customer#isSameCustomer(Customer)
+ * @see Customer#isSameReservation(Customer)
  */
 public class UniqueCustomerList implements Iterable<Customer> {
 
@@ -34,7 +34,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
      */
     public boolean contains(Customer toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameCustomer);
+        return internalList.stream().anyMatch(toCheck::isSameReservation);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
             throw new CustomerNotFoundException();
         }
 
-        if (!target.isSameCustomer(editedCustomer) && contains(editedCustomer)) {
+        if (!target.isSameReservation(editedCustomer) && contains(editedCustomer)) {
             throw new DuplicateCustomerException();
         }
 
@@ -141,7 +141,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
     private boolean customersAreUnique(List<Customer> customers) {
         for (int i = 0; i < customers.size() - 1; i++) {
             for (int j = i + 1; j < customers.size(); j++) {
-                if (customers.get(i).isSameCustomer(customers.get(j))) {
+                if (customers.get(i).isSameReservation(customers.get(j))) {
                     return false;
                 }
             }

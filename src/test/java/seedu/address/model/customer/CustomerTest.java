@@ -25,30 +25,30 @@ public class CustomerTest {
     }
 
     @Test
-    public void isSameCustomer() {
+    public void isSameReservation() {
         // same object -> returns true
-        assertTrue(ALICE.isSameCustomer(ALICE));
+        assertTrue(ALICE.isSameReservation(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSameCustomer(null));
+        assertFalse(ALICE.isSameReservation(null));
 
-        // same name, all other attributes different -> returns true
-        Customer editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name, phone number and date time, all other attributes different -> returns true
+        Customer editedAlice = new CustomerBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameCustomer(editedAlice));
+        assertTrue(ALICE.isSameReservation(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new CustomerBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameCustomer(editedAlice));
+        assertFalse(ALICE.isSameReservation(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Customer editedBob = new CustomerBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameCustomer(editedBob));
+        assertFalse(BOB.isSameReservation(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new CustomerBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameCustomer(editedBob));
+        assertFalse(BOB.isSameReservation(editedBob));
     }
 
     @Test
@@ -93,7 +93,8 @@ public class CustomerTest {
     @Test
     public void toStringMethod() {
         String expected = Customer.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", diners=" + ALICE.getDiners()
+                + ", dateTime=" + ALICE.getDateTime() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

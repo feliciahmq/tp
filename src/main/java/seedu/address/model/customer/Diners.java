@@ -54,7 +54,7 @@ public class Diners {
         }
 
         Diners otherDiners = (Diners) other;
-        return value == otherDiners.value;
+        return value.equals(otherDiners.value);
     }
 
     @Override
