@@ -19,11 +19,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
+            + ": Deletes the reservation identified by the index number used in the reservation list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer: %1$s";
+    public static final String MESSAGE_DELETE_RESERVATION_SUCCESS = "Reservation %1$s deleted successfully";
 
     private final Index targetIndex;
 
@@ -37,12 +37,12 @@ public class DeleteCommand extends Command {
         List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
         }
 
         Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCustomer(customerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, Messages.format(customerToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, Messages.format(customerToDelete)));
     }
 
     @Override
