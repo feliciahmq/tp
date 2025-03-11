@@ -76,7 +76,7 @@ public class Customer {
     }
 
     /**
-     * Returns true if both customers have the same name.
+     * Returns true if both customers have the phone number and reservation date and time.
      * This defines a weaker notion of equality between two customers.
      */
     public boolean isSameCustomer(Customer otherCustomer) {
@@ -85,7 +85,8 @@ public class Customer {
         }
 
         return otherCustomer != null
-                && otherCustomer.getName().equals(getName());
+                && otherCustomer.getPhone().equals(getPhone())
+                && otherCustomer.getDateTime().equals(getDateTime());
     }
 
     /**
