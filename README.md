@@ -52,7 +52,7 @@ List
 ```
 
 ### Feature: Delete reservation by reservation number
-**Purpose:** To delete a reservation.  
+**Purpose:** To delete a reservation.
 
 **Command format:** `delete <INDEX>`
 
