@@ -30,7 +30,7 @@ public class TypicalCustomers {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDiners("5")
-            .withDateTime("2026-10-10 1800")
+            .withDateTime("2040-10-10 1800")
             .withTags("friends")
             .build();
 
@@ -39,7 +39,7 @@ public class TypicalCustomers {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDiners("3")
-            .withDateTime("2026-12-25 1200")
+            .withDateTime("2040-12-25 1200")
             .withTags("owesMoney", "friends")
             .build();
 
@@ -48,7 +48,7 @@ public class TypicalCustomers {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withDiners("2")
-            .withDateTime("2026-11-15 1400")
+            .withDateTime("2040-11-15 1400")
             .build();
 
     public static final Customer DANIEL = new CustomerBuilder().withName("Daniel Meier")
@@ -56,7 +56,7 @@ public class TypicalCustomers {
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
             .withDiners("4")
-            .withDateTime("2026-09-20 1600")
+            .withDateTime("2040-09-20 1600")
             .withTags("friends")
             .build();
 
@@ -65,7 +65,7 @@ public class TypicalCustomers {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withDiners("1")
-            .withDateTime("2026-08-05 1000")
+            .withDateTime("2040-08-05 1000")
             .build();
 
     public static final Customer FIONA = new CustomerBuilder().withName("Fiona Kunz")
@@ -73,7 +73,7 @@ public class TypicalCustomers {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withDiners("7")
-            .withDateTime("2026-07-12 1100")
+            .withDateTime("2040-07-12 1100")
             .build();
 
     public static final Customer GEORGE = new CustomerBuilder().withName("George Best")
@@ -81,7 +81,7 @@ public class TypicalCustomers {
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withDiners("10")
-            .withDateTime("2026-06-18 1300")
+            .withDateTime("2040-06-18 1300")
             .build();
 
     // Manually added
@@ -89,16 +89,16 @@ public class TypicalCustomers {
             .withPhone("8482424")
             .withEmail("stefan@example.com")
             .withAddress("little india")
-            .withDiners("6") // Example value
-            .withDateTime("2026-05-01 0900") // Example value
+            .withDiners("6")
+            .withDateTime("2040-05-01 0900")
             .build();
 
     public static final Customer IDA = new CustomerBuilder().withName("Ida Mueller")
             .withPhone("8482131")
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
-            .withDiners("8") // Example value
-            .withDateTime("2026-04-15 1700") // Example value
+            .withDiners("8")
+            .withDateTime("2040-04-15 1700")
             .build();
 
     // Manually added - Customer's details found in {@code CommandTestUtil}

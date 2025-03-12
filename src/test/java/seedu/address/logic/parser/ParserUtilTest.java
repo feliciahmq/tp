@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.customer.Address;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -34,7 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DINERS = "2";
-    private static final String VALID_DATETIME = "2026-12-12 1800";
+    private static final String VALID_DATETIME = "2030-12-12 1800";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -150,6 +152,52 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseDiners_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDiners((String) null));
+    }
+
+    @Test
+    public void parseDiners_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDiners(INVALID_DINERS));
+    }
+
+    @Test
+    public void parseDiners_validValueWithoutWhitespace_returnsDiners() throws Exception {
+        Diners expectedDiners = new Diners(VALID_DINERS);
+        assertEquals(expectedDiners, ParserUtil.parseDiners(VALID_DINERS));
+    }
+
+    @Test
+    public void parseDiners_validValueWithWhitespace_returnsTrimmedDiners() throws Exception {
+        String dinersWithWhitespace = WHITESPACE + VALID_DINERS + WHITESPACE;
+        Diners expectedDiners = new Diners(VALID_DINERS);
+        assertEquals(expectedDiners, ParserUtil.parseDiners(dinersWithWhitespace));
+    }
+
+    @Test
+    public void parseDateTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime((String) null));
+    }
+
+    @Test
+    public void parseDateTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATETIME));
+    }
+
+    @Test
+    public void parseDateTime_validValueWithoutWhitespace_returnsDateTime() throws Exception {
+        DateTime expectedDateTime = new DateTime(VALID_DATETIME);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_DATETIME));
+    }
+
+    @Test
+    public void parseDateTime_validValueWithWhitespace_returnsTrimmedDateTime() throws Exception {
+        String dateTimeWithWhitespace = WHITESPACE + VALID_DATETIME + WHITESPACE;
+        DateTime expectedDateTime = new DateTime(VALID_DATETIME);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhitespace));
     }
 
     @Test

@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.customer.Address;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -107,6 +109,40 @@ public class JsonAdaptedCustomerTest {
         JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
                 VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDiners_throwsIllegalValueException() {
+        JsonAdaptedCustomer customer =
+                new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        INVALID_DINERS, VALID_DATETIME, VALID_TAGS);
+        String expectedMessage = Diners.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullDiners_throwsIllegalValueException() {
+        JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                null, VALID_DATETIME, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Diners.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDateTime_throwsIllegalValueException() {
+        JsonAdaptedCustomer customer =
+                new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_DINERS, INVALID_DATETIME, VALID_TAGS);
+        String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullDateTime_throwsIllegalValueException() {
+        JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_DINERS, null, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
 
