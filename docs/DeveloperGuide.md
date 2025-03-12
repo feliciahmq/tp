@@ -200,20 +200,20 @@ Use case ends.
 
 **Extensions**
 
-* 1a. ReserveMate detects an error in the entered data. 
+* 1a. ReserveMate detects an error in the entered data.
 
   * 1a1. ReserveMate requests for the correct data.
 
   * 1a2. User enters new data.
-  
+
   * Steps 1a1-1a2 are repeated until the data entered are correct.
-  
+
   Use case resumes from step 2.
 
 * 1b. ReserveMate found no matches.
 
   * 1b1. ReserveMate shows No reservation found for NAME.
-  
+
   Use case ends.
 
 
