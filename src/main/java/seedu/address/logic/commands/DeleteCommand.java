@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCustomer(customerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, Messages.format(customerToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, this.targetIndex.getOneBased()));
     }
 
     @Override
