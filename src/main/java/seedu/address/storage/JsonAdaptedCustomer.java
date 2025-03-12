@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -28,6 +30,8 @@ class JsonAdaptedCustomer {
     private final String phone;
     private final String email;
     private final String address;
+    private final String diners;
+    private final String dateTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +40,14 @@ class JsonAdaptedCustomer {
     @JsonCreator
     public JsonAdaptedCustomer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
+                               @JsonProperty("diners") String diners, @JsonProperty("dateTime") String dateTime,
                                @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.diners = diners;
+        this.dateTime = dateTime;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +61,8 @@ class JsonAdaptedCustomer {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        diners = source.getDiners().toString();
+        dateTime = source.getDateTime().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +111,27 @@ class JsonAdaptedCustomer {
         }
         final Address modelAddress = new Address(address);
 
+        if (diners == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Diners.class.getSimpleName()));
+        }
+
+        if (!Diners.isValidDiners(diners)) {
+            throw new IllegalValueException(Diners.MESSAGE_CONSTRAINTS);
+        }
+        final Diners modelDiners = new Diners(diners);
+
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
+        }
+
+        if (!DateTime.isValidDateTime(dateTime)) {
+            throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        final DateTime modelDateTime = new DateTime(dateTime);
+
         final Set<Tag> modelTags = new HashSet<>(customerTags);
-        return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelDiners, modelDateTime, modelTags);
     }
 
 }

@@ -74,7 +74,7 @@ public class UniqueCustomerListTest {
     }
 
     @Test
-    public void setCustomer_editedCustomerIsSameCustomer_success() {
+    public void setCustomer_editedCustomerIsSameReservation_success() {
         uniqueCustomerList.add(ALICE);
         uniqueCustomerList.setCustomer(ALICE, ALICE);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();

@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -34,6 +36,8 @@ public class CustomerUtil {
         sb.append(PREFIX_PHONE + customer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + customer.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + customer.getAddress().value + " ");
+        sb.append(PREFIX_NUMBER_OF_DINERS + customer.getDiners().value + " ");
+        sb.append(PREFIX_DATE_TIME + customer.getDateTime().toString() + " ");
         customer.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -45,10 +49,18 @@ public class CustomerUtil {
      */
     public static String getEditCustomerDescriptorDetails(EditCustomerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME)
+                .append(name.fullName).append(" "));
+        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE)
+                .append(phone.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL)
+                .append(email.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS)
+                .append(address.value).append(" "));
+        descriptor.getDiners().ifPresent(diner -> sb.append(PREFIX_NUMBER_OF_DINERS)
+                .append(diner.value).append(" "));
+        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATE_TIME)
+                .append(dateTime.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

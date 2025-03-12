@@ -64,7 +64,9 @@ public class EditCustomerDescriptorTest {
                 + editCustomerDescriptor.getName().orElse(null) + ", phone="
                 + editCustomerDescriptor.getPhone().orElse(null) + ", email="
                 + editCustomerDescriptor.getEmail().orElse(null) + ", address="
-                + editCustomerDescriptor.getAddress().orElse(null) + ", tags="
+                + editCustomerDescriptor.getAddress().orElse(null) + ", diners="
+                + editCustomerDescriptor.getDiners().orElse(null) + ", dateTime="
+                + editCustomerDescriptor.getDateTime().orElse(null) + ", tags="
                 + editCustomerDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editCustomerDescriptor.toString());
     }
