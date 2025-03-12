@@ -32,8 +32,8 @@ public class DeleteCommandTest {
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-                Messages.format(customerToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
+                INDEX_FIRST_CUSTOMER.getOneBased());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
@@ -46,7 +46,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class DeleteCommandTest {
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-                Messages.format(customerToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
+               INDEX_FIRST_CUSTOMER.getOneBased());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
@@ -76,7 +76,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
