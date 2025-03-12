@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -61,11 +63,11 @@ public class EditCommandTest {
 
         CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
         Customer editedCustomer = customerInList.withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB)
+                .withPhone(VALID_PHONE_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder()
-                .withName(VALID_NAME_BOB)
+                .withName(VALID_NAME_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastCustomer, descriptor);
 

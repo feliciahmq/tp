@@ -5,6 +5,8 @@ import java.util.Set;
 
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -20,11 +22,15 @@ public class CustomerBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DINERS = "2";
+    public static final String DEFAULT_DATETIME = "2026-12-12 1800";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Diners diners;
+    private DateTime dateTime;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +41,8 @@ public class CustomerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        diners = new Diners(DEFAULT_DINERS);
+        dateTime = new DateTime(DEFAULT_DATETIME);
         tags = new HashSet<>();
     }
 
@@ -46,6 +54,8 @@ public class CustomerBuilder {
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
         address = customerToCopy.getAddress();
+        diners = customerToCopy.getDiners();
+        dateTime = customerToCopy.getDateTime();
         tags = new HashSet<>(customerToCopy.getTags());
     }
 
@@ -89,8 +99,26 @@ public class CustomerBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Diners} of the {@code Customer} that we are building.
+     */
+    public CustomerBuilder withDiners(String diners) {
+        this.diners = new Diners(diners);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateTime} of the {@code Customer} that we are building.
+     */
+    public CustomerBuilder withDateTime(String dateTime) {
+        this.dateTime = new DateTime(dateTime);
+        return this;
+    }
+
+
+
     public Customer build() {
-        return new Customer(name, phone, email, address, tags);
+        return new Customer(name, phone, email, address, diners, dateTime, tags);
     }
 
 }

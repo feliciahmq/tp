@@ -8,6 +8,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCustomerDescriptor;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.DateTime;
+import seedu.address.model.customer.Diners;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
@@ -37,6 +39,8 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setPhone(customer.getPhone());
         descriptor.setEmail(customer.getEmail());
         descriptor.setAddress(customer.getAddress());
+        descriptor.setDiners(customer.getDiners());
+        descriptor.setDateTime(customer.getDateTime());
         descriptor.setTags(customer.getTags());
     }
 
@@ -69,6 +73,22 @@ public class EditCustomerDescriptorBuilder {
      */
     public EditCustomerDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Diners} of the {@code EditCustomerDescriptor} that we are building.
+     */
+    public EditCustomerDescriptorBuilder withDiners(String diners) {
+        descriptor.setDiners(new Diners(diners));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code EditCustomerDescriptor} that we are building.
+     */
+    public EditCustomerDescriptorBuilder withDateTime(String dateTime) {
+        descriptor.setDateTime(new DateTime(dateTime));
         return this;
     }
 
