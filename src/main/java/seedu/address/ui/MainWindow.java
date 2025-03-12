@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
-    private HelpListWindow helpListWindow;
+    private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpListWindow = new HelpListWindow();
+        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -140,10 +140,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpListWindow.isShowing()) {
-            helpListWindow.show();
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
         } else {
-            helpListWindow.focus();
+            helpWindow.focus();
         }
     }
 

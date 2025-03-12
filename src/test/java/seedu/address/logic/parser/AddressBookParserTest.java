@@ -19,7 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpListCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.customer.Customer;
@@ -77,8 +77,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpListCommand.COMMAND_WORD) instanceof HelpListCommand);
-        assertTrue(parser.parseCommand(HelpListCommand.COMMAND_WORD + " 3") instanceof HelpListCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            HelpListCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
+            HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
