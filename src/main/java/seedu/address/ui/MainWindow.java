@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private HelpListWindow helpListWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpListWindow = new HelpListWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -140,10 +140,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+        if (!helpListWindow.isShowing()) {
+            helpListWindow.show();
         } else {
-            helpWindow.focus();
+            helpListWindow.focus();
         }
     }
 
@@ -159,7 +159,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
@@ -177,10 +176,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
 
             if (commandResult.isExit()) {
                 handleExit();
