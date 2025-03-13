@@ -14,7 +14,8 @@ import seedu.address.model.customer.NameContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    public static final String MESSAGE_INVALID_NAME = "Invalid name format. Only alphabets, hyphens(-) and apostrophes(') are allowed.";
+    public static final String MESSAGE_INVALID_NAME = "Invalid name format. Only alphabets, "
+            + "hyphens(-) and apostrophes(') are allowed.";
     public static final String MESSAGE_SHORT_NAME = "Invalid name. The name must have at least 2 characters.";
     public static final String MESSAGE_LONG_NAME = "Invalid name. The name must be 50 characters or less.";
 
