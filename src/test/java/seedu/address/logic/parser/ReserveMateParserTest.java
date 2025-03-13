@@ -28,9 +28,9 @@ import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.CustomerUtil;
 import seedu.address.testutil.EditCustomerDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class ReserveMateParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ReserveMateParser parser = new ReserveMateParser();
 
     @Test
     public void parseCommand_add() throws Exception {

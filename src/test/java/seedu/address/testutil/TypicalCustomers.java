@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.customer.Customer;
 
 /**
@@ -114,10 +114,10 @@ public class TypicalCustomers {
     private TypicalCustomers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical customers.
+     * Returns an {@code ReserveMate} with all the typical customers.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ReserveMate getTypicalReserveMate() {
+        ReserveMate ab = new ReserveMate();
         for (Customer customer : getTypicalCustomers()) {
             ab.addCustomer(customer);
         }

@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyReserveMate;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.customer.Customer;
 import seedu.address.testutil.CustomerBuilder;
@@ -110,12 +110,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getReserveMateFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setReserveMateFilePath(Path ReserveMateFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setReserveMate(ReadOnlyReserveMate newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyReserveMate getReserveMate() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,8 +197,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyReserveMate getReserveMate() {
+            return new ReserveMate();
         }
     }
 

@@ -6,7 +6,7 @@ import seedu.address.model.customer.Customer;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyReserveMate {
 
     /**
      * Returns an unmodifiable view of the customers list.

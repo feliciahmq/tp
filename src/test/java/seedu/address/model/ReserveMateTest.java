@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.ALICE;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.getTypicalReserveMate;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.exceptions.DuplicateCustomerException;
 import seedu.address.testutil.CustomerBuilder;
 
-public class AddressBookTest {
+public class ReserveMateTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final ReserveMate ReserveMate = new ReserveMate();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getCustomerList());
+        assertEquals(Collections.emptyList(), ReserveMate.getCustomerList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> ReserveMate.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyReserveMate_replacesData() {
+        ReserveMate newData = getTypicalReserveMate();
+        ReserveMate.resetData(newData);
+        assertEquals(newData, ReserveMate);
     }
 
     @Test
@@ -49,53 +49,53 @@ public class AddressBookTest {
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newCustomers);
+        ReserveMateStub newData = new ReserveMateStub(newCustomers);
 
-        assertThrows(DuplicateCustomerException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateCustomerException.class, () -> ReserveMate.resetData(newData));
     }
 
     @Test
     public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasCustomer(null));
+        assertThrows(NullPointerException.class, () -> ReserveMate.hasCustomer(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCustomer(ALICE));
+    public void hasCustomer_customerNotInReserveMate_returnsFalse() {
+        assertFalse(ReserveMate.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerInAddressBook_returnsTrue() {
-        addressBook.addCustomer(ALICE);
-        assertTrue(addressBook.hasCustomer(ALICE));
+    public void hasCustomer_customerInReserveMate_returnsTrue() {
+        ReserveMate.addCustomer(ALICE);
+        assertTrue(ReserveMate.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addCustomer(ALICE);
+    public void hasCustomer_customerWithSameIdentityFieldsInReserveMate_returnsTrue() {
+        ReserveMate.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasCustomer(editedAlice));
+        assertTrue(ReserveMate.hasCustomer(editedAlice));
     }
 
     @Test
     public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCustomerList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> ReserveMate.getCustomerList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{customers=" + addressBook.getCustomerList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = ReserveMate.class.getCanonicalName() + "{customers=" + ReserveMate.getCustomerList() + "}";
+        assertEquals(expected, ReserveMate.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose customers list can violate interface constraints.
+     * A stub ReadOnlyReserveMate whose customers list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ReserveMateStub implements ReadOnlyReserveMate {
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Customer> customers) {
+        ReserveMateStub(Collection<Customer> customers) {
             this.customers.setAll(customers);
         }
 

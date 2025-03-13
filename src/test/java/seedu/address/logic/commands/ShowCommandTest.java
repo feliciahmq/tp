@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 
@@ -25,7 +25,7 @@ import seedu.address.model.customer.Customer;
  */
 public class ShowCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +35,7 @@ public class ShowCommandTest {
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_CUSTOMER_SUCCESS,
                 Messages.format(customerToShow));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
     }
@@ -54,7 +54,7 @@ public class ShowCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getCustomerList().size());
 
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 

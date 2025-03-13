@@ -9,52 +9,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReserveMate;
+import seedu.address.model.ReadOnlyReserveMate;
 import seedu.address.model.customer.Customer;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ReserveMate that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "ReserveMate")
+class JsonSerializableReserveMate {
 
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
 
     private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given customers.
+     * Constructs a {@code JsonSerializableReserveMate} with the given customers.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
+    public JsonSerializableReserveMate(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
         this.customers.addAll(customers);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyReserveMate} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableReserveMate}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableReserveMate(ReadOnlyReserveMate source) {
         customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code ReserveMate} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ReserveMate toModelType() throws IllegalValueException {
+        ReserveMate ReserveMate = new ReserveMate();
         for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
-            if (addressBook.hasCustomer(customer)) {
+            if (ReserveMate.hasCustomer(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
-            addressBook.addCustomer(customer);
+            ReserveMate.addCustomer(customer);
         }
-        return addressBook;
+        return ReserveMate;
     }
 
 }

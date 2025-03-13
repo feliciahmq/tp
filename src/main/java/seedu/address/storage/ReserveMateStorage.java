@@ -1,0 +1,45 @@
+package seedu.address.storage;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyReserveMate;
+
+/**
+ * Represents a storage for {@link seedu.address.model.ReserveMate}.
+ */
+public interface ReserveMateStorage {
+
+    /**
+     * Returns the file path of the data file.
+     */
+    Path getReserveMateFilePath();
+
+    /**
+     * Returns ReserveMate data as a {@link ReadOnlyReserveMate}.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @throws DataLoadingException if loading the data from storage failed.
+     */
+    Optional<ReadOnlyReserveMate> readReserveMate() throws DataLoadingException;
+
+    /**
+     * @see #getReserveMateFilePath()
+     */
+    Optional<ReadOnlyReserveMate> readReserveMate(Path filePath) throws DataLoadingException;
+
+    /**
+     * Saves the given {@link ReadOnlyReserveMate} to the storage.
+     * @param ReserveMate cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveReserveMate(ReadOnlyReserveMate ReserveMate) throws IOException;
+
+    /**
+     * @see #saveReserveMate(ReadOnlyReserveMate)
+     */
+    void saveReserveMate(ReadOnlyReserveMate ReserveMate, Path filePath) throws IOException;
+
+}

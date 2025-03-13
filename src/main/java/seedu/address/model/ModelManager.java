@@ -19,25 +19,25 @@ import seedu.address.model.customer.Customer;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ReserveMate ReserveMate;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ReserveMate and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyReserveMate ReserveMate, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(ReserveMate, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + ReserveMate + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.ReserveMate = new ReserveMate(ReserveMate);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        filteredCustomers = new FilteredList<>(this.ReserveMate.getCustomerList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ReserveMate(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getReserveMateFilePath() {
+        return userPrefs.getReserveMateFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setReserveMateFilePath(Path ReserveMateFilePath) {
+        requireNonNull(ReserveMateFilePath);
+        userPrefs.setReserveMateFilePath(ReserveMateFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ReserveMate ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setReserveMate(ReadOnlyReserveMate ReserveMate) {
+        this.ReserveMate.resetData(ReserveMate);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyReserveMate getReserveMate() {
+        return ReserveMate;
     }
 
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return addressBook.hasCustomer(customer);
+        return ReserveMate.hasCustomer(customer);
     }
 
     @Override
     public void deleteCustomer(Customer target) {
-        addressBook.removeCustomer(target);
+        ReserveMate.removeCustomer(target);
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        addressBook.addCustomer(customer);
+        ReserveMate.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
@@ -108,14 +108,14 @@ public class ModelManager implements Model {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
-        addressBook.setCustomer(target, editedCustomer);
+        ReserveMate.setCustomer(target, editedCustomer);
     }
 
     //=========== Filtered Customer List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedReserveMate}
      */
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return ReserveMate.equals(otherModelManager.ReserveMate)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCustomers.equals(otherModelManager.filteredCustomers);
     }

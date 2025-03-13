@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Customer values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "ReserveMate save file which contains the same Customer values as in TypicalPersons#getTypicalReserveMate()",
   "customers": [
     {
       "name": "Alice Pauline",

@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 
@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditCustomerDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -36,7 +36,7 @@ import seedu.address.testutil.EditCustomerDescriptorBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -48,7 +48,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
                 Messages.format(editedCustomer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
@@ -74,7 +74,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
                 Messages.format(editedCustomer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
 
@@ -91,7 +91,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
                 Messages.format(editedCustomer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -112,7 +112,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
                 Messages.format(editedCustomer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
@@ -135,7 +135,7 @@ public class EditCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
         // edit customer in filtered list into a duplicate in address book
-        Customer customerInList = model.getAddressBook().getCustomerList()
+        Customer customerInList = model.getReserveMate().getCustomerList()
                 .get(INDEX_SECOND_CUSTOMER.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CUSTOMER,
                 new EditCustomerDescriptorBuilder(customerInList).build());
@@ -163,7 +163,7 @@ public class EditCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getCustomerList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());

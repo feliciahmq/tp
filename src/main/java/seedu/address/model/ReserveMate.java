@@ -13,7 +13,7 @@ import seedu.address.model.customer.UniqueCustomerList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameCustomer comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class ReserveMate implements ReadOnlyReserveMate {
 
     private final UniqueCustomerList customers;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         customers = new UniqueCustomerList();
     }
 
-    public AddressBook() {}
+    public ReserveMate() {}
 
     /**
-     * Creates an AddressBook using the Customers in the {@code toBeCopied}
+     * Creates an ReserveMate using the Customers in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ReserveMate(ReadOnlyReserveMate toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ReserveMate} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyReserveMate newData) {
         requireNonNull(newData);
 
         setCustomers(newData.getCustomerList());
@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ReserveMate}.
      * {@code key} must exist in the address book.
      */
     public void removeCustomer(Customer key) {
@@ -116,12 +116,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof ReserveMate)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return customers.equals(otherAddressBook.customers);
+        ReserveMate otherReserveMate = (ReserveMate) other;
+        return customers.equals(otherReserveMate.customers);
     }
 
     @Override

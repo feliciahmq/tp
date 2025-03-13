@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getReserveMateFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setReserveMateFilePath(Path ReserveMateFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code ReserveMate}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setReserveMate(ReadOnlyReserveMate ReserveMate);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the ReserveMate */
+    ReadOnlyReserveMate getReserveMate();
 
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
