@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.customer.Customer;
@@ -33,17 +30,9 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private Label diners;
     @FXML
     private Label dateTime;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code CustomerCode} with the given {@code Customer} and index to display.
@@ -53,13 +42,7 @@ public class CustomerCard extends UiPart<Region> {
         this.customer = customer;
         id.setText(displayedIndex + ". ");
         name.setText(customer.getName().fullName);
-        phone.setText(customer.getPhone().value);
-        address.setText(customer.getAddress().value);
-        email.setText(customer.getEmail().value);
-        diners.setText(customer.getDiners().value);
+        diners.setText(customer.getDiners().value + " Diners");
         dateTime.setText(customer.getDateTime().toString());
-        customer.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
