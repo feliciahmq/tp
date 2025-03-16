@@ -35,8 +35,6 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private Label diners;
@@ -54,7 +52,6 @@ public class CustomerCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(customer.getName().fullName);
         phone.setText(customer.getPhone().value);
-        address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
         diners.setText(customer.getDiners().value);
         dateTime.setText(customer.getDateTime().toString());

@@ -22,7 +22,6 @@ public class Customer {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Diners diners;
     private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
@@ -31,13 +30,12 @@ public class Customer {
     /**
      * Every field must be present and not null.
      */
-    public Customer(Name name, Phone phone, Email email, Address address, Diners diners,
+    public Customer(Name name, Phone phone, Email email, Diners diners,
                     DateTime dateTime, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, diners, tags);
+        requireAllNonNull(name, phone, email, diners, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.diners = diners;
         this.dateTime = dateTime;
         this.tags.addAll(tags);
@@ -55,9 +53,6 @@ public class Customer {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
     public Diners getDiners() {
         return diners;
@@ -109,7 +104,6 @@ public class Customer {
         return name.equals(otherCustomer.name)
                 && phone.equals(otherCustomer.phone)
                 && email.equals(otherCustomer.email)
-                && address.equals(otherCustomer.address)
                 && diners.equals(otherCustomer.diners)
                 && dateTime.equals(otherCustomer.dateTime)
                 && tags.equals(otherCustomer.tags);
@@ -118,7 +112,7 @@ public class Customer {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, diners, dateTime, tags);
+        return Objects.hash(name, phone, email, diners, dateTime, tags);
     }
 
     @Override
@@ -127,7 +121,6 @@ public class Customer {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("diners", diners)
                 .add("dateTime", dateTime)
                 .add("tags", tags)

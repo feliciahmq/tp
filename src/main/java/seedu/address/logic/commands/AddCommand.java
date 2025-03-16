@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -16,18 +15,17 @@ import seedu.address.model.Model;
 import seedu.address.model.customer.Customer;
 
 /**
- * Adds a customer to the address book.
+ * Adds a customer to ReserveMate.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to ReserveMate. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS "
             + PREFIX_DATE_TIME + "DATETIME "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -35,14 +33,13 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_NUMBER_OF_DINERS + "5 "
             + PREFIX_DATE_TIME + "2021-12-31 1800 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in ReserveMate";
 
     private final Customer toAdd;
 

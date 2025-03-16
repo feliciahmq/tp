@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.DateTime;
 import seedu.address.model.customer.Diners;
@@ -21,14 +20,12 @@ public class CustomerBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DINERS = "2";
     public static final String DEFAULT_DATETIME = "2026-12-12 1800";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Diners diners;
     private DateTime dateTime;
     private Set<Tag> tags;
@@ -40,7 +37,6 @@ public class CustomerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         diners = new Diners(DEFAULT_DINERS);
         dateTime = new DateTime(DEFAULT_DATETIME);
         tags = new HashSet<>();
@@ -53,7 +49,6 @@ public class CustomerBuilder {
         name = customerToCopy.getName();
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
-        address = customerToCopy.getAddress();
         diners = customerToCopy.getDiners();
         dateTime = customerToCopy.getDateTime();
         tags = new HashSet<>(customerToCopy.getTags());
@@ -72,14 +67,6 @@ public class CustomerBuilder {
      */
     public CustomerBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Customer} that we are building.
-     */
-    public CustomerBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -118,7 +105,7 @@ public class CustomerBuilder {
 
 
     public Customer build() {
-        return new Customer(name, phone, email, address, diners, dateTime, tags);
+        return new Customer(name, phone, email, diners, dateTime, tags);
     }
 
 }

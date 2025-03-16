@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,7 +22,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.DateTime;
 import seedu.address.model.customer.Diners;
@@ -33,7 +31,7 @@ import seedu.address.model.customer.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing customer in the address book.
+ * Edits the details of an existing customer in ReserveMate.
  */
 public class EditCommand extends Command {
 
@@ -46,7 +44,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS] "
             + "[" + PREFIX_DATE_TIME + "DATETIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -58,7 +55,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in ReserveMate.";
 
     private final Index index;
     private final EditCustomerDescriptor editCustomerDescriptor;
@@ -108,12 +105,11 @@ public class EditCommand extends Command {
         Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
         Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
         Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
         Diners updateDiners = editCustomerDescriptor.getDiners().orElse(customerToEdit.getDiners());
         DateTime updateDateTime = editCustomerDescriptor.getDateTime().orElse(customerToEdit.getDateTime());
         Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Customer(updatedName, updatedPhone, updatedEmail,
                 updateDiners, updateDateTime, updatedTags);
     }
 
@@ -149,7 +145,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Diners diners;
         private DateTime dateTime;
         private Set<Tag> tags;
@@ -164,7 +159,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setDiners(toCopy.diners);
             setDateTime(toCopy.dateTime);
             setTags(toCopy.tags);
@@ -174,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, diners, dateTime, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, diners, dateTime, tags);
         }
 
         public void setName(Name name) {
@@ -199,14 +193,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setDiners(Diners diners) {
@@ -257,7 +243,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditCustomerDescriptor.name)
                     && Objects.equals(phone, otherEditCustomerDescriptor.phone)
                     && Objects.equals(email, otherEditCustomerDescriptor.email)
-                    && Objects.equals(address, otherEditCustomerDescriptor.address)
                     && Objects.equals(diners, otherEditCustomerDescriptor.diners)
                     && Objects.equals(dateTime, otherEditCustomerDescriptor.dateTime)
                     && Objects.equals(tags, otherEditCustomerDescriptor.tags);
@@ -269,7 +254,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
                     .add("diners", diners)
                     .add("dateTime", dateTime)
                     .add("tags", tags)
