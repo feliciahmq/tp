@@ -49,8 +49,11 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `<UPPER_CASE>` are mandatory parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Words in `[UPPER_CASE]` are optional parameters to be supplied by the user.<br>
+  e.g. in `add t/[TAG]`, `TAG` is a parameter which can be used as `add t/Vegan`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
