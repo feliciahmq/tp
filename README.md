@@ -32,12 +32,12 @@ Show 1
 ### Feature: Create a new reservation
 **Purpose:** The create function will enable users to add new reservations to reserve by capturing relevant details such as name, number of diners, contact information, date and time of reservation.
 
-**Command format:** `add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>`
+**Command format:** `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​`
 
 **Example commands:**
 ```
-add John Doe,2,6591234567,2025-02-23 1800
-Add JOHN DOE,2,6591234567,2025-02-23 1800
+add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
+ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/6598765432
 ```
 
 ### Feature: List
@@ -85,14 +85,14 @@ Find Bobby
 ```
 
 ## Command Summary
-| Feature | Command Format | Purpose |
-|---------|---------------|---------|
-| Reservation details | `show <INDEX>` | Show details of reservation to user |
-| Create a new reservation | `add <CUSTOMER NAME>,<NUMBER OF DINER>,<CONTACT NUMBER>,<DATE TIME>` | Add new reservations to the address book |
-| List | `list` | Display the available list of commands to the user |
-| Delete reservation | `delete <INDEX>` | Remove a reservation from the system |
-| View Schedule | `schedule` | View the entire reservation schedule |
-| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information |
+| Feature                  | Command Format | Purpose                                           |
+|--------------------------|---------------|---------------------------------------------------|
+| Reservation details      | `show <INDEX>` | Show details of reservation to user               |
+| Create a new reservation | `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​` | Add new reservation to ReserveMate                |
+| List                     | `list` | Display the available list of commands to the user |
+| Delete reservation       | `delete <INDEX>` | Remove a reservation from the system              |
+| View Schedule            | `schedule` | View the entire reservation schedule              |
+| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information         |
 
 
 ### Acknowledgement
