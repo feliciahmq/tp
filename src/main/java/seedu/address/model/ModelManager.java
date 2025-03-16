@@ -19,21 +19,21 @@ import seedu.address.model.customer.Customer;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ReserveMate ReserveMate;
+    private final ReserveMate reserveMate;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
 
     /**
      * Initializes a ModelManager with the given ReserveMate and userPrefs.
      */
-    public ModelManager(ReadOnlyReserveMate ReserveMate, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(ReserveMate, userPrefs);
+    public ModelManager(ReadOnlyReserveMate reserveMate, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(reserveMate, userPrefs);
 
-        logger.fine("Initializing with address book: " + ReserveMate + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + reserveMate + " and user prefs " + userPrefs);
 
-        this.ReserveMate = new ReserveMate(ReserveMate);
+        this.reserveMate = new ReserveMate(reserveMate);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.ReserveMate.getCustomerList());
+        filteredCustomers = new FilteredList<>(this.reserveMate.getCustomerList());
     }
 
     public ModelManager() {
@@ -70,37 +70,37 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setReserveMateFilePath(Path ReserveMateFilePath) {
-        requireNonNull(ReserveMateFilePath);
-        userPrefs.setReserveMateFilePath(ReserveMateFilePath);
+    public void setReserveMateFilePath(Path reserveMateFilePath) {
+        requireNonNull(reserveMateFilePath);
+        userPrefs.setReserveMateFilePath(reserveMateFilePath);
     }
 
     //=========== ReserveMate ================================================================================
 
     @Override
-    public void setReserveMate(ReadOnlyReserveMate ReserveMate) {
-        this.ReserveMate.resetData(ReserveMate);
+    public void setReserveMate(ReadOnlyReserveMate reserveMate) {
+        this.reserveMate.resetData(reserveMate);
     }
 
     @Override
     public ReadOnlyReserveMate getReserveMate() {
-        return ReserveMate;
+        return reserveMate;
     }
 
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return ReserveMate.hasCustomer(customer);
+        return reserveMate.hasCustomer(customer);
     }
 
     @Override
     public void deleteCustomer(Customer target) {
-        ReserveMate.removeCustomer(target);
+        reserveMate.removeCustomer(target);
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        ReserveMate.addCustomer(customer);
+        reserveMate.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
-        ReserveMate.setCustomer(target, editedCustomer);
+        reserveMate.setCustomer(target, editedCustomer);
     }
 
     //=========== Filtered Customer List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return ReserveMate.equals(otherModelManager.ReserveMate)
+        return reserveMate.equals(otherModelManager.reserveMate)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCustomers.equals(otherModelManager.filteredCustomers);
     }

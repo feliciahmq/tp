@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setReserveMateFilePath(Path ReserveMateFilePath);
+    void setReserveMateFilePath(Path reserveMateFilePath);
 
     /**
      * Replaces address book data with the data in {@code ReserveMate}.
      */
-    void setReserveMate(ReadOnlyReserveMate ReserveMate);
+    void setReserveMate(ReadOnlyReserveMate reserveMate);
 
     /** Returns the ReserveMate */
     ReadOnlyReserveMate getReserveMate();

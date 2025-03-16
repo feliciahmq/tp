@@ -15,16 +15,16 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.ReserveMate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyReserveMate;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.ReserveMateStorage;
 import seedu.address.storage.JsonReserveMateStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ReserveMateStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ReserveMateStorage ReserveMateStorage = new JsonReserveMateStorage(userPrefs.getReserveMateFilePath());
-        storage = new StorageManager(ReserveMateStorage, userPrefsStorage);
+        ReserveMateStorage reserveMateStorage = new JsonReserveMateStorage(userPrefs.getReserveMateFilePath());
+        storage = new StorageManager(reserveMateStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getReserveMateFilePath());
 
-        Optional<ReadOnlyReserveMate> ReserveMateOptional;
+        Optional<ReadOnlyReserveMate> reserveMateOptional;
         ReadOnlyReserveMate initialData;
         try {
-            ReserveMateOptional = storage.readReserveMate();
-            if (!ReserveMateOptional.isPresent()) {
+            reserveMateOptional = storage.readReserveMate();
+            if (!reserveMateOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getReserveMateFilePath()
                         + " populated with a sample ReserveMate.");
             }
-            initialData = ReserveMateOptional.orElseGet(SampleDataUtil::getSampleReserveMate);
+            initialData = reserveMateOptional.orElseGet(SampleDataUtil::getSampleReserveMate);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getReserveMateFilePath() + " could not be loaded."
                     + " Will be starting with an empty ReserveMate.");

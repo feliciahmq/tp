@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path ReserveMateFilePath = Paths.get("data" , "ReserveMate.json");
+    private Path reserveMateFilePath = Paths.get("data" , "reservemate.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -48,12 +48,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getReserveMateFilePath() {
-        return ReserveMateFilePath;
+        return reserveMateFilePath;
     }
 
-    public void setReserveMateFilePath(Path ReserveMateFilePath) {
-        requireNonNull(ReserveMateFilePath);
-        this.ReserveMateFilePath = ReserveMateFilePath;
+    public void setReserveMateFilePath(Path reserveMateFilePath) {
+        requireNonNull(reserveMateFilePath);
+        this.reserveMateFilePath = reserveMateFilePath;
     }
 
     @Override
@@ -69,19 +69,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && ReserveMateFilePath.equals(otherUserPrefs.ReserveMateFilePath);
+                && reserveMateFilePath.equals(otherUserPrefs.reserveMateFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, ReserveMateFilePath);
+        return Objects.hash(guiSettings, reserveMateFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + ReserveMateFilePath);
+        sb.append("\nLocal data file location : " + reserveMateFilePath);
         return sb.toString();
     }
 

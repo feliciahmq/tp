@@ -32,14 +32,14 @@ public interface ReserveMateStorage {
 
     /**
      * Saves the given {@link ReadOnlyReserveMate} to the storage.
-     * @param ReserveMate cannot be null.
+     * @param reserveMate cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveReserveMate(ReadOnlyReserveMate ReserveMate) throws IOException;
+    void saveReserveMate(ReadOnlyReserveMate reserveMate) throws IOException;
 
     /**
      * @see #saveReserveMate(ReadOnlyReserveMate)
      */
-    void saveReserveMate(ReadOnlyReserveMate ReserveMate, Path filePath) throws IOException;
+    void saveReserveMate(ReadOnlyReserveMate reserveMate, Path filePath) throws IOException;
 
 }

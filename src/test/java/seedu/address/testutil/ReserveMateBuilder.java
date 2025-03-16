@@ -10,25 +10,25 @@ import seedu.address.model.customer.Customer;
  */
 public class ReserveMateBuilder {
 
-    private ReserveMate ReserveMate;
+    private ReserveMate reserveMate;
 
     public ReserveMateBuilder() {
-        ReserveMate = new ReserveMate();
+        reserveMate = new ReserveMate();
     }
 
-    public ReserveMateBuilder(ReserveMate ReserveMate) {
-        this.ReserveMate = ReserveMate;
+    public ReserveMateBuilder(ReserveMate reserveMate) {
+        this.reserveMate = reserveMate;
     }
 
     /**
      * Adds a new {@code Customer} to the {@code ReserveMate} that we are building.
      */
     public ReserveMateBuilder withCustomer(Customer customer) {
-        ReserveMate.addCustomer(customer);
+        reserveMate.addCustomer(customer);
         return this;
     }
 
     public ReserveMate build() {
-        return ReserveMate;
+        return reserveMate;
     }
 }

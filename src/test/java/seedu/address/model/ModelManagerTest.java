@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ReserveMate ReserveMate = new ReserveMateBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
+        ReserveMate reserveMate = new ReserveMateBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         ReserveMate differentReserveMate = new ReserveMate();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(ReserveMate, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(ReserveMate, userPrefs);
+        modelManager = new ModelManager(reserveMate, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(reserveMate, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -119,7 +119,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(ReserveMate, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(reserveMate, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
@@ -127,6 +127,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setReserveMateFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(ReserveMate, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(reserveMate, differentUserPrefs)));
     }
 }

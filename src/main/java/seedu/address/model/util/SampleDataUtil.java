@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.ReserveMate;
 import seedu.address.model.ReadOnlyReserveMate;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.DateTime;

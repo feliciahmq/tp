@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReserveMate;
 import seedu.address.model.ReadOnlyReserveMate;
+import seedu.address.model.ReserveMate;
 
 public class JsonReserveMateStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonReserveMateStorageTest");
@@ -94,10 +94,10 @@ public class JsonReserveMateStorageTest {
     /**
      * Saves {@code ReserveMate} at the specified {@code filePath}.
      */
-    private void saveReserveMate(ReadOnlyReserveMate ReserveMate, String filePath) {
+    private void saveReserveMate(ReadOnlyReserveMate reserveMate, String filePath) {
         try {
             new JsonReserveMateStorage(Paths.get(filePath))
-                    .saveReserveMate(ReserveMate, addToTestDataPathIfNotNull(filePath));
+                    .saveReserveMate(reserveMate, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

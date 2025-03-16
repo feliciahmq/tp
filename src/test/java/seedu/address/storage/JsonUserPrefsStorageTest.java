@@ -73,7 +73,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setReserveMateFilePath(Paths.get("ReserveMate.json"));
+        userPrefs.setReserveMateFilePath(Paths.get("data/reservemate.json"));
         return userPrefs;
     }
 

@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReserveMate;
 import seedu.address.model.ReadOnlyReserveMate;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.customer.Customer;
 
 /**
@@ -46,15 +46,15 @@ class JsonSerializableReserveMate {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ReserveMate toModelType() throws IllegalValueException {
-        ReserveMate ReserveMate = new ReserveMate();
+        ReserveMate reserveMate = new ReserveMate();
         for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
-            if (ReserveMate.hasCustomer(customer)) {
+            if (reserveMate.hasCustomer(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
-            ReserveMate.addCustomer(customer);
+            reserveMate.addCustomer(customer);
         }
-        return ReserveMate;
+        return reserveMate;
     }
 
 }

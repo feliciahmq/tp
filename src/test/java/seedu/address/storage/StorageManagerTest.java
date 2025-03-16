@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReserveMate;
 import seedu.address.model.ReadOnlyReserveMate;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonReserveMateStorage ReserveMateStorage = new JsonReserveMateStorage(getTempFilePath("ab"));
+        JsonReserveMateStorage reserveMateStorage = new JsonReserveMateStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(ReserveMateStorage, userPrefsStorage);
+        storageManager = new StorageManager(reserveMateStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,7 +48,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void ReserveMateReadSave() throws Exception {
+    public void reserveMateReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonReserveMateStorage} class.

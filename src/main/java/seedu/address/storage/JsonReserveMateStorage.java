@@ -60,8 +60,8 @@ public class JsonReserveMateStorage implements ReserveMateStorage {
     }
 
     @Override
-    public void saveReserveMate(ReadOnlyReserveMate ReserveMate) throws IOException {
-        saveReserveMate(ReserveMate, filePath);
+    public void saveReserveMate(ReadOnlyReserveMate reserveMate) throws IOException {
+        saveReserveMate(reserveMate, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonReserveMateStorage implements ReserveMateStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveReserveMate(ReadOnlyReserveMate ReserveMate, Path filePath) throws IOException {
-        requireNonNull(ReserveMate);
+    public void saveReserveMate(ReadOnlyReserveMate reserveMate, Path filePath) throws IOException {
+        requireNonNull(reserveMate);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableReserveMate(ReserveMate), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableReserveMate(reserveMate), filePath);
     }
 
 }

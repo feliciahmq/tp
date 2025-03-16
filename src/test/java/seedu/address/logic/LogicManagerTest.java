@@ -47,10 +47,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonReserveMateStorage ReserveMateStorage =
-                new JsonReserveMateStorage(temporaryFolder.resolve("ReserveMate.json"));
+        JsonReserveMateStorage reserveMateStorage =
+                new JsonReserveMateStorage(temporaryFolder.resolve("reservemate.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(ReserveMateStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(reserveMateStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -152,9 +152,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an ReserveMateStorage that throws the IOException e when saving
-        JsonReserveMateStorage ReserveMateStorage = new JsonReserveMateStorage(prefPath) {
+        JsonReserveMateStorage reserveMateStorage = new JsonReserveMateStorage(prefPath) {
             @Override
-            public void saveReserveMate(ReadOnlyReserveMate ReserveMate, Path filePath)
+            public void saveReserveMate(ReadOnlyReserveMate reserveMate, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -162,7 +162,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(ReserveMateStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(reserveMateStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

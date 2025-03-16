@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final ReserveMateParser ReserveMateParser;
+    private final ReserveMateParser reserveMateParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        ReserveMateParser = new ReserveMateParser();
+        reserveMateParser = new ReserveMateParser();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = ReserveMateParser.parseCommand(commandText);
+        Command command = reserveMateParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {

@@ -24,9 +24,9 @@ public class JsonSerializableReserveMateTest {
     public void toModelType_typicalCustomersFile_success() throws Exception {
         JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(TYPICAL_CUSTOMERS_FILE,
                 JsonSerializableReserveMate.class).get();
-        ReserveMate ReserveMateFromFile = dataFromFile.toModelType();
+        ReserveMate reserveMateFromFile = dataFromFile.toModelType();
         ReserveMate typicalCustomersReserveMate = TypicalCustomers.getTypicalReserveMate();
-        assertEquals(ReserveMateFromFile, typicalCustomersReserveMate);
+        assertEquals(reserveMateFromFile, typicalCustomersReserveMate);
     }
 
     @Test

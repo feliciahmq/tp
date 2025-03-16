@@ -18,10 +18,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReserveMate;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyReserveMate;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.customer.Customer;
 import seedu.address.testutil.CustomerBuilder;
 
@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setReserveMateFilePath(Path ReserveMateFilePath) {
+        public void setReserveMateFilePath(Path reserveMateFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -17,14 +17,14 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ReserveMateStorage ReserveMateStorage;
+    private ReserveMateStorage reserveMateStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ReserveMateStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(ReserveMateStorage ReserveMateStorage, UserPrefsStorage userPrefsStorage) {
-        this.ReserveMateStorage = ReserveMateStorage;
+    public StorageManager(ReserveMateStorage reserveMateStorage, UserPrefsStorage userPrefsStorage) {
+        this.reserveMateStorage = reserveMateStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,29 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getReserveMateFilePath() {
-        return ReserveMateStorage.getReserveMateFilePath();
+        return reserveMateStorage.getReserveMateFilePath();
     }
 
     @Override
     public Optional<ReadOnlyReserveMate> readReserveMate() throws DataLoadingException {
-        return readReserveMate(ReserveMateStorage.getReserveMateFilePath());
+        return readReserveMate(reserveMateStorage.getReserveMateFilePath());
     }
 
     @Override
     public Optional<ReadOnlyReserveMate> readReserveMate(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return ReserveMateStorage.readReserveMate(filePath);
+        return reserveMateStorage.readReserveMate(filePath);
     }
 
     @Override
-    public void saveReserveMate(ReadOnlyReserveMate ReserveMate) throws IOException {
-        saveReserveMate(ReserveMate, ReserveMateStorage.getReserveMateFilePath());
+    public void saveReserveMate(ReadOnlyReserveMate reserveMate) throws IOException {
+        saveReserveMate(reserveMate, reserveMateStorage.getReserveMateFilePath());
     }
 
     @Override
-    public void saveReserveMate(ReadOnlyReserveMate ReserveMate, Path filePath) throws IOException {
+    public void saveReserveMate(ReadOnlyReserveMate reserveMate, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        ReserveMateStorage.saveReserveMate(ReserveMate, filePath);
+        reserveMateStorage.saveReserveMate(reserveMate, filePath);
     }
 
 }

@@ -27,6 +27,6 @@ public interface Storage extends ReserveMateStorage, UserPrefsStorage {
     Optional<ReadOnlyReserveMate> readReserveMate() throws DataLoadingException;
 
     @Override
-    void saveReserveMate(ReadOnlyReserveMate ReserveMate) throws IOException;
+    void saveReserveMate(ReadOnlyReserveMate reserveMate) throws IOException;
 
 }

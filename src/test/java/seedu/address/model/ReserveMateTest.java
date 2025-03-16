@@ -24,23 +24,23 @@ import seedu.address.testutil.CustomerBuilder;
 
 public class ReserveMateTest {
 
-    private final ReserveMate ReserveMate = new ReserveMate();
+    private final ReserveMate reserveMate = new ReserveMate();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), ReserveMate.getCustomerList());
+        assertEquals(Collections.emptyList(), reserveMate.getCustomerList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ReserveMate.resetData(null));
+        assertThrows(NullPointerException.class, () -> reserveMate.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyReserveMate_replacesData() {
         ReserveMate newData = getTypicalReserveMate();
-        ReserveMate.resetData(newData);
-        assertEquals(newData, ReserveMate);
+        reserveMate.resetData(newData);
+        assertEquals(newData, reserveMate);
     }
 
     @Test
@@ -51,42 +51,42 @@ public class ReserveMateTest {
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         ReserveMateStub newData = new ReserveMateStub(newCustomers);
 
-        assertThrows(DuplicateCustomerException.class, () -> ReserveMate.resetData(newData));
+        assertThrows(DuplicateCustomerException.class, () -> reserveMate.resetData(newData));
     }
 
     @Test
     public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ReserveMate.hasCustomer(null));
+        assertThrows(NullPointerException.class, () -> reserveMate.hasCustomer(null));
     }
 
     @Test
     public void hasCustomer_customerNotInReserveMate_returnsFalse() {
-        assertFalse(ReserveMate.hasCustomer(ALICE));
+        assertFalse(reserveMate.hasCustomer(ALICE));
     }
 
     @Test
     public void hasCustomer_customerInReserveMate_returnsTrue() {
-        ReserveMate.addCustomer(ALICE);
-        assertTrue(ReserveMate.hasCustomer(ALICE));
+        reserveMate.addCustomer(ALICE);
+        assertTrue(reserveMate.hasCustomer(ALICE));
     }
 
     @Test
     public void hasCustomer_customerWithSameIdentityFieldsInReserveMate_returnsTrue() {
-        ReserveMate.addCustomer(ALICE);
+        reserveMate.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(ReserveMate.hasCustomer(editedAlice));
+        assertTrue(reserveMate.hasCustomer(editedAlice));
     }
 
     @Test
     public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> ReserveMate.getCustomerList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> reserveMate.getCustomerList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = ReserveMate.class.getCanonicalName() + "{customers=" + ReserveMate.getCustomerList() + "}";
-        assertEquals(expected, ReserveMate.toString());
+        String expected = ReserveMate.class.getCanonicalName() + "{customers=" + reserveMate.getCustomerList() + "}";
+        assertEquals(expected, reserveMate.toString());
     }
 
     /**

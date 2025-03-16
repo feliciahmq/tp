@@ -5,9 +5,9 @@ import static seedu.address.testutil.TypicalCustomers.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.ReserveMate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReserveMate;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
