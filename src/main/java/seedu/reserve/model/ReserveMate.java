@@ -1,0 +1,131 @@
+package seedu.reserve.model;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
+import javafx.collections.ObservableList;
+import seedu.reserve.commons.util.ToStringBuilder;
+import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.customer.UniqueCustomerList;
+
+/**
+ * Wraps all data at the reservation-book level
+ * Duplicates are not allowed (by .isSameCustomer comparison)
+ */
+public class ReserveMate implements ReadOnlyReserveMate {
+
+    private final UniqueCustomerList customers;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
+    {
+        customers = new UniqueCustomerList();
+    }
+
+    public ReserveMate() {}
+
+    /**
+     * Creates an ReserveMate using the Customers in the {@code toBeCopied}
+     */
+    public ReserveMate(ReadOnlyReserveMate toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    //// list overwrite operations
+
+    /**
+     * Replaces the contents of the customer list with {@code customers}.
+     * {@code customers} must not contain duplicate customers.
+     */
+    public void setCustomers(List<Customer> customers) {
+        this.customers.setCustomers(customers);
+    }
+
+    /**
+     * Resets the existing data of this {@code ReserveMate} with {@code newData}.
+     */
+    public void resetData(ReadOnlyReserveMate newData) {
+        requireNonNull(newData);
+
+        setCustomers(newData.getCustomerList());
+    }
+
+    //// customer-level operations
+
+    /**
+     * Returns true if a customer with the same identity as {@code customer} exists in the reservation book.
+     */
+    public boolean hasCustomer(Customer customer) {
+        requireNonNull(customer);
+        return customers.contains(customer);
+    }
+
+    /**
+     * Adds a customer to the reservation book.
+     * The customer must not already exist in the reservation book.
+     */
+    public void addCustomer(Customer p) {
+        customers.add(p);
+    }
+
+    /**
+     * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
+     * {@code target} must exist in the reservation book.
+     * The customer identity of {@code editedCustomer} must not be the same as
+     * another existing customer in the reservation book.
+     */
+    public void setCustomer(Customer target, Customer editedCustomer) {
+        requireNonNull(editedCustomer);
+
+        customers.setCustomer(target, editedCustomer);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ReserveMate}.
+     * {@code key} must exist in the reservation book.
+     */
+    public void removeCustomer(Customer key) {
+        customers.remove(key);
+    }
+
+    //// util methods
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("customers", customers)
+                .toString();
+    }
+
+    @Override
+    public ObservableList<Customer> getCustomerList() {
+        return customers.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ReserveMate)) {
+            return false;
+        }
+
+        ReserveMate otherReserveMate = (ReserveMate) other;
+        return customers.equals(otherReserveMate.customers);
+    }
+
+    @Override
+    public int hashCode() {
+        return customers.hashCode();
+    }
+}
