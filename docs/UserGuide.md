@@ -79,15 +79,15 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a customer: `add`
+### Adding a reservation: `add`
 
-Adds a customer to the ReserveMate.
+Adds a reservation to the ReserveMate.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A customer can have any number of tags (including 0)
+**Tip:** A reservation can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -100,9 +100,9 @@ Shows a list of all customers in the address book.
 
 Format: `list`
 
-### Editing a customer : `edit`
+### Editing a reservation : `edit`
 
-Edits an existing customer in the address book.
+Edits an existing reservation in ReserveMate.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
