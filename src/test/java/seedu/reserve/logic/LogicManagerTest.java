@@ -21,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.commands.CommandResult;
+import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.logic.parser.exceptions.ParseException;
@@ -65,11 +66,7 @@ public class LogicManagerTest {
         assertCommandException(deleteCommand, MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    }
+
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -100,6 +97,12 @@ public class LogicManagerTest {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
+    }
+
+    @Test
+    public void execute_validCommand_success() throws Exception {
+        String helpcommand = HelpCommand.COMMAND_WORD;
+        assertCommandSuccess(helpcommand, HelpCommand.SHOWING_HELP_MESSAGE, model);
     }
 
     /**
