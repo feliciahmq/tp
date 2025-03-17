@@ -3,7 +3,6 @@ package seedu.reserve.model.customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -36,7 +35,7 @@ public class CustomerTest {
 
         // same name, phone number and date time, all other attributes different -> returns true
         Customer editedAlice = new CustomerBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameReservation(editedAlice));
 
         // different diners, all other attributes same -> returns false
@@ -98,10 +97,6 @@ public class CustomerTest {
         editedAlice = new CustomerBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different tags -> returns false
         editedAlice = new CustomerBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -110,7 +105,7 @@ public class CustomerTest {
     @Test
     public void toStringMethod() {
         String expected = Customer.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", diners=" + ALICE.getDiners()
+                + ", email=" + ALICE.getEmail() + ", diners=" + ALICE.getDiners()
                 + ", dateTime=" + ALICE.getDateTime() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
