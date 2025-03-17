@@ -5,7 +5,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the number of diners in a reservation.
- * Guarantees: immutable; is valid as declared in {@link #isValidDiners(int)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDiners(String)}
  */
 public class Diners {
 

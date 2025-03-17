@@ -1,7 +1,6 @@
 package seedu.reserve.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,7 +22,6 @@ import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.reservation.Address;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
@@ -46,7 +44,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS] "
             + "[" + PREFIX_DATE_TIME + "DATETIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -109,12 +106,11 @@ public class EditCommand extends Command {
         Name updatedName = editReservationDescriptor.getName().orElse(reservationToEdit.getName());
         Phone updatedPhone = editReservationDescriptor.getPhone().orElse(reservationToEdit.getPhone());
         Email updatedEmail = editReservationDescriptor.getEmail().orElse(reservationToEdit.getEmail());
-        Address updatedAddress = editReservationDescriptor.getAddress().orElse(reservationToEdit.getAddress());
         Diners updateDiners = editReservationDescriptor.getDiners().orElse(reservationToEdit.getDiners());
         DateTime updateDateTime = editReservationDescriptor.getDateTime().orElse(reservationToEdit.getDateTime());
         Set<Tag> updatedTags = editReservationDescriptor.getTags().orElse(reservationToEdit.getTags());
 
-        return new Reservation(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Reservation(updatedName, updatedPhone, updatedEmail,
                 updateDiners, updateDateTime, updatedTags);
     }
 
@@ -150,7 +146,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Diners diners;
         private DateTime dateTime;
         private Set<Tag> tags;
@@ -165,7 +160,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setDiners(toCopy.diners);
             setDateTime(toCopy.dateTime);
             setTags(toCopy.tags);
@@ -175,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, diners, dateTime, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, diners, dateTime, tags);
         }
 
         public void setName(Name name) {
@@ -200,14 +194,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setDiners(Diners diners) {
@@ -258,7 +244,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditReservationDescriptor.name)
                     && Objects.equals(phone, otherEditReservationDescriptor.phone)
                     && Objects.equals(email, otherEditReservationDescriptor.email)
-                    && Objects.equals(address, otherEditReservationDescriptor.address)
                     && Objects.equals(diners, otherEditReservationDescriptor.diners)
                     && Objects.equals(dateTime, otherEditReservationDescriptor.dateTime)
                     && Objects.equals(tags, otherEditReservationDescriptor.tags);
@@ -270,7 +255,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
                     .add("diners", diners)
                     .add("dateTime", dateTime)
                     .add("tags", tags)

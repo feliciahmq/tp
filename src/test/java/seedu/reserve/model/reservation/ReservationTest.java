@@ -3,7 +3,6 @@ package seedu.reserve.model.reservation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -36,7 +35,7 @@ public class ReservationTest {
 
         // same name, phone number and date time, all other attributes different -> returns true
         Reservation editedAlice = new ReservationBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameReservation(editedAlice));
 
         // different diners, all other attributes same -> returns false
@@ -98,10 +97,6 @@ public class ReservationTest {
         editedAlice = new ReservationBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new ReservationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different tags -> returns false
         editedAlice = new ReservationBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -110,7 +105,7 @@ public class ReservationTest {
     @Test
     public void toStringMethod() {
         String expected = Reservation.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
-                + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", diners="
+                + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", diners="
                 + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -42,8 +42,6 @@ public class Messages {
                 .append(reservation.getPhone())
                 .append("; Email: ")
                 .append(reservation.getEmail())
-                .append("; Address: ")
-                .append(reservation.getAddress())
                 .append("; Tags: ");
         reservation.getTags().forEach(builder::append);
         return builder.toString();

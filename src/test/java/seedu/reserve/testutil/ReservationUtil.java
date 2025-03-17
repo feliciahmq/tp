@@ -1,6 +1,5 @@
 package seedu.reserve.testutil;
 
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
@@ -35,7 +34,6 @@ public class ReservationUtil {
         sb.append(PREFIX_NAME + reservation.getName().fullName + " ");
         sb.append(PREFIX_PHONE + reservation.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + reservation.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + reservation.getAddress().value + " ");
         sb.append(PREFIX_NUMBER_OF_DINERS + reservation.getDiners().value + " ");
         sb.append(PREFIX_DATE_TIME + reservation.getDateTime().toString() + " ");
         reservation.getTags().stream().forEach(
@@ -55,8 +53,6 @@ public class ReservationUtil {
                 .append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL)
                 .append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS)
-                .append(address.value).append(" "));
         descriptor.getDiners().ifPresent(diner -> sb.append(PREFIX_NUMBER_OF_DINERS)
                 .append(diner.value).append(" "));
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATE_TIME)

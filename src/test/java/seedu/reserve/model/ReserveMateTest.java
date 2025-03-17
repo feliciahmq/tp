@@ -3,7 +3,6 @@ package seedu.reserve.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
@@ -46,7 +45,7 @@ public class ReserveMateTest {
     @Test
     public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
         // Two reservations with the same identity fields
-        Reservation editedAlice = new ReservationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         List<Reservation> newReservations = Arrays.asList(ALICE, editedAlice);
         ReserveMateStub newData = new ReserveMateStub(newReservations);
@@ -73,7 +72,7 @@ public class ReserveMateTest {
     @Test
     public void hasCustomer_reservationWithSameIdentityFieldsInReserveMate_returnsTrue() {
         reserveMate.addReservation(ALICE);
-        Reservation editedAlice = new ReservationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(reserveMate.hasReservation(editedAlice));
     }

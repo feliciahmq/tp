@@ -1,12 +1,24 @@
 package seedu.reserve.model.reservation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class NameTest {
+    private Name name1;
+    private Name name2;
+    private Name name3;
+
+    @BeforeEach
+    public void setUp() {
+        name1 = new Name("Valid Name");
+        name2 = new Name("Valid Name");
+        name3 = new Name("Another Valid Name");
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -33,28 +45,38 @@ public class NameTest {
         assertFalse(Name.isValidName("peter the 2nd")); // contains alphanumeric characters
         assertFalse(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // contains number long names
 
+        // long name more than 50 characters
+        assertFalse(Name.isValidName("Lorem ipsum dolor sit amete consectetuer adipiscing"));
+
         // valid name
+
+        // long name with 50 characters
+        assertTrue(Name.isValidName("Lorem ipsum dolor sit amet consectetuer adipiscing"));
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
     }
 
     @Test
     public void equals() {
-        Name name = new Name("Valid Name");
 
         // same values -> returns true
-        assertTrue(name.equals(new Name("Valid Name")));
+        assertTrue(name1.equals(name2));
 
         // same object -> returns true
-        assertTrue(name.equals(name));
+        assertTrue(name1.equals(name1));
 
         // null -> returns false
-        assertFalse(name.equals(null));
+        assertFalse(name1.equals(null));
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertFalse(name1.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(name.equals(new Name("Other Valid Name")));
+        assertFalse(name1.equals(name3));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(name1.hashCode(), name2.hashCode());
     }
 }
