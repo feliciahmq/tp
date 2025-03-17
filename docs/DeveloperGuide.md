@@ -96,42 +96,24 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 **Use case: UC02 - Create A New Reservation**
 
+Actor: Restaurant Manager, ReserveMate
+
 **MSS**
 
-1.  User requests to add a new reservation with customer name, number of diners, contact number, and date-time.
-2.  ReserveMate validates the input.
-3.  ReserveMate adds the reservation and confirms success.
+1. Restaurant Manager requests customer's reservation details.
+2. Restaurant Manager enter reservation details. 
+3. ReserveMate validates the input. 
+4. ReserveMate adds the reservation and confirms success.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Invalid customer name.
-    * 2a1. ReserveMate shows an error message:
-        * `Invalid customer name: Name cannot contain numbers.` (if it contains numerical values)
-        * `Invalid customer name: Name must not exceed 50 characters.` (if it exceeds 50 characters)
-    * Use case resumes at step 1.
-
-* 2b. Invalid number of diners.
-    * 2b1. ReserveMate shows an error message:
-        * `Invalid reservation: Maximum number of diners is 10.` (if >10)
-        * `Invalid reservation: Number of diners must be at least 1.` (if <1)
-    * Use case resumes at step 1.
-
-* 2c. Invalid contact number.
-    * 2c1. ReserveMate shows an error message:
-        * `Invalid contact number: Must start with country code '65'.` (if it does not start with "65")
-        * `Invalid contact number: Must contain exactly 10 digits.` (if it is not exactly 10 digits long)
-        * `Invalid contact number: Must start with '65' followed by 8 or 9.` (if the third digit is not 8 or 9)
-    * Use case resumes at step 1.
-
-* 2d. Invalid date and time.
-    * 2d1. ReserveMate shows an error message:
-        * `Invalid date format: Must be in YYYY-MM-DD HHmm format.` (if the format is incorrect)
-        * `Invalid date: Cannot check or reserve dates beyond allowed range.` (if it is in the past beyond the allowed range)
-        * `Invalid date: Nonexistent date entered (e.g., 29, 30, 31 February).` (if an invalid date is provided)
-        * `Invalid reservation time: Restaurant operates between 10:00 and 21:00.` (if outside restaurant hours, considering last reservation at 21:00)
-    * Use case resumes at step 1.
+* 3a. ReserveMate detects an error in the user input.
+    * 3a1. ReserveMate shows an error message.
+    * 3a2. User enters new input.
+    * Steps 3a1 - 3a2 are repeated until user input is correct.
+    * Use case resumes at step 4.
 
 **Use case: UC03 - Listing Commands**
 
@@ -234,19 +216,6 @@ system.
 
 ### Glossary
 
-1. **Index**: A whole number representing the position of a reservation in the system, ranging from 1 to the total number of reservations.
-
-
-2. **Contact Number**: A Singapore phone number that must start with "65" and be exactly 10 digits long, with the third digit being 8 or 9.
-
-
-3. **Reservation**: A booking made by a customer to accommodate 1 - 10 diners at a specific date and time.
-
-
-4. **Customer Name**: The full name of the individual making the reservation. It must not contain numbers, special symbols and should be between 2 - 50 characters.
-
-
-5. **Find**: A feature that allows users to search for reservations based on a customer’s name.
-
-
-6. **User**: Restaurant manager using ReserveMates
+* **User**: Restaurant manager using ReserveMates
+* **Mainstream OS**: Windows, MacOS, Linux, Unix
+* **Customer**: Reservation details of the customer
