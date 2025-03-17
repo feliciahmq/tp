@@ -41,15 +41,35 @@ public class ReserveMateParserTest {
     }
 
     @Test
+    public void parseCommand_addMixedCase() throws Exception {
+        Reservation reservation = new ReservationBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand("aDd "
+                + ReservationUtil.getAddCommand(reservation).substring(4));
+        assertEquals(new AddCommand(reservation), command);
+    }
+
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
+    public void parseCommand_clearMixedCase() throws Exception {
+        assertTrue(parser.parseCommand("ClEaR") instanceof ClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMixedCase() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand("DeLeTe " + INDEX_FIRST_CUSTOMER.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
     }
 
@@ -64,9 +84,23 @@ public class ReserveMateParserTest {
     }
 
     @Test
+    public void parseCommand_editMixedCase() throws Exception {
+        Reservation reservation = new ReservationBuilder().build();
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(reservation).build();
+        EditCommand command = (EditCommand) parser.parseCommand("EdIt " + INDEX_FIRST_CUSTOMER.getOneBased() + " "
+                + ReservationUtil.getEditCustomerDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_CUSTOMER, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_exitMixedCase() throws Exception {
+        assertTrue(parser.parseCommand("ExIt") instanceof ExitCommand);
     }
 
     @Test
@@ -78,15 +112,32 @@ public class ReserveMateParserTest {
     }
 
     @Test
+    public void parseCommand_findMixedCase() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand("FiNd " + String.join(" ", keywords));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
+    public void parseCommand_helpMixedCase() throws Exception {
+        assertTrue(parser.parseCommand("HeLp") instanceof HelpCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listMixedCase() throws Exception {
+        assertTrue(parser.parseCommand("LiSt") instanceof ListCommand);
     }
 
     @Test
@@ -99,4 +150,5 @@ public class ReserveMateParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
 }
