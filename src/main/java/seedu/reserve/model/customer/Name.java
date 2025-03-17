@@ -9,8 +9,9 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int MAX_NAME_LENGTH = 50;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain characters and spaces, should not be blank and not more than 50 characters.";
 
     /*
      * The first character of the name must not be a whitespace,
@@ -34,9 +35,19 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+
+        if (isValidNameLength(test)) {
+            return test.matches(VALIDATION_REGEX);
+        }
+        return false;
     }
 
+    /**
+     * Returns true if a given string is less than 50 characters.
+     */
+    public static boolean isValidNameLength(String test) {
+        return test.length() <= MAX_NAME_LENGTH;
+    }
 
     @Override
     public String toString() {
