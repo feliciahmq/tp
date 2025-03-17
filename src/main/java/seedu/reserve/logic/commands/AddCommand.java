@@ -1,0 +1,87 @@
+package seedu.reserve.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.reserve.commons.util.ToStringBuilder;
+import seedu.reserve.logic.Messages;
+import seedu.reserve.logic.commands.exceptions.CommandException;
+import seedu.reserve.model.Model;
+import seedu.reserve.model.customer.Customer;
+
+/**
+ * Adds a customer to the reservation book.
+ */
+public class AddCommand extends Command {
+
+    public static final String COMMAND_WORD = "add";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the reservation book. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS "
+            + PREFIX_DATE_TIME + "DATETIME "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_NUMBER_OF_DINERS + "5 "
+            + PREFIX_DATE_TIME + "2021-12-31 1800 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
+
+    public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the reservation book";
+
+    private final Customer toAdd;
+
+    /**
+     * Creates an AddCommand to add the specified {@code Customer}
+     */
+    public AddCommand(Customer customer) {
+        requireNonNull(customer);
+        toAdd = customer;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        if (model.hasCustomer(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
+        }
+
+        model.addCustomer(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand otherAddCommand = (AddCommand) other;
+        return toAdd.equals(otherAddCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .toString();
+    }
+}
