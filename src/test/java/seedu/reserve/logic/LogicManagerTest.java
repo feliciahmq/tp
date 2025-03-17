@@ -22,7 +22,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.commands.CommandResult;
 import seedu.reserve.logic.commands.HelpCommand;
-import seedu.reserve.logic.commands.ListCommand;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
