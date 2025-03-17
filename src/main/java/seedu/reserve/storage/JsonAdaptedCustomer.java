@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.reserve.commons.exceptions.IllegalValueException;
-import seedu.reserve.model.customer.Address;
 import seedu.reserve.model.customer.Customer;
 import seedu.reserve.model.customer.DateTime;
 import seedu.reserve.model.customer.Diners;
@@ -29,7 +28,6 @@ class JsonAdaptedCustomer {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final String diners;
     private final String dateTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -39,13 +37,12 @@ class JsonAdaptedCustomer {
      */
     @JsonCreator
     public JsonAdaptedCustomer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                               @JsonProperty("diners") String diners, @JsonProperty("dateTime") String dateTime,
+                               @JsonProperty("email") String email, @JsonProperty("diners") String diners,
+                               @JsonProperty("dateTime") String dateTime,
                                @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.diners = diners;
         this.dateTime = dateTime;
         if (tags != null) {
@@ -60,7 +57,6 @@ class JsonAdaptedCustomer {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         diners = source.getDiners().toString();
         dateTime = source.getDateTime().toString();
         tags.addAll(source.getTags().stream()
@@ -103,14 +99,6 @@ class JsonAdaptedCustomer {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
         if (diners == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Diners.class.getSimpleName()));
         }
@@ -131,7 +119,7 @@ class JsonAdaptedCustomer {
         final DateTime modelDateTime = new DateTime(dateTime);
 
         final Set<Tag> modelTags = new HashSet<>(customerTags);
-        return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelDiners, modelDateTime, modelTags);
+        return new Customer(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelTags);
     }
 
 }
