@@ -3,7 +3,6 @@ package seedu.reserve.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.reserve.model.reservation.Address;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
@@ -28,7 +27,6 @@ public class ReservationBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Diners diners;
     private DateTime dateTime;
     private Set<Tag> tags;
@@ -40,7 +38,6 @@ public class ReservationBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         diners = new Diners(DEFAULT_DINERS);
         dateTime = new DateTime(DEFAULT_DATETIME);
         tags = new HashSet<>();
@@ -53,7 +50,6 @@ public class ReservationBuilder {
         name = reservationToCopy.getName();
         phone = reservationToCopy.getPhone();
         email = reservationToCopy.getEmail();
-        address = reservationToCopy.getAddress();
         diners = reservationToCopy.getDiners();
         dateTime = reservationToCopy.getDateTime();
         tags = new HashSet<>(reservationToCopy.getTags());
@@ -72,14 +68,6 @@ public class ReservationBuilder {
      */
     public ReservationBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Reservation} that we are building.
-     */
-    public ReservationBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -118,7 +106,7 @@ public class ReservationBuilder {
 
 
     public Reservation build() {
-        return new Reservation(name, phone, email, address, diners, dateTime, tags);
+        return new Reservation(name, phone, email, diners, dateTime, tags);
     }
 
 }

@@ -3,7 +3,6 @@ package seedu.reserve.model.reservation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
@@ -42,7 +41,7 @@ public class UniqueReservationListTest {
     @Test
     public void contains_customerWithSameIdentityFieldsInList_returnsTrue() {
         uniqueReservationList.add(ALICE);
-        Reservation editedAlice = new ReservationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(uniqueReservationList.contains(editedAlice));
     }
@@ -85,7 +84,7 @@ public class UniqueReservationListTest {
     @Test
     public void setCustomer_editedReservationHasSameIdentity_success() {
         uniqueReservationList.add(ALICE);
-        Reservation editedAlice = new ReservationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         uniqueReservationList.setReservation(ALICE, editedAlice);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();

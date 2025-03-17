@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
-import seedu.reserve.model.reservation.Address;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
@@ -38,7 +37,6 @@ public class EditReservationDescriptorBuilder {
         descriptor.setName(reservation.getName());
         descriptor.setPhone(reservation.getPhone());
         descriptor.setEmail(reservation.getEmail());
-        descriptor.setAddress(reservation.getAddress());
         descriptor.setDiners(reservation.getDiners());
         descriptor.setDateTime(reservation.getDateTime());
         descriptor.setTags(reservation.getTags());
@@ -65,14 +63,6 @@ public class EditReservationDescriptorBuilder {
      */
     public EditReservationDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditReservationDescriptor} that we are building.
-     */
-    public EditReservationDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 
