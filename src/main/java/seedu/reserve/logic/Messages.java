@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.reserve.logic.parser.Prefix;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * Container for user visible messages.
@@ -14,10 +14,9 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX = "The customer index provided is invalid";
     public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX =
-                "The reservation index provided is invalid";
-    public static final String MESSAGE_CUSTOMERS_LISTED_OVERVIEW = "%1$d customers listed!";
+            "The reservation index provided is invalid";
+    public static final String MESSAGE_RESERVATIONS_LISTED_OVERVIEW = "%1$d reservations listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -34,17 +33,17 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code Customer} for display to the user.
+     * Formats the {@code Reservation} for display to the user.
      */
-    public static String format(Customer customer) {
+    public static String format(Reservation reservation) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(customer.getName())
+        builder.append(reservation.getName())
                 .append("; Phone: ")
-                .append(customer.getPhone())
+                .append(reservation.getPhone())
                 .append("; Email: ")
-                .append(customer.getEmail())
+                .append(reservation.getEmail())
                 .append("; Tags: ");
-        customer.getTags().forEach(builder::append);
+        reservation.getTags().forEach(builder::append);
         return builder.toString();
     }
 

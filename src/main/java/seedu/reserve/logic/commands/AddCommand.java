@@ -12,16 +12,16 @@ import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
- * Adds a customer to the reservation book.
+ * Adds a reservation to the reservation book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the reservation book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reservation to the reservation book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -38,28 +38,29 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the reservation book";
+    public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
+    public static final String MESSAGE_DUPLICATE_RESERVATION =
+            "This reservation already exists in the reservation book";
 
-    private final Customer toAdd;
+    private final Reservation toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Customer}
+     * Creates an AddCommand to add the specified {@code Reservation}
      */
-    public AddCommand(Customer customer) {
-        requireNonNull(customer);
-        toAdd = customer;
+    public AddCommand(Reservation reservation) {
+        requireNonNull(reservation);
+        toAdd = reservation;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasCustomer(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
+        if (model.hasReservation(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
         }
 
-        model.addCustomer(toAdd);
+        model.addReservation(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

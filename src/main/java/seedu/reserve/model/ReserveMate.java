@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.reserve.commons.util.ToStringBuilder;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.UniqueCustomerList;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.model.reservation.UniqueReservationList;
 
 /**
  * Wraps all data at the reservation-book level
- * Duplicates are not allowed (by .isSameCustomer comparison)
+ * Duplicates are not allowed (by .isSameReservation comparison)
  */
 public class ReserveMate implements ReadOnlyReserveMate {
 
-    private final UniqueCustomerList customers;
+    private final UniqueReservationList reservations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +25,13 @@ public class ReserveMate implements ReadOnlyReserveMate {
      *   among constructors.
      */
     {
-        customers = new UniqueCustomerList();
+        reservations = new UniqueReservationList();
     }
 
     public ReserveMate() {}
 
     /**
-     * Creates an ReserveMate using the Customers in the {@code toBeCopied}
+     * Creates an ReserveMate using the reservations in the {@code toBeCopied}
      */
     public ReserveMate(ReadOnlyReserveMate toBeCopied) {
         this();
@@ -41,11 +41,11 @@ public class ReserveMate implements ReadOnlyReserveMate {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the customer list with {@code customers}.
-     * {@code customers} must not contain duplicate customers.
+     * Replaces the contents of the reservation list with {@code reservations}.
+     * {@code reservations} must not contain duplicate reservations.
      */
-    public void setCustomers(List<Customer> customers) {
-        this.customers.setCustomers(customers);
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations.setReservations(reservations);
     }
 
     /**
@@ -54,45 +54,45 @@ public class ReserveMate implements ReadOnlyReserveMate {
     public void resetData(ReadOnlyReserveMate newData) {
         requireNonNull(newData);
 
-        setCustomers(newData.getCustomerList());
+        setReservations(newData.getReservationList());
     }
 
-    //// customer-level operations
+    //// reservation-level operations
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the reservation book.
+     * Returns true if a reservation with the same identity as {@code reservation} exists in the reservation book.
      */
-    public boolean hasCustomer(Customer customer) {
-        requireNonNull(customer);
-        return customers.contains(customer);
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return reservations.contains(reservation);
     }
 
     /**
-     * Adds a customer to the reservation book.
-     * The customer must not already exist in the reservation book.
+     * Adds a reservation to the reservation book.
+     * The reservation must not already exist in the reservation book.
      */
-    public void addCustomer(Customer p) {
-        customers.add(p);
+    public void addReservation(Reservation p) {
+        reservations.add(p);
     }
 
     /**
-     * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
+     * Replaces the given reservation {@code target} in the list with {@code editedReservation}.
      * {@code target} must exist in the reservation book.
-     * The customer identity of {@code editedCustomer} must not be the same as
-     * another existing customer in the reservation book.
+     * The reservation identity of {@code editedReservation} must not be the same as
+     * another existing reservation in the reservation book.
      */
-    public void setCustomer(Customer target, Customer editedCustomer) {
-        requireNonNull(editedCustomer);
+    public void setReservation(Reservation target, Reservation editedReservation) {
+        requireNonNull(editedReservation);
 
-        customers.setCustomer(target, editedCustomer);
+        reservations.setReservation(target, editedReservation);
     }
 
     /**
      * Removes {@code key} from this {@code ReserveMate}.
      * {@code key} must exist in the reservation book.
      */
-    public void removeCustomer(Customer key) {
-        customers.remove(key);
+    public void removeReservation(Reservation key) {
+        reservations.remove(key);
     }
 
     //// util methods
@@ -100,13 +100,13 @@ public class ReserveMate implements ReadOnlyReserveMate {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("customers", customers)
+                .add("reservations", reservations)
                 .toString();
     }
 
     @Override
-    public ObservableList<Customer> getCustomerList() {
-        return customers.asUnmodifiableObservableList();
+    public ObservableList<Reservation> getReservationList() {
+        return reservations.asUnmodifiableObservableList();
     }
 
     @Override
@@ -121,11 +121,11 @@ public class ReserveMate implements ReadOnlyReserveMate {
         }
 
         ReserveMate otherReserveMate = (ReserveMate) other;
-        return customers.equals(otherReserveMate.customers);
+        return reservations.equals(otherReserveMate.reservations);
     }
 
     @Override
     public int hashCode() {
-        return customers.hashCode();
+        return reservations.hashCode();
     }
 }

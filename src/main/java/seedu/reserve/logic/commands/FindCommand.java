@@ -5,17 +5,17 @@ import static java.util.Objects.requireNonNull;
 import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all customers in reservation book whose name contains any of the argument keywords.
+ * Finds and lists all reservations in reservation book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all reservations whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
@@ -29,9 +29,10 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredCustomerList(predicate);
+        model.updateFilteredReservationList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW, model.getFilteredCustomerList().size()));
+                String.format(Messages.MESSAGE_RESERVATIONS_LISTED_OVERVIEW,
+                        model.getFilteredReservationList().size()));
     }
 
     @Override

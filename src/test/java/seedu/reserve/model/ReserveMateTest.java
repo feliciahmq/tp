@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalCustomers.ALICE;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.ALICE;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.exceptions.DuplicateCustomerException;
-import seedu.reserve.testutil.CustomerBuilder;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.model.reservation.exceptions.DuplicateReservationException;
+import seedu.reserve.testutil.ReservationBuilder;
 
 public class ReserveMateTest {
 
@@ -27,7 +27,7 @@ public class ReserveMateTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), reserveMate.getCustomerList());
+        assertEquals(Collections.emptyList(), reserveMate.getReservationList());
     }
 
     @Test
@@ -44,63 +44,64 @@ public class ReserveMateTest {
 
     @Test
     public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
-        // Two customers with the same identity fields
-        Customer editedAlice = new CustomerBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
-        ReserveMateStub newData = new ReserveMateStub(newCustomers);
+        // Two reservations with the same identity fields
+        Reservation editedAlice = new ReservationBuilder(ALICE)
+                .withTags(VALID_TAG_HUSBAND).build();
+        List<Reservation> newReservations = Arrays.asList(ALICE, editedAlice);
+        ReserveMateStub newData = new ReserveMateStub(newReservations);
 
-        assertThrows(DuplicateCustomerException.class, () -> reserveMate.resetData(newData));
+        assertThrows(DuplicateReservationException.class, () -> reserveMate.resetData(newData));
     }
 
     @Test
-    public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> reserveMate.hasCustomer(null));
+    public void hasCustomer_nullReservation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> reserveMate.hasReservation(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInReserveMate_returnsFalse() {
-        assertFalse(reserveMate.hasCustomer(ALICE));
+    public void hasCustomer_reservationNotInReserveMate_returnsFalse() {
+        assertFalse(reserveMate.hasReservation(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerInReserveMate_returnsTrue() {
-        reserveMate.addCustomer(ALICE);
-        assertTrue(reserveMate.hasCustomer(ALICE));
+    public void hasCustomer_reservationInReserveMate_returnsTrue() {
+        reserveMate.addReservation(ALICE);
+        assertTrue(reserveMate.hasReservation(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerWithSameIdentityFieldsInReserveMate_returnsTrue() {
-        reserveMate.addCustomer(ALICE);
-        Customer editedAlice = new CustomerBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(reserveMate.hasCustomer(editedAlice));
+    public void hasCustomer_reservationWithSameIdentityFieldsInReserveMate_returnsTrue() {
+        reserveMate.addReservation(ALICE);
+        Reservation editedAlice = new ReservationBuilder(ALICE)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(reserveMate.hasReservation(editedAlice));
     }
 
     @Test
-    public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> reserveMate.getCustomerList().remove(0));
+    public void getReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> reserveMate.getReservationList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = ReserveMate.class.getCanonicalName() + "{customers=" + reserveMate.getCustomerList() + "}";
+        String expected = ReserveMate.class.getCanonicalName() + "{reservations="
+                + reserveMate.getReservationList() + "}";
         assertEquals(expected, reserveMate.toString());
     }
 
     /**
-     * A stub ReadOnlyReserveMate whose customers list can violate interface constraints.
+     * A stub ReadOnlyReserveMate whose reservations list can violate interface constraints.
      */
     private static class ReserveMateStub implements ReadOnlyReserveMate {
-        private final ObservableList<Customer> customers = FXCollections.observableArrayList();
+        private final ObservableList<Reservation> reservations = FXCollections.observableArrayList();
 
-        ReserveMateStub(Collection<Customer> customers) {
-            this.customers.setAll(customers);
+        ReserveMateStub(Collection<Reservation> reservations) {
+            this.reservations.setAll(reservations);
         }
 
         @Override
-        public ObservableList<Customer> getCustomerList() {
-            return customers;
+        public ObservableList<Reservation> getReservationList() {
+            return reservations;
         }
     }
 

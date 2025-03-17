@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.reserve.commons.core.GuiSettings;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
+    Predicate<Reservation> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,36 +53,36 @@ public interface Model {
     ReadOnlyReserveMate getReserveMate();
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the reservation book.
+     * Returns true if a reservation with the same identity as {@code reservation} exists in the reservation book.
      */
-    boolean hasCustomer(Customer customer);
+    boolean hasReservation(Reservation reservation);
 
     /**
-     * Deletes the given customer.
-     * The customer must exist in the reservation book.
+     * Deletes the given reservation.
+     * The reservation must exist in the reservation book.
      */
-    void deleteCustomer(Customer target);
+    void deleteReservation(Reservation target);
 
     /**
-     * Adds the given customer.
-     * {@code customer} must not already exist in the reservation book.
+     * Adds the given reservation.
+     * {@code reservation} must not already exist in the reservation book.
      */
-    void addCustomer(Customer customer);
+    void addReservation(Reservation reservation);
 
     /**
-     * Replaces the given customer {@code target} with {@code editedCustomer}.
+     * Replaces the given reservation {@code target} with {@code editedReservation}.
      * {@code target} must exist in the reservation book.
-     * The customer identity of {@code editedCustomer} must not be the same as
-     * another existing customer in the reservation book.
+     * The reservation identity of {@code editedReservation} must not be the same as
+     * another existing reservation in the reservation book.
      */
-    void setCustomer(Customer target, Customer editedCustomer);
+    void setReservation(Reservation target, Reservation editedReservation);
 
-    /** Returns an unmodifiable view of the filtered customer list */
-    ObservableList<Customer> getFilteredCustomerList();
+    /** Returns an unmodifiable view of the filtered reservation list */
+    ObservableList<Reservation> getFilteredReservationList();
 
     /**
-     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered reservation list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredCustomerList(Predicate<Customer> predicate);
+    void updateFilteredReservationList(Predicate<Reservation> predicate);
 }

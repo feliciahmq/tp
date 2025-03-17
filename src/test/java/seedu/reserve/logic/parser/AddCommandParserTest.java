@@ -31,40 +31,40 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.reserve.testutil.TypicalCustomers.AMY;
-import static seedu.reserve.testutil.TypicalCustomers.BOB;
+import static seedu.reserve.testutil.TypicalReservation.AMY;
+import static seedu.reserve.testutil.TypicalReservation.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.AddCommand;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.tag.Tag;
-import seedu.reserve.testutil.CustomerBuilder;
+import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Customer expectedCustomer = new CustomerBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Reservation expectedReservation = new ReservationBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedCustomer));
+                + TAG_DESC_FRIEND, new AddCommand(expectedReservation));
 
 
         // multiple tags - all accepted
-        Customer expectedCustomerMultipleTags = new CustomerBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        Reservation expectedReservationMultipleTags = new ReservationBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedCustomerMultipleTags));
+                new AddCommand(expectedReservationMultipleTags));
     }
 
     @Test
@@ -123,9 +123,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Customer expectedCustomer = new CustomerBuilder(AMY).withTags().build();
+        Reservation expectedReservation = new ReservationBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + DINERS_DESC_AMY + DATETIME_DESC_AMY, new AddCommand(expectedCustomer));
+                + DINERS_DESC_AMY + DATETIME_DESC_AMY, new AddCommand(expectedReservation));
     }
 
     @Test

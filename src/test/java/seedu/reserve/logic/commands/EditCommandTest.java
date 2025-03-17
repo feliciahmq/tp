@@ -13,22 +13,22 @@ import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
-import seedu.reserve.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.ReserveMate;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.testutil.CustomerBuilder;
-import seedu.reserve.testutil.EditCustomerDescriptorBuilder;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.testutil.EditReservationDescriptorBuilder;
+import seedu.reserve.testutil.ReservationBuilder;
 
 
 /**
@@ -40,43 +40,43 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Customer editedCustomer = new CustomerBuilder().build();
-        EditCommand.EditCustomerDescriptor descriptor =
-                new EditCustomerDescriptorBuilder(editedCustomer).build();
+        Reservation editedReservation = new ReservationBuilder().build();
+        EditCommand.EditReservationDescriptor descriptor =
+                new EditReservationDescriptorBuilder(editedReservation).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CUSTOMER, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
-                Messages.format(editedCustomer));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                Messages.format(editedReservation));
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
-        expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        expectedModel.setReservation(model.getFilteredReservationList().get(0), editedReservation);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerList().size());
-        Customer lastCustomer = model.getFilteredCustomerList()
+        Index indexLastCustomer = Index.fromOneBased(model.getFilteredReservationList().size());
+        Reservation lastReservation = model.getFilteredReservationList()
                 .get(indexLastCustomer.getZeroBased());
 
-        CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
-        Customer editedCustomer = customerInList.withName(VALID_NAME_BOB)
+        ReservationBuilder customerInList = new ReservationBuilder(lastReservation);
+        Reservation editedReservation = customerInList.withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder()
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastCustomer, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
-                Messages.format(editedCustomer));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                Messages.format(editedReservation));
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
-        expectedModel.setCustomer(lastCustomer, editedCustomer);
+        expectedModel.setReservation(lastReservation, editedReservation);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -84,12 +84,12 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CUSTOMER,
-                new EditCustomerDescriptor());
-        Customer editedCustomer = model.getFilteredCustomerList()
+                new EditCommand.EditReservationDescriptor());
+        Reservation editedReservation = model.getFilteredReservationList()
                 .get(INDEX_FIRST_CUSTOMER.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
-                Messages.format(editedCustomer));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                Messages.format(editedReservation));
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
@@ -101,57 +101,57 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
-        Customer customerInFilteredList = model.getFilteredCustomerList()
+        Reservation reservationInFilteredList = model.getFilteredReservationList()
                 .get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        Customer editedCustomer = new CustomerBuilder(customerInFilteredList)
+        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList)
                 .withName(VALID_NAME_BOB)
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CUSTOMER,
-                new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
-                Messages.format(editedCustomer));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                Messages.format(editedReservation));
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
-        expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        expectedModel.setReservation(model.getFilteredReservationList().get(0), editedReservation);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateCustomerUnfilteredList_failure() {
-        Customer firstCustomer = model.getFilteredCustomerList()
+        Reservation firstReservation = model.getFilteredReservationList()
                 .get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        EditCommand.EditCustomerDescriptor descriptor =
-                new EditCustomerDescriptorBuilder(firstCustomer).build();
+        EditCommand.EditReservationDescriptor descriptor =
+                new EditReservationDescriptorBuilder(firstReservation).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_CUSTOMER, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CUSTOMER);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
     public void execute_duplicateCustomerFilteredList_failure() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
-        // edit customer in filtered list into a duplicate in address book
-        Customer customerInList = model.getReserveMate().getCustomerList()
+        // edit reservation in filtered list into a duplicate in address book
+        Reservation reservationInList = model.getReserveMate().getReservationList()
                 .get(INDEX_SECOND_CUSTOMER.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CUSTOMER,
-                new EditCustomerDescriptorBuilder(customerInList).build());
+                new EditReservationDescriptorBuilder(reservationInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CUSTOMER);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
     public void execute_invalidCustomerIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index
-                .fromOneBased(model.getFilteredCustomerList().size() + 1);
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder()
+                .fromOneBased(model.getFilteredReservationList().size() + 1);
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     /**
@@ -163,12 +163,12 @@ public class EditCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -176,7 +176,7 @@ public class EditCommandTest {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CUSTOMER, DESC_AMY);
 
         // same values -> returns true
-        EditCommand.EditCustomerDescriptor copyDescriptor = new EditCommand.EditCustomerDescriptor(DESC_AMY);
+        EditCommand.EditReservationDescriptor copyDescriptor = new EditCommand.EditReservationDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_CUSTOMER, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -199,10 +199,10 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditCustomerDescriptor editCustomerDescriptor = new EditCommand.EditCustomerDescriptor();
-        EditCommand editCommand = new EditCommand(index, editCustomerDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editCustomerDescriptor="
-                + editCustomerDescriptor + "}";
+        EditCommand.EditReservationDescriptor editReservationDescriptor = new EditReservationDescriptor();
+        EditCommand editCommand = new EditCommand(index, editReservationDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editReservationDescriptor="
+                + editReservationDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

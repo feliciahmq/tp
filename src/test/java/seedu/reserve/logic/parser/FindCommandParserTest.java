@@ -12,7 +12,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.logic.commands.FindCommand;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

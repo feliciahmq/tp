@@ -32,12 +32,12 @@ import org.junit.jupiter.api.Test;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.EditCommand;
-import seedu.reserve.logic.commands.EditCommand.EditCustomerDescriptor;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.tag.Tag;
-import seedu.reserve.testutil.EditCustomerDescriptorBuilder;
+import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -85,7 +85,7 @@ public class EditCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Customer} being edited,
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Reservation} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
@@ -102,8 +102,8 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -115,8 +115,8 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_CUSTOMER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -127,26 +127,27 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_CUSTOMER;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditReservationDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditReservationDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditCustomerDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditReservationDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -188,7 +189,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_CUSTOMER;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withTags().build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

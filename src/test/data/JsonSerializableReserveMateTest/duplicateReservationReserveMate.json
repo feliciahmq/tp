@@ -1,0 +1,16 @@
+{
+  "reservations": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "diners": "3",
+    "dateTime": "2025-12-25 1200",
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "diners": "3",
+    "dateTime": "2025-12-25 1200"
+  } ]
+}

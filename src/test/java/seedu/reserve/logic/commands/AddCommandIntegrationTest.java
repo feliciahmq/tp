@@ -2,7 +2,7 @@ package seedu.reserve.logic.commands;
 
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.testutil.CustomerBuilder;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.testutil.ReservationBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -28,21 +28,21 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newCustomer_success() {
-        Customer validCustomer = new CustomerBuilder().build();
+        Reservation validReservation = new ReservationBuilder().build();
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
-        expectedModel.addCustomer(validCustomer);
+        expectedModel.addReservation(validReservation);
 
-        assertCommandSuccess(new AddCommand(validCustomer), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
+        assertCommandSuccess(new AddCommand(validReservation), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validReservation)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateCustomer_throwsCommandException() {
-        Customer customerInList = model.getReserveMate().getCustomerList().get(0);
-        assertCommandFailure(new AddCommand(customerInList), model,
-                AddCommand.MESSAGE_DUPLICATE_CUSTOMER);
+        Reservation reservationInList = model.getReserveMate().getReservationList().get(0);
+        assertCommandFailure(new AddCommand(reservationInList), model,
+                AddCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
 }

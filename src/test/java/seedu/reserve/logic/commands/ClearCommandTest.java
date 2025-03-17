@@ -1,7 +1,7 @@
 package seedu.reserve.logic.commands;
 
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
 

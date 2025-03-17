@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.reserve.commons.core.GuiSettings;
 import seedu.reserve.commons.core.LogsCenter;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * Represents the in-memory model of the reservation book data.
@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final ReserveMate reserveMate;
     private final UserPrefs userPrefs;
-    private final FilteredList<Customer> filteredCustomers;
+    private final FilteredList<Reservation> filteredReservations;
 
     /**
      * Initializes a ModelManager with the given ReserveMate and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.reserveMate = new ReserveMate(reserveMate);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.reserveMate.getCustomerList());
+        filteredReservations = new FilteredList<>(this.reserveMate.getReservationList());
     }
 
     public ModelManager() {
@@ -88,44 +88,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasCustomer(Customer customer) {
-        requireNonNull(customer);
-        return reserveMate.hasCustomer(customer);
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return reserveMate.hasReservation(reservation);
     }
 
     @Override
-    public void deleteCustomer(Customer target) {
-        reserveMate.removeCustomer(target);
+    public void deleteReservation(Reservation target) {
+        reserveMate.removeReservation(target);
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        reserveMate.addCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    public void addReservation(Reservation reservation) {
+        reserveMate.addReservation(reservation);
+        updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
     }
 
     @Override
-    public void setCustomer(Customer target, Customer editedCustomer) {
-        requireAllNonNull(target, editedCustomer);
+    public void setReservation(Reservation target, Reservation editedReservation) {
+        requireAllNonNull(target, editedReservation);
 
-        reserveMate.setCustomer(target, editedCustomer);
+        reserveMate.setReservation(target, editedReservation);
     }
 
-    //=========== Filtered Customer List Accessors =============================================================
+    //=========== Filtered Reservation List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of
      * {@code versionedReserveMate}
      */
     @Override
-    public ObservableList<Customer> getFilteredCustomerList() {
-        return filteredCustomers;
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return filteredReservations;
     }
 
     @Override
-    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+    public void updateFilteredReservationList(Predicate<Reservation> predicate) {
         requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
+        filteredReservations.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return reserveMate.equals(otherModelManager.reserveMate)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers);
+                && filteredReservations.equals(otherModelManager.filteredReservations);
     }
 
 }

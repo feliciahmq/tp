@@ -18,9 +18,9 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ReserveMate;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
-import seedu.reserve.testutil.EditCustomerDescriptorBuilder;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -64,15 +64,15 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditCustomerDescriptor DESC_AMY;
-    public static final EditCommand.EditCustomerDescriptor DESC_BOB;
+    public static final EditCommand.EditReservationDescriptor DESC_AMY;
+    public static final EditCommand.EditReservationDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditReservationDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withDiners(VALID_DINERS_AMY).withDateTime(VALID_DATETIME_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
@@ -108,30 +108,31 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the reservation book, filtered customer list and selected customer in {@code actualModel} remain unchanged
+     * - the reservation book, filtered reservation list and selected reservation in {@code actualModel}
+     * remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         ReserveMate expectedReserveMate = new ReserveMate(actualModel.getReserveMate());
-        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCustomerList());
+        List<Reservation> expectedFilteredList = new ArrayList<>(actualModel.getFilteredReservationList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedReserveMate, actualModel.getReserveMate());
-        assertEquals(expectedFilteredList, actualModel.getFilteredCustomerList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredReservationList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the customer at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the reservation at the given {@code targetIndex} in the
      * {@code model}'s reservation book.
      */
     public static void showCustomerAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredReservationList().size());
 
-        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
-        final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Reservation reservation = model.getFilteredReservationList().get(targetIndex.getZeroBased());
+        final String[] splitName = reservation.getName().fullName.split("\\s+");
+        model.updateFilteredReservationList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredCustomerList().size());
+        assertEquals(1, model.getFilteredReservationList().size());
     }
 
 }

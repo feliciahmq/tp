@@ -8,7 +8,7 @@ import seedu.reserve.logic.commands.CommandResult;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.ReadOnlyReserveMate;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * API of the Logic component
@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyReserveMate getReserveMate();
 
-    /** Returns an unmodifiable view of the filtered list of customers */
-    ObservableList<Customer> getFilteredCustomerList();
+    /** Returns an unmodifiable view of the filtered list of reservations */
+    ObservableList<Reservation> getFilteredReservationList();
 
     /**
      * Returns the user prefs' reservation book file path.

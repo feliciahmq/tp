@@ -3,10 +3,10 @@ package seedu.reserve.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalCustomers.ALICE;
-import static seedu.reserve.testutil.TypicalCustomers.HOON;
-import static seedu.reserve.testutil.TypicalCustomers.IDA;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.ALICE;
+import static seedu.reserve.testutil.TypicalReservation.HOON;
+import static seedu.reserve.testutil.TypicalReservation.IDA;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonReserveMateStorageTest {
     }
 
     @Test
-    public void readReserveMate_invalidCustomerReserveMate_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readReserveMate("invalidCustomerReserveMate.json"));
+    public void readReserveMate_invalidReservationReserveMate_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readReserveMate("invalidReservationReserveMate.json"));
     }
 
     @Test
-    public void readReserveMate_invalidAndValidCustomerReserveMate_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readReserveMate("invalidAndValidCustomerReserveMate.json"));
+    public void readReserveMate_invalidAndValidReservationReserveMate_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readReserveMate("invalidAndValidReservationReserveMate.json"));
     }
 
     @Test
@@ -72,14 +72,14 @@ public class JsonReserveMateStorageTest {
         assertEquals(original, new ReserveMate(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addCustomer(HOON);
-        original.removeCustomer(ALICE);
+        original.addReservation(HOON);
+        original.removeReservation(ALICE);
         jsonReserveMateStorage.saveReserveMate(original, filePath);
         readBack = jsonReserveMateStorage.readReserveMate(filePath).get();
         assertEquals(original, new ReserveMate(readBack));
 
         // Save and read without specifying file path
-        original.addCustomer(IDA);
+        original.addReservation(IDA);
         jsonReserveMateStorage.saveReserveMate(original); // file path not specified
         readBack = jsonReserveMateStorage.readReserveMate().get(); // file path not specified
         assertEquals(original, new ReserveMate(readBack));

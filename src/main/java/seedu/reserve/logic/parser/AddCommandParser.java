@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.DateTime;
-import seedu.reserve.model.customer.Diners;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.model.reservation.DateTime;
+import seedu.reserve.model.reservation.Diners;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.tag.Tag;
 
 /**
@@ -51,9 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Customer customer = new Customer(name, phone, email, diners, dateTime, tagList);
+        Reservation reservation = new Reservation(name, phone, email, diners, dateTime, tagList);
 
-        return new AddCommand(customer);
+        return new AddCommand(reservation);
     }
 
     /**

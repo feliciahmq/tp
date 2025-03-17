@@ -2,7 +2,7 @@ package seedu.reserve.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.nio.file.Path;
 
