@@ -22,11 +22,12 @@ import seedu.reserve.logic.commands.FindCommand;
 import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
-import seedu.reserve.testutil.CustomerBuilder;
-import seedu.reserve.testutil.CustomerUtil;
-import seedu.reserve.testutil.EditCustomerDescriptorBuilder;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.testutil.EditReservationDescriptorBuilder;
+import seedu.reserve.testutil.ReservationBuilder;
+import seedu.reserve.testutil.ReservationUtil;
+
 
 public class ReserveMateParserTest {
 
@@ -34,9 +35,9 @@ public class ReserveMateParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Customer customer = new CustomerBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(CustomerUtil.getAddCommand(customer));
-        assertEquals(new AddCommand(customer), command);
+        Reservation reservation = new ReservationBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ReservationUtil.getAddCommand(reservation));
+        assertEquals(new AddCommand(reservation), command);
     }
 
     @Test
@@ -54,10 +55,11 @@ public class ReserveMateParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Customer customer = new CustomerBuilder().build();
-        EditCommand.EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder(customer).build();
+        Reservation reservation = new ReservationBuilder().build();
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(reservation).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CUSTOMER.getOneBased() + " " + CustomerUtil.getEditCustomerDescriptorDetails(descriptor));
+                + INDEX_FIRST_CUSTOMER.getOneBased() + " "
+                + ReservationUtil.getEditCustomerDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_CUSTOMER, descriptor), command);
     }
 

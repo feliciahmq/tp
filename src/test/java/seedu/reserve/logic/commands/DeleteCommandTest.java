@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,21 +29,21 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
+        Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                 INDEX_FIRST_CUSTOMER.getOneBased());
 
         ModelManager expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
-        expectedModel.deleteCustomer(customerToDelete);
+        expectedModel.deleteReservation(reservationToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
@@ -53,14 +53,14 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
-        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
+        Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                INDEX_FIRST_CUSTOMER.getOneBased());
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
-        expectedModel.deleteCustomer(customerToDelete);
+        expectedModel.deleteReservation(reservationToDelete);
         showNoCustomer(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -97,7 +97,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different customer -> returns false
+        // different reservation -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
@@ -113,8 +113,8 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoCustomer(Model model) {
-        model.updateFilteredCustomerList(p -> false);
+        model.updateFilteredReservationList(p -> false);
 
-        assertTrue(model.getFilteredCustomerList().isEmpty());
+        assertTrue(model.getFilteredReservationList().isEmpty());
     }
 }

@@ -3,12 +3,12 @@ package seedu.reserve.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.logic.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
+import static seedu.reserve.logic.Messages.MESSAGE_RESERVATIONS_LISTED_OVERVIEW;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.testutil.TypicalCustomers.CARL;
-import static seedu.reserve.testutil.TypicalCustomers.ELLE;
-import static seedu.reserve.testutil.TypicalCustomers.FIONA;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
+import static seedu.reserve.testutil.TypicalReservation.CARL;
+import static seedu.reserve.testutil.TypicalReservation.ELLE;
+import static seedu.reserve.testutil.TypicalReservation.FIONA;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,28 +50,28 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different customer -> returns false
+        // different reservation -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noCustomerFound() {
-        String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_RESERVATIONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredCustomerList(predicate);
+        expectedModel.updateFilteredReservationList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredCustomerList());
+        assertEquals(Collections.emptyList(), model.getFilteredReservationList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleCustomersFound() {
-        String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_RESERVATIONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredCustomerList(predicate);
+        expectedModel.updateFilteredReservationList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCustomerList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredReservationList());
     }
 
     @Test

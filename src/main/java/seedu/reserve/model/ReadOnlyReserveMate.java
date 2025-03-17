@@ -1,7 +1,7 @@
 package seedu.reserve.model;
 
 import javafx.collections.ObservableList;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * Unmodifiable view of an reservation book
@@ -9,9 +9,9 @@ import seedu.reserve.model.customer.Customer;
 public interface ReadOnlyReserveMate {
 
     /**
-     * Returns an unmodifiable view of the customers list.
-     * This list will not contain any duplicate customers.
+     * Returns an unmodifiable view of the reservations list.
+     * This list will not contain any duplicate reservation.
      */
-    ObservableList<Customer> getCustomerList();
+    ObservableList<Reservation> getReservationList();
 
 }

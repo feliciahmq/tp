@@ -8,7 +8,7 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,24 +23,24 @@ import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.customer.Address;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.DateTime;
-import seedu.reserve.model.customer.Diners;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.model.reservation.Address;
+import seedu.reserve.model.reservation.DateTime;
+import seedu.reserve.model.reservation.Diners;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.tag.Tag;
 
 /**
- * Edits the details of an existing customer in the reservation book.
+ * Edits the details of an existing reservation in the reservation book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the customer identified "
-            + "by the index number used in the displayed customer list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the reservation identified "
+            + "by the index number used in the displayed reservation list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -56,64 +56,65 @@ public class EditCommand extends Command {
             + PREFIX_NUMBER_OF_DINERS + "5 "
             + PREFIX_DATE_TIME + "2021-12-31 1800 ";
 
-    public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
+    public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the reservation book.";
+    public static final String MESSAGE_DUPLICATE_RESERVATION =
+            "This reservation already exists in the reservation book.";
 
     private final Index index;
-    private final EditCustomerDescriptor editCustomerDescriptor;
+    private final EditReservationDescriptor editReservationDescriptor;
 
     /**
-     * @param index of the customer in the filtered customer list to edit
-     * @param editCustomerDescriptor details to edit the customer with
+     * @param index of the reservation in the filtered reservation list to edit
+     * @param editReservationDescriptor details to edit the reservation with
      */
-    public EditCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
+    public EditCommand(Index index, EditReservationDescriptor editReservationDescriptor) {
         requireNonNull(index);
-        requireNonNull(editCustomerDescriptor);
+        requireNonNull(editReservationDescriptor);
 
         this.index = index;
-        this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
+        this.editReservationDescriptor = new EditReservationDescriptor(editReservationDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredCustomerList();
+        List<Reservation> lastShownList = model.getFilteredReservationList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
         }
 
-        Customer customerToEdit = lastShownList.get(index.getZeroBased());
-        Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
+        Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
+        Reservation editedReservation = createEditedReservation(reservationToEdit, editReservationDescriptor);
 
-        if (!customerToEdit.isSameReservation(editedCustomer) && model.hasCustomer(editedCustomer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
+        if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
+            throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
 
         }
 
-        model.setCustomer(customerToEdit, editedCustomer);
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, Messages.format(editedCustomer)));
+        model.setReservation(reservationToEdit, editedReservation);
+        model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation)));
     }
 
     /**
-     * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
-     * edited with {@code editCustomerDescriptor}.
+     * Creates and returns a {@code Reservation} with the details of {@code reservationToEdit}
+     * edited with {@code editReservationDescriptor}.
      */
-    private static Customer createEditedCustomer(Customer customerToEdit,
-                                                 EditCustomerDescriptor editCustomerDescriptor) {
-        assert customerToEdit != null;
+    private static Reservation createEditedReservation(Reservation reservationToEdit,
+                                                       EditReservationDescriptor editReservationDescriptor) {
+        assert reservationToEdit != null;
 
-        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
-        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
-        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Diners updateDiners = editCustomerDescriptor.getDiners().orElse(customerToEdit.getDiners());
-        DateTime updateDateTime = editCustomerDescriptor.getDateTime().orElse(customerToEdit.getDateTime());
-        Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
+        Name updatedName = editReservationDescriptor.getName().orElse(reservationToEdit.getName());
+        Phone updatedPhone = editReservationDescriptor.getPhone().orElse(reservationToEdit.getPhone());
+        Email updatedEmail = editReservationDescriptor.getEmail().orElse(reservationToEdit.getEmail());
+        Address updatedAddress = editReservationDescriptor.getAddress().orElse(reservationToEdit.getAddress());
+        Diners updateDiners = editReservationDescriptor.getDiners().orElse(reservationToEdit.getDiners());
+        DateTime updateDateTime = editReservationDescriptor.getDateTime().orElse(reservationToEdit.getDateTime());
+        Set<Tag> updatedTags = editReservationDescriptor.getTags().orElse(reservationToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Reservation(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updateDiners, updateDateTime, updatedTags);
     }
 
@@ -130,22 +131,22 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editCustomerDescriptor.equals(otherEditCommand.editCustomerDescriptor);
+                && editReservationDescriptor.equals(otherEditCommand.editReservationDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editCustomerDescriptor", editCustomerDescriptor)
+                .add("editReservationDescriptor", editReservationDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the customer with. Each non-empty field value will replace the
-     * corresponding field value of the customer.
+     * Stores the details to edit the reservation with. Each non-empty field value will replace the
+     * corresponding field value of the reservation.
      */
-    public static class EditCustomerDescriptor {
+    public static class EditReservationDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -154,13 +155,13 @@ public class EditCommand extends Command {
         private DateTime dateTime;
         private Set<Tag> tags;
 
-        public EditCustomerDescriptor() {}
+        public EditReservationDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
+        public EditReservationDescriptor(EditReservationDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -249,18 +250,18 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCustomerDescriptor)) {
+            if (!(other instanceof EditReservationDescriptor)) {
                 return false;
             }
 
-            EditCustomerDescriptor otherEditCustomerDescriptor = (EditCustomerDescriptor) other;
-            return Objects.equals(name, otherEditCustomerDescriptor.name)
-                    && Objects.equals(phone, otherEditCustomerDescriptor.phone)
-                    && Objects.equals(email, otherEditCustomerDescriptor.email)
-                    && Objects.equals(address, otherEditCustomerDescriptor.address)
-                    && Objects.equals(diners, otherEditCustomerDescriptor.diners)
-                    && Objects.equals(dateTime, otherEditCustomerDescriptor.dateTime)
-                    && Objects.equals(tags, otherEditCustomerDescriptor.tags);
+            EditReservationDescriptor otherEditReservationDescriptor = (EditReservationDescriptor) other;
+            return Objects.equals(name, otherEditReservationDescriptor.name)
+                    && Objects.equals(phone, otherEditReservationDescriptor.phone)
+                    && Objects.equals(email, otherEditReservationDescriptor.email)
+                    && Objects.equals(address, otherEditReservationDescriptor.address)
+                    && Objects.equals(diners, otherEditReservationDescriptor.diners)
+                    && Objects.equals(dateTime, otherEditReservationDescriptor.dateTime)
+                    && Objects.equals(tags, otherEditReservationDescriptor.tags);
         }
 
         @Override

@@ -1,7 +1,7 @@
 package seedu.reserve.testutil;
 
 import seedu.reserve.model.ReserveMate;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * A utility class to help with building ReserveMate objects.
@@ -21,10 +21,10 @@ public class ReserveMateBuilder {
     }
 
     /**
-     * Adds a new {@code Customer} to the {@code ReserveMate} that we are building.
+     * Adds a new {@code Reservation} to the {@code ReserveMate} that we are building.
      */
-    public ReserveMateBuilder withCustomer(Customer customer) {
-        reserveMate.addCustomer(customer);
+    public ReserveMateBuilder withCustomer(Reservation reservation) {
+        reserveMate.addReservation(reservation);
         return this;
     }
 

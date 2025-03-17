@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalCustomers.ALICE;
+import static seedu.reserve.testutil.TypicalReservation.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ import seedu.reserve.model.Model;
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.ReadOnlyUserPrefs;
 import seedu.reserve.model.ReserveMate;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.testutil.CustomerBuilder;
+import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandTest {
 
@@ -35,29 +35,29 @@ public class AddCommandTest {
     @Test
     public void execute_customerAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCustomerAdded modelStub = new ModelStubAcceptingCustomerAdded();
-        Customer validCustomer = new CustomerBuilder().build();
+        Reservation validReservation = new ReservationBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validReservation).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validReservation)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
+        assertEquals(Arrays.asList(validReservation), modelStub.customersAdded);
     }
 
     @Test
     public void execute_duplicateCustomer_throwsCommandException() {
-        Customer validCustomer = new CustomerBuilder().build();
-        AddCommand addCommand = new AddCommand(validCustomer);
-        ModelStub modelStub = new ModelStubWithCustomer(validCustomer);
+        Reservation validReservation = new ReservationBuilder().build();
+        AddCommand addCommand = new AddCommand(validReservation);
+        ModelStub modelStub = new ModelStubWithCustomer(validReservation);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CUSTOMER, ()
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RESERVATION, ()
                 -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Customer alice = new CustomerBuilder().withName("Alice").build();
-        Customer bob = new CustomerBuilder().withName("Bob").build();
+        Reservation alice = new ReservationBuilder().withName("Alice").build();
+        Reservation bob = new ReservationBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -74,7 +74,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different customer -> returns false
+        // different reservation -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -120,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addCustomer(Customer customer) {
+        public void addReservation(Reservation reservation) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -135,65 +135,65 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasCustomer(Customer customer) {
+        public boolean hasReservation(Reservation reservation) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteCustomer(Customer target) {
+        public void deleteReservation(Reservation target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setCustomer(Customer target, Customer editedCustomer) {
+        public void setReservation(Reservation target, Reservation editedReservation) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Customer> getFilteredCustomerList() {
+        public ObservableList<Reservation> getFilteredReservationList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+        public void updateFilteredReservationList(Predicate<Reservation> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single customer.
+     * A Model stub that contains a single reservation.
      */
     private class ModelStubWithCustomer extends ModelStub {
-        private final Customer customer;
+        private final Reservation reservation;
 
-        ModelStubWithCustomer(Customer customer) {
-            requireNonNull(customer);
-            this.customer = customer;
+        ModelStubWithCustomer(Reservation reservation) {
+            requireNonNull(reservation);
+            this.reservation = reservation;
         }
 
         @Override
-        public boolean hasCustomer(Customer customer) {
-            requireNonNull(customer);
-            return this.customer.isSameReservation(customer);
+        public boolean hasReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            return this.reservation.isSameReservation(reservation);
         }
     }
 
     /**
-     * A Model stub that always accept the customer being added.
+     * A Model stub that always accept the reservation being added.
      */
     private class ModelStubAcceptingCustomerAdded extends ModelStub {
-        final ArrayList<Customer> customersAdded = new ArrayList<>();
+        final ArrayList<Reservation> customersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasCustomer(Customer customer) {
-            requireNonNull(customer);
-            return customersAdded.stream().anyMatch(customer::isSameReservation);
+        public boolean hasReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            return customersAdded.stream().anyMatch(reservation::isSameReservation);
         }
 
         @Override
-        public void addCustomer(Customer customer) {
-            requireNonNull(customer);
-            customersAdded.add(customer);
+        public void addReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            customersAdded.add(reservation);
         }
 
         @Override

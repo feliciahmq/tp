@@ -9,10 +9,10 @@ import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
- * Deletes a customer identified using it's displayed index from the reservation book.
+ * Deletes a reservation identified using it's displayed index from the reservation book.
  */
 public class DeleteCommand extends Command {
 
@@ -34,14 +34,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredCustomerList();
+        List<Reservation> lastShownList = model.getFilteredReservationList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
         }
 
-        Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteCustomer(customerToDelete);
+        Reservation reservationToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteReservation(reservationToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, this.targetIndex.getOneBased()));
     }
 

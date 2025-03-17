@@ -2,8 +2,8 @@ package seedu.reserve.logic.commands;
 
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

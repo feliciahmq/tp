@@ -10,7 +10,7 @@ import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalCustomers.AMY;
+import static seedu.reserve.testutil.TypicalReservation.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -29,11 +29,11 @@ import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.storage.JsonReserveMateStorage;
 import seedu.reserve.storage.JsonUserPrefsStorage;
 import seedu.reserve.storage.StorageManager;
-import seedu.reserve.testutil.CustomerBuilder;
+import seedu.reserve.testutil.ReservationBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -85,8 +85,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
+    public void getFilteredReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredReservationList().remove(0));
     }
 
     /**
@@ -169,9 +169,9 @@ public class LogicManagerTest {
         // Triggers the saveReserveMate method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY;
-        Customer expectedCustomer = new CustomerBuilder(AMY).withTags().build();
+        Reservation expectedReservation = new ReservationBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addCustomer(expectedCustomer);
+        expectedModel.addReservation(expectedReservation);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

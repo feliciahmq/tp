@@ -3,10 +3,10 @@ package seedu.reserve.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalCustomers.ALICE;
-import static seedu.reserve.testutil.TypicalCustomers.BENSON;
+import static seedu.reserve.testutil.TypicalReservation.ALICE;
+import static seedu.reserve.testutil.TypicalReservation.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.commons.core.GuiSettings;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 import seedu.reserve.testutil.ReserveMateBuilder;
 
 public class ModelManagerTest {
@@ -73,24 +73,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasCustomer(null));
+    public void hasReservation_nullReservation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasReservation(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInReserveMate_returnsFalse() {
-        assertFalse(modelManager.hasCustomer(ALICE));
+    public void hasReservation_reservationNotInReserveMate_returnsFalse() {
+        assertFalse(modelManager.hasReservation(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerInReserveMate_returnsTrue() {
-        modelManager.addCustomer(ALICE);
-        assertTrue(modelManager.hasCustomer(ALICE));
+    public void hasReservation_reservationInReserveMate_returnsTrue() {
+        modelManager.addReservation(ALICE);
+        assertTrue(modelManager.hasReservation(ALICE));
     }
 
     @Test
-    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCustomerList().remove(0));
+    public void getFilteredReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredReservationList().remove(0));
     }
 
     @Test
@@ -118,11 +118,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredReservationList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(reserveMate, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

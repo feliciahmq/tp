@@ -1,0 +1,10 @@
+{
+  "reservations": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "diners": "5",
+    "dateTime": "2025-12-25 1200"
+  } ]
+}

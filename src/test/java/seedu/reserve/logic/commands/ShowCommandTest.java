@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalCustomers.getTypicalReserveMate;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,11 +29,11 @@ public class ShowCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Customer customerToShow = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
+        Reservation reservationToShow = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         ShowCommand showCommand = new ShowCommand(INDEX_FIRST_CUSTOMER);
 
-        String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_CUSTOMER_SUCCESS,
-                Messages.format(customerToShow));
+        String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_RESERVATION_SUCCESS,
+                Messages.format(reservationToShow));
 
         ModelManager expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
 
@@ -42,10 +42,10 @@ public class ShowCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
-        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -54,11 +54,11 @@ public class ShowCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
-        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class ShowCommandTest {
         // null -> returns false
         assertFalse(showFirstCommand.equals(null));
 
-        // different customer -> returns false
+        // different reservation -> returns false
         assertFalse(showFirstCommand.equals(showSecondCommand));
     }
 

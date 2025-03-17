@@ -9,12 +9,12 @@ import java.util.Set;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.customer.Address;
-import seedu.reserve.model.customer.DateTime;
-import seedu.reserve.model.customer.Diners;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.model.reservation.Address;
+import seedu.reserve.model.reservation.DateTime;
+import seedu.reserve.model.reservation.Diners;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.tag.Tag;
 
 /**

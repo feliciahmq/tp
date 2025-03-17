@@ -15,7 +15,7 @@ import seedu.reserve.logic.parser.ReserveMateParser;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ReadOnlyReserveMate;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.storage.Storage;
 
 /**
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Customer> getFilteredCustomerList() {
-        return model.getFilteredCustomerList();
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return model.getFilteredReservationList();
     }
 
     @Override

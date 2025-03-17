@@ -7,7 +7,7 @@ import java.util.List;
 
 import seedu.reserve.logic.commands.FindCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.customer.NameContainsKeywordsPredicate;
+import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

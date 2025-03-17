@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.reserve.commons.exceptions.IllegalValueException;
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.ReserveMate;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * An Immutable ReserveMate that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.reserve.model.customer.Customer;
 @JsonRootName(value = "ReserveMate")
 class JsonSerializableReserveMate {
 
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
+    public static final String MESSAGE_DUPLICATE_RESERVATION = "Reservation list contains duplicate reservations(s).";
 
-    private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
+    private final List<JsonAdaptedReservation> reservations = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableReserveMate} with the given customers.
+     * Constructs a {@code JsonSerializableReserveMate} with the given reservations.
      */
     @JsonCreator
-    public JsonSerializableReserveMate(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
-        this.customers.addAll(customers);
+    public JsonSerializableReserveMate(@JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
+        this.reservations.addAll(reservations);
     }
 
     /**
@@ -37,22 +37,23 @@ class JsonSerializableReserveMate {
      * @param source future changes to this will not affect the created {@code JsonSerializableReserveMate}.
      */
     public JsonSerializableReserveMate(ReadOnlyReserveMate source) {
-        customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
+        reservations.addAll(source.getReservationList().stream().map(JsonAdaptedReservation::new)
+                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this reservation book into the model's {@code ReserveMate} object.
+     * Converts this reservations book into the model's {@code ReserveMate} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ReserveMate toModelType() throws IllegalValueException {
         ReserveMate reserveMate = new ReserveMate();
-        for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
-            Customer customer = jsonAdaptedCustomer.toModelType();
-            if (reserveMate.hasCustomer(customer)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
+        for (JsonAdaptedReservation jsonAdaptedReservation : reservations) {
+            Reservation reservation = jsonAdaptedReservation.toModelType();
+            if (reserveMate.hasReservation(reservation)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RESERVATION);
             }
-            reserveMate.addCustomer(customer);
+            reserveMate.addReservation(reservation);
         }
         return reserveMate;
     }

@@ -1,0 +1,20 @@
+{
+  "reservations": [
+    {
+      "name": "Valid Person",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "address": "4th street",
+      "diners": "5",
+      "dateTime": "2026-10-10 1800"
+    },
+    {
+      "name": "Person With Invalid Phone Field",
+      "phone": "948asdf2424",
+      "email": "hans@example.com",
+      "address": "4th street",
+      "diners": "3",
+      "dateTime": "2025-12-25 1200"
+    }
+  ]
+}

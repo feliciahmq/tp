@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.model.Model;
-import seedu.reserve.model.customer.Customer;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * A utility class for test cases.
@@ -33,23 +33,23 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the customer in the {@code model}'s customer list.
+     * Returns the middle index of the reservation in the {@code model}'s reservation list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredCustomerList().size() / 2);
+        return Index.fromOneBased(model.getFilteredReservationList().size() / 2);
     }
 
     /**
-     * Returns the last index of the customer in the {@code model}'s customer list.
+     * Returns the last index of the reservation in the {@code model}'s reservation list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredCustomerList().size());
+        return Index.fromOneBased(model.getFilteredReservationList().size());
     }
 
     /**
-     * Returns the customer in the {@code model}'s customer list at {@code index}.
+     * Returns the reservation in the {@code model}'s reservation list at {@code index}.
      */
-    public static Customer getCustomer(Model model, Index index) {
-        return model.getFilteredCustomerList().get(index.getZeroBased());
+    public static Reservation getCustomer(Model model, Index index) {
+        return model.getFilteredReservationList().get(index.getZeroBased());
     }
 }

@@ -6,30 +6,30 @@ import java.util.stream.Collectors;
 
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.ReserveMate;
-import seedu.reserve.model.customer.Address;
-import seedu.reserve.model.customer.Customer;
-import seedu.reserve.model.customer.DateTime;
-import seedu.reserve.model.customer.Diners;
-import seedu.reserve.model.customer.Email;
-import seedu.reserve.model.customer.Name;
-import seedu.reserve.model.customer.Phone;
+import seedu.reserve.model.reservation.Address;
+import seedu.reserve.model.reservation.DateTime;
+import seedu.reserve.model.reservation.Diners;
+import seedu.reserve.model.reservation.Email;
+import seedu.reserve.model.reservation.Name;
+import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code ReserveMate} with sample data.
  */
 public class SampleDataUtil {
-    public static Customer[] getSampleCustomers() {
-        return new Customer[]{
-            new Customer(new Name("John Doe"), new Phone("6598765432"), new Email("johnd@example.com"),
+    public static Reservation[] getSampleReservations() {
+        return new Reservation[]{
+            new Reservation(new Name("John Doe"), new Phone("6598765432"), new Email("johnd@example.com"),
                 new Address("311, Clementi Ave 2, #02-25"),
                 new Diners("5"), new DateTime("2026-12-31 1800"),
                 getTagSet("owesMoney", "friends")),
-            new Customer(new Name("Alexa Yeoh"), new Phone("6598765432"), new Email("alexy@example.com"),
+            new Reservation(new Name("Alexa Yeoh"), new Phone("6598765432"), new Email("alexy@example.com"),
                 new Address("311, Clementi Ave 2, #02-25"),
                 new Diners("5"), new DateTime("2026-12-31 1800"),
                 getTagSet("owesMoney", "friends")),
-            new Customer(new Name("Mickey Mouse"), new Phone("6598765432"), new Email("mickey@example.com"),
+            new Reservation(new Name("Mickey Mouse"), new Phone("6598765432"), new Email("mickey@example.com"),
                 new Address("311, Clementi Ave 2, #02-25"),
                 new Diners("5"), new DateTime("2026-12-30 1800"),
                 getTagSet("owesMoney", "friends"))
@@ -38,8 +38,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyReserveMate getSampleReserveMate() {
         ReserveMate sampleAb = new ReserveMate();
-        for (Customer sampleCustomer : getSampleCustomers()) {
-            sampleAb.addCustomer(sampleCustomer);
+        for (Reservation sampleReservation : getSampleReservations()) {
+            sampleAb.addReservation(sampleReservation);
         }
         return sampleAb;
     }
