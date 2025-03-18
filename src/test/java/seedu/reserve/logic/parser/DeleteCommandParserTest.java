@@ -26,13 +26,13 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsWithSpaces_returnsDeleteCommand() {
-        assertParseSuccess(parser, "  1  ", new DeleteCommand(INDEX_FIRST_CUSTOMER));
+    public void parse_whitespaceArgs_throwsParseException() {
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_whitespaceArgs_throwsParseException() {
-        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_invalidIndex_throwsParseException() {
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
