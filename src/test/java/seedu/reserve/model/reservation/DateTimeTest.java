@@ -1,5 +1,6 @@
 package seedu.reserve.model.reservation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.testutil.Assert.assertThrows;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 public class DateTimeTest {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final String INVALID_DATE_TIME_FORMAT_STR = "2025-12-12 180";
+
     private String formattedYesterdayDateTime;
     private String formattedTomorrowDateTime;
     private String formattedDayAfterDateTime;
@@ -31,6 +34,11 @@ public class DateTimeTest {
     }
 
     @Test
+    public void constructor_validDateTime_success() {
+        assertEquals(DateTime.class, DateTime.fromFileString(formattedYesterdayDateTime).getClass());
+    }
+
+    @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateTime(null));
     }
@@ -39,6 +47,12 @@ public class DateTimeTest {
     public void constructor_invalidDateTime_throwsIllegalArgumentException() {
         String invalidDateTime = "2023-12-12 190";
         assertThrows(IllegalArgumentException.class, () -> new DateTime(invalidDateTime));
+    }
+
+    @Test
+    public void constructor_invalidFileInputDateTime_throwsIllegalValueException() {
+        String invalidDateTime = "2023-12-12 190";
+        assertThrows(IllegalArgumentException.class, () -> DateTime.fromFileString(invalidDateTime));
     }
 
     @BeforeEach
@@ -55,12 +69,24 @@ public class DateTimeTest {
         assertFalse(DateTime.isValidDateTime(""));
         assertFalse(DateTime.isValidDateTime("1990-12-12 1800"));
         assertFalse(DateTime.isValidDateTime("2020-12-12 1800"));
-        assertFalse(DateTime.isValidDateTime("2025-12-12 180"));
+        assertFalse(DateTime.isValidDateTime(INVALID_DATE_TIME_FORMAT_STR));
         assertFalse(DateTime.isValidDateTime(formattedYesterdayDateTime));
 
         // valid date time
         assertTrue(DateTime.isValidDateTime("2030-12-12 1800"));
         assertTrue(DateTime.isValidDateTime(formattedTomorrowDateTime));
+
+    }
+
+    @Test
+    public void isValidFileInputDateTime() {
+        // invalid date time
+        assertFalse(DateTime.isValidFileInputDateTime(""));
+        assertFalse(DateTime.isValidFileInputDateTime(INVALID_DATE_TIME_FORMAT_STR));
+
+        // valid date time
+        assertTrue(DateTime.isValidFileInputDateTime(formattedYesterdayDateTime));
+        assertTrue(DateTime.isValidFileInputDateTime(formattedTomorrowDateTime));
 
     }
 
