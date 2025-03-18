@@ -119,7 +119,7 @@ Actor: Restaurant Manager, ReserveMate
 
 **MSS**
 
-1. User requests to view all available commands by entering "list" (not case-sensitive).
+1. User requests to view all available commands by entering "help".
 2. ReserveMate displays the list of available commands to user.
 
     Use case ends.
