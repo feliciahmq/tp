@@ -75,7 +75,7 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be invalid.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as invalid.
 
-* All commands are case not case-sensitive.
+* All commands are not case-sensitive.
   e.g. if the command specifies `list` or `LIST` will be accepted as valid commands. 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
