@@ -29,21 +29,21 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
    
-   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st contact shown in the current list to reflect new details of at least one specified tag.
+   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st reservation shown in the current list to reflect new details of at least one specified tag.
    
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd reservation shown in the current list.
    
-   * `show 1` : Displays additional details about the 1st contact shown in the current list.
+   * `show 1` : Displays additional details about the 1st reservation shown in the current list.
    
-   * `list` : Lists all contacts.
+   * `list` : Lists all reservations.
    
    * `help` : Displays all available commands.
    
-   * `find john` : Filters & displays contacts containing "john".
+   * `find john` : Filters & displays reservations containing "john".
    
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all reservations.
 
    * `exit` : Exits the app.
 
