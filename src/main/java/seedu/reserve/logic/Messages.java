@@ -19,6 +19,9 @@ public class Messages {
     public static final String MESSAGE_RESERVATIONS_LISTED_OVERVIEW = "%1$d reservations listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_RESERVATION_LIST =
+            "No reservations found. Use the 'add' command to create a reservation\n"
+                    + "or 'help' to view all commands.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

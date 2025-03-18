@@ -26,16 +26,24 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
+   * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
+   
+   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st reservation shown in the current list to reflect new details of at least one specified tag.
+   
+   * `delete 3` : Deletes the 3rd reservation shown in the current list.
+   
+   * `show 1` : Displays additional details about the 1st reservation shown in the current list.
+   
+   * `list` : Lists all reservations.
+   
+   * `help` : Displays all available commands.
+   
+   * `find john` : Filters & displays reservations containing "john".
+   
+   * `clear` : Deletes all reservations.
 
    * `exit` : Exits the app.
 
@@ -64,20 +72,30 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be invalid.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as invalid.
+
+* All commands are not case-sensitive.
+  e.g. if the command specifies `list` or `LIST` will be accepted as valid commands. 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing User Guide : `User Guide`
 
-Shows a message explaning how to access the help page.
+Refers user to github ReserveMate user guide documentation. 
 
-![help message](images/helpMessage.png)
+![help message](images/userGuideMessage.png)
+
+
+### Displaying commands : `help`
+
+Displays a list of available commands.
 
 Format: `help`
 
+Examples:
+* `help`
 
 ### Adding a reservation: `add`
 
@@ -99,6 +117,9 @@ Examples:
 Shows a list of all customers in the address book.
 
 Format: `list`
+
+Examples:
+* `list`
 
 ### Editing a reservation : `edit`
 
@@ -205,5 +226,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Show**   | `show INDEX`<br> e.g., `show 2`
 **List**   | `list`
 **Help**   | `help`
+**Exit**   | `exit`

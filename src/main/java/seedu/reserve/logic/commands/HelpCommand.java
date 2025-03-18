@@ -14,11 +14,14 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "List of Commands: \n"
         + "1. add - Enter a reservation \n"
-        + "2. delete - Delete a reservation \n"
-        + "3. show - Display reservation details \n"
-        + "4. list - Display a list of all reservations \n"
-        + "5. help - Display the available commands \n"
-        + "6. find - Finds a reservation by name \n";
+        + "2. edit - Edit a reservation \n"
+        + "3. delete - Delete a reservation \n"
+        + "4. show - Display reservation details \n"
+        + "5. list - Display a list of all reservations \n"
+        + "6. help - Display list of available commands \n"
+        + "7. find - Finds a reservation by name \n"
+        + "8. clear - Deletes all contacts \n"
+        + "9. exit - Exit the program";
 
     @Override
     public CommandResult execute(Model model) {
