@@ -1,5 +1,6 @@
 package seedu.reserve.logic.commands;
 
+import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
@@ -8,6 +9,7 @@ import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
@@ -35,5 +37,14 @@ public class ListCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyList_throwsCommandException() {
+        // Create an empty model
+        Model emptyModel = new ModelManager();
+
+        // Check for CommandException
+        assertCommandFailure(new ListCommand(), emptyModel, Messages.MESSAGE_EMPTY_RESERVATION_LIST);
     }
 }

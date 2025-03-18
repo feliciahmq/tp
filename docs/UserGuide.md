@@ -100,6 +100,9 @@ Shows a list of all customers in the address book.
 
 Format: `list`
 
+Examples:
+* `list`
+
 ### Editing a reservation : `edit`
 
 Edits an existing reservation in ReserveMate.

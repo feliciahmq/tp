@@ -143,16 +143,17 @@ Actor: Restaurant Manager, ReserveMate
 
 **Extensions**
 * 1a. The index is invalid.
+
   * 1a1. ReserveMate prompts the user to enter a valid index.
 
     Use case resumes at step 1.
 
 
-**Use case: UC05 - View Schedule**
+**Use case: UC05 - View Reservations**
 
 **MSS**
 
-1.  User requests to view schedule.
+1.  User requests to view all reservations.
 2.  ReserveMate retrieves and displays all existing reservations.
 
     Use case ends.
@@ -167,7 +168,10 @@ Actor: Restaurant Manager, ReserveMate
 
 * 2a. The list is empty.
 
-  Use case ends.
+  * 2a1. ReserveMate shows an error message.
+
+    Use case ends.
+
 
 **Use case: UC06 - Find Reservation by Name**
 
