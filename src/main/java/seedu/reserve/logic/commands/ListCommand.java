@@ -23,6 +23,8 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+
         List<Reservation> lastShownList = model.getFilteredReservationList();
 
         if (lastShownList.isEmpty()) {
