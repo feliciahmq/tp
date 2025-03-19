@@ -6,7 +6,7 @@
 
 # User Guide
 
-ReserveMate is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate can get your contact management tasks done faster than traditional GUI apps.
+ReserveMate is a **desktop app for managing reservations, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate can get your reservation management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -20,22 +20,22 @@ ReserveMate is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
    Some example commands you can try:
 
    * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
    
-   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st reservation shown in the current list to reflect new details of at least one specified tag.
+   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st reservation shown in the reservation list to reflect new details of at least one specified tag.
    
-   * `delete 3` : Deletes the 3rd reservation shown in the current list.
+   * `delete 3` : Deletes the 3rd reservation shown in the reservation list.
    
-   * `show 1` : Displays additional details about the 1st reservation shown in the current list.
+   * `show 1` : Displays additional details about the 1st reservation shown in the reservation list.
    
    * `list` : Lists all reservations.
    
@@ -97,15 +97,26 @@ Format: `help`
 Examples:
 * `help`
 
+### Showing reservation's details : `show`
+
+Show additional details of a specific reservation.
+
+Format: `show <INDEX>`
+
+Examples:
+* `show 1` 
+
 ### Adding a reservation: `add`
 
 Adds a reservation to the ReserveMate.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="constraint" seamless>
 
-**Tip:** A reservation can have any number of tags (including 0)
+**Constraint** 
+- A reservation can have any number of tags (including 0)
+- Phone number should start with either 8 or 9 and must be 8 numbers long.
 </box>
 
 Examples:
@@ -114,7 +125,7 @@ Examples:
 
 ### Listing all customers : `list`
 
-Shows a list of all customers in ReserveMate.
+Shows a list of all reservations in the ReserveMate.
 
 Format: `list`
 
@@ -173,7 +184,7 @@ Examples:
 ![img_1.png](images/deleteCommandResult.png)
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the ReserveMate
 
 Format: `clear`
 
@@ -185,17 +196,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ReserveMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ReserveMate data are saved automatically as a JSON file `[JAR file location]/data/reservemate.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ReserveMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ReserveMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -207,7 +218,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ReserveMate home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
