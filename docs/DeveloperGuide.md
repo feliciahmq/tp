@@ -65,14 +65,13 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 (For all use cases below, the **System** is the `ReserveMate` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - View Schedule Details**
+**Use case: UC01 - View Reservation's Details**
 
 **MSS**
 
-1.  User requests to view the schedule list
-2.  ReserveMate displays the schedule list
-3.  User requests to view a specific schedule details in the list
-4.  ReserveMate displays the schedule details in a popup box
+1.  User performs <u>View Reservations (UC05)</u> to view all reservations.
+2.  User requests to view a specific reservation's details.
+3.  ReserveMate displays the reservation's details as a message.
 
     Use case ends.
 
@@ -82,15 +81,11 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
   * 1a1. ReserveMate shows an error message.
 
-  Use Case ends.
+    Use Case ends.
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. ReserveMate shows an error message.
+    * 2a1. ReserveMate shows an error message.
 
       Use case resumes at step 2.
 
