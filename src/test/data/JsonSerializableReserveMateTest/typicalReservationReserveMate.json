@@ -56,22 +56,6 @@
       "diners": "10",
       "dateTime": "2040-06-18 1300",
       "tags": []
-    },
-    {
-      "name": "Hoon Meier",
-      "phone": "84824244",
-      "email": "stefan@example.com",
-      "diners": "6",
-      "dateTime": "2040-05-01 0900",
-      "tags": []
-    },
-    {
-      "name": "Ida Mueller",
-      "phone": "84821315",
-      "email": "hans@example.com",
-      "diners": "8",
-      "dateTime": "2040-04-15 1700",
-      "tags": []
     }
   ]
 }

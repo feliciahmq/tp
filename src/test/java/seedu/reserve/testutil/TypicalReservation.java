@@ -75,7 +75,6 @@ public class TypicalReservation {
             .withDateTime("2040-06-18 1300")
             .build();
 
-    // Manually added
     public static final Reservation HOON = new ReservationBuilder().withName("Hoon Meier")
             .withPhone("84824244")
             .withEmail("stefan@example.com")
