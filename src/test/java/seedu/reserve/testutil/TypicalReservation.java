@@ -72,7 +72,7 @@ public class TypicalReservation {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withDiners("10")
-            .withDateTime("2040-06-18 1300")
+            .withDateTime("2020-06-18 1300")
             .build();
 
     // Manually added

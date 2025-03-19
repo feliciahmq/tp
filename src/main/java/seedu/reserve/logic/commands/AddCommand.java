@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NUMBER_OF_DINERS + "5 "
-            + PREFIX_DATE_TIME + "2021-12-31 1800 "
+            + PREFIX_DATE_TIME + "2026-12-31 1800 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

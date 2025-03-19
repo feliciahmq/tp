@@ -99,7 +99,7 @@ public class ReservationBuilder {
      * Sets the {@code DateTime} of the {@code Reservation} that we are building.
      */
     public ReservationBuilder withDateTime(String dateTime) {
-        this.dateTime = new DateTime(dateTime);
+        this.dateTime = DateTime.fromFileString(dateTime);
         return this;
     }
 

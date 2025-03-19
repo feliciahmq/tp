@@ -33,8 +33,24 @@ public class DateTime {
         this.value = LocalDateTime.parse(dateTime, FORMATTER);
     }
 
+    private DateTime(LocalDateTime dateTime) {
+        this.value = dateTime;
+    }
+
     /**
-     * Returns true if a given string is a valid date-time in the format YYYY-MM-DD HHmm.
+     * Constructs a {@code DateTime} from a string input without validation.
+     *
+     * @param dateTime A date-time string.
+     * @return A DateTime object if the string is valid, otherwise null.
+     */
+    public static DateTime fromFileString(String dateTime) {
+        requireNonNull(dateTime);
+        checkArgument(isValidFileInputDateTime(dateTime), MESSAGE_CONSTRAINTS);
+        return new DateTime(LocalDateTime.parse(dateTime, FORMATTER));
+    }
+
+    /**
+     * Returns true if a given string is a valid date-time in the format YYYY-MM-DD HHmm and after current date-time.
      */
     public static boolean isValidDateTime(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
@@ -45,6 +61,13 @@ public class DateTime {
         } catch (DateTimeParseException | ParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if a given string from an input file a valid date-time in the format YYYY-MM-DD HHmm.
+     */
+    public static boolean isValidFileInputDateTime(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**

@@ -113,10 +113,10 @@ class JsonAdaptedReservation {
                     DateTime.class.getSimpleName()));
         }
 
-        if (!DateTime.isValidDateTime(dateTime)) {
+        if (!DateTime.isValidFileInputDateTime(dateTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        final DateTime modelDateTime = new DateTime(dateTime);
+        final DateTime modelDateTime = DateTime.fromFileString(dateTime);
 
         final Set<Tag> modelTags = new HashSet<>(reservationTags);
         return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelTags);
