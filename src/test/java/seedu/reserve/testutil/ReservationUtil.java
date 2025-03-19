@@ -23,13 +23,13 @@ public class ReservationUtil {
      * Returns an add command string for adding the {@code reservation}.
      */
     public static String getAddCommand(Reservation reservation) {
-        return AddCommand.COMMAND_WORD + " " + getCustomerDetails(reservation);
+        return AddCommand.COMMAND_WORD + " " + getReservationDetails(reservation);
     }
 
     /**
      * Returns the part of command string for the given {@code reservation}'s details.
      */
-    public static String getCustomerDetails(Reservation reservation) {
+    public static String getReservationDetails(Reservation reservation) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + reservation.getName().fullName + " ");
         sb.append(PREFIX_PHONE + reservation.getPhone().value + " ");
@@ -45,7 +45,7 @@ public class ReservationUtil {
     /**
      * Returns the part of command string for the given {@code EditReservationDescriptor}'s details.
      */
-    public static String getEditCustomerDescriptorDetails(EditCommand.EditReservationDescriptor descriptor) {
+    public static String getEditReservationDescriptorDetails(EditCommand.EditReservationDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME)
                 .append(name.fullName).append(" "));

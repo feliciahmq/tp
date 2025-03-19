@@ -69,53 +69,53 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedCustomerString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedReservationString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedCustomerString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedCustomerString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedCustomerString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedCustomerString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
-                        + validExpectedCustomerString,
+                validExpectedReservationString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
+                        + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE,
                         PREFIX_DATE_TIME, PREFIX_NUMBER_OF_DINERS));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedCustomerString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedCustomerString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedCustomerString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedReservationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid name
-        assertParseFailure(parser, validExpectedCustomerString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedReservationString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedCustomerString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedReservationString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedCustomerString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedReservationString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
     }

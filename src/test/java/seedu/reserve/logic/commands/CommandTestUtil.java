@@ -125,7 +125,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the reservation at the given {@code targetIndex} in the
      * {@code model}'s reservation book.
      */
-    public static void showCustomerAtIndex(Model model, Index targetIndex) {
+    public static void showReservationAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredReservationList().size());
 
         Reservation reservation = model.getFilteredReservationList().get(targetIndex.getZeroBased());

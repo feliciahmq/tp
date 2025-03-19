@@ -6,7 +6,7 @@ import seedu.reserve.model.reservation.Reservation;
 /**
  * A utility class to help with building ReserveMate objects.
  * Example usage: <br>
- *     {@code ReserveMate ab = new ReserveMateBuilder().withCustomer("John", "Doe").build();}
+ *     {@code ReserveMate ab = new ReserveMateBuilder().withReservation("John", "Doe").build();}
  */
 public class ReserveMateBuilder {
 
@@ -23,7 +23,7 @@ public class ReserveMateBuilder {
     /**
      * Adds a new {@code Reservation} to the {@code ReserveMate} that we are building.
      */
-    public ReserveMateBuilder withCustomer(Reservation reservation) {
+    public ReserveMateBuilder withReservation(Reservation reservation) {
         reserveMate.addReservation(reservation);
         return this;
     }

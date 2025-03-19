@@ -36,104 +36,104 @@ public class JsonAdaptedReservationTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validCustomerDetails_returnsCustomer() throws Exception {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(BENSON);
-        assertEquals(BENSON, customer.toModelType());
+    public void toModelType_validReservationDetails_returnsReservation() throws Exception {
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(BENSON);
+        assertEquals(BENSON, reservation.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_DINERS,
                         VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(null, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(null, VALID_PHONE, VALID_EMAIL,
                 VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
                         VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(VALID_NAME, null, VALID_EMAIL,
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(VALID_NAME, null, VALID_EMAIL,
                 VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
                         VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, null,
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, null,
                 VALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_invalidDiners_throwsIllegalValueException() {
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         INVALID_DINERS, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Diners.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_nullDiners_throwsIllegalValueException() {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 null, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Diners.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_DINERS, INVALID_DATETIME, VALID_TAGS);
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_nullDateTime_throwsIllegalValueException() {
-        JsonAdaptedReservation customer = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedReservation reservation = new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_DINERS, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, reservation::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedReservation customer =
+        JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_DINERS, VALID_DATETIME, invalidTags);
-        assertThrows(IllegalValueException.class, customer::toModelType);
+        assertThrows(IllegalValueException.class, reservation::toModelType);
     }
 
 }

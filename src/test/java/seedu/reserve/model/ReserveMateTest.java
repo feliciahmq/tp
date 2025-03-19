@@ -43,7 +43,7 @@ public class ReserveMateTest {
     }
 
     @Test
-    public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
+    public void resetData_withDuplicateReservations_throwsDuplicateReservationException() {
         // Two reservations with the same identity fields
         Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -54,23 +54,23 @@ public class ReserveMateTest {
     }
 
     @Test
-    public void hasCustomer_nullReservation_throwsNullPointerException() {
+    public void hasReservation_nullReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> reserveMate.hasReservation(null));
     }
 
     @Test
-    public void hasCustomer_reservationNotInReserveMate_returnsFalse() {
+    public void hasReservation_reservationNotInReserveMate_returnsFalse() {
         assertFalse(reserveMate.hasReservation(ALICE));
     }
 
     @Test
-    public void hasCustomer_reservationInReserveMate_returnsTrue() {
+    public void hasReservation_reservationInReserveMate_returnsTrue() {
         reserveMate.addReservation(ALICE);
         assertTrue(reserveMate.hasReservation(ALICE));
     }
 
     @Test
-    public void hasCustomer_reservationWithSameIdentityFieldsInReserveMate_returnsTrue() {
+    public void hasReservation_reservationWithSameIdentityFieldsInReserveMate_returnsTrue() {
         reserveMate.addReservation(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();

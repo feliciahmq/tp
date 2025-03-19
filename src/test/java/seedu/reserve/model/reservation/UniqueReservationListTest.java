@@ -23,23 +23,23 @@ public class UniqueReservationListTest {
     private final UniqueReservationList uniqueReservationList = new UniqueReservationList();
 
     @Test
-    public void contains_nullCustomer_throwsNullPointerException() {
+    public void contains_nullReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList.contains(null));
     }
 
     @Test
-    public void contains_customerNotInList_returnsFalse() {
+    public void contains_reservationNotInList_returnsFalse() {
         assertFalse(uniqueReservationList.contains(ALICE));
     }
 
     @Test
-    public void contains_customerInList_returnsTrue() {
+    public void contains_reservationInList_returnsTrue() {
         uniqueReservationList.add(ALICE);
         assertTrue(uniqueReservationList.contains(ALICE));
     }
 
     @Test
-    public void contains_customerWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_reservationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueReservationList.add(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -47,33 +47,33 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void add_nullCustomer_throwsNullPointerException() {
+    public void add_nullReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList.add(null));
     }
 
     @Test
-    public void add_duplicateCustomer_throwsDuplicateCustomerException() {
+    public void add_duplicateReservation_throwsDuplicateReservationException() {
         uniqueReservationList.add(ALICE);
         assertThrows(DuplicateReservationException.class, () -> uniqueReservationList.add(ALICE));
     }
 
     @Test
-    public void setCustomer_nullTargetReservation_throwsNullPointerException() {
+    public void setReservation_nullTargetReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList.setReservation(null, ALICE));
     }
 
     @Test
-    public void setCustomer_nullEditedReservation_throwsNullPointerException() {
+    public void setReservation_nullEditedReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList.setReservation(ALICE, null));
     }
 
     @Test
-    public void setCustomer_targetCustomerNotInList_throwsReservationNotFoundException() {
+    public void setReservation_targetReservationNotInList_throwsReservationNotFoundException() {
         assertThrows(ReservationNotFoundException.class, () -> uniqueReservationList.setReservation(ALICE, ALICE));
     }
 
     @Test
-    public void setCustomer_editedReservationIsSameReservation_success() {
+    public void setReservation_editedReservationIsSameReservation_success() {
         uniqueReservationList.add(ALICE);
         uniqueReservationList.setReservation(ALICE, ALICE);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();
@@ -82,7 +82,7 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void setCustomer_editedReservationHasSameIdentity_success() {
+    public void setReservation_editedReservationHasSameIdentity_success() {
         uniqueReservationList.add(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
@@ -93,7 +93,7 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void setCustomer_editedReservationHasDifferentIdentity_success() {
+    public void setReservation_editedReservationHasDifferentIdentity_success() {
         uniqueReservationList.add(ALICE);
         uniqueReservationList.setReservation(ALICE, BOB);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();
@@ -102,24 +102,24 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void setCustomer_editedCustomerHasNonUniqueIdentity_throwsDuplicateReservationException() {
+    public void setReservation_editedReservationHasNonUniqueIdentity_throwsDuplicateReservationException() {
         uniqueReservationList.add(ALICE);
         uniqueReservationList.add(BOB);
         assertThrows(DuplicateReservationException.class, () -> uniqueReservationList.setReservation(ALICE, BOB));
     }
 
     @Test
-    public void remove_nullCustomer_throwsNullPointerException() {
+    public void remove_nullReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList.remove(null));
     }
 
     @Test
-    public void remove_customerDoesNotExist_throwsCustomerNotFoundException() {
+    public void remove_reservationDoesNotExist_throwsReservationNotFoundException() {
         assertThrows(ReservationNotFoundException.class, () -> uniqueReservationList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingCustomer_removesCustomer() {
+    public void remove_existingReservation_removesReservation() {
         uniqueReservationList.add(ALICE);
         uniqueReservationList.remove(ALICE);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();
@@ -133,7 +133,7 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void setReservations_uniqueCustomerList_replacesOwnListWithProvidedUniqueReservationList() {
+    public void setReservations_uniqueReservationList_replacesOwnListWithProvidedUniqueReservationList() {
         uniqueReservationList.add(ALICE);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();
         expectedUniqueReservationList.add(BOB);
@@ -157,7 +157,7 @@ public class UniqueReservationListTest {
     }
 
     @Test
-    public void setCustomers_listWithDuplicateReservations_throwsDuplicateReservationException() {
+    public void setReservations_listWithDuplicateReservations_throwsDuplicateReservationException() {
         List<Reservation> listWithDuplicateReservations = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicateReservationException.class, () -> uniqueReservationList
                 .setReservations(listWithDuplicateReservations));

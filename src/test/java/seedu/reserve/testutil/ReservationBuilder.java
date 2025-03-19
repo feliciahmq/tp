@@ -44,7 +44,7 @@ public class ReservationBuilder {
     }
 
     /**
-     * Initializes the ReservationBuilder with the data of {@code CustomerToCopy}.
+     * Initializes the ReservationBuilder with the data of {@code ReservationToCopy}.
      */
     public ReservationBuilder(Reservation reservationToCopy) {
         name = reservationToCopy.getName();

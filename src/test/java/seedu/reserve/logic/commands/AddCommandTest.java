@@ -28,27 +28,27 @@ import seedu.reserve.testutil.ReservationBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullCustomer_throwsNullPointerException() {
+    public void constructor_nullReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_customerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingCustomerAdded modelStub = new ModelStubAcceptingCustomerAdded();
+    public void execute_reservationAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingReservationAdded modelStub = new ModelStubAcceptingReservationAdded();
         Reservation validReservation = new ReservationBuilder().build();
 
         CommandResult commandResult = new AddCommand(validReservation).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validReservation)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validReservation), modelStub.customersAdded);
+        assertEquals(Arrays.asList(validReservation), modelStub.reservationsAdded);
     }
 
     @Test
-    public void execute_duplicateCustomer_throwsCommandException() {
+    public void execute_duplicateReservation_throwsCommandException() {
         Reservation validReservation = new ReservationBuilder().build();
         AddCommand addCommand = new AddCommand(validReservation);
-        ModelStub modelStub = new ModelStubWithCustomer(validReservation);
+        ModelStub modelStub = new ModelStubWithReservation(validReservation);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RESERVATION, ()
                 -> addCommand.execute(modelStub));
@@ -163,10 +163,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single reservation.
      */
-    private class ModelStubWithCustomer extends ModelStub {
+    private class ModelStubWithReservation extends ModelStub {
         private final Reservation reservation;
 
-        ModelStubWithCustomer(Reservation reservation) {
+        ModelStubWithReservation(Reservation reservation) {
             requireNonNull(reservation);
             this.reservation = reservation;
         }
@@ -181,19 +181,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the reservation being added.
      */
-    private class ModelStubAcceptingCustomerAdded extends ModelStub {
-        final ArrayList<Reservation> customersAdded = new ArrayList<>();
+    private class ModelStubAcceptingReservationAdded extends ModelStub {
+        final ArrayList<Reservation> reservationsAdded = new ArrayList<>();
 
         @Override
         public boolean hasReservation(Reservation reservation) {
             requireNonNull(reservation);
-            return customersAdded.stream().anyMatch(reservation::isSameReservation);
+            return reservationsAdded.stream().anyMatch(reservation::isSameReservation);
         }
 
         @Override
         public void addReservation(Reservation reservation) {
             requireNonNull(reservation);
-            customersAdded.add(reservation);
+            reservationsAdded.add(reservation);
         }
 
         @Override

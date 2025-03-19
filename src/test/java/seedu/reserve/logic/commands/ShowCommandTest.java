@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
@@ -29,8 +29,8 @@ public class ShowCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Reservation reservationToShow = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_CUSTOMER);
+        Reservation reservationToShow = model.getFilteredReservationList().get(INDEX_FIRST_RESERVATION.getZeroBased());
+        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_RESERVATION);
 
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_RESERVATION_SUCCESS,
                 Messages.format(reservationToShow));
@@ -50,9 +50,9 @@ public class ShowCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
 
-        Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
+        Index outOfBoundIndex = INDEX_SECOND_RESERVATION;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
@@ -63,14 +63,14 @@ public class ShowCommandTest {
 
     @Test
     public void equals() {
-        ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_CUSTOMER);
-        ShowCommand showSecondCommand = new ShowCommand(INDEX_SECOND_CUSTOMER);
+        ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_RESERVATION);
+        ShowCommand showSecondCommand = new ShowCommand(INDEX_SECOND_RESERVATION);
 
         // same object -> returns true
         assertTrue(showFirstCommand.equals(showFirstCommand));
 
         // same values -> returns true
-        ShowCommand showFirstCommandCopy = new ShowCommand(INDEX_FIRST_CUSTOMER);
+        ShowCommand showFirstCommandCopy = new ShowCommand(INDEX_FIRST_RESERVATION);
         assertTrue(showFirstCommand.equals(showFirstCommandCopy));
 
         // different types -> returns false
