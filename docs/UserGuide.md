@@ -114,7 +114,7 @@ Examples:
 
 ### Listing all customers : `list`
 
-Shows a list of all customers in the address book.
+Shows a list of all customers in ReserveMate.
 
 Format: `list`
 
