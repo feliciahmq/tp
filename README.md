@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/AY2425S2-CS2103-F08-1/tp/graph/badge.svg?token=8D3EDHO8BA)](https://codecov.io/gh/AY2425S2-CS2103-F08-1/tp)
 
-![Ui](docs/images/UI.png)
+![Ui](docs/images/Ui.png)
 
 # ReserveMate User Guide
 
@@ -18,7 +18,7 @@ Welcome to **ReserveMate**, your go-to application for managing reservations eff
 ## Features
 ReserveMate supports a variety of commands to help you manage your reservations:
 
-### Feature: Reservation details
+### Feature: Show Reservation details
 **Purpose:** Show details of a specific reservation to user.
 
 **Command format:** `show <INDEX>`
@@ -40,15 +40,15 @@ add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAller
 ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/6598765432
 ```
 
-### Feature: List
+### Feature: View help list 
 **Purpose:** Display the available list of commands to the user.
 
-**Command format:** `list`
+**Command format:** `help`
 
 **Example commands:**
 ```
-list
-List
+help
+Help
 ```
 
 ### Feature: Delete reservation by reservation number
@@ -62,15 +62,15 @@ delete 2
 Delete 2
 ```
 
-### Feature: View Schedule
+### Feature: View Reservation list 
 **Purpose:** Allow the user to view the entire reservation schedule without specifying a date range.
 
-**Command format:** `schedule`
+**Command format:** `list`
 
 **Example commands:**
 ```
-schedule
-Schedule
+list
+List
 ```
 
 ### Feature: Find reservation by name
@@ -85,14 +85,14 @@ Find Bobby
 ```
 
 ## Command Summary
-| Feature                  | Command Format | Purpose                                            |
-|--------------------------|---------------|----------------------------------------------------|
-| Reservation details      | `show <INDEX>` | Show details of reservation to user                |
-| Create a new reservation | `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​` | Add new reservation to ReserveMate                 |
-| List                     | `list` | Display the available list of commands to the user |
-| Delete reservation       | `delete <INDEX>` | Remove a reservation from ReserveMate              |
-| View Schedule            | `schedule` | View the entire reservation schedule               |
-| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information          |
+| Feature                  | Command Format                                                                                      | Purpose                                             |
+|--------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| Show Reservation details | `show <INDEX>`                                                                                      | Show details of reservation to user                 |
+| Create a new reservation | `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​`    | Add new reservation to ReserveMate                  |
+| View help list           | `help`                                                                                              | Display the available list of commands to the user  |
+| Delete reservation       | `delete <INDEX>`                                                                                    | Remove a reservation from ReserveMate               |
+| View reservation list    | `list`                                                                                              | View the entire reservation schedule                |
+| Find reservation by name | `find <CUSTOMER NAME>`                                                                              | Retrieve customer reservation information           |
 
 
 ### Acknowledgement

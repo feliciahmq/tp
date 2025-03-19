@@ -123,7 +123,7 @@ Examples:
 * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy`
 * `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/6581234567 t/vegan d/2026-12-12 1800`
 
-### Listing all customers : `list`
+### Listing all reservations : `list`
 
 Shows a list of all reservations in the ReserveMate.
 

@@ -144,7 +144,7 @@ Actor: Restaurant Manager, ReserveMate
     Use case resumes at step 1.
 
 
-**Use case: UC05 - View Reservations**
+**Use case: UC05 - View Reservation list**
 
 **MSS**
 
@@ -217,4 +217,4 @@ system.
 
 * **User**: Restaurant manager using ReserveMates
 * **Mainstream OS**: Windows, MacOS, Linux, Unix
-* **Customer**: Reservation details of the customer
+* **Reservation**: Reservation details of the customer
