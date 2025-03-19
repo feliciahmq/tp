@@ -156,20 +156,21 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a customer : `delete`
+### Deleting a reservation : `delete`
 
-Deletes the specified customer from the address book.
+Deletes the specified reservation from ReserveMate.
 
 Format: `delete INDEX`
 
-* Deletes the customer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed customer list.
+* Deletes the reservation at the specified `INDEX`.
+* The index refers to the index number shown in the displayed in ReserveMate.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd customer in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd reservation in ReserveMate.
+* `find Betsy` followed by `delete 1` deletes the 1st reservation in the results of the `find` command.
 
+![img_1.png](images/deleteCommandResult.png)
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
