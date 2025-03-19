@@ -2,8 +2,8 @@ package seedu.reserve.logic.commands;
 
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

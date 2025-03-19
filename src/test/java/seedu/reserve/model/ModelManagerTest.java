@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ReserveMate reserveMate = new ReserveMateBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
+        ReserveMate reserveMate = new ReserveMateBuilder().withReservation(ALICE).withReservation(BENSON).build();
         ReserveMate differentReserveMate = new ReserveMate();
         UserPrefs userPrefs = new UserPrefs();
 

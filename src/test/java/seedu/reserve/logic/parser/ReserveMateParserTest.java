@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.reserve.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,14 +63,14 @@ public class ReserveMateParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_RESERVATION.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION), command);
     }
 
     @Test
     public void parseCommand_deleteMixedCase() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand("DeLeTe " + INDEX_FIRST_CUSTOMER.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
+        DeleteCommand command = (DeleteCommand) parser.parseCommand("DeLeTe " + INDEX_FIRST_RESERVATION.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION), command);
     }
 
     @Test
@@ -78,18 +78,18 @@ public class ReserveMateParserTest {
         Reservation reservation = new ReservationBuilder().build();
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(reservation).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CUSTOMER.getOneBased() + " "
-                + ReservationUtil.getEditCustomerDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_CUSTOMER, descriptor), command);
+                + INDEX_FIRST_RESERVATION.getOneBased() + " "
+                + ReservationUtil.getEditReservationDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_RESERVATION, descriptor), command);
     }
 
     @Test
     public void parseCommand_editMixedCase() throws Exception {
         Reservation reservation = new ReservationBuilder().build();
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(reservation).build();
-        EditCommand command = (EditCommand) parser.parseCommand("EdIt " + INDEX_FIRST_CUSTOMER.getOneBased() + " "
-                + ReservationUtil.getEditCustomerDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_CUSTOMER, descriptor), command);
+        EditCommand command = (EditCommand) parser.parseCommand("EdIt " + INDEX_FIRST_RESERVATION.getOneBased() + " "
+                + ReservationUtil.getEditReservationDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_RESERVATION, descriptor), command);
     }
 
     @Test

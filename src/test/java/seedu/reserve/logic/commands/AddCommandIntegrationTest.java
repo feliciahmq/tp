@@ -27,7 +27,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newCustomer_success() {
+    public void execute_newReservation_success() {
         Reservation validReservation = new ReservationBuilder().build();
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateCustomer_throwsCommandException() {
+    public void execute_duplicateReservation_throwsCommandException() {
         Reservation reservationInList = model.getReserveMate().getReservationList().get(0);
         assertCommandFailure(new AddCommand(reservationInList), model,
                 AddCommand.MESSAGE_DUPLICATE_RESERVATION);

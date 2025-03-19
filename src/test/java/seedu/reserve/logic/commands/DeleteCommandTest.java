@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
@@ -29,11 +29,12 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        Reservation reservationToDelete = model.getFilteredReservationList()
+                .get(INDEX_FIRST_RESERVATION.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
-                INDEX_FIRST_CUSTOMER.getOneBased());
+                INDEX_FIRST_RESERVATION.getOneBased());
 
         ModelManager expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
@@ -51,13 +52,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
 
-        Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        Reservation reservationToDelete = model.getFilteredReservationList()
+                .get(INDEX_FIRST_RESERVATION.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
-               INDEX_FIRST_CUSTOMER.getOneBased());
+               INDEX_FIRST_RESERVATION.getOneBased());
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
@@ -68,9 +70,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
 
-        Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
+        Index outOfBoundIndex = INDEX_SECOND_RESERVATION;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
@@ -81,14 +83,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_CUSTOMER);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_RESERVATION);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_RESERVATION);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -17,32 +17,32 @@ public class JsonSerializableReserveMateTest {
 
     private static final Path TEST_DATA_FOLDER =
             Paths.get("src", "test", "data", "JsonSerializableReserveMateTest");
-    private static final Path TYPICAL_CUSTOMERS_FILE =
+    private static final Path TYPICAL_RESERVATIONS_FILE =
             TEST_DATA_FOLDER.resolve("typicalReservationReserveMate.json");
-    private static final Path INVALID_CUSTOMER_FILE =
+    private static final Path INVALID_RESERVATION_FILE =
             TEST_DATA_FOLDER.resolve("invalidReservationReserveMate.json");
-    private static final Path DUPLICATE_CUSTOMER_FILE =
+    private static final Path DUPLICATE_RESERVATION_FILE =
             TEST_DATA_FOLDER.resolve("duplicateReservationReserveMate.json");
 
     @Test
-    public void toModelType_typicalCustomersFile_success() throws Exception {
-        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(TYPICAL_CUSTOMERS_FILE,
+    public void toModelType_typicalReservationsFile_success() throws Exception {
+        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(TYPICAL_RESERVATIONS_FILE,
                 JsonSerializableReserveMate.class).get();
         ReserveMate reserveMateFromFile = dataFromFile.toModelType();
-        ReserveMate typicalCustomersReserveMate = TypicalReservation.getTypicalReserveMate();
-        assertEquals(reserveMateFromFile, typicalCustomersReserveMate);
+        ReserveMate typicalReservationsReserveMate = TypicalReservation.getTypicalReserveMate();
+        assertEquals(reserveMateFromFile, typicalReservationsReserveMate);
     }
 
     @Test
-    public void toModelType_invalidCustomerFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(INVALID_CUSTOMER_FILE,
+    public void toModelType_invalidReservationFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(INVALID_RESERVATION_FILE,
                 JsonSerializableReserveMate.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
-    public void toModelType_duplicateCustomers_throwsIllegalValueException() throws Exception {
-        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CUSTOMER_FILE,
+    public void toModelType_duplicateReservations_throwsIllegalValueException() throws Exception {
+        JsonSerializableReserveMate dataFromFile = JsonUtil.readJsonFile(DUPLICATE_RESERVATION_FILE,
                 JsonSerializableReserveMate.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableReserveMate.MESSAGE_DUPLICATE_RESERVATION,
                 dataFromFile::toModelType);

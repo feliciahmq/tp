@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the reservation in the {@code model}'s reservation list at {@code index}.
      */
-    public static Reservation getCustomer(Model model, Index index) {
+    public static Reservation getReservation(Model model, Index index) {
         return model.getFilteredReservationList().get(index.getZeroBased());
     }
 }

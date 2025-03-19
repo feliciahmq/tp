@@ -103,17 +103,17 @@ public class TypicalReservation {
     private TypicalReservation() {} // prevents instantiation
 
     /**
-     * Returns an {@code ReserveMate} with all the typical customers.
+     * Returns an {@code ReserveMate} with all the typical reservations.
      */
     public static ReserveMate getTypicalReserveMate() {
         ReserveMate ab = new ReserveMate();
-        for (Reservation reservation : getTypicalCustomers()) {
+        for (Reservation reservation : getTypicalReservations()) {
             ab.addReservation(reservation);
         }
         return ab;
     }
 
-    public static List<Reservation> getTypicalCustomers() {
+    public static List<Reservation> getTypicalReservations() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
