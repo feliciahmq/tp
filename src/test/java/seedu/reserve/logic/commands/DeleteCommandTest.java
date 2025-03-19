@@ -61,7 +61,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
-        showNoCustomer(expectedModel);
+        showNoReservation(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -112,7 +112,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoCustomer(Model model) {
+    private void showNoReservation(Model model) {
         model.updateFilteredReservationList(p -> false);
 
         assertTrue(model.getFilteredReservationList().isEmpty());
