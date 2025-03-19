@@ -85,14 +85,14 @@ Find Bobby
 ```
 
 ## Command Summary
-| Feature                  | Command Format | Purpose                                           |
-|--------------------------|---------------|---------------------------------------------------|
-| Reservation details      | `show <INDEX>` | Show details of reservation to user               |
-| Create a new reservation | `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​` | Add new reservation to ReserveMate                |
+| Feature                  | Command Format | Purpose                                            |
+|--------------------------|---------------|----------------------------------------------------|
+| Reservation details      | `show <INDEX>` | Show details of reservation to user                |
+| Create a new reservation | `add n/<CUSTOMER NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​` | Add new reservation to ReserveMate                 |
 | List                     | `list` | Display the available list of commands to the user |
-| Delete reservation       | `delete <INDEX>` | Remove a reservation from the system              |
-| View Schedule            | `schedule` | View the entire reservation schedule              |
-| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information         |
+| Delete reservation       | `delete <INDEX>` | Remove a reservation from ReserveMate              |
+| View Schedule            | `schedule` | View the entire reservation schedule               |
+| Find reservation by name | `find <CUSTOMER NAME>` | Retrieve customer reservation information          |
 
 
 ### Acknowledgement
