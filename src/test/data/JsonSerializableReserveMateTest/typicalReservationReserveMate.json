@@ -35,7 +35,7 @@
     },
     {
       "name": "Elle Meyer",
-      "phone": "9482224",
+      "phone": "94822241",
       "email": "werner@example.com",
       "diners": "1",
       "dateTime": "2040-08-05 1000",
@@ -43,7 +43,7 @@
     },
     {
       "name": "Fiona Kunz",
-      "phone": "9482427",
+      "phone": "94824272",
       "email": "lydia@example.com",
       "diners": "7",
       "dateTime": "2040-07-12 1100",
@@ -51,10 +51,26 @@
     },
     {
       "name": "George Best",
-      "phone": "9482442",
+      "phone": "94824423",
       "email": "anna@example.com",
       "diners": "10",
       "dateTime": "2040-06-18 1300",
+      "tags": []
+    },
+    {
+      "name": "Hoon Meier",
+      "phone": "84824244",
+      "email": "stefan@example.com",
+      "diners": "6",
+      "dateTime": "2040-05-01 0900",
+      "tags": []
+    },
+    {
+      "name": "Ida Mueller",
+      "phone": "84821315",
+      "email": "hans@example.com",
+      "diners": "8",
+      "dateTime": "2040-04-15 1700",
       "tags": []
     }
   ]

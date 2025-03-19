@@ -55,21 +55,21 @@ public class TypicalReservation {
             .build();
 
     public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
-            .withPhone("9482224")
+            .withPhone("94822241")
             .withEmail("werner@example.com")
             .withDiners("1")
             .withDateTime("2040-08-05 1000")
             .build();
 
     public static final Reservation FIONA = new ReservationBuilder().withName("Fiona Kunz")
-            .withPhone("9482427")
+            .withPhone("94824272")
             .withEmail("lydia@example.com")
             .withDiners("7")
             .withDateTime("2040-07-12 1100")
             .build();
 
     public static final Reservation GEORGE = new ReservationBuilder().withName("George Best")
-            .withPhone("9482442")
+            .withPhone("94824423")
             .withEmail("anna@example.com")
             .withDiners("10")
             .withDateTime("2040-06-18 1300")
@@ -77,14 +77,14 @@ public class TypicalReservation {
 
     // Manually added
     public static final Reservation HOON = new ReservationBuilder().withName("Hoon Meier")
-            .withPhone("8482424")
+            .withPhone("84824244")
             .withEmail("stefan@example.com")
             .withDiners("6")
             .withDateTime("2040-05-01 0900")
             .build();
 
     public static final Reservation IDA = new ReservationBuilder().withName("Ida Mueller")
-            .withPhone("8482131")
+            .withPhone("84821315")
             .withEmail("hans@example.com")
             .withDiners("8")
             .withDateTime("2040-04-15 1700")
