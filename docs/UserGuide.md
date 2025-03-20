@@ -97,7 +97,7 @@ Format: `help`
 Examples:
 * `help`
 
-### Showing reservation's details : `show`
+### Showing reservation details : `show`
 
 Show additional details of a specific reservation.
 
