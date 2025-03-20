@@ -13,7 +13,7 @@
 4. [Acknowledgement](#acknowledgement)
 
 ## Introduction
-Welcome to **ReserveMate**, your go-to application for managing reservations efficiently. ReserveMate helps you track **reservations details**. This guide provides instructions on how to use ReserveMate effectively.
+Welcome to **ReserveMate**, your go-to application for managing reservations efficiently. ReserveMate helps you track **reservation details**. This guide provides instructions on how to use ReserveMate effectively.
 
 ## Features
 ReserveMate supports a variety of commands to help you manage your reservations:
