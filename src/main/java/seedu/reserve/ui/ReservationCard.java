@@ -33,15 +33,9 @@ public class ReservationCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label email;
-    @FXML
     private Label diners;
     @FXML
     private Label dateTime;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code ReservationCode} with the given {@code Reservation} and index to display.
@@ -51,12 +45,7 @@ public class ReservationCard extends UiPart<Region> {
         this.reservation = reservation;
         id.setText(displayedIndex + ". ");
         name.setText(reservation.getName().fullName);
-        phone.setText(reservation.getPhone().value);
-        email.setText(reservation.getEmail().value);
-        diners.setText(reservation.getDiners().value);
+        diners.setText(reservation.getDiners().value + " Diners");
         dateTime.setText(reservation.getDateTime().toString());
-        reservation.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
