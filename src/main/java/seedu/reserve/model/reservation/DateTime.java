@@ -13,7 +13,7 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
  * Represents a Date and Time for a reservation.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format YYYY-MM-DD HHmm "
             + "and be a date-time after the current time.";
@@ -100,5 +100,10 @@ public class DateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(DateTime dateTime) {
+        return this.value.compareTo(dateTime.value);
     }
 }
