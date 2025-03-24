@@ -55,7 +55,7 @@ public class DeleteCommand extends Command {
      */
     public static boolean isValidDelete(String trimmedArgs) throws ParseException {
         String[] trimmedArgArray = trimmedArgs.split("\\s+");
-        if (trimmedArgArray.length < 1) {
+        if (trimmedArgArray[INDEX_POSITION].isEmpty()) {
             return false;
         }
         // Check for valid Index

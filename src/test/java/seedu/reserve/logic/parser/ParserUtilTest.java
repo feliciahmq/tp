@@ -13,6 +13,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
+import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
@@ -219,4 +221,13 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseDeleteArgs_validInputWithConfirmation_success() throws ParseException {
+        String input = "1 cfm";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
+    }
+
 }

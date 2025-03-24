@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
+import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.UserPrefs;
@@ -119,4 +120,34 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredReservationList().isEmpty());
     }
+
+    @Test
+    public void isValidDelete_validIndex_returnsTrue() throws ParseException {
+        assertTrue(DeleteCommand.isValidDelete("1")); // Valid single index
+        assertTrue(DeleteCommand.isValidDelete("5")); // Another valid index
+    }
+
+    @Test
+    public void isValidDelete_emptyInput_returnsFalse() throws ParseException {
+        assertFalse(DeleteCommand.isValidDelete("")); // Empty string
+    }
+
+    @Test
+    public void isValidDelete_validIndexWithExtraArgs_returnsTrue() throws ParseException {
+        assertTrue(DeleteCommand.isValidDelete("1 confirm")); // Index followed by confirmation keyword
+        assertTrue(DeleteCommand.isValidDelete("2 extra")); // Extra argument after index
+    }
+
+    @Test
+    public void execute_unconfirmedDeletion_returnsConfirmationMessage() {
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION, false);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_CONFIRM_DELETE,
+                INDEX_FIRST_RESERVATION.getOneBased());
+
+        Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
 }
