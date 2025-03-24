@@ -30,19 +30,19 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
    Some example commands you can try:
 
    * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
-   
+
    * `edit 2 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 2nd reservation shown in the reservation list to reflect new details of at least one specified tag.
-   
+
    * `delete 3` : Deletes the 3rd reservation shown in the reservation list.
-   
+
    * `show 1` : Displays additional details about the 1st reservation shown in the reservation list.
-   
+
    * `list` : Lists all reservations.
-   
+
    * `help` : Displays all available commands.
-   
+
    * `find john` : Filters & displays reservations containing "john".
-   
+
    * `clear` : Deletes all reservations.
 
    * `exit` : Exits the app.
@@ -76,14 +76,14 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
   e.g. if the command specifies `help 123`, it will be interpreted as invalid.
 
 * All commands are not case-sensitive.
-  e.g. if the command specifies `list` or `LIST` will be accepted as valid commands. 
+  e.g. if the command specifies `list` or `LIST` will be accepted as valid commands.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing User Guide : `User Guide`
 
-Refers user to github ReserveMate user guide documentation. 
+Refers user to github ReserveMate user guide documentation.
 
 ![help message](images/userGuideMessage.png)
 
@@ -104,7 +104,7 @@ Show additional details of a specific reservation.
 Format: `show <INDEX>`
 
 Examples:
-* `show 1` 
+* `show 1`
 
 ### Adding a reservation: `add`
 
@@ -114,7 +114,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]
 
 <box type="constraint" seamless>
 
-**Constraint** 
+**Constraint**
 - A reservation can have any number of tags (including 0)
 - Phone number should start with either 8 or 9 and must be 8 numbers long.
 </box>
