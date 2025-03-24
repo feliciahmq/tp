@@ -133,8 +133,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateReservationFilteredList_failure() {
-        showReservationAtIndex(model, INDEX_SECOND_RESERVATION); 
-
+        showReservationAtIndex(model, INDEX_SECOND_RESERVATION);
         // edit reservation in filtered list into a duplicate in address book
         Reservation reservationInList = model.getReserveMate().getReservationList()
                 .get(INDEX_THIRD_RESERVATION.getZeroBased());
