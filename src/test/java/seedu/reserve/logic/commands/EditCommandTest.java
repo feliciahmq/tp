@@ -15,6 +15,7 @@ import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
@@ -132,11 +133,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateReservationFilteredList_failure() {
-        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
+        showReservationAtIndex(model, INDEX_SECOND_RESERVATION); 
 
         // edit reservation in filtered list into a duplicate in address book
         Reservation reservationInList = model.getReserveMate().getReservationList()
-                .get(INDEX_SECOND_RESERVATION.getZeroBased());
+                .get(INDEX_THIRD_RESERVATION.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
                 new EditReservationDescriptorBuilder(reservationInList).build());
 

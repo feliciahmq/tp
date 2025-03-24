@@ -21,7 +21,7 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 ### Feature: Create a new reservation
 **Purpose:** The create function will enable users to add new reservations to reserve by capturing relevant details such as name, number of diners, contact information, date and time of reservation.
 
-**Command format:** `add n/<RESERVATION NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​`
+**Command format:** `add n/NAME p/PHONE e/EMAIL x/DINERS d/DATETIME [t/TAG]...…​`
 
 **Example commands:**
 ```
@@ -32,12 +32,13 @@ ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/65987654
 ### Feature: Editing a reservation
 **Purpose:** The edit function will enable users to edit existing reservations by specifying the detail(s) of the reservation to be changed.
 
-**Command format:** `edit <INDEX> n/<RESERVATION NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​`
+**Command format:** `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/DINERS] [d/DATETIME] [t/TAG]…​`
 
 **Example commands:**
 ```
 edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
 EDIT 1 n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/98765432
+edit 1 d/2026-12-12 1800
 ```
 ### Feature: Delete reservation by reservation number
 **Purpose:** To delete a reservation.
@@ -118,8 +119,8 @@ Exit
 ## Command Summary
 | Feature                   | Command Format                                                                                               | Purpose                                       |
 |---------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
-| Create a new reservation  | `add n/<RESERVATION NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​`          | Add new reservation to ReserveMate            |
-| Editing a reservation     | `edit <INDEX> n/<RESERVATION NAME> e/<EMAIL> x/<NUMBER OF DINER> p/<CONTACT NUMBER> d/<DATE TIME> t/[TAG]…​` | Edit existing details of a reservation        |
+| Create a new reservation  | `add n/NAME p/PHONE e/EMAIL x/DINERS d/DATETIME [t/TAG]…​`          | Add new reservation to ReserveMate            |
+| Editing a reservation     | `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/DINERS] [d/DATETIME] [t/TAG]…​` | Edit existing details of a reservation        |
 | Delete reservation        | `delete <INDEX>`                                                                                             | Remove a reservation from ReserveMate         |
 | Show Reservation details  | `show <INDEX>`                                                                                               | Show details of reservation to user           |
 | View reservation list     | `list`                                                                                                       | View the entire reservation schedule          |

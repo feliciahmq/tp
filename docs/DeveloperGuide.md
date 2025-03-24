@@ -197,6 +197,45 @@ Use case ends.
 
   Use case ends.
 
+**Use case: UC07 - Edit a Reservation**
+
+**MSS**
+
+1. User requests to edit a reservation by providing an index and new details.
+
+2. ReserveMate check if the reservation exists and is in the future.
+
+3. ReserveMate updates the reservation with new details.
+
+4. ReserveMate displays success message with updated reservation details in the reservation list.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command format.
+
+    * 1a1. ReserveMate shows an error message providing the correct format.
+    
+    Use case resumes at step 1.
+
+* 2a. The user given index is not a valid reservation.
+
+  * 2a1. ReserveMate shows invalid reservation index error.
+
+    Use case resumes at step 1.
+
+* 2b. The reservation is in the past.
+
+    * 2b1. ReserveMate shows Cannot past reservation error.
+
+    Use case ends.
+
+* 3a. The new user details would cause duplicate reservation.
+
+    * 3a1. ReserveMate shows "This would conflict with existing reservation" error.
+
+    Use case resumes at step 1.
 
 *{More to be added}*
 

@@ -99,13 +99,13 @@ public class EditCommand extends Command {
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
         Reservation editedReservation = createEditedReservation(reservationToEdit, editReservationDescriptor);
 
+        if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
+            throw new CommandException(MESSAGE_EDIT_PAST_RESERVATION_FAILURE);
+        }
+
         if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
             throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
 
-        }
-
-        if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
-            throw new CommandException(MESSAGE_EDIT_PAST_RESERVATION_FAILURE);
         }
 
         model.setReservation(reservationToEdit, editedReservation);

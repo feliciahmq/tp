@@ -31,7 +31,7 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 
    * `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
    
-   * `edit 1 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 1st reservation shown in the reservation list to reflect new details of at least one specified tag.
+   * `edit 2 n/Bobby p/6598765432 e/bobby@example.com` : Updates the 2nd reservation shown in the reservation list to reflect new details of at least one specified tag.
    
    * `delete 3` : Deletes the 3rd reservation shown in the reservation list.
    
@@ -136,7 +136,7 @@ Examples:
 
 Edits an existing reservation in ReserveMate.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [t/TAG]…​`
 
 * Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed reservation list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -144,7 +144,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the reservation will be removed i.e adding of tags is not cumulative.
 * You can remove all the reservation’s tags by typing `t/` without
     specifying any tags after it.
-
+* Attempts to edit reservations with dates/times before the current time will be rejected.
+![editCommandResult.png](images/editCommandResult.png)
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st reservation to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd reservation to be `Betsy Crower` and clears all existing tags.
@@ -236,7 +237,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]…​` <br> e.g., `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [d/DATE_TIME] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Show**   | `show INDEX`<br> e.g., `show 2`
 **List**   | `list`
