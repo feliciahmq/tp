@@ -102,8 +102,9 @@ public class UniqueReservationList implements Iterable<Reservation> {
         if (!target.isSameReservation(editedReservation) && contains(editedReservation)) {
             throw new DuplicateReservationException();
         }
-
-        internalList.set(index, editedReservation);
+        internalList.remove(index);
+        int idx = findInsertIndex(editedReservation);
+        internalList.add(idx, editedReservation);
     }
 
     /**
