@@ -203,7 +203,7 @@ Use case ends.
 
 1. User requests to edit a reservation by providing an index and new details.
 
-2. ReserveMate check if the reservation exists and is in the future.
+2. ReserveMate check if the reservation exists has not passed the current date and time.
 
 3. ReserveMate updates the reservation with new details.
 
@@ -225,9 +225,9 @@ Use case ends.
 
   Use case resumes at step 1.
 
-* 2b. The reservation is in the past.
+* 2b. The reservation date has already passed.
 
-  * 2b1. ReserveMate shows Cannot past reservation error.
+  * 2b1. ReserveMate shows cannot edit past reservation error.
 
   Use case ends.
 

@@ -134,7 +134,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateReservationFilteredList_failure() {
         showReservationAtIndex(model, INDEX_SECOND_RESERVATION);
-        // edit reservation in filtered list into a duplicate in address book
+        // edit reservation in filtered list into a duplicate in ReserveMate
         Reservation reservationInList = model.getReserveMate().getReservationList()
                 .get(INDEX_THIRD_RESERVATION.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
@@ -162,7 +162,7 @@ public class EditCommandTest {
     public void execute_invalidReservationIndexFilteredList_failure() {
         showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
         Index outOfBoundIndex = INDEX_SECOND_RESERVATION;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ReserveMate list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
@@ -182,7 +182,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
         // Assert that the command fails with the correct error message
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_PAST_RESERVATION_FAILURE);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
     }
 
     @Test
