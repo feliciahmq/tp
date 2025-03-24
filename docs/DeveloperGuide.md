@@ -59,7 +59,6 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 | `*`      | Frequent user       | See visuals of booked tables and available seats                                       | Assign tables to customers easily                                   |
 | `*`      | Beginner user       | Add table size for each type of table                                                  | Organise seating more effectively                                   |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -131,7 +130,7 @@ Actor: Restaurant Manager, ReserveMate
 
 **MSS**
 
-1. User requests to delete a reservation by providing an index.
+1. User requests to delete a reservation by providing an index and confirmation.
 2. ReserveMate deletes the particular reservation.
 
     Use case ends.
@@ -143,6 +142,11 @@ Actor: Restaurant Manager, ReserveMate
 
     Use case resumes at step 1.
 
+* 1b. Confirmation not given
+
+  * 1b1. ReserveMate prompts the user to confirm the deletion
+
+    use case resumes at step 1.
 
 **Use case: UC05 - View Reservation list**
 

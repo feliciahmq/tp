@@ -171,15 +171,17 @@ Examples:
 
 Deletes the specified reservation from ReserveMate.
 
-Format: `delete INDEX`
+Format: `delete INDEX cfm`
 
 * Deletes the reservation at the specified `INDEX`.
 * The index refers to the index number shown in the displayed in ReserveMate.
 * The index **must be a positive integer** 1, 2, 3, …​
+* A confirmation flag **'cfm' is required** to confirm the deletion action
+  * If cfm is not included, the deletion will not occur.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd reservation in ReserveMate.
-* `find Betsy` followed by `delete 1` deletes the 1st reservation in the results of the `find` command.
+* `list` followed by `delete 2 cfm` deletes the 2nd reservation in ReserveMate.
+* `find Betsy` followed by `delete 1 cfm` deletes the 1st reservation in the results of the `find` command.
 
 ![img_1.png](images/deleteCommandResult.png)
 ### Clearing all entries : `clear`
