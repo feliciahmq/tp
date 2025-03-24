@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
+import seedu.reserve.logic.commands.DeleteCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
@@ -22,7 +24,9 @@ import seedu.reserve.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    private static final String CONFIRMATION_KEYWORD = "cfm";
+    private static final int INDEX_POSITION = 0; // Index is expected at position 0
+    private static final int CONFIRMATION_POSITION = 1; // "confirm" keyword is expect at position 1
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -34,6 +38,32 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses the given {@code args} string for a delete command and extracts the index
+     * and confirmation flag.
+     *
+     * @param args The input string containing the index and optional confirmation keyword.
+     * @return A {@code Pair} containing the parsed {@code Index} and a {@code Boolean}
+     *         indicating whether the delete action is confirmed.
+     * @throws ParseException If the input format is invalid or the index is not a valid number.
+     */
+    public static Pair<Index, Boolean> parseDeleteArgs(String args) throws ParseException {
+        requireNonNull(args);
+
+        String trimmedArgs = args.trim();
+        if (!DeleteCommand.isValidDelete(trimmedArgs)) {
+            throw new ParseException(DeleteCommand.MESSAGE_USAGE);
+        }
+
+        String[] splitArgs = trimmedArgs.split("\\s+");
+        assert splitArgs.length > 0 : "splitArgs should have at least one element";
+
+        Index index = parseIndex(splitArgs[INDEX_POSITION]);
+        boolean isConfirmed = splitArgs.length > 1 && splitArgs[CONFIRMATION_POSITION].equals(CONFIRMATION_KEYWORD);
+
+        return new Pair<>(index, isConfirmed);
     }
 
     /**

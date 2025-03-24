@@ -31,7 +31,7 @@ public class DeleteCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Reservation reservationToDelete = model.getFilteredReservationList()
                 .get(INDEX_FIRST_RESERVATION.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION, true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                 INDEX_FIRST_RESERVATION.getOneBased());
@@ -45,7 +45,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, true);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
 
         Reservation reservationToDelete = model.getFilteredReservationList()
                 .get(INDEX_FIRST_RESERVATION.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESERVATION, true);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                INDEX_FIRST_RESERVATION.getOneBased());
@@ -76,21 +76,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, true);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_RESERVATION);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_RESERVATION);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_RESERVATION, true);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_RESERVATION, true);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_RESERVATION);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_RESERVATION, true);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -106,7 +106,7 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, true);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }
