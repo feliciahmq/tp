@@ -15,6 +15,7 @@ import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
+import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import org.junit.jupiter.api.Test;
@@ -43,14 +44,14 @@ public class EditCommandTest {
         Reservation editedReservation = new ReservationBuilder().build();
         EditCommand.EditReservationDescriptor descriptor =
                 new EditReservationDescriptorBuilder(editedReservation).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_RESERVATION, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 Messages.format(editedReservation));
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
                 new UserPrefs());
-        expectedModel.setReservation(model.getFilteredReservationList().get(0), editedReservation);
+        expectedModel.setReservation(model.getFilteredReservationList().get(1), editedReservation);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -83,10 +84,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_RESERVATION,
                 new EditCommand.EditReservationDescriptor());
         Reservation editedReservation = model.getFilteredReservationList()
-                .get(INDEX_FIRST_RESERVATION.getZeroBased());
+                .get(INDEX_SECOND_RESERVATION.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 Messages.format(editedReservation));
@@ -99,7 +100,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
+        showReservationAtIndex(model, INDEX_SECOND_RESERVATION);
 
         Reservation reservationInFilteredList = model.getFilteredReservationList()
                 .get(INDEX_FIRST_RESERVATION.getZeroBased());
@@ -132,11 +133,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateReservationFilteredList_failure() {
-        showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
-
-        // edit reservation in filtered list into a duplicate in address book
+        showReservationAtIndex(model, INDEX_SECOND_RESERVATION);
+        // edit reservation in filtered list into a duplicate in ReserveMate
         Reservation reservationInList = model.getReserveMate().getReservationList()
-                .get(INDEX_SECOND_RESERVATION.getZeroBased());
+                .get(INDEX_THIRD_RESERVATION.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
                 new EditReservationDescriptorBuilder(reservationInList).build());
 
@@ -162,13 +162,27 @@ public class EditCommandTest {
     public void execute_invalidReservationIndexFilteredList_failure() {
         showReservationAtIndex(model, INDEX_FIRST_RESERVATION);
         Index outOfBoundIndex = INDEX_SECOND_RESERVATION;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ReserveMate list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getReserveMate().getReservationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editPastReservation_failure() {
+        Reservation pastReservation = new ReservationBuilder().withDateTime("2022-01-01 1200").build();
+        model.addReservation(pastReservation);
+
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withDateTime("2026-01-01 1300")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+
+        // Assert that the command fails with the correct error message
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
     }
 
     @Test

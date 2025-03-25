@@ -9,6 +9,7 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -57,6 +58,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
             "This reservation already exists in the reservation book.";
+    public static final String MESSAGE_FUTURE_RESERVATION_REQUIRED = "Past reservation cannot be edited.";
+
 
     private final Index index;
     private final EditReservationDescriptor editReservationDescriptor;
@@ -73,6 +76,17 @@ public class EditCommand extends Command {
         this.editReservationDescriptor = new EditReservationDescriptor(editReservationDescriptor);
     }
 
+    /**
+     * Checks if the DateTime is before the current time.
+     *
+     * @param dateTime The DateTime to check.
+     * @return true if the DateTime is before the current time, false otherwise.
+     */
+    private boolean isDateTimeBeforeCurrentTime(DateTime dateTime) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        return dateTime.value.isBefore(currentDateTime);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -84,6 +98,10 @@ public class EditCommand extends Command {
 
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
         Reservation editedReservation = createEditedReservation(reservationToEdit, editReservationDescriptor);
+
+        if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
+            throw new CommandException(MESSAGE_FUTURE_RESERVATION_REQUIRED);
+        }
 
         if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
             throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
