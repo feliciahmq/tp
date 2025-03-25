@@ -203,7 +203,7 @@ Use case ends.
 
 1. User requests to edit a reservation by providing an index and new details.
 
-2. ReserveMate check if the reservation exists has not passed the current date and time.
+2. ReserveMate check if the reservation has not passed the current date and time.
 
 3. ReserveMate updates the reservation with new details.
 

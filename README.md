@@ -21,12 +21,12 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 ### Feature: Create a new reservation
 **Purpose:** The create function will enable users to add new reservations to reserve by capturing relevant details such as name, number of diners, contact information, date and time of reservation.
 
-**Command format:** `add n/NAME p/PHONE e/EMAIL x/NUMBER_OF_DINERS d/DATETIME [t/TAG]...…​`
+**Command format:** `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [t/TAG]...…​`
 
 **Example commands:**
 ```
 add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
-ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/6598765432
+ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/98765432
 ```
 
 ### Feature: Editing a reservation
@@ -119,7 +119,7 @@ Exit
 ## Command Summary
 | Feature                   | Command Format                                                                          | Purpose                                       |
 |---------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------|
-| Create a new reservation  | `add n/NAME p/PHONE e/EMAIL x/NUMBER_OF_DINERS d/DATETIME [t/TAG]…​`                    | Add new reservation to ReserveMate            |
+| Create a new reservation  | `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [t/TAG]…​`                    | Add new reservation to ReserveMate            |
 | Editing a reservation     | `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [t/TAG]…​` | Edit existing details of a reservation        |
 | Delete reservation        | `delete <INDEX>`                                                                        | Remove a reservation from ReserveMate         |
 | Show Reservation details  | `show <INDEX>`                                                                          | Show details of reservation to user           |
