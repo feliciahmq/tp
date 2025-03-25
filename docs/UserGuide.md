@@ -172,13 +172,14 @@ Examples:
 
 Deletes the specified reservation from ReserveMate.
 
-Format: `delete INDEX cfm`
+Format: `delete <INDEX cfm>`
 
 * Deletes the reservation at the specified `INDEX`.
 * The index refers to the index number shown in the displayed in ReserveMate.
 * The index **must be a positive integer** 1, 2, 3, …​
 * A confirmation flag **'cfm' is required** to confirm the deletion action
   * If cfm is not included, the deletion will not occur.
+  * keyword 'cfm' is case-sensitive
 
 Examples:
 * `list` followed by `delete 2 cfm` deletes the 2nd reservation in ReserveMate.
