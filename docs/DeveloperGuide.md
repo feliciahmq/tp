@@ -59,7 +59,6 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 | `*`      | Frequent user       | See visuals of booked tables and available seats                                       | Assign tables to customers easily                                   |
 | `*`      | Beginner user       | Add table size for each type of table                                                  | Organise seating more effectively                                   |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -123,7 +122,7 @@ Actor: Restaurant Manager, ReserveMate
 
 * 1a. User enters an invalid command format.
 
-    * 1a1. ReserveMate shows the error message: "Invalid command entered!"
+    * 1a1. ReserveMate shows an error message 
 
       Use case ends.
 
@@ -131,7 +130,7 @@ Actor: Restaurant Manager, ReserveMate
 
 **MSS**
 
-1. User requests to delete a reservation by providing an index.
+1. User requests to delete a reservation by providing an index and confirmation.
 2. ReserveMate deletes the particular reservation.
 
     Use case ends.
@@ -142,6 +141,18 @@ Actor: Restaurant Manager, ReserveMate
   * 1a1. ReserveMate prompts the user to enter a valid index.
 
     Use case resumes at step 1.
+
+* 1b. Confirmation not given
+
+  * 1b1. ReserveMate prompts the user to confirm the deletion
+
+    use case resumes at step 1.
+
+* 1c. User enters an invalid command format.
+
+  * 1c1. ReserveMate shows an error message providing the correct format.
+
+    use case resumes at step 1.
 
 
 **Use case: UC05 - View Reservation list**
@@ -237,6 +248,7 @@ Use case ends.
 
   Use case resumes at step 1.
 
+
 **Use case: UC08 - View all free time slots**
 
 **MSS**
@@ -260,6 +272,27 @@ Use case ends.
     * 2a1. ReserveMate shows an error message.
 
       Use case ends.
+
+**Use case: UC09 - Filter Reservations**
+
+**MSS**
+
+1. User requests to filter reservations between 2 given dates.
+
+2. ReserveMate displays reservations which fits criteria.
+
+Use case ends
+
+**Extensions**
+* 1a. The user enters an invalid command.
+
+  * 1a1 ReserveMate prompts user to input a valid command.
+  
+  Use case resumes at step 1.
+
+* 2a. ReserveMate found no reservations between the 2 dates.
+
+  * 2a1. ReserveMate displays No reservations found for the date range.
 
 *{More to be added}*
 

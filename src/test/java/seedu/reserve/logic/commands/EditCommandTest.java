@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
@@ -17,6 +21,9 @@ import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,11 +38,12 @@ import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 import seedu.reserve.testutil.ReservationBuilder;
 
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
@@ -65,11 +73,11 @@ public class EditCommandTest {
         ReservationBuilder reservationInList = new ReservationBuilder(lastReservation);
         Reservation editedReservation = reservationInList.withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_OCCASION_BIRTHDAY).build();
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_OCCASION_BIRTHDAY).build();
         EditCommand editCommand = new EditCommand(indexLastReservation, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
@@ -177,11 +185,63 @@ public class EditCommandTest {
         model.addReservation(pastReservation);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-                .withDateTime("2026-01-01 1300")
+                .withDateTime(LocalDateTime.now().plusDays(29).format(FORMATTER))
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
         // Assert that the command fails with the correct error message
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
+    }
+
+    @Test
+    public void execute_clearOccasions_success() {
+        model = new ModelManager(new ReserveMate(), new UserPrefs());
+        Reservation futureReservationWithTag = new ReservationBuilder()
+            .withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withDiners(VALID_DINERS_AMY)
+            .withDateTime(LocalDateTime.now().plusDays(1).format(FORMATTER))
+            .withTags(VALID_OCCASION_BIRTHDAY)
+            .build();
+
+        model.addReservation(futureReservationWithTag);
+        Index targetIndex = INDEX_FIRST_RESERVATION; // Use first index since we cleared the model
+
+        // Create descriptor to clear tags
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+            .withTags().build(); // Empty tags to clear occasions
+        EditCommand editCommand = new EditCommand(targetIndex, descriptor);
+
+        // Create the expected reservation after editing (same as original but without tags)
+        Reservation editedReservation = new ReservationBuilder(futureReservationWithTag)
+            .withTags().build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+            Messages.format(editedReservation));
+
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
+            new UserPrefs());
+        expectedModel.setReservation(futureReservationWithTag, editedReservation);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_clearTagsFromPastReservation_failure() {
+        // Create a past reservation with a tag
+        Reservation pastReservationWithTag = new ReservationBuilder()
+            .withDateTime("2020-01-01 1200") // Past date
+            .withTags(VALID_OCCASION_BIRTHDAY)
+            .build();
+
+        model.setReservation(model.getFilteredReservationList().get(0), pastReservationWithTag);
+
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+            .withTags().build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+
+        // The command should fail because we can't edit past reservations
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
     }
 

@@ -18,18 +18,18 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
+3. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/UI.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/Nut allergy` : Adds a reservation named `John Doe` to the ReserveMate.
+   * `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday` : Adds a reservation named `John Doe` to the ReserveMate.
 
    * `edit 2 n/Bobby p/98765432 e/bobby@example.com` : Updates the 2nd reservation shown in the reservation list to reflect new details of at least one specified tag.
 
@@ -44,10 +44,12 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
    * `find john` : Filters & displays reservations containing "john".
 
    * `clear` : Deletes all reservations.
-
+   
+   * `filter sd/ 2026-12-12 1800 ed/ 2026-12-15 1400` : Filters all reservations between the 2 dates.
+   
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,13 +63,13 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Words in `[UPPER_CASE]` are optional parameters to be supplied by the user.<br>
-  e.g. in `add t/[TAG]`, `TAG` is a parameter which can be used as `add t/Vegan`.
+  e.g. in `edit <INDEX> p/96214711`, `PHONE_NUMBER` is a parameter which can be used as `add n/John Doe p/96214711`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `edit <INDEX> [o/OCCASION]` can be used as `n/John Doe o/Birthday` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/nutAllergy`, `t/friend t/family` etc.
+  e.g. `[o/OCCASION]…​` can be used as ` ` (i.e. 0 times), `o/Birthday`, `o/Birthday o/Graduation` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -110,18 +112,20 @@ Examples:
 
 Adds a reservation to the ReserveMate.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`
 
 <box type="constraint" seamless>
 
 **Constraint**
 - A reservation can have any number of tags (including 0)
 - Phone number should start with either 8 or 9 and must be 8 numbers long.
+- Date time should be after current time but within 60 days from it.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 t/nutAllergy`
-* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 t/vegan d/2025-04-12 1800`
+
+* `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 o/GRADUATION d/2025-04-20 1800`
 
 ### Listing all reservations : `list`
 
@@ -136,7 +140,7 @@ Examples:
 
 Edits an existing reservation in ReserveMate.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [o/OCCASION]…​`
 
 * Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed reservation list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -148,7 +152,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 ![editCommandResult.png](images/editCommandResult.png)
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st reservation to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd reservation to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower o/` Edits the name of the 2nd reservation to be `Betsy Crower` and clears all existing occasions.
 
 ### Locating reservations by name: `find`
 
@@ -172,15 +176,18 @@ Examples:
 
 Deletes the specified reservation from ReserveMate.
 
-Format: `delete INDEX`
+Format: `delete <INDEX cfm>`
 
 * Deletes the reservation at the specified `INDEX`.
 * The index refers to the index number shown in the displayed in ReserveMate.
 * The index **must be a positive integer** 1, 2, 3, …​
+* A confirmation flag **'cfm' is required** to confirm the deletion action
+  * If cfm is not included, the deletion will not occur.
+  * keyword 'cfm' is case-sensitive
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd reservation in ReserveMate.
-* `find Betsy` followed by `delete 1` deletes the 1st reservation in the results of the `find` command.
+* `list` followed by `delete 2 cfm` deletes the 2nd reservation in ReserveMate.
+* `find Betsy` followed by `delete 1 cfm` deletes the 1st reservation in the results of the `find` command.
 
 ![img_1.png](images/deleteCommandResult.png)
 ### Clearing all entries : `clear`
@@ -188,6 +195,21 @@ Examples:
 Clears all entries from the ReserveMate
 
 Format: `clear`
+
+### Filtering the reservations: `filter`
+
+Filters reservations between the given date range.
+
+Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
+
+* Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
+* `DATE_TIME` provided must be valid
+* The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
+
+Examples:
+* `filter sd/ 2026-12-12 1400 ed/ 2026-12-15 1400` filters all reservations between 12/12/2026 1400 and 15/12/2026 1400
+
+![filter_command.png](images/filterCommand.png)
 
 ### Exiting the program : `exit`
 
@@ -241,13 +263,14 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]…​` <br> e.g., `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy`
+**Add**    | `add <n/NAME> <p/PHONE_NUMBER> <e/EMAIL> <x/NUMBER_OF_DINER> <d/DATE_TIME> <o/OCCASION…​>` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Show**   | `show INDEX`<br> e.g., `show 2`
 **Free**   | `free`
 **List**   | `list`
+**Filter** | `filter sd/DATE_TIME ed/DATE_TIME` <br> e.g., `filter sd/ 2026-12-12 1400 ed/2025-12-14 1400`
 **Help**   | `help`
 **Exit**   | `exit`

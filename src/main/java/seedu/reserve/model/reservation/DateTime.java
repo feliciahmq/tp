@@ -16,9 +16,11 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
 public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format YYYY-MM-DD HHmm "
-            + "and be a date-time after the current time.";
+            + "and be a date-time after the current time but within 60 days from now.";
+    public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final LocalDateTime currentDateTime = LocalDateTime.now();
 
     public final LocalDateTime value;
 
@@ -57,7 +59,8 @@ public class DateTime implements Comparable<DateTime> {
             return false;
         }
         try {
-            return isAfterCurrentTime(LocalDateTime.parse(test, FORMATTER));
+            LocalDateTime parsedDateTime = LocalDateTime.parse(test, FORMATTER);
+            return isAfterCurrentTime(parsedDateTime) && isBeforeMaxBookingTime(parsedDateTime);
         } catch (DateTimeParseException | ParseException e) {
             return false;
         }
@@ -74,8 +77,16 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if the given DateTime is after the current time.
      */
     public static boolean isAfterCurrentTime(LocalDateTime dateTime) throws ParseException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
         return dateTime.isAfter(currentDateTime);
+    }
+
+    /**
+     * Returns true if the given DateTime is before 60 days from the current time.
+     */
+    public static boolean isBeforeMaxBookingTime(LocalDateTime dateTime) throws ParseException {
+        LocalDateTime maxBookingDateTime = currentDateTime.plusDays(60);
+        assert(maxBookingDateTime.isBefore(currentDateTime.plusDays(61)));
+        return dateTime.isBefore(maxBookingDateTime) || dateTime.isEqual(maxBookingDateTime);
     }
 
     @Override
@@ -105,5 +116,17 @@ public class DateTime implements Comparable<DateTime> {
     @Override
     public int compareTo(DateTime dateTime) {
         return this.value.compareTo(dateTime.value);
+    }
+
+    /**
+     * Returns True if the current {@code DateTime} object's date and time is between the start and end
+     * {@code DateTime} objects (inclusive). The {@code startDateTime} must be before {@end endDateTime}.
+     *
+     * @param startDateTime start date
+     * @param endDateTime end date
+     * @return true if conditions met, false otherwise
+     */
+    public boolean isBetween(DateTime startDateTime, DateTime endDateTime) {
+        return this.compareTo(startDateTime) >= 0 && this.compareTo(endDateTime) <= 0;
     }
 }
