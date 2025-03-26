@@ -13,6 +13,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
+import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
@@ -218,5 +220,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDeleteArgs_validInputWithConfirmation_success() throws ParseException {
+        String input = "1 cfm";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
+    }
+
+    @Test
+    public void parseDeleteArgs_validInputWithSpacesWithConfirmation_success() throws ParseException {
+        String input = "1             cfm";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
+    }
+
+    @Test
+    public void parseDeleteArgs_validInputWithMoreSpacesWithConfirmation_success() throws ParseException {
+        String input = "1             cfm      ";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
     }
 }
