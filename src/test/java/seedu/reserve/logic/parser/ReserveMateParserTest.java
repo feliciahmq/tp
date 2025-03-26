@@ -18,10 +18,12 @@ import seedu.reserve.logic.commands.ClearCommand;
 import seedu.reserve.logic.commands.DeleteCommand;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.ExitCommand;
+import seedu.reserve.logic.commands.FilterCommand;
 import seedu.reserve.logic.commands.FindCommand;
 import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
@@ -144,6 +146,23 @@ public class ReserveMateParserTest {
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
+    }
+
+    @Test
+    public void parseCommand_filter_success() throws Exception {
+        DateTime startTime = DateTime.fromFileString("2025-12-13 1800");
+        DateTime endTime = DateTime.fromFileString("2025-12-13 1900");
+        FilterCommand command = (FilterCommand) parser.parseCommand("filter sd/ 2025-12-13 1800 ed/ 2025-12-13 1900");
+
+        assertEquals(new FilterCommand(startTime, endTime), command);
+    }
+
+    @Test
+    public void parseCommand_filter_failure() throws Exception {
+        assertThrows(ParseException.class, () -> parser.parseCommand("filter "));
+        assertThrows(ParseException.class, () -> parser.parseCommand("filter sd/ ed/ "));
+        assertThrows(ParseException.class, () -> parser.parseCommand("filter sd/ 2025-12-13 1800 ed/"));
+        assertThrows(ParseException.class, () -> parser.parseCommand("filter ed/ 2025-12-13 1900 "));
     }
 
     @Test
