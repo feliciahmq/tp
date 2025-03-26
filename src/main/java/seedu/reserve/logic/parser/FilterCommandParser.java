@@ -39,6 +39,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(MESSAGE_INVALID_ORDER);
         }
 
+        assert startDate.compareTo(endDate) <= 0;
         return new FilterCommand(startDate, endDate);
 
     }

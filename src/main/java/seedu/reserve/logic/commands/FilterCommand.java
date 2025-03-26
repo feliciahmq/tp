@@ -41,6 +41,7 @@ public class FilterCommand extends Command {
         if (model.getFilteredReservationList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_RESERVATIONS);
         }
+        assert !model.getFilteredReservationList().isEmpty();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
