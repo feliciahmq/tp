@@ -177,7 +177,7 @@ public class EditCommandTest {
         model.addReservation(pastReservation);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-                .withDateTime("2026-01-01 1300")
+                .withDateTime("2025-05-01 1300")
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 

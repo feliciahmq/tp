@@ -27,13 +27,13 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DINERS = "0";
-    private static final String INVALID_DATETIME = "2026-12-12 180";
+    private static final String INVALID_DATETIME = "2030-04-12 180";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "98765432";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DINERS = "2";
-    private static final String VALID_DATETIME = "2030-12-12 1800";
+    private static final String VALID_DATETIME = "2025-04-12 1800";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 

@@ -22,7 +22,7 @@ public class ReservationBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DINERS = "2";
-    public static final String DEFAULT_DATETIME = "2026-12-12 1800";
+    public static final String DEFAULT_DATETIME = "2025-04-12 1800";
 
     private Name name;
     private Phone phone;
