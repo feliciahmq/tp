@@ -25,7 +25,7 @@ public class Reservation {
     private final Diners diners;
     private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final String preference; // New field for customer preferences
 
     /**
      * Every field must be present and not null.
@@ -39,6 +39,23 @@ public class Reservation {
         this.diners = diners;
         this.dateTime = dateTime;
         this.tags.addAll(tags);
+        this.preference = "None"; // Initialize with empty preference
+    }
+
+    /**
+     * Every field must be present and not null.
+     * This constructor includes preference.
+     */
+    public Reservation(Name name, Phone phone, Email email, Diners diners,
+                    DateTime dateTime, Set<Tag> tags, String preference) {
+        requireAllNonNull(name, phone, email, diners, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.diners = diners;
+        this.dateTime = dateTime;
+        this.tags.addAll(tags);
+        this.preference = preference;
     }
 
     public Name getName() {
@@ -68,6 +85,17 @@ public class Reservation {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getPreference() {
+        return preference;
+    }
+
+    /**
+     * Returns a copy of this reservation with the updated preference.
+     */
+    public Reservation withPreference(String preference) {
+        return new Reservation(this.name, this.phone, this.email, this.diners, this.dateTime, this.tags, preference);
     }
 
     /**
@@ -106,13 +134,14 @@ public class Reservation {
                 && email.equals(otherReservation.email)
                 && diners.equals(otherReservation.diners)
                 && dateTime.equals(otherReservation.dateTime)
-                && tags.equals(otherReservation.tags);
+                && tags.equals(otherReservation.tags)
+                && preference.equals(otherReservation.preference);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, diners, dateTime, tags);
+        return Objects.hash(name, phone, email, diners, dateTime, tags, preference);
     }
 
     @Override
@@ -124,6 +153,7 @@ public class Reservation {
                 .add("diners", diners)
                 .add("dateTime", dateTime)
                 .add("occasion", tags)
+                .add("preference", preference)
                 .toString();
     }
 
