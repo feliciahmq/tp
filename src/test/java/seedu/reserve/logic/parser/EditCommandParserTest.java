@@ -20,7 +20,7 @@ import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
@@ -41,7 +41,7 @@ import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String TAG_EMPTY = " " + PREFIX_OCCASION;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);

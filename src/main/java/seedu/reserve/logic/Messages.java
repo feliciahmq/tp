@@ -47,7 +47,7 @@ public class Messages {
                 .append(reservation.getEmail())
                 .append("; Number of Diners: ")
                 .append(reservation.getDiners().value)
-                .append("; Tags: ");
+                .append("; Occasion: ");
         reservation.getTags().forEach(builder::append);
         return builder.toString();
     }

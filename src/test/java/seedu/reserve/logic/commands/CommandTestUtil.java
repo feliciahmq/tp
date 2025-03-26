@@ -7,7 +7,7 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final String DINERS_DESC_BOB = " " + PREFIX_NUMBER_OF_DINERS + VALID_DINERS_BOB;
     public static final String DATETIME_DESC_AMY = " " + PREFIX_DATE_TIME + VALID_DATETIME_AMY;
     public static final String DATETIME_DESC_BOB = " " + PREFIX_DATE_TIME + VALID_DATETIME_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_OCCASION + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_OCCASION + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -59,7 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_DINERS_DESC = " " + PREFIX_NUMBER_OF_DINERS + "0"; // '0' not in range
     public static final String INVALID_DATETIME_DESC = " "
             + PREFIX_DATE_TIME + "2026-12-12 180"; // not a valid date time
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_OCCASION + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

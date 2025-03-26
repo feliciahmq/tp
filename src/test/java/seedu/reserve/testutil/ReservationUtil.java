@@ -5,7 +5,7 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public class ReservationUtil {
         sb.append(PREFIX_NUMBER_OF_DINERS + reservation.getDiners().value + " ");
         sb.append(PREFIX_DATE_TIME + reservation.getDateTime().toString() + " ");
         reservation.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_OCCASION + s.tagName + " ")
         );
         return sb.toString();
     }
@@ -60,9 +60,9 @@ public class ReservationUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_OCCASION);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_OCCASION).append(s.tagName).append(" "));
             }
         }
         return sb.toString();
