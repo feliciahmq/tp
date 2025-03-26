@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newReservation_success() {
-        Reservation validReservation = new ReservationBuilder().build();
+        Reservation validReservation = new ReservationBuilder().withTags("Anniversary").build();
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
         expectedModel.addReservation(validReservation);
