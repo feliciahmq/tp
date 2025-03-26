@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> ReserveMateParser : parseCommand("delete 1")
+LogicManager -> ReserveMateParser : parseCommand("delete 1 cfm")
 activate ReserveMateParser
 
 create DeleteCommandParser
@@ -27,7 +27,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> ReserveMateParser
 deactivate DeleteCommandParser
 
-ReserveMateParser -> DeleteCommandParser : parse("1")
+ReserveMateParser -> DeleteCommandParser : parse("1 cfm")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -49,7 +49,7 @@ deactivate ReserveMateParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteCustomer(1)
+DeleteCommand -> Model : deleteReservation(1)
 activate Model
 
 Model --> DeleteCommand
