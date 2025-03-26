@@ -7,8 +7,8 @@ import static seedu.reserve.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,7 @@ public class EditReservationDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withTags(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
