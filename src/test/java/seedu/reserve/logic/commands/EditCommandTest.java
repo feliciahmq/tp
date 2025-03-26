@@ -8,8 +8,8 @@ import static seedu.reserve.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
@@ -65,11 +65,11 @@ public class EditCommandTest {
         ReservationBuilder reservationInList = new ReservationBuilder(lastReservation);
         Reservation editedReservation = reservationInList.withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_OCCASION_BIRTHDAY).build();
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_OCCASION_BIRTHDAY).build();
         EditCommand editCommand = new EditCommand(indexLastReservation, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,

@@ -6,10 +6,10 @@ import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_ANNIVERSARY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,10 +91,10 @@ public class TypicalReservation {
 
     // Manually added - Reservation's details found in {@code CommandTestUtil}
     public static final Reservation AMY = new ReservationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
     public static final Reservation BOB = new ReservationBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withDiners(VALID_DINERS_BOB)
-            .withDateTime(VALID_DATETIME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withDateTime(VALID_DATETIME_BOB).withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

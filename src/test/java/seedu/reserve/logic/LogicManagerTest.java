@@ -8,6 +8,8 @@ import static seedu.reserve.logic.commands.CommandTestUtil.DINERS_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.reserve.logic.commands.CommandTestUtil.TAG_DESC_ANNIVERSARY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_ANNIVERSARY;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.AMY;
 
@@ -41,13 +43,14 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model;
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
+        model = new ModelManager();
         JsonReserveMateStorage reserveMateStorage =
-                new JsonReserveMateStorage(temporaryFolder.resolve("reservemate.json"));
+            new JsonReserveMateStorage(temporaryFolder.resolve("reservemate.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(reserveMateStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -65,18 +68,16 @@ public class LogicManagerTest {
         assertCommandException(deleteCommand, MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
-
-
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -92,10 +93,10 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, model);
+        assertModelsEqual(expectedModel, model);
     }
 
     @Test
@@ -125,7 +126,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -138,9 +139,19 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+                                      String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
-        assertEquals(expectedModel, model);
+        assertModelsEqual(expectedModel, model);
+    }
+
+    /**
+     * Asserts that two models are equal by comparing their contents
+     */
+    private void assertModelsEqual(Model expected, Model actual) {
+        assertEquals(expected.getReserveMate(), actual.getReserveMate(),
+            "ReserveMate contents should be equal");
+        assertEquals(expected.getFilteredReservationList(), actual.getFilteredReservationList(),
+            "Filtered reservation lists should be equal");
     }
 
     /**
@@ -157,20 +168,20 @@ public class LogicManagerTest {
             @Override
             public void saveReserveMate(ReadOnlyReserveMate reserveMate, Path filePath)
                     throws IOException {
-                throw e;
+                    throw e;
             }
         };
 
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(reserveMateStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveReserveMate method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY;
-        Reservation expectedReservation = new ReservationBuilder(AMY).withTags().build();
+            + EMAIL_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY + TAG_DESC_ANNIVERSARY;
+        Reservation expectedReservation = new ReservationBuilder(AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addReservation(expectedReservation);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

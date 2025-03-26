@@ -6,8 +6,8 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,8 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_DINERS_BOB = "4";
     public static final String VALID_DATETIME_AMY = "2026-12-12 1800";
     public static final String VALID_DATETIME_BOB = "2026-12-25 1200";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_OCCASION_BIRTHDAY = "Birthday";
+    public static final String VALID_OCCASION_ANNIVERSARY = "Anniversary";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final String DINERS_DESC_BOB = " " + PREFIX_NUMBER_OF_DINERS + VALID_DINERS_BOB;
     public static final String DATETIME_DESC_AMY = " " + PREFIX_DATE_TIME + VALID_DATETIME_AMY;
     public static final String DATETIME_DESC_BOB = " " + PREFIX_DATE_TIME + VALID_DATETIME_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_OCCASION + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_OCCASION + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_ANNIVERSARY = " " + PREFIX_OCCASION + VALID_OCCASION_ANNIVERSARY;
+    public static final String TAG_DESC_BIRTHDAY = " " + PREFIX_OCCASION + VALID_OCCASION_BIRTHDAY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -59,7 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_DINERS_DESC = " " + PREFIX_NUMBER_OF_DINERS + "0"; // '0' not in range
     public static final String INVALID_DATETIME_DESC = " "
             + PREFIX_DATE_TIME + "2026-12-12 180"; // not a valid date time
-    public static final String INVALID_TAG_DESC = " " + PREFIX_OCCASION + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_OCCASION + "graduation*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -71,11 +71,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditReservationDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withDiners(VALID_DINERS_AMY).withDateTime(VALID_DATETIME_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_OCCASION_ANNIVERSARY).build();
         DESC_BOB = new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY).build();
     }
 
     /**

@@ -5,8 +5,8 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
@@ -40,7 +40,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
             "This reservation already exists in the reservation book";
-    public static final String MESSAGE_NO_OCCASION = "No occasion selected";
+    public static final String MESSAGE_NO_OCCASION = "Please indicate an occasion \n"
+        + "Example: " + PREFIX_OCCASION + "Birthday \n"
+        + "Example: " + PREFIX_OCCASION + "None";
 
     private final Reservation toAdd;
 
@@ -60,9 +62,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
         }
 
-//        if (toAdd.getTags().isEmpty()) {
-//            throw new CommandException(MESSAGE_NO_OCCASION);
-//        }
+        if (toAdd.getTags().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_OCCASION);
+        }
 
         model.addReservation(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

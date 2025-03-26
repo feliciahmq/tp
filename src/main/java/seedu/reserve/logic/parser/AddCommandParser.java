@@ -5,11 +5,9 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -27,14 +25,6 @@ import seedu.reserve.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
-    public static final String MESSAGE_IS_OCCASION = "Are you celebrating an occasion?";
-    public static final String MESSAGE_OCCASION_OPTIONS = "Select an option: \n"
-        + "1. Birthday \n"
-        + "2. Anniversary \n"
-        + "3. Graduation \n"
-        + "4. Others \n"
-        + "5. None \n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

@@ -123,7 +123,7 @@ public class Reservation {
                 .add("email", email)
                 .add("diners", diners)
                 .add("dateTime", dateTime)
-                .add("tags", tags)
+                .add("occasion", tags)
                 .toString();
     }
 

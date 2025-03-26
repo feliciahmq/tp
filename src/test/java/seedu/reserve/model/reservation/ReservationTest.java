@@ -7,8 +7,8 @@ import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.reserve.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
 import static seedu.reserve.testutil.TypicalReservation.BOB;
@@ -35,7 +35,7 @@ public class ReservationTest {
 
         // same name, phone number and date time, all other attributes different -> returns true
         Reservation editedAlice = new ReservationBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_OCCASION_BIRTHDAY).build();
         assertTrue(ALICE.isSameReservation(editedAlice));
 
         // different diners, all other attributes same -> returns false
@@ -98,7 +98,7 @@ public class ReservationTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ReservationBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new ReservationBuilder(ALICE).withTags(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -106,7 +106,7 @@ public class ReservationTest {
     public void toStringMethod() {
         String expected = Reservation.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", diners="
-                + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", tags=" + ALICE.getTags() + "}";
+                + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", occasion=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
