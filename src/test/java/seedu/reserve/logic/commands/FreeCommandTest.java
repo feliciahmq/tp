@@ -17,6 +17,7 @@ import seedu.reserve.testutil.ReservationBuilder;
 
 public class FreeCommandTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 
     @Test
     public void execute_emptyReservationList_throwsCommandException() {
@@ -28,7 +29,6 @@ public class FreeCommandTest {
     @Test
     public void execute_hasFreeSlots_showsFreeSlots() {
         // Create reservations with gaps
-        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
         Reservation r1 = new ReservationBuilder().withDateTime(now.format(FORMATTER)).build();
         Reservation r2 = new ReservationBuilder().withDateTime(now.plusHours(2).format(FORMATTER)).build();
 
@@ -48,7 +48,6 @@ public class FreeCommandTest {
 
     @Test
     public void execute_hasMultipleFreeSlots_showsAllFreeSlots() {
-        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
         Reservation r1 = new ReservationBuilder().withDateTime(now.format(FORMATTER)).build();
         Reservation r2 = new ReservationBuilder().withDateTime(now.plusHours(2).format(FORMATTER)).build();
         Reservation r3 = new ReservationBuilder().withDateTime(now.plusHours(4).format(FORMATTER)).build();

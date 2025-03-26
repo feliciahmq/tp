@@ -255,7 +255,7 @@ Use case ends.
 
       Use Case ends.
 
-* 2a. The list is empty.
+* 2a. The reservation list is empty.
 
     * 2a1. ReserveMate shows an error message.
 
