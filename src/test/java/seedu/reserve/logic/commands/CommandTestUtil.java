@@ -10,6 +10,8 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.reserve.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,8 @@ import seedu.reserve.testutil.EditReservationDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "99999999";
@@ -35,8 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_DINERS_AMY = "2";
     public static final String VALID_DINERS_BOB = "4";
-    public static final String VALID_DATETIME_AMY = "2026-12-12 1800";
-    public static final String VALID_DATETIME_BOB = "2026-12-25 1200";
+    public static final String VALID_DATETIME_AMY = LocalDateTime.now().plusDays(30).format(FORMATTER);
+    public static final String VALID_DATETIME_BOB = LocalDateTime.now().plusDays(29).format(FORMATTER);
     public static final String VALID_OCCASION_BIRTHDAY = "Birthday";
     public static final String VALID_OCCASION_ANNIVERSARY = "Anniversary";
 
@@ -58,7 +62,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DINERS_DESC = " " + PREFIX_NUMBER_OF_DINERS + "0"; // '0' not in range
     public static final String INVALID_DATETIME_DESC = " "
-            + PREFIX_DATE_TIME + "2026-12-12 180"; // not a valid date time
+            + PREFIX_DATE_TIME + LocalDateTime.now().plusDays(28).format(FORMATTER); // not a valid date time
     public static final String INVALID_OCC_DESC = " " + PREFIX_OCCASION + "graduation*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

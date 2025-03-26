@@ -18,15 +18,15 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
+3. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/UI.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
    Some example commands you can try:
 
    * `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday` : Adds a reservation named `John Doe` to the ReserveMate.
@@ -47,7 +47,7 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,11 +117,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 **Constraint**
 - A reservation can have any number of tags (including 0)
 - Phone number should start with either 8 or 9 and must be 8 numbers long.
+- Date time should be after current time but within 60 days from it.
 </box>
 
 Examples:
-* `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/BIRTHDAY`
-* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/6581234567 o/GRADUATION d/2026-12-12 1800`
+* `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 o/GRADUATION d/2025-04-20 1800`
 
 ### Listing all reservations : `list`
 
@@ -237,7 +238,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add <n/NAME> <p/PHONE_NUMBER> <e/EMAIL> <x/NUMBER_OF_DINER> <d/DATE_TIME> <o/OCCASION…​>` <br> e.g., `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday`
+**Add**    | `add <n/NAME> <p/PHONE_NUMBER> <e/EMAIL> <x/NUMBER_OF_DINER> <d/DATE_TIME> <o/OCCASION…​>` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

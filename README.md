@@ -25,8 +25,8 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 
 **Example commands:**
 ```
-add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday
-ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy o/Anniversary
+add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/Birthday
+ADD n/John Doe e/johnd@example.com x/5 d/2025-04-12 1800 o/Anniversary
 ```
 
 ### Feature: Editing a reservation
@@ -36,9 +36,9 @@ ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy o/Annivers
 
 **Example commands:**
 ```
-edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday
-EDIT 1 n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 o/None p/98765432
-edit 1 d/2026-12-12 1800
+edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/Birthday
+EDIT 1 n/John Doe e/johnd@example.com x/5 d/2025-04-12 1800 o/None p/98765432
+edit 1 d/2022-04-12 1800
 ```
 ### Feature: Delete reservation by reservation number
 **Purpose:** To delete a reservation.

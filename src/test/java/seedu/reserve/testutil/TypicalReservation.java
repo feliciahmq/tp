@@ -1,6 +1,8 @@
 package seedu.reserve.testutil;
 
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -27,7 +29,7 @@ public class TypicalReservation {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDiners("5")
-            .withDateTime("2040-10-10 1800")
+            .withDateTime("2025-04-10 1800")
             .withTags("friends")
             .build();
 
@@ -35,7 +37,7 @@ public class TypicalReservation {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDiners("3")
-            .withDateTime("2040-12-25 1200")
+            .withDateTime("2025-04-25 1200")
             .withTags("owesMoney", "friends")
             .build();
 
@@ -43,14 +45,14 @@ public class TypicalReservation {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withDiners("2")
-            .withDateTime("2040-11-15 1400")
+            .withDateTime("2025-04-15 1400")
             .build();
 
     public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withDiners("4")
-            .withDateTime("2040-09-20 1600")
+            .withDateTime("2025-04-20 1600")
             .withTags("friends")
             .build();
 
@@ -58,40 +60,41 @@ public class TypicalReservation {
             .withPhone("94822241")
             .withEmail("werner@example.com")
             .withDiners("1")
-            .withDateTime("2040-08-05 1000")
+            .withDateTime("2025-04-05 1000")
             .build();
 
     public static final Reservation FIONA = new ReservationBuilder().withName("Fiona Kunz")
             .withPhone("94824272")
             .withEmail("lydia@example.com")
             .withDiners("7")
-            .withDateTime("2040-07-12 1100")
+            .withDateTime("2025-04-12 1100")
             .build();
 
     public static final Reservation GEORGE = new ReservationBuilder().withName("George Best")
             .withPhone("94824423")
             .withEmail("anna@example.com")
             .withDiners("10")
-            .withDateTime("2020-06-18 1300")
+            .withDateTime("2025-04-18 1300")
             .build();
 
     public static final Reservation HOON = new ReservationBuilder().withName("Hoon Meier")
             .withPhone("84824244")
             .withEmail("stefan@example.com")
             .withDiners("6")
-            .withDateTime("2040-05-01 0900")
+            .withDateTime("2025-04-07 0900")
             .build();
 
     public static final Reservation IDA = new ReservationBuilder().withName("Ida Mueller")
             .withPhone("84821315")
             .withEmail("hans@example.com")
             .withDiners("8")
-            .withDateTime("2040-04-15 1700")
+            .withDateTime("2025-04-08 1700")
             .build();
 
     // Manually added - Reservation's details found in {@code CommandTestUtil}
     public static final Reservation AMY = new ReservationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
+            .withEmail(VALID_EMAIL_AMY).withDiners(VALID_DINERS_AMY)
+            .withDateTime(VALID_DATETIME_AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
     public static final Reservation BOB = new ReservationBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withDiners(VALID_DINERS_BOB)
             .withDateTime(VALID_DATETIME_BOB).withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY)

@@ -6,9 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -17,6 +21,9 @@ import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,11 +38,12 @@ import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 import seedu.reserve.testutil.ReservationBuilder;
 
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
@@ -177,7 +185,7 @@ public class EditCommandTest {
         model.addReservation(pastReservation);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-                .withDateTime("2026-01-01 1300")
+                .withDateTime(LocalDateTime.now().plusDays(29).format(FORMATTER))
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
@@ -187,17 +195,25 @@ public class EditCommandTest {
 
     @Test
     public void execute_clearOccasions_success() {
+        model = new ModelManager(new ReserveMate(), new UserPrefs());
         Reservation futureReservationWithTag = new ReservationBuilder()
-            .withDateTime("2030-01-01 1200") // Future date
+            .withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withDiners(VALID_DINERS_AMY)
+            .withDateTime(LocalDateTime.now().plusDays(1).format(FORMATTER))
             .withTags(VALID_OCCASION_BIRTHDAY)
             .build();
 
-        model.setReservation(model.getFilteredReservationList().get(0), futureReservationWithTag);
+        model.addReservation(futureReservationWithTag);
+        Index targetIndex = INDEX_FIRST_RESERVATION; // Use first index since we cleared the model
 
+        // Create descriptor to clear tags
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-            .withTags().build(); // This should clear occasions when o/ is provided
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+            .withTags().build(); // Empty tags to clear occasions
+        EditCommand editCommand = new EditCommand(targetIndex, descriptor);
 
+        // Create the expected reservation after editing (same as original but without tags)
         Reservation editedReservation = new ReservationBuilder(futureReservationWithTag)
             .withTags().build();
 

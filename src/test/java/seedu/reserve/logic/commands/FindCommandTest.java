@@ -67,11 +67,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleReservationsFound() {
         String expectedMessage = String.format(MESSAGE_RESERVATIONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Kunz Elle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredReservationList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, ELLE, CARL), model.getFilteredReservationList());
+        assertEquals(Arrays.asList(ELLE, FIONA, CARL), model.getFilteredReservationList());
     }
 
     @Test
