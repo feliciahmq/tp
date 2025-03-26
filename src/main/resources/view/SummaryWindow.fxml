@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="messageContainer" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.reserve.ui.SummaryWindow"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label fx:id="summaryMessage" text="Summary of reservations"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <PieChart fx:id="pieChart" prefHeight="300" prefWidth="400" />
+
+</VBox>
