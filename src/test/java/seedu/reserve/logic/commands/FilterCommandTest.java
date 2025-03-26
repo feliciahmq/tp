@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.reserve.testutil.TypicalReservation.CARL;
+import static seedu.reserve.testutil.TypicalReservation.FIONA;
+import static seedu.reserve.testutil.TypicalReservation.GEORGE;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -66,6 +70,20 @@ public class FilterCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredReservationList());
     }
 
+    @Test
+    public void filterCommand_someReservationsFound() {
+        DateTime startDate = DateTime.fromFileString("2025-04-12 1000");
+        DateTime endDate = DateTime.fromFileString("2025-04-18 1400");
+
+        String expectedMessage = FilterCommand.MESSAGE_SUCCESS;
+        ReservationBetweenDatePredicate predicate = new ReservationBetweenDatePredicate(startDate, endDate);
+        expectedModel.updateFilteredReservationList(predicate);
+
+        FilterCommand filterCommand = new FilterCommand(startDate, endDate);
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(FIONA, CARL, GEORGE), expectedModel.getFilteredReservationList());
+
+    }
 
     @Test
     public void toStringTest() {
