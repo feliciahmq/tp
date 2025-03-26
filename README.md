@@ -21,34 +21,34 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 ### Feature: Create a new reservation
 **Purpose:** The create function will enable users to add new reservations to reserve by capturing relevant details such as name, number of diners, contact information, date and time of reservation.
 
-**Command format:** `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [t/TAG]...…​`
+**Command format:** `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> <o/OCCASION>...…​`
 
 **Example commands:**
 ```
-add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
-ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/98765432
+add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/Birthday
+ADD n/John Doe e/johnd@example.com x/5 d/2025-04-12 1800 o/Anniversary
 ```
 
 ### Feature: Editing a reservation
 **Purpose:** The edit function will enable users to edit existing reservations by specifying the detail(s) of the reservation to be changed.
 
-**Command format:** `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [t/TAG]…​`
+**Command format:** `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [o/OCCASION]…​`
 
 **Example commands:**
 ```
-edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
-EDIT 1 n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/98765432
-edit 1 d/2026-12-12 1800
+edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/Birthday
+EDIT 1 n/John Doe e/johnd@example.com x/5 d/2025-04-12 1800 o/None p/98765432
+edit 1 d/2022-04-12 1800
 ```
 ### Feature: Delete reservation by reservation number
 **Purpose:** To delete a reservation.
 
-**Command format:** `delete <INDEX>`
+**Command format:** `delete <INDEX cfm>`
 
 **Example commands:**
 ```
-delete 2
-Delete 2
+delete 2 cfm
+Delete 2 cfm
 ```
 ### Feature: Show Reservation details
 **Purpose:** Show details of a specific reservation to user.

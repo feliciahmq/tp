@@ -19,7 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johannsenlum)]
 [[portfolio](team/johannsenlum.md)]
 
-* Role: Documentation
+* Role: Developer
+* Responsibilities: Testing, Documentation, Code Quality
 
 ### Kai Jun
 

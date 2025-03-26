@@ -6,8 +6,8 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE_TIME,
-                        PREFIX_NUMBER_OF_DINERS, PREFIX_TAG);
+                        PREFIX_NUMBER_OF_DINERS, PREFIX_OCCASION);
 
         Index index;
 
@@ -66,7 +66,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editReservationDescriptor
                     .setDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editReservationDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_OCCASION)).ifPresent(editReservationDescriptor::setTags);
 
         if (!editReservationDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

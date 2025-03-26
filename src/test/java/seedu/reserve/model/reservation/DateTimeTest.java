@@ -11,15 +11,19 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class DateTimeTest {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final String INVALID_DATE_TIME_FORMAT_STR = "2025-12-12 180";
+    private static final DateTime endDate = DateTime.fromFileString("2025-12-15 1800");
+    private static final DateTime middleDate = DateTime.fromFileString("2025-12-13 1400");
+    private static final DateTime outOfBoundsDate = DateTime.fromFileString("2025-12-16 1800");
+    private static final DateTime startDate = DateTime.fromFileString("2025-12-12 1800");
 
     private String formattedYesterdayDateTime;
     private String formattedTomorrowDateTime;
     private String formattedDayAfterDateTime;
-
 
     /**
      * Helper method to generate a formatted date string based on the current date and time.
@@ -73,7 +77,7 @@ public class DateTimeTest {
         assertFalse(DateTime.isValidDateTime(formattedYesterdayDateTime));
 
         // valid date time
-        assertTrue(DateTime.isValidDateTime("2030-12-12 1800"));
+        assertTrue(DateTime.isValidDateTime(getFormattedDateTime(29)));
         assertTrue(DateTime.isValidDateTime(formattedTomorrowDateTime));
 
     }
@@ -109,4 +113,18 @@ public class DateTimeTest {
         // different date and time value -> return false
         assertFalse(dateTime.equals(new DateTime(formattedDayAfterDateTime)));
     }
+
+    @Test
+    public void isBetween() {
+        // date in between both start and end date
+        assertTrue(middleDate.isBetween(startDate, endDate));
+
+        // date out of bounds
+        assertFalse(outOfBoundsDate.isBetween(startDate, endDate));
+
+        // edge dates
+        assertTrue(startDate.isBetween(startDate, endDate));
+        assertTrue(endDate.isBetween(startDate, endDate));
+    }
+
 }
