@@ -5,8 +5,8 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.reserve.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.reserve.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
@@ -33,25 +33,25 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME, PREFIX_OCCASION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME);
+            PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Diners diners = ParserUtil.parseDiners(argMultimap.getValue(PREFIX_NUMBER_OF_DINERS).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> occasionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_OCCASION));
 
-        Reservation reservation = new Reservation(name, phone, email, diners, dateTime, tagList);
+        Reservation reservation = new Reservation(name, phone, email, diners, dateTime, occasionList);
 
         return new AddCommand(reservation);
     }
