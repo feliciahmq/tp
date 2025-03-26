@@ -3,6 +3,7 @@ package seedu.reserve.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.logic.parser.exceptions.ParseException;
@@ -68,5 +69,22 @@ public class ClearCommand extends Command {
         assert (isConfirmed == true);
         model.setReserveMate(new ReserveMate());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ClearCommand)) {
+            return false;
+        }
+        ClearCommand otherCommand = (ClearCommand) other;
+        return this.isConfirmed == otherCommand.isConfirmed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isConfirmed);
     }
 }
