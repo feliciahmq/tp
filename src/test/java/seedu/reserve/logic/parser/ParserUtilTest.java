@@ -230,4 +230,19 @@ public class ParserUtilTest {
         assertTrue(result.getValue()); // confirmed is true
     }
 
+    @Test
+    public void parseDeleteArgs_validInputWithSpacesWithConfirmation_success() throws ParseException {
+        String input = "1             cfm";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
+    }
+
+    @Test
+    public void parseDeleteArgs_validInputWithMoreSpacesWithConfirmation_success() throws ParseException {
+        String input = "1             cfm      ";
+        Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
+        assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
+        assertTrue(result.getValue()); // confirmed is true
+    }
 }

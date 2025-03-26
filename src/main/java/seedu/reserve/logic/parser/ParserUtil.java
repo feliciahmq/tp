@@ -61,7 +61,7 @@ public class ParserUtil {
         assert splitArgs.length > 0 : "splitArgs should have at least one element";
 
         Index index = parseIndex(splitArgs[INDEX_POSITION]);
-        boolean isConfirmed = splitArgs.length > 1 && splitArgs[CONFIRMATION_POSITION].equals(CONFIRMATION_KEYWORD);
+        boolean isConfirmed = splitArgs.length == 2 && splitArgs[CONFIRMATION_POSITION].equals(CONFIRMATION_KEYWORD);
 
         return new Pair<>(index, isConfirmed);
     }
