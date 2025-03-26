@@ -16,9 +16,10 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
 public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format YYYY-MM-DD HHmm "
-            + "and be a date-time after the current time.";
+            + "and be a date-time after the current time but within 60 days from now.";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final LocalDateTime currentDateTime = LocalDateTime.now();
 
     public final LocalDateTime value;
 
@@ -57,7 +58,8 @@ public class DateTime implements Comparable<DateTime> {
             return false;
         }
         try {
-            return isAfterCurrentTime(LocalDateTime.parse(test, FORMATTER));
+            LocalDateTime parsedDateTime = LocalDateTime.parse(test, FORMATTER);
+            return isAfterCurrentTime(parsedDateTime) && isBeforeMaxBookingTime(parsedDateTime);
         } catch (DateTimeParseException | ParseException e) {
             return false;
         }
@@ -74,8 +76,16 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if the given DateTime is after the current time.
      */
     public static boolean isAfterCurrentTime(LocalDateTime dateTime) throws ParseException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
         return dateTime.isAfter(currentDateTime);
+    }
+
+    /**
+     * Returns true if the given DateTime is before 60 days from the current time.
+     */
+    public static boolean isBeforeMaxBookingTime(LocalDateTime dateTime) throws ParseException {
+        LocalDateTime maxBookingDateTime = currentDateTime.plusDays(60);
+        assert(maxBookingDateTime.isBefore(currentDateTime.plusDays(61)));
+        return dateTime.isBefore(maxBookingDateTime) || dateTime.isEqual(maxBookingDateTime);
     }
 
     @Override
