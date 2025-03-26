@@ -26,7 +26,7 @@ ReserveMate supports a variety of commands to help you manage your reservations:
 **Example commands:**
 ```
 add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy
-ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/6598765432
+ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy p/98765432
 ```
 
 ### Feature: Editing a reservation
