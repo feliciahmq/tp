@@ -19,6 +19,7 @@ public class DateTime implements Comparable<DateTime> {
             + "and be a date-time after the current time but within 60 days from now.";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final LocalDateTime currentDateTime = LocalDateTime.now();
 
     public final LocalDateTime value;
 
@@ -75,7 +76,6 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if the given DateTime is after the current time.
      */
     public static boolean isAfterCurrentTime(LocalDateTime dateTime) throws ParseException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
         return dateTime.isAfter(currentDateTime);
     }
 
@@ -83,8 +83,8 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if the given DateTime is before 60 days from the current time.
      */
     public static boolean isBeforeMaxBookingTime(LocalDateTime dateTime) throws ParseException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDateTime maxBookingDateTime = currentDateTime.plusDays(60);
+        assert(maxBookingDateTime.isBefore(currentDateTime.plusDays(61)));
         return dateTime.isBefore(maxBookingDateTime) || dateTime.isEqual(maxBookingDateTime);
     }
 
