@@ -237,6 +237,30 @@ Use case ends.
 
   Use case resumes at step 1.
 
+**Use case: UC08 - View all free time slots**
+
+**MSS**
+
+1. User requests to view all free time slots.
+
+2. ReserveMate retrieve all free time slots and display it to User.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. ReserveMate shows an error message.
+
+      Use Case ends.
+
+* 2a. The list is empty.
+
+    * 2a1. ReserveMate shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 

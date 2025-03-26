@@ -120,8 +120,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [t/TAG]
 </box>
 
 Examples:
-* `add n/John Doe p/6598765432 e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy`
-* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/6581234567 t/vegan d/2026-12-12 1800`
+* `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 t/nutAllergy`
+* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 t/vegan d/2025-04-12 1800`
 
 ### Listing all reservations : `list`
 
@@ -210,6 +210,13 @@ If your changes to the data file makes its format invalid, ReserveMate will disc
 Furthermore, certain edits can cause the ReserveMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+### View all free time slots : `free`
+
+View all free time slots for reservation within a window of 60days from current time.
+
+Format: `free`
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -240,6 +247,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Show**   | `show INDEX`<br> e.g., `show 2`
+**Free**   | `free`
 **List**   | `list`
 **Help**   | `help`
 **Exit**   | `exit`

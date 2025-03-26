@@ -94,6 +94,17 @@ find Bobby
 Find Bobby
 ```
 
+### Feature: View all free time slots
+**Purpose:** View all free time slots for reservation within a window of 60days from current time.
+
+**Command format:** `free`
+
+**Example commands:**
+```
+free
+Free
+```
+
 ### Feature: Clearing all reservations
 **Purpose:** Deletes all reservations in ReserveMate.
 
@@ -119,15 +130,16 @@ Exit
 ## Command Summary
 | Feature                   | Command Format                                                                          | Purpose                                       |
 |---------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------|
-| Create a new reservation  | `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [t/TAG]…​`                    | Add new reservation to ReserveMate            |
+| Create a new reservation  | `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [t/TAG]…​`          | Add new reservation to ReserveMate            |
 | Editing a reservation     | `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [t/TAG]…​` | Edit existing details of a reservation        |
 | Delete reservation        | `delete <INDEX>`                                                                        | Remove a reservation from ReserveMate         |
 | Show Reservation details  | `show <INDEX>`                                                                          | Show details of reservation to user           |
+| View all free time slots  | `free`                                                                                  | View all free time slots for reservation within a window of 60days from current time.         |
 | View reservation list     | `list`                                                                                  | View the entire reservation schedule          |
 | View help list            | `help`                                                                                  | Display the available list of commands to the user |
 | Find reservation by name  | `find <RESERVATION NAME>`                                                               | Retrieve reservation information              |
 | Clearing all reservations | `clear`                                                                                 | Deletes all reservations in ReserveMate       |
-| Exiting the application | `exit`                                                                                  | Terminates the application                    |
+| Exiting the application   | `exit`                                                                                  | Terminates the application                    |
 
 ### Acknowledgement
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
