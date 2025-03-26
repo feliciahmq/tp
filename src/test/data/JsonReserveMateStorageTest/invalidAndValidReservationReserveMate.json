@@ -2,17 +2,17 @@
   "reservations": [
     {
       "name": "Valid Person",
-      "phone": "9482424",
+      "phone": "94824242",
       "email": "hans@example.com",
       "diners": "5",
-      "dateTime": "2026-10-10 1800"
+      "dateTime": "2025-04-10 1800"
     },
     {
       "name": "Person With Invalid Phone Field",
       "phone": "948asdf2424",
       "email": "hans@example.com",
       "diners": "3",
-      "dateTime": "2025-12-25 1200"
+      "dateTime": "2025-04-25 1200"
     }
   ]
 }
