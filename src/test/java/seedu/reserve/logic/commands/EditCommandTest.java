@@ -18,6 +18,9 @@ import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.commons.core.index.Index;
@@ -36,6 +39,8 @@ import seedu.reserve.testutil.ReservationBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
@@ -177,7 +182,7 @@ public class EditCommandTest {
         model.addReservation(pastReservation);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-                .withDateTime("2025-05-01 1300")
+                .withDateTime(LocalDateTime.now().plusDays(29).format(FORMATTER))
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 

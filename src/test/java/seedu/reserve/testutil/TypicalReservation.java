@@ -1,6 +1,8 @@
 package seedu.reserve.testutil;
 
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -91,7 +93,8 @@ public class TypicalReservation {
 
     // Manually added - Reservation's details found in {@code CommandTestUtil}
     public static final Reservation AMY = new ReservationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withDiners(VALID_DINERS_AMY)
+            .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Reservation BOB = new ReservationBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withDiners(VALID_DINERS_BOB)
             .withDateTime(VALID_DATETIME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)

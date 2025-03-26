@@ -80,7 +80,7 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Returns true if the given DateTime is before 30 days from the current time.
+     * Returns true if the given DateTime is before 60 days from the current time.
      */
     public static boolean isBeforeMaxBookingTime(LocalDateTime dateTime) throws ParseException {
         LocalDateTime currentDateTime = LocalDateTime.now();

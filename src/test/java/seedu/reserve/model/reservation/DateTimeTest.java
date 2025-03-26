@@ -73,7 +73,7 @@ public class DateTimeTest {
         assertFalse(DateTime.isValidDateTime(formattedYesterdayDateTime));
 
         // valid date time
-        assertTrue(DateTime.isValidDateTime("2025-04-12 1800"));
+        assertTrue(DateTime.isValidDateTime(getFormattedDateTime(29)));
         assertTrue(DateTime.isValidDateTime(formattedTomorrowDateTime));
 
     }
