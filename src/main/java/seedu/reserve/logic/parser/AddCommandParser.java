@@ -49,9 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Diners diners = ParserUtil.parseDiners(argMultimap.getValue(PREFIX_NUMBER_OF_DINERS).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_OCCASION));
+        Set<Tag> occasionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_OCCASION));
 
-        Reservation reservation = new Reservation(name, phone, email, diners, dateTime, tagList);
+        Reservation reservation = new Reservation(name, phone, email, diners, dateTime, occasionList);
 
         return new AddCommand(reservation);
     }

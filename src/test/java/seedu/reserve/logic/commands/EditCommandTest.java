@@ -186,6 +186,50 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_clearOccasions_success() {
+        Reservation futureReservationWithTag = new ReservationBuilder()
+            .withDateTime("2030-01-01 1200") // Future date
+            .withTags(VALID_OCCASION_BIRTHDAY)
+            .build();
+
+        model.setReservation(model.getFilteredReservationList().get(0), futureReservationWithTag);
+
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+            .withTags().build(); // This should clear occasions when o/ is provided
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+
+        Reservation editedReservation = new ReservationBuilder(futureReservationWithTag)
+            .withTags().build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+            Messages.format(editedReservation));
+
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
+            new UserPrefs());
+        expectedModel.setReservation(futureReservationWithTag, editedReservation);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_clearTagsFromPastReservation_failure() {
+        // Create a past reservation with a tag
+        Reservation pastReservationWithTag = new ReservationBuilder()
+            .withDateTime("2020-01-01 1200") // Past date
+            .withTags(VALID_OCCASION_BIRTHDAY)
+            .build();
+
+        model.setReservation(model.getFilteredReservationList().get(0), pastReservationWithTag);
+
+        EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+            .withTags().build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+
+        // The command should fail because we can't edit past reservations
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_RESERVATION, DESC_AMY);
 

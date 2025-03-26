@@ -37,7 +37,7 @@ public class ReservationUtil {
         sb.append(PREFIX_NUMBER_OF_DINERS + reservation.getDiners().value + " ");
         sb.append(PREFIX_DATE_TIME + reservation.getDateTime().toString() + " ");
         reservation.getTags().stream().forEach(
-            s -> sb.append(PREFIX_OCCASION + s.tagName + " ")
+            s -> sb.append(PREFIX_OCCASION + s.occasionName + " ")
         );
         return sb.toString();
     }
@@ -62,7 +62,7 @@ public class ReservationUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_OCCASION);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_OCCASION).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_OCCASION).append(s.occasionName).append(" "));
             }
         }
         return sb.toString();

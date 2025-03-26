@@ -7,8 +7,8 @@ import static seedu.reserve.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DINERS_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.reserve.logic.commands.CommandTestUtil.OCC_DESC_ANNIVERSARY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.reserve.logic.commands.CommandTestUtil.TAG_DESC_ANNIVERSARY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_ANNIVERSARY;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.AMY;
@@ -180,7 +180,7 @@ public class LogicManagerTest {
 
         // Triggers the saveReserveMate method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-            + EMAIL_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY + TAG_DESC_ANNIVERSARY;
+            + EMAIL_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY + OCC_DESC_ANNIVERSARY;
         Reservation expectedReservation = new ReservationBuilder(AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addReservation(expectedReservation);

@@ -37,7 +37,7 @@ ADD n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 t/nutAllergy o/Annivers
 **Example commands:**
 ```
 edit 1 n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday
-EDIT 1 n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 o/Anniversary p/98765432
+EDIT 1 n/John Doe e/johnd@example.com x/5 d/2026-12-12 1800 o/None p/98765432
 edit 1 d/2026-12-12 1800
 ```
 ### Feature: Delete reservation by reservation number

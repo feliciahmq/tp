@@ -9,16 +9,16 @@ import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.reserve.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.reserve.logic.commands.CommandTestUtil.INVALID_OCC_DESC;
 import static seedu.reserve.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.reserve.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.reserve.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.OCC_DESC_ANNIVERSARY;
+import static seedu.reserve.logic.commands.CommandTestUtil.OCC_DESC_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.reserve.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.reserve.logic.commands.CommandTestUtil.TAG_DESC_ANNIVERSARY;
-import static seedu.reserve.logic.commands.CommandTestUtil.TAG_DESC_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_ANNIVERSARY;
@@ -55,7 +55,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB
-                + TAG_DESC_BIRTHDAY, new AddCommand(expectedReservation));
+                + OCC_DESC_BIRTHDAY, new AddCommand(expectedReservation));
 
 
         // multiple tags - all accepted
@@ -63,14 +63,14 @@ public class AddCommandParserTest {
                 .withTags(VALID_OCCASION_ANNIVERSARY, VALID_OCCASION_BIRTHDAY).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_ANNIVERSARY + TAG_DESC_BIRTHDAY,
+                        + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY,
                 new AddCommand(expectedReservationMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedReservationString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_ANNIVERSARY;
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedReservationString,
@@ -154,23 +154,23 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_BIRTHDAY
-                + TAG_DESC_ANNIVERSARY, Name.MESSAGE_CONSTRAINTS);
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_BIRTHDAY
+                + OCC_DESC_ANNIVERSARY, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_BIRTHDAY
-                + TAG_DESC_ANNIVERSARY, Phone.MESSAGE_CONSTRAINTS);
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_BIRTHDAY
+                + OCC_DESC_ANNIVERSARY, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_BIRTHDAY
-                + TAG_DESC_ANNIVERSARY, Email.MESSAGE_CONSTRAINTS);
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_BIRTHDAY
+                + OCC_DESC_ANNIVERSARY, Email.MESSAGE_CONSTRAINTS);
 
 
-        // invalid tag
+        // invalid occasion
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + INVALID_TAG_DESC
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + INVALID_OCC_DESC
                 + VALID_OCCASION_ANNIVERSARY, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
@@ -179,7 +179,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DINERS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_BIRTHDAY + TAG_DESC_ANNIVERSARY,
+                + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_BIRTHDAY + OCC_DESC_ANNIVERSARY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
