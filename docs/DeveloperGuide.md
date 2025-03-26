@@ -122,7 +122,7 @@ Actor: Restaurant Manager, ReserveMate
 
 * 1a. User enters an invalid command format.
 
-    * 1a1. ReserveMate shows the error message: "Invalid command entered!"
+    * 1a1. ReserveMate shows an error message 
 
       Use case ends.
 
@@ -147,6 +147,13 @@ Actor: Restaurant Manager, ReserveMate
   * 1b1. ReserveMate prompts the user to confirm the deletion
 
     use case resumes at step 1.
+
+* 1c. User enters an invalid command format.
+
+  * 1c1. ReserveMate shows an error message providing the correct format.
+
+    use case resumes at step 1.
+
 
 **Use case: UC05 - View Reservation list**
 
