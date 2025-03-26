@@ -24,6 +24,7 @@ public class ReservationBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DINERS = "2";
+    public static final String DEFAULT_PREFERENCE = "None";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     public static final String DEFAULT_DATETIME = LocalDateTime.now().plusDays(29).format(FORMATTER);
 
@@ -33,6 +34,7 @@ public class ReservationBuilder {
     private Diners diners;
     private DateTime dateTime;
     private Set<Tag> tags;
+    private String preference;
 
     /**
      * Creates a {@code ReservationBuilder} with the default details.
@@ -44,6 +46,7 @@ public class ReservationBuilder {
         diners = new Diners(DEFAULT_DINERS);
         dateTime = new DateTime(DEFAULT_DATETIME);
         tags = new HashSet<>();
+        preference = DEFAULT_PREFERENCE;
     }
 
     /**
@@ -56,6 +59,7 @@ public class ReservationBuilder {
         diners = reservationToCopy.getDiners();
         dateTime = reservationToCopy.getDateTime();
         tags = new HashSet<>(reservationToCopy.getTags());
+        preference = reservationToCopy.getPreference();
     }
 
     /**
@@ -106,10 +110,15 @@ public class ReservationBuilder {
         return this;
     }
 
-
-
-    public Reservation build() {
-        return new Reservation(name, phone, email, diners, dateTime, tags);
+    /**
+     * Sets the {@code Preference} of the {@code Reservation} that we are building.
+     */
+    public ReservationBuilder withPreference(String preference) {
+        this.preference = preference;
+        return this;
     }
 
+    public Reservation build() {
+        return new Reservation(name, phone, email, diners, dateTime, tags, preference);
+    }
 }

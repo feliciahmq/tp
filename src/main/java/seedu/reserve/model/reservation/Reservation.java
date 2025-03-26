@@ -95,6 +95,7 @@ public class Reservation {
      * Returns a copy of this reservation with the updated preference.
      */
     public Reservation withPreference(String preference) {
+        Objects.requireNonNull(preference);
         return new Reservation(this.name, this.phone, this.email, this.diners, this.dateTime, this.tags, preference);
     }
 
