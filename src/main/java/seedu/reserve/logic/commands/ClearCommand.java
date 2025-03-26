@@ -56,12 +56,12 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if(!isConfirmed) {
+        if (!isConfirmed) {
             throw new CommandException(MESSAGE_ADD_CONFIRM_CLEAR_RESERVATION);
         }
 
         List<Reservation> lastShownList = model.getFilteredReservationList();
-        if(lastShownList.isEmpty()) {
+        if (lastShownList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_RESERVATIONS_TO_CLEAR);
         }
 
