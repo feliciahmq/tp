@@ -44,7 +44,9 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
    * `find john` : Filters & displays reservations containing "john".
 
    * `clear` : Deletes all reservations.
-
+   
+   * `filter sd/ 2026-12-12 1800 ed/ 2026-12-15 1400` : Filters all reservations between the 2 dates.
+   
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
@@ -193,6 +195,21 @@ Clears all entries from the ReserveMate
 
 Format: `clear`
 
+### Filtering the reservations: `filter`
+
+Filters reservations between the given date range.
+
+Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
+
+* Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
+* `DATE_TIME` provided must be valid
+* The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
+
+Examples:
+* `filter sd/ 2026-12-12 1400 ed/ 2026-12-15 1400` filters all reservations between 12/12/2026 1400 and 15/12/2026 1400
+
+![filter_command.png](images/filterCommand.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -245,5 +262,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Show**   | `show INDEX`<br> e.g., `show 2`
 **List**   | `list`
+**Filter** | `filter sd/DATE_TIME ed/DATE_TIME` <br> e.g., `filter sd/ 2026-12-12 1400 ed/2025-12-14 1400`
 **Help**   | `help`
 **Exit**   | `exit`
