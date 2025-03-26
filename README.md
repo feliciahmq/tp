@@ -43,12 +43,12 @@ edit 1 d/2026-12-12 1800
 ### Feature: Delete reservation by reservation number
 **Purpose:** To delete a reservation.
 
-**Command format:** `delete <INDEX>`
+**Command format:** `delete <INDEX cfm>`
 
 **Example commands:**
 ```
-delete 2
-Delete 2
+delete 2 cfm
+Delete 2 cfm
 ```
 ### Feature: Show Reservation details
 **Purpose:** Show details of a specific reservation to user.

@@ -64,13 +64,14 @@ public class ReserveMateParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_RESERVATION.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION, true), command);
     }
 
     @Test
     public void parseCommand_deleteMixedCase() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand("DeLeTe " + INDEX_FIRST_RESERVATION.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION), command);
+        DeleteCommand command = (DeleteCommand) parser.parseCommand("DeLeTe "
+                + INDEX_FIRST_RESERVATION.getOneBased() + " confirm");
+        assertEquals(new DeleteCommand(INDEX_FIRST_RESERVATION, true), command);
     }
 
     @Test
