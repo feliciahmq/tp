@@ -17,6 +17,7 @@ public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format YYYY-MM-DD HHmm "
             + "and be a date-time after the current time.";
+    public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
@@ -105,5 +106,17 @@ public class DateTime implements Comparable<DateTime> {
     @Override
     public int compareTo(DateTime dateTime) {
         return this.value.compareTo(dateTime.value);
+    }
+
+    /**
+     * Returns True if the current {@code DateTime} object's date and time is between the start and end
+     * {@code DateTime} objects (inclusive). The {@code startDateTime} must be before {@end endDateTime}.
+     *
+     * @param startDateTime start date
+     * @param endDateTime end date
+     * @return true if conditions met, false otherwise
+     */
+    public boolean isBetween(DateTime startDateTime, DateTime endDateTime) {
+        return this.compareTo(startDateTime) >= 0 && this.compareTo(endDateTime) <= 0;
     }
 }
