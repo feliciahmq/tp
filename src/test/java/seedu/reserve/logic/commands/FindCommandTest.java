@@ -71,7 +71,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredReservationList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredReservationList());
+        assertEquals(Arrays.asList(FIONA, ELLE, CARL), model.getFilteredReservationList());
     }
 
     @Test

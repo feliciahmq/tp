@@ -8,6 +8,8 @@ import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
 import static seedu.reserve.testutil.TypicalReservation.BOB;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -130,6 +132,24 @@ public class UniqueReservationListTest {
     public void setReservations_nullUniqueReservationList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueReservationList
                 .setReservations((UniqueReservationList) null));
+    }
+
+    @Test
+    public void addReservations_reservationsOrderedByDateTime_success() {
+        UniqueReservationList reservationList = new UniqueReservationList();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        String tomorrow = LocalDateTime.now().plusDays(1).format(formatter);
+        String dayAfterTomorrow = LocalDateTime.now().plusDays(2).format(formatter);
+
+        Reservation earlierReservation = new ReservationBuilder().withDateTime(tomorrow).build();
+        Reservation laterReservation = new ReservationBuilder().withDateTime(dayAfterTomorrow).build();
+
+        reservationList.add(laterReservation);
+        reservationList.add(earlierReservation);
+
+        List<Reservation> expectedList = Arrays.asList(earlierReservation, laterReservation);
+        assertEquals(expectedList, reservationList.asUnmodifiableObservableList());
     }
 
     @Test
