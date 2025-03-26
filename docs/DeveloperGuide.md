@@ -248,6 +248,34 @@ Use case ends.
 
   Use case resumes at step 1.
 
+**Use case: UC08 - Filter Reservations**
+
+**MSS**
+
+1. User requests to filter reservations between 2 given dates.
+
+2. ReserveMate displays reservations which fits criteria.
+
+Use case ends
+
+**Extensions**
+* 1a. The user enters an invalid command.
+
+  * 1a1 ReserveMate prompts user to input a valid command.
+  
+  Use case resumes at step 1.
+
+* 1b. The date entered by user is invalid.
+
+  * 1a1. ReserveMate prompts the user to input a valid date.
+  
+  Use case resumes at step 1.
+
+* 2a. ReserveMate found no reservations between the 2 dates.
+
+  * 2a1. ReserveMate displays No reservations found for the date range.
+
+
 *{More to be added}*
 
 
