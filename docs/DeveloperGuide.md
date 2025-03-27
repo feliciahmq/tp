@@ -270,8 +270,42 @@ Use case ends
   * 2a1. ReserveMate displays No reservations found for the date range.
 
 
-*{More to be added}*
+**Use case: UC09 - Manage Reservation Preferences**
 
+**MSS**
+
+1. User requests to save a preference for a specific reservation by providing an index and preference text.
+2. ReserveMate saves the preference ce for the specified reservation.
+3. ReserveMate displays a success message.
+
+   Use case ends.
+
+**Alternative Flow 1: View Preference**
+
+1. User requests to view a preference for a specific reservation by providing an index.
+2. ReserveMate retrieves the preference for the specified reservation.
+3. ReserveMate displays the preference.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid command format.
+  * 1a1. ReserveMate shows an error message providing the correct format.
+  
+    Use case resumes at step 1.
+
+* 1b. The specified index is invalid.
+  * 1b1. ReserveMate shows an invalid reservation index error.
+  
+    Use case resumes at step 1.
+
+* 2a. No preference has been set for the reservation.
+  * 2a1. ReserveMate displays an error message to provide preference description.
+  
+    Use case resumes at step 1.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 1) The system should be primarily command-line based.
