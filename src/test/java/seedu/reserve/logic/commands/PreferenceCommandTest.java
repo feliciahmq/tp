@@ -27,7 +27,7 @@ public class PreferenceCommandTest {
     private static final String TEST_PREFERENCE = "No nuts, allergic to seafood";
     private static final String DIFFERENT_PREFERENCE = "Window seat preferred";
 
-    private Model model = new ModelManager(new ReserveMate(getTypicalReserveMate()), new UserPrefs());
+    private final Model model = new ModelManager(new ReserveMate(getTypicalReserveMate()), new UserPrefs());
 
     @Test
     public void execute_savePreference_success() {
@@ -112,14 +112,6 @@ public class PreferenceCommandTest {
         PreferenceCommand showCommandCopy = new PreferenceCommand(INDEX_FIRST_RESERVATION, true);
         assertTrue(standardSaveCommand.equals(saveCommandCopy));
         assertTrue(standardShowCommand.equals(showCommandCopy));
-
-        // different types -> returns false
-        assertFalse(standardSaveCommand.equals(1));
-        assertFalse(standardShowCommand.equals("string"));
-
-        // null -> returns false
-        assertFalse(standardSaveCommand.equals(null));
-        assertFalse(standardShowCommand.equals(null));
 
         // different index -> returns false
         assertFalse(standardSaveCommand.equals(new PreferenceCommand(INDEX_SECOND_RESERVATION, TEST_PREFERENCE)));

@@ -15,7 +15,7 @@ public class PreferenceCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
 
-    private PreferenceParser parser = new PreferenceParser();
+    private final PreferenceParser parser = new PreferenceParser();
 
     @Test
     public void parse_missingParts_failure() {
