@@ -3,14 +3,27 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
 
-<VBox fx:id="messageContainer" xmlns="http://javafx.com/javafx/8.0.171"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.reserve.ui.SummaryWindow"
-      spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+<fx:root resizable="false" title="ReserveMate Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <VBox fx:id="messageContainer"
+                  alignment="CENTER"
+                  spacing="10"
+                  style="-fx-padding: 20;">
 
-    <Label fx:id="summaryMessage" text="Summary of reservations"
-           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-
-    <PieChart fx:id="pieChart" prefHeight="300" prefWidth="400" />
-
-</VBox>
+                <children>
+                    <Label fx:id="summaryMessage"
+                           text="Reservation Summary"
+                           style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                    />
+                    <PieChart fx:id="pieChart"
+                              prefWidth="400"
+                              prefHeight="300"
+                    />
+                </children>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

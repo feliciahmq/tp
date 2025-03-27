@@ -84,7 +84,7 @@ public class SummaryWindow extends UiPart<Stage> {
     private void configurePieChart() {
         pieChart.setLegendVisible(true);
         pieChart.setLabelsVisible(true);
-        pieChart.setTitle("Reservations by categories");
+        pieChart.setTitle("Reservations by number of diners");
     }
 
     /**
