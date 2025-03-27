@@ -64,6 +64,7 @@ public class PreferenceCommand extends Command {
         }
 
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
+        assert reservationToEdit != null : "Reservation at the specified index cannot be null";
 
         if (isShow) {
             // Show preference
