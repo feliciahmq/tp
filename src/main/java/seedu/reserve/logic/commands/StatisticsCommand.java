@@ -6,7 +6,7 @@ import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
 
 /**
- * View statistics of reservations in ReserveMate.
+ * Display statistics of reservations in ReserveMate.
  */
 public class StatisticsCommand extends Command {
 
