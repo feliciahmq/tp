@@ -34,8 +34,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of reservations */
     ObservableList<Reservation> getFilteredReservationList();
 
-    /** Returns a Hash Map of reservation summary from model */
-    HashMap<String, Integer> getReservationSummary();
+    /** Returns a Hash Map of reservation statistics from model */
+    HashMap<String, Integer> getReservationStatistics();
 
     /**
      * Returns the user prefs' reservation book file path.

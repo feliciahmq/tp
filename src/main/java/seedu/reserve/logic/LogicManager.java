@@ -73,8 +73,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public HashMap<String, Integer> getReservationSummary() {
-        return model.getReservationSummary();
+    public HashMap<String, Integer> getReservationStatistics() {
+        return model.getReservationStatistics();
     }
 
     @Override

@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private ReservationListPanel reservationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private SummaryWindow summaryWindow;
+    private StatisticsWindow statisticsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -67,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        summaryWindow = new SummaryWindow();
+        statisticsWindow = new StatisticsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -150,14 +150,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the summary window or focuses on it if it's already opened.
+     * Opens the statistics window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleSummary() {
-        if (!summaryWindow.isShowing()) {
-            summaryWindow.show(logic.getReservationSummary());
+    public void handleStatistics() {
+        if (!statisticsWindow.isShowing()) {
+            statisticsWindow.show(logic.getReservationStatistics());
         } else {
-            summaryWindow.focus();
+            statisticsWindow.focus();
         }
     }
 
@@ -175,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         primaryStage.hide();
         helpWindow.hide();
-        summaryWindow.hide();
+        statisticsWindow.hide();
     }
 
     public ReservationListPanel getReservationListPanel() {
@@ -192,14 +192,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            summaryWindow.setPieChart(logic.getReservationSummary());
+            statisticsWindow.setPieChart(logic.getReservationStatistics());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
-            if (commandResult.isShowSummary()) {
-                handleSummary();
+            if (commandResult.isShowStatistics()) {
+                handleStatistics();
             }
 
             if (commandResult.isExit()) {

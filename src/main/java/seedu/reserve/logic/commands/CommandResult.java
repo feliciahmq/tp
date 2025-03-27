@@ -16,8 +16,8 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
-    /** Summary information should be shown to the user. */
-    private final boolean showSummary;
+    /** Statistics information should be shown to the user. */
+    private final boolean showStatistics;
 
     /** The application should exit. */
     private final boolean exit;
@@ -25,10 +25,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSummary, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showStatistics, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.showSummary = showSummary;
+        this.showStatistics = showStatistics;
         this.exit = exit;
     }
 
@@ -48,8 +48,8 @@ public class CommandResult {
         return showHelp;
     }
 
-    public boolean isShowSummary() {
-        return showSummary;
+    public boolean isShowStatistics() {
+        return showStatistics;
     }
 
     public boolean isExit() {
@@ -70,13 +70,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && showSummary == otherCommandResult.showSummary
+                && showStatistics == otherCommandResult.showStatistics
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showSummary, exit);
+        return Objects.hash(feedbackToUser, showHelp, showStatistics, exit);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("showSummary", showSummary)
+                .add("showStatistics", showStatistics)
                 .add("exit", exit)
                 .toString();
     }

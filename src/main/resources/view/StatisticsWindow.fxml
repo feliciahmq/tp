@@ -13,8 +13,8 @@
                   spacing="10"
                   style="-fx-padding: 20;">
                 <children>
-                <Label fx:id="summaryMessage"
-                       text="Reservation Summary"
+                <Label fx:id="statisticsMessage"
+                       text="Reservation Statistics"
                        style="-fx-font-size: 18px; -fx-font-weight: bold;"
                 />
                 <PieChart fx:id="pieChart"

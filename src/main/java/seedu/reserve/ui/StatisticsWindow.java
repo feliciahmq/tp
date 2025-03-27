@@ -13,20 +13,20 @@ import javafx.stage.Stage;
 import seedu.reserve.commons.core.LogsCenter;
 
 /**
- * The Summary Window. Provides the basic application layout containing
- * a summary statistics.
+ * The Statistics Window. Provides the basic application layout containing
+ * the statistics.
  */
-public class SummaryWindow extends UiPart<Stage> {
+public class StatisticsWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =
             "https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/UserGuide.md";
-    public static final String SUMMARY_MESSAGE = "Summary of reservations";
+    public static final String STATISTICS_MESSAGE = "Statistics of reservations";
 
-    private static final Logger logger = LogsCenter.getLogger(SummaryWindow.class);
-    private static final String FXML = "SummaryWindow.fxml";
+    private static final Logger logger = LogsCenter.getLogger(StatisticsWindow.class);
+    private static final String FXML = "StatisticsWindow.fxml";
 
     @FXML
-    private Label summaryMessage;
+    private Label statisticsMessage;
 
     @FXML
     private PieChart pieChart;
@@ -36,25 +36,25 @@ public class SummaryWindow extends UiPart<Stage> {
 
 
     /**
-     * Creates a new SummaryWindow.
+     * Creates a new Statistics Window.
      *
-     * @param root Stage to use as the root of the SummaryWindow.
+     * @param root Stage to use as the root of the Statistics Window.
      */
-    public SummaryWindow(Stage root) {
+    public StatisticsWindow(Stage root) {
         super(FXML, root);
-        summaryMessage.setText(SUMMARY_MESSAGE);
+        statisticsMessage.setText(STATISTICS_MESSAGE);
         configurePieChart();
     }
 
     /**
-     * Creates a new SummaryWindow.
+     * Creates a new StatisticsWindow.
      */
-    public SummaryWindow() {
+    public StatisticsWindow() {
         this(new Stage());
     }
 
     /**
-     * Shows the summary window.
+     * Shows the statistics window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -71,10 +71,10 @@ public class SummaryWindow extends UiPart<Stage> {
      *         </li>
      *     </ul>
      */
-    public void show(HashMap<String, Integer> reservationSummary) {
-        logger.fine("Showing summary page of reservations.");
+    public void show(HashMap<String, Integer> reservationStatistics) {
+        logger.fine("Showing statistics page of reservations.");
         Stage root = getRoot();
-        setPieChart(reservationSummary);
+        setPieChart(reservationStatistics);
         root.show();
     }
 
@@ -88,15 +88,15 @@ public class SummaryWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets pie chart data from reservation summary.
+     * Sets pie chart data from reservation statistics.
      *
-     * @param reservationSummary HashMap of categories to numerical values.
+     * @param reservationStatistics HashMap of categories to numerical values.
      */
-    public void setPieChart(HashMap<String, Integer> reservationSummary) {
+    public void setPieChart(HashMap<String, Integer> reservationStatistics) {
         pieChart.getData().clear();
 
-        for (String numOfDiners : reservationSummary.keySet()) {
-            Integer value = reservationSummary.get(numOfDiners);
+        for (String numOfDiners : reservationStatistics.keySet()) {
+            Integer value = reservationStatistics.get(numOfDiners);
 
             if (value != null && value > 0) {
                 PieChart.Data slice = new PieChart.Data(numOfDiners, value);
@@ -113,21 +113,21 @@ public class SummaryWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the summary window is currently being shown.
+     * Returns true if the statistics window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the summary window.
+     * Hides the statistics window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the summary window.
+     * Focuses on the statistics window.
      */
     public void focus() {
         getRoot().requestFocus();

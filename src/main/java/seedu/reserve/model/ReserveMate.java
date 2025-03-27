@@ -7,7 +7,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.reserve.commons.util.ToStringBuilder;
-import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.reservation.UniqueReservationList;
 

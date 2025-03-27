@@ -81,8 +81,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered reservation list */
     ObservableList<Reservation> getFilteredReservationList();
 
-    /** Returns a HashMap of the reservation summary */
-    HashMap<String, Integer> getReservationSummary();
+    /** Returns a HashMap of the reservation statistics */
+    HashMap<String, Integer> getReservationStatistics();
 
     /**
      * Updates the filter of the filtered reservation list to filter by the given {@code predicate}.
@@ -91,7 +91,7 @@ public interface Model {
     void updateFilteredReservationList(Predicate<Reservation> predicate);
 
     /**
-     * Updates the reservation summary in ReserveMate.
+     * Updates the reservation statistics in ReserveMate.
      */
-    void updateReservationSummary();
+    void updateReservationStatistics();
 }

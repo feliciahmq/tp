@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final ReserveMate reserveMate;
     private final UserPrefs userPrefs;
     private final FilteredList<Reservation> filteredReservations;
-    private final HashMap<String, Integer> reservationSummary;
+    private final HashMap<String, Integer> reservationStatistics;
 
     /**
      * Initializes a ModelManager with the given ReserveMate and userPrefs.
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         this.reserveMate = new ReserveMate(reserveMate);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredReservations = new FilteredList<>(this.reserveMate.getReservationList());
-        reservationSummary = this.reserveMate.getSumOfReservationsPerDiner();
+        reservationStatistics = this.reserveMate.getSumOfReservationsPerDiner();
     }
 
     public ModelManager() {
@@ -83,7 +83,7 @@ public class ModelManager implements Model {
     @Override
     public void setReserveMate(ReadOnlyReserveMate reserveMate) {
         this.reserveMate.resetData(reserveMate);
-        updateReservationSummary();
+        updateReservationStatistics();
     }
 
     @Override
@@ -100,14 +100,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteReservation(Reservation target) {
         reserveMate.removeReservation(target);
-        updateReservationSummary();
+        updateReservationStatistics();
     }
 
     @Override
     public void addReservation(Reservation reservation) {
         reserveMate.addReservation(reservation);
         updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-        updateReservationSummary();
+        updateReservationStatistics();
     }
 
     @Override
@@ -134,28 +134,28 @@ public class ModelManager implements Model {
         filteredReservations.setPredicate(predicate);
     }
 
-    //=========== Reservation Summary Accessors =============================================================
+    //=========== Reservation Statistics Accessors =============================================================
 
     /**
-     * Returns a HashMap of reservation summary.
+     * Returns a HashMap of reservation statistics.
      */
     @Override
-    public HashMap<String, Integer> getReservationSummary() {
-        return reservationSummary;
+    public HashMap<String, Integer> getReservationStatistics() {
+        return reservationStatistics;
     }
 
     @Override
-    public void updateReservationSummary() {
-        HashMap<String, Integer> newReservationSummary = reserveMate.getSumOfReservationsPerDiner();
-        clearReservationSummary();
-        reservationSummary.putAll(newReservationSummary);
+    public void updateReservationStatistics() {
+        HashMap<String, Integer> newReservationStatistics = reserveMate.getSumOfReservationsPerDiner();
+        clearReservationStatistics();
+        reservationStatistics.putAll(newReservationStatistics);
     }
 
     /**
-     * Clears all data in reservationSummary.
+     * Clears all data in reservationStatistics.
     */
-    public void clearReservationSummary() {
-        reservationSummary.clear();
+    public void clearReservationStatistics() {
+        reservationStatistics.clear();
     }
 
     @Override
@@ -173,7 +173,7 @@ public class ModelManager implements Model {
         return reserveMate.equals(otherModelManager.reserveMate)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredReservations.equals(otherModelManager.filteredReservations)
-                && reservationSummary.equals(otherModelManager.reservationSummary);
+                && reservationStatistics.equals(otherModelManager.reservationStatistics);
     }
 
 }
