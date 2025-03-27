@@ -215,7 +215,11 @@ Examples:
 
 Clears all entries from the ReserveMate
 
-Format: `clear`
+Format: `clear cfm`
+
+* A confirmation flag **'cfm' is required** to confirm the clear action
+    * If cfm is not included, the clear action will not occur.
+    * keyword 'cfm' is case-sensitive
 
 ### Filtering the reservations: `filter`
 
