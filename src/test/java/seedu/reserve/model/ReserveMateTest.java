@@ -6,11 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
+import static seedu.reserve.testutil.TypicalReservation.BENSON;
+import static seedu.reserve.testutil.TypicalReservation.ELLE;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.reservation.exceptions.DuplicateReservationException;
 import seedu.reserve.testutil.ReservationBuilder;
+import seedu.reserve.testutil.ReserveMateBuilder;
 
 public class ReserveMateTest {
 
@@ -87,6 +91,62 @@ public class ReserveMateTest {
         String expected = ReserveMate.class.getCanonicalName() + "{reservations="
                 + reserveMate.getReservationList() + "}";
         assertEquals(expected, reserveMate.toString());
+    }
+
+    @Test
+    public void getSumOfReservationsPerDiners_reservationsHaveZeroDinerGroup_success() {
+        ReserveMate reserveMate = new ReserveMateBuilder().build();
+        HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
+
+        assertEquals(expectedStatistics, actualStatistics);
+    }
+
+    @Test
+    public void getSumOfReservationsPerDiners_reservationsHaveOneDinerGroup_success() {
+        ReserveMate reserveMate = new ReserveMateBuilder()
+                .withReservation(BENSON)
+                .build();
+        HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        expectedStatistics.put("3", 1);
+        HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
+
+        assertEquals(expectedStatistics, actualStatistics);
+    }
+
+    @Test
+    public void getSumOfReservationsPerDiners_reservationsHaveOneDinerGroupTwoReservations_success() {
+        Reservation anotherReservation = new ReservationBuilder().withName("Benson Meier")
+                .withEmail("basil@example.com")
+                .withPhone("93748263")
+                .withDiners("3")
+                .withDateTime("2025-04-24 1200")
+                .withTags("friends")
+                .build();
+        ReserveMate reserveMate = new ReserveMateBuilder()
+                .withReservation(BENSON)
+                .withReservation(anotherReservation)
+                .build();
+        HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        expectedStatistics.put("3", 1);
+        expectedStatistics.put("3", 2);
+        HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
+
+        assertEquals(expectedStatistics, actualStatistics);
+    }
+
+    @Test
+    public void getSumOfReservationsPerDiners_reservationsHaveMoreThanOneDinerGroup_success() {
+        ReserveMate reserveMate = new ReserveMateBuilder()
+                .withReservation(BENSON)
+                .withReservation(ELLE)
+                .build();
+        HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        expectedStatistics.put("3", 1);
+        expectedStatistics.put("1", 1);
+        HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
+
+        assertEquals(expectedStatistics, actualStatistics);
     }
 
     /**

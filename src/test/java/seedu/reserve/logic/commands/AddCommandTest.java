@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -169,7 +170,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public HashMap<String, Integer> getReservationStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredReservationList(Predicate<Reservation> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateReservationStatistics() {
             throw new AssertionError("This method should not be called.");
         }
     }

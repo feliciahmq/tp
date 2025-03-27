@@ -22,6 +22,7 @@ import seedu.reserve.logic.commands.FilterCommand;
 import seedu.reserve.logic.commands.FindCommand;
 import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
+import seedu.reserve.logic.commands.StatisticsCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
@@ -128,8 +129,19 @@ public class ReserveMateParserTest {
     }
 
     @Test
+    public void parseCommand_statistics() throws Exception {
+        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD) instanceof StatisticsCommand);
+        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD + " 3") instanceof StatisticsCommand);
+    }
+
+    @Test
     public void parseCommand_helpMixedCase() throws Exception {
         assertTrue(parser.parseCommand("HeLp") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_statisticsMixedCase() throws Exception {
+        assertTrue(parser.parseCommand("sTats") instanceof StatisticsCommand);
     }
 
     @Test

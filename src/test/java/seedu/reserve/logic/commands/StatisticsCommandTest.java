@@ -1,20 +1,20 @@
 package seedu.reserve.logic.commands;
 
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.reserve.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.reserve.logic.commands.StatisticsCommand.SHOWING_STATISTICS_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 
-public class HelpCommandTest {
+public class StatisticsCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
-        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_STATISTICS_MESSAGE, false, true, false);
+        assertCommandSuccess(new StatisticsCommand(), model, expectedCommandResult, expectedModel);
     }
 }

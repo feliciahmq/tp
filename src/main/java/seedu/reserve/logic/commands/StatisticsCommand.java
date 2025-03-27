@@ -12,12 +12,12 @@ public class StatisticsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String STATISTICS_MESSAGE = "Displayed statistics of reservations.";
+    public static final String SHOWING_STATISTICS_MESSAGE = "Displayed statistics of reservations.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        return new CommandResult(STATISTICS_MESSAGE, false, true, false);
+        return new CommandResult(SHOWING_STATISTICS_MESSAGE, false, true, false);
     }
 }
