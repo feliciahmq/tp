@@ -95,13 +95,21 @@ public class SummaryWindow extends UiPart<Stage> {
     public void setPieChart(HashMap<String, Integer> reservationSummary) {
         pieChart.getData().clear();
 
-        for (String category : reservationSummary.keySet()) {
-            Integer value = reservationSummary.get(category);
+        for (String numOfDiners : reservationSummary.keySet()) {
+            Integer value = reservationSummary.get(numOfDiners);
+
             if (value != null && value > 0) {
-                PieChart.Data slice = new PieChart.Data(category, value);
+                PieChart.Data slice = new PieChart.Data(numOfDiners, value);
                 pieChart.getData().add(slice);
             }
         }
+
+        if (pieChart.getData().isEmpty()) {
+            logger.warning("No data was added to the PieChart.");
+        } else {
+            logger.fine("PieChart data set successfully.");
+        }
+
     }
 
     /**
