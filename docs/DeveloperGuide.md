@@ -330,6 +330,30 @@ Use case ends
   
     Use case ends
 
+
+**Use case: UC11 - Viewing statistics**
+
+**MSS**
+
+1. User enters the "stats" command to display reservation statistics.
+2. ReserveMate displays a new window containing the reservation statistics, a pie chart grouped by number of diners.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command format.
+
+    * 1a1. ReserveMate shows an error message.
+
+      Use case ends.
+* 2a. There is no reservation data available.
+
+    * 2a1. ReserveMate shows an empty chart indicating that there are no reservations to summarize.
+
+      Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements

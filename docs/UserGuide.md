@@ -50,8 +50,10 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
    * `clear` : Deletes all reservations.
    
    * `filter sd/ 2026-12-12 1800 ed/ 2026-12-15 1400` : Filters all reservations between the 2 dates.
+
+   * `stats` : Display the statistics of reservations.
    
-   * `exit` : Exits the app.
+     * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -236,6 +238,17 @@ Examples:
 * `filter sd/ 2026-12-12 1400 ed/ 2026-12-15 1400` filters all reservations between 12/12/2026 1400 and 15/12/2026 1400
 
 ![filter_command.png](images/filterCommand.png)
+
+### View reservation statistics : `stats`
+
+Show statistics of reservations in ReserveMate.
+
+Format: `stats`
+
+Examples:
+* `stats`
+
+![stats_command.png](images/statsCommand.png)
 
 ### Exiting the program : `exit`
 

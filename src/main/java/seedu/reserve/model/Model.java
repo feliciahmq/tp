@@ -1,6 +1,7 @@
 package seedu.reserve.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -80,9 +81,17 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered reservation list */
     ObservableList<Reservation> getFilteredReservationList();
 
+    /** Returns a HashMap of the reservation statistics */
+    HashMap<String, Integer> getReservationStatistics();
+
     /**
      * Updates the filter of the filtered reservation list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredReservationList(Predicate<Reservation> predicate);
+
+    /**
+     * Updates the reservation statistics in ReserveMate.
+     */
+    void updateReservationStatistics();
 }

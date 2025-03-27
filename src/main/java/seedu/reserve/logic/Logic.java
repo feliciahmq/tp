@@ -1,6 +1,7 @@
 package seedu.reserve.logic;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import javafx.collections.ObservableList;
 import seedu.reserve.commons.core.GuiSettings;
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of reservations */
     ObservableList<Reservation> getFilteredReservationList();
+
+    /** Returns a Hash Map of reservation statistics from model */
+    HashMap<String, Integer> getReservationStatistics();
 
     /**
      * Returns the user prefs' reservation book file path.

@@ -7,10 +7,12 @@ import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
 import static seedu.reserve.testutil.TypicalReservation.BENSON;
+import static seedu.reserve.testutil.TypicalReservation.CARL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -94,6 +96,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getReservationStatistics_success() {
+        ReserveMate reserveMate = new ReserveMateBuilder()
+                .withReservation(ALICE)
+                .withReservation(BENSON)
+                .withReservation(CARL)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(reserveMate, userPrefs);
+
+        HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        expectedStatistics.put("5+", 1);
+        expectedStatistics.put("3", 1);
+        expectedStatistics.put("2", 1);
+
+        assertEquals(modelManager.getReservationStatistics(), expectedStatistics);
+    }
+
+    @Test
     public void equals() {
         ReserveMate reserveMate = new ReserveMateBuilder().withReservation(ALICE).withReservation(BENSON).build();
         ReserveMate differentReserveMate = new ReserveMate();
@@ -120,6 +140,11 @@ public class ModelManagerTest {
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredReservationList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(reserveMate, userPrefs)));
+
+        // different reservationStatistics -> returns false
+        modelManager.addReservation(CARL);
+        modelManagerCopy.clearReservationStatistics();
+        assertFalse(modelManager.equals(modelManagerCopy));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
