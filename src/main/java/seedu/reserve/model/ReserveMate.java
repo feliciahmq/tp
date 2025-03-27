@@ -2,10 +2,12 @@ package seedu.reserve.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.reserve.commons.util.ToStringBuilder;
+import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.reservation.UniqueReservationList;
 
@@ -107,6 +109,26 @@ public class ReserveMate implements ReadOnlyReserveMate {
     @Override
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();
+    }
+
+    HashMap<String, Integer> getSumOfReservationsPerDiner() {
+        HashMap<String, Integer> sumOfReservationsPerDiner = new HashMap<>();
+        ObservableList<Reservation> reservationList = getReservationList();
+
+        for (Reservation r : reservationList) {
+            int numOfDiners = Integer.parseInt(r.getDiners().value);
+
+            String key = numOfDiners >= 5 ? "5+" : String.valueOf(numOfDiners);
+
+            if (!sumOfReservationsPerDiner.containsKey(key)) {
+                sumOfReservationsPerDiner.put(key, 0);
+            }
+
+            Integer count = sumOfReservationsPerDiner.get(key);
+            sumOfReservationsPerDiner.put(key, count + 1);
+        }
+
+        return sumOfReservationsPerDiner;
     }
 
     @Override

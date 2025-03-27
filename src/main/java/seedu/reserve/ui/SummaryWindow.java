@@ -71,12 +71,11 @@ public class SummaryWindow extends UiPart<Stage> {
      *         </li>
      *     </ul>
      */
-    public void show(HashMap<String, Double> reservationSummary) {
+    public void show(HashMap<String, Integer> reservationSummary) {
         logger.fine("Showing summary page of reservations.");
-        setPieChart(reservationSummary);
         Stage root = getRoot();
+        setPieChart(reservationSummary);
         root.show();
-        root.centerOnScreen();
     }
 
     /**
@@ -93,11 +92,11 @@ public class SummaryWindow extends UiPart<Stage> {
      *
      * @param reservationSummary HashMap of categories to numerical values.
      */
-    public void setPieChart(HashMap<String, Double> reservationSummary) {
+    public void setPieChart(HashMap<String, Integer> reservationSummary) {
         pieChart.getData().clear();
 
         for (String category : reservationSummary.keySet()) {
-            Double value = reservationSummary.get(category);
+            Integer value = reservationSummary.get(category);
             if (value != null && value > 0) {
                 PieChart.Data slice = new PieChart.Data(category, value);
                 pieChart.getData().add(slice);

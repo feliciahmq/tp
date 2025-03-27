@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final ReserveMate reserveMate;
     private final UserPrefs userPrefs;
     private final FilteredList<Reservation> filteredReservations;
+    private final HashMap<String, Integer> reservationSummary;
 
     /**
      * Initializes a ModelManager with the given ReserveMate and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.reserveMate = new ReserveMate(reserveMate);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredReservations = new FilteredList<>(this.reserveMate.getReservationList());
+        reservationSummary = this.reserveMate.getSumOfReservationsPerDiner();
     }
 
     public ModelManager() {
@@ -80,6 +83,7 @@ public class ModelManager implements Model {
     @Override
     public void setReserveMate(ReadOnlyReserveMate reserveMate) {
         this.reserveMate.resetData(reserveMate);
+        updateReservationSummary();
     }
 
     @Override
@@ -96,12 +100,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteReservation(Reservation target) {
         reserveMate.removeReservation(target);
+        updateReservationSummary();
     }
 
     @Override
     public void addReservation(Reservation reservation) {
         reserveMate.addReservation(reservation);
         updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        updateReservationSummary();
     }
 
     @Override
@@ -128,6 +134,30 @@ public class ModelManager implements Model {
         filteredReservations.setPredicate(predicate);
     }
 
+    //=========== Reservation Summary Accessors =============================================================
+
+    /**
+     * Returns a HashMap of reservation summary.
+     */
+    @Override
+    public HashMap<String, Integer> getReservationSummary() {
+        return reservationSummary;
+    }
+
+    @Override
+    public void updateReservationSummary() {
+        HashMap<String, Integer> newReservationSummary = reserveMate.getSumOfReservationsPerDiner();
+        clearReservationSummary();
+        reservationSummary.putAll(newReservationSummary);
+    }
+
+    /**
+     * Clears all data in reservationSummary.
+    */
+    public void clearReservationSummary() {
+        reservationSummary.clear();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +172,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return reserveMate.equals(otherModelManager.reserveMate)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredReservations.equals(otherModelManager.filteredReservations);
+                && filteredReservations.equals(otherModelManager.filteredReservations)
+                && reservationSummary.equals(otherModelManager.reservationSummary);
     }
 
 }

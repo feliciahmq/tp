@@ -3,6 +3,7 @@ package seedu.reserve.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -69,6 +70,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Reservation> getFilteredReservationList() {
         return model.getFilteredReservationList();
+    }
+
+    @Override
+    public HashMap<String, Integer> getReservationSummary() {
+        return model.getReservationSummary();
     }
 
     @Override

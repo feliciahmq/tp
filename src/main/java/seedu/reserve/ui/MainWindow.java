@@ -155,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSummary() {
         if (!summaryWindow.isShowing()) {
-            summaryWindow.show();
+            summaryWindow.show(logic.getReservationSummary());
         } else {
             summaryWindow.focus();
         }
