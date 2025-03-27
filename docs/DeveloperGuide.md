@@ -248,7 +248,32 @@ Use case ends.
 
   Use case resumes at step 1.
 
-**Use case: UC08 - Filter Reservations**
+
+**Use case: UC08 - View all free time slots**
+
+**MSS**
+
+1. User requests to view all free time slots.
+
+2. ReserveMate retrieve all free time slots and display it to User.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. ReserveMate shows an error message.
+
+      Use Case ends.
+
+* 2a. The reservation list is empty.
+
+    * 2a1. ReserveMate shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Filter Reservations**
 
 **MSS**
 
@@ -268,7 +293,6 @@ Use case ends
 * 2a. ReserveMate found no reservations between the 2 dates.
 
   * 2a1. ReserveMate displays No reservations found for the date range.
-
 
 *{More to be added}*
 
