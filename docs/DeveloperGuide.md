@@ -300,7 +300,7 @@ Use case ends
 **MSS**
 
 1. User requests to save a preference for a specific reservation by providing an index and preference text.
-2. ReserveMate saves the preference ce for the specified reservation.
+2. ReserveMate saves the preference for the specified reservation.
 3. ReserveMate displays a success message.
 
    Use case ends.
@@ -326,9 +326,9 @@ Use case ends
     Use case resumes at step 1.
 
 * 2a. No preference has been set for the reservation.
-  * 2a1. ReserveMate displays an error message to provide preference description.
+  * 2a1. ReserveMate displays a message indicating no preference set.
   
-    Use case resumes at step 1.
+    Use case ends
 
 *{More to be added}*
 

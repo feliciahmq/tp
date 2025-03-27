@@ -120,8 +120,7 @@ Format:
 * To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
 * To show a preference: `pref show <INDEX>`
 
-* The index refers to the index number shown in the displayed reservation list.
-* The index **must be a positive integer** 1, 2, 3, ...
+* The index refers to the index number shown in the displayed reservation list and must be a positive integer within range of reservation list. 
 * When saving a preference, the text can include any special dietary requirements, seating preferences, or other customer requests.
 * When showing a preference, if no preference has been set, a message indicating this will be displayed.
 

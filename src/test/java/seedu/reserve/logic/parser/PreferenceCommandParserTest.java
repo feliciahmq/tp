@@ -75,4 +75,15 @@ public class PreferenceCommandParserTest {
         // multiple spaces between parts
         assertParseSuccess(parser, "show    1", expectedShowCommand);
     }
+
+    @Test
+    public void parse_preferenceTextTooLong_throwsParseException() {
+        // Generate a preference text that exceeds the maximum length (50 characters)
+        StringBuilder longPreference = new StringBuilder();
+        for (int i = 0; i < 60; i++) { // Using 60 characters (exceeds the 50 limit)
+            longPreference.append('a');
+        }
+        String userInput = "save 1 " + longPreference;
+        assertParseFailure(parser, userInput, PreferenceParser.MESSAGE_PREFERENCE_TOO_LONG);
+    }
 }

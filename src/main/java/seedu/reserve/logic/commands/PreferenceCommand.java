@@ -29,6 +29,7 @@ public class PreferenceCommand extends Command {
     public static final String MESSAGE_SAVE_PREFERENCE_SUCCESS = "Saved preference for reservation: %1$s";
     public static final String MESSAGE_SHOW_PREFERENCE_SUCCESS = "Preference for reservation %1$s: %2$s";
     public static final String MESSAGE_NO_PREFERENCE = "No preference has been set for this reservation.";
+    public static final String MESSAGE_INVALID_INDEX = "Reservation at the specified index cannot be null";
 
     private final Index index;
     private final boolean isShow;
@@ -64,24 +65,40 @@ public class PreferenceCommand extends Command {
         }
 
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
-        assert reservationToEdit != null : "Reservation at the specified index cannot be null";
+        assert reservationToEdit != null : MESSAGE_INVALID_INDEX;
 
         if (isShow) {
-            // Show preference
-            String preferenceToShow = reservationToEdit.getPreference();
-            if (preferenceToShow.isEmpty()) {
-                return new CommandResult(MESSAGE_NO_PREFERENCE);
-            }
-            return new CommandResult(String.format(MESSAGE_SHOW_PREFERENCE_SUCCESS,
-                    index.getOneBased(), preferenceToShow));
+            return executeShowPreference(reservationToEdit);
         } else {
-            // Save preference
-            Reservation editedReservation = reservationToEdit.withPreference(preference);
-
-            model.setReservation(reservationToEdit, editedReservation);
-            model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-            return new CommandResult(String.format(MESSAGE_SAVE_PREFERENCE_SUCCESS, index.getOneBased()));
+            return executeSavePreference(model, reservationToEdit);
         }
+    }
+
+    /**
+     * Executes the show preference functionality.
+     * @param reservation The reservation to show preference for
+     * @return CommandResult containing the preference message
+     */
+    private CommandResult executeShowPreference(Reservation reservation) {
+        String preferenceToShow = reservation.getPreference();
+        if (preferenceToShow.isEmpty()) {
+            return new CommandResult(MESSAGE_NO_PREFERENCE);
+        }
+        return new CommandResult(String.format(MESSAGE_SHOW_PREFERENCE_SUCCESS,
+                index.getOneBased(), preferenceToShow));
+    }
+
+    /**
+     * Executes the save preference functionality.
+     * @param model The model to update
+     * @param reservation The reservation to save preference for
+     * @return CommandResult indicating success
+     */
+    private CommandResult executeSavePreference(Model model, Reservation reservation) {
+        Reservation editedReservation = reservation.withPreference(preference);
+        model.setReservation(reservation, editedReservation);
+        model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        return new CommandResult(String.format(MESSAGE_SAVE_PREFERENCE_SUCCESS, index.getOneBased()));
     }
 
     @Override
