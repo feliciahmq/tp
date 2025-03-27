@@ -106,7 +106,8 @@ public class ReservationTest {
     public void toStringMethod() {
         String expected = Reservation.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", diners="
-                + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", occasion=" + ALICE.getTags() + "}";
+                + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", occasion="
+                + ALICE.getTags() + ", preference=" + ALICE.getPreference() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

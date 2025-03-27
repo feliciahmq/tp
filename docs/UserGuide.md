@@ -33,6 +33,10 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 
    * `edit 2 n/Bobby p/98765432 e/bobby@example.com` : Updates the 2nd reservation shown in the reservation list to reflect new details of at least one specified tag.
 
+   * `pref save 3 Allergic to seafood` : saves the 3rd reservation's preference in the reservation list.
+
+   * `pref show 3 ` : Displays the 3rd reservation's preference that is stored in the reservation list.
+
    * `delete 3` : Deletes the 3rd reservation shown in the reservation list.
 
    * `show 1` : Displays additional details about the 1st reservation shown in the reservation list.
@@ -107,6 +111,24 @@ Format: `show <INDEX>`
 
 Examples:
 * `show 1`
+
+### Managing reservation preferences : `pref`
+
+Saves or displays a reservation preference.
+
+Format: 
+* To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
+* To show a preference: `pref show <INDEX>`
+
+* The index refers to the index number shown in the displayed reservation list and must be a positive integer within range of reservation list. 
+* When saving a preference, the text can include any special dietary requirements, seating preferences, or other customer requests.
+* When showing a preference, if no preference has been set, a message indicating this will be displayed.
+
+![savePreferenceCommand.png](images/savePreferenceCommand.png)
+![showPreferenceCommand.png](images/showPreferenceCommand.png)
+Examples:
+* `pref save 1 Window seat preferred, allergic to nuts` saves this preference for the 1st reservation.
+* `pref show 2` displays any saved preferences for the 2nd reservation.
 
 ### Adding a reservation: `add`
 
@@ -272,6 +294,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Preference** | `pref save INDEX PREFERENCE_TEXT` or `pref show INDEX`<br> e.g., `pref save 1 Window seat preferred` or `pref show 1`
 **Show**   | `show INDEX`<br> e.g., `show 2`
 **Free**   | `free`
 **List**   | `list`

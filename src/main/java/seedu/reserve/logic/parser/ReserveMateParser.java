@@ -19,6 +19,7 @@ import seedu.reserve.logic.commands.FindCommand;
 import seedu.reserve.logic.commands.FreeCommand;
 import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
+import seedu.reserve.logic.commands.PreferenceCommand;
 import seedu.reserve.logic.commands.ShowCommand;
 import seedu.reserve.logic.commands.StatisticsCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
@@ -67,7 +68,7 @@ public class ReserveMateParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommandParser().parse(arguments);
+            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -91,6 +92,9 @@ public class ReserveMateParser {
 
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommand();
+
+        case PreferenceCommand.COMMAND_WORD:
+            return new PreferenceParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
