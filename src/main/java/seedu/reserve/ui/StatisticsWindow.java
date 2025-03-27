@@ -95,6 +95,14 @@ public class StatisticsWindow extends UiPart<Stage> {
     public void setPieChart(HashMap<String, Integer> reservationStatistics) {
         pieChart.getData().clear();
 
+        if (reservationStatistics == null || reservationStatistics.isEmpty()) {
+            logger.info("No reservations found to display in chart.");
+            statisticsMessage.setText("No reservations to summarize.");
+            return;
+        }
+
+        statisticsMessage.setText("Summary of reservations");
+
         for (String numOfDiners : reservationStatistics.keySet()) {
             Integer value = reservationStatistics.get(numOfDiners);
 
