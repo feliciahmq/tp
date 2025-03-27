@@ -16,6 +16,7 @@ import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.ExitCommand;
 import seedu.reserve.logic.commands.FilterCommand;
 import seedu.reserve.logic.commands.FindCommand;
+import seedu.reserve.logic.commands.FreeCommand;
 import seedu.reserve.logic.commands.HelpCommand;
 import seedu.reserve.logic.commands.ListCommand;
 import seedu.reserve.logic.commands.ShowCommand;
@@ -66,7 +67,7 @@ public class ReserveMateParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -82,6 +83,8 @@ public class ReserveMateParser {
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
+        case FreeCommand.COMMAND_WORD:
+            return new FreeCommand();
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

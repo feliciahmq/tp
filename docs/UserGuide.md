@@ -123,6 +123,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 </box>
 
 Examples:
+
 * `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
 * `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 o/GRADUATION d/2025-04-20 1800`
 
@@ -193,7 +194,11 @@ Examples:
 
 Clears all entries from the ReserveMate
 
-Format: `clear`
+Format: `clear cfm`
+
+* A confirmation flag **'cfm' is required** to confirm the clear action
+    * If cfm is not included, the clear action will not occur.
+    * keyword 'cfm' is case-sensitive
 
 ### Filtering the reservations: `filter`
 
@@ -231,6 +236,13 @@ If your changes to the data file makes its format invalid, ReserveMate will disc
 Furthermore, certain edits can cause the ReserveMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+### View all free time slots : `free`
+
+View all free time slots for reservation within a window of 60days from current time.
+
+Format: `free`
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -261,6 +273,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Show**   | `show INDEX`<br> e.g., `show 2`
+**Free**   | `free`
 **List**   | `list`
 **Filter** | `filter sd/DATE_TIME ed/DATE_TIME` <br> e.g., `filter sd/ 2026-12-12 1400 ed/2025-12-14 1400`
 **Help**   | `help`

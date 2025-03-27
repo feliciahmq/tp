@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
+import seedu.reserve.logic.commands.ClearCommand;
 import seedu.reserve.logic.commands.DeleteCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.reservation.DateTime;
@@ -210,4 +211,23 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Parses the given input string and determines if the clear command is confirmed.
+     *
+     * @param args The user input string to be parsed.
+     * @return {@code true} if the user input matches the confirmation keyword, {@code false} otherwise.
+     * @throws ParseException If the input does not match the expected confirmation format.
+     */
+    public static boolean parseClearArgs(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedArgs = args.trim();
+
+        if (!ClearCommand.isValidConfirm(trimmedArgs)) {
+            throw new ParseException(ClearCommand.MESSAGE_USAGE);
+        }
+
+        boolean isConfirmed = trimmedArgs.equals(CONFIRMATION_KEYWORD);
+
+        return isConfirmed;
+    }
 }
