@@ -7,9 +7,9 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NUMBER_OF_DINERS;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.reserve.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
@@ -56,11 +56,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(reservation);
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
+
+
 }

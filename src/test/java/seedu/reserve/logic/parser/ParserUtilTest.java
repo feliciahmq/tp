@@ -30,12 +30,14 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DINERS = "0";
     private static final String INVALID_DATETIME = "2030-04-12 180";
+    private static final String INVALID_FILTER_DATETIME = "2025-13-01 1900";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "98765432";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DINERS = "2";
     private static final String VALID_DATETIME = "2025-04-12 1800";
+    private static final String VALID_FILTER_DATETIME = "2025-01-01 1400";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -174,6 +176,32 @@ public class ParserUtilTest {
         String dateTimeWithWhitespace = WHITESPACE + VALID_DATETIME + WHITESPACE;
         DateTime expectedDateTime = new DateTime(VALID_DATETIME);
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseDateTimeFilter_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTimeFilter(null));
+    }
+
+    @Test
+    public void parseDateTimeFilter_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeFilter(INVALID_FILTER_DATETIME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeFilter(INVALID_DATETIME));
+    }
+
+    @Test
+    public void parseDateTimeFilter_validValue_returnsDateTime() throws Exception {
+        DateTime expectedDateTime = DateTime.fromFileString(VALID_FILTER_DATETIME);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTimeFilter(VALID_FILTER_DATETIME));
+        DateTime expectedDateTimeAfter = new DateTime(VALID_DATETIME);
+        assertEquals(expectedDateTimeAfter, ParserUtil.parseDateTimeFilter(VALID_DATETIME));
+    }
+
+    @Test
+    public void parseDateTimeFilter_validValueWithWhitespace_returnsTrimmedDateTime() throws Exception {
+        String dateTimeWithWhitespace = WHITESPACE + VALID_FILTER_DATETIME + WHITESPACE;
+        DateTime expectedDateTime = ParserUtil.parseDateTimeFilter(dateTimeWithWhitespace);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTimeFilter(dateTimeWithWhitespace));
     }
 
     @Test

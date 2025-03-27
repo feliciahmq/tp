@@ -12,4 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_OCCASION = new Prefix("o/");
     public static final Prefix PREFIX_DATE_TIME = new Prefix("d/");
     public static final Prefix PREFIX_NUMBER_OF_DINERS = new Prefix("x/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
 }

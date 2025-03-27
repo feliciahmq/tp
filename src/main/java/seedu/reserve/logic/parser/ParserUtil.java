@@ -2,9 +2,11 @@ package seedu.reserve.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
@@ -172,6 +174,41 @@ public class ParserUtil {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
         return new DateTime(trimmedDateTime);
+    }
+
+    /**
+     * Parses a {@code dateTimeFile} to a {@code  DateTime}. Does not check if {@code dateTimeFile}
+     * is after today's date.
+     *
+     * @param dateTimeFile
+     * @return DateTime object of {@code dateTimeFile}
+     * @throws ParseException if the given {@code dateTimeFile} is invalid
+     */
+    public static DateTime parseDateTimeFilter(String dateTimeFile) throws ParseException {
+        requireNonNull(dateTimeFile);
+        String trimmedDateTime = dateTimeFile.trim();
+
+        if (!DateTime.isValidFileInputDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS_FILTER);
+        }
+
+        DateTime dateTime;
+
+        try {
+            dateTime = DateTime.fromFileString(trimmedDateTime);
+        } catch (DateTimeException e) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS_FILTER);
+        }
+
+        return dateTime;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
