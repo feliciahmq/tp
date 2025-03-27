@@ -124,6 +124,8 @@ Format:
 * When saving a preference, the text can include any special dietary requirements, seating preferences, or other customer requests.
 * When showing a preference, if no preference has been set, a message indicating this will be displayed.
 
+![savePreferenceCommand.png](images/savePreferenceCommand.png)
+![showPreferenceCommand.png](images/showPreferenceCommand.png)
 Examples:
 * `pref save 1 Window seat preferred, allergic to nuts` saves this preference for the 1st reservation.
 * `pref show 2` displays any saved preferences for the 2nd reservation.
