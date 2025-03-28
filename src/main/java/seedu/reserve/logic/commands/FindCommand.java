@@ -1,6 +1,7 @@
 package seedu.reserve.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.reserve.logic.Messages.MESSAGE_NO_RESERVATIONS;
 
 import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
@@ -19,7 +20,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive).\n"
             + "Parameters: NAME [MORE_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " alice Bob Charlie";
-    public static final String MESSAGE_NO_RESERVATIONS = "No reservations found.";
+
 
     private final NameContainsKeywordsPredicate predicate;
 

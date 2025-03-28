@@ -3,6 +3,7 @@ package seedu.reserve.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.reserve.logic.Messages.MESSAGE_NO_RESERVATIONS;
 import static seedu.reserve.logic.Messages.MESSAGE_RESERVATIONS_LISTED_OVERVIEW;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.testutil.TypicalReservation.CARL;
@@ -56,7 +57,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noReservationFound() {
-        String expectedMessage = String.format(MESSAGE_RESERVATIONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = MESSAGE_NO_RESERVATIONS;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredReservationList(predicate);
