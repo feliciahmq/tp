@@ -29,7 +29,8 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        String concatPhoneNumber = test.replaceAll("[^0-9]", "");
+        return concatPhoneNumber.matches(VALIDATION_REGEX);
     }
 
     @Override
