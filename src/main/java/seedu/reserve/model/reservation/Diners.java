@@ -31,11 +31,7 @@ public class Diners {
      * Format the diners string by removing leading zeros.
      */
     private static String formatDiners(String diners) {
-        try {
-            return String.valueOf(Integer.parseInt(diners));
-        } catch (NumberFormatException e) {
-            return diners;
-        }
+        return String.valueOf(Integer.parseInt(diners));
     }
 
     /**
