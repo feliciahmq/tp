@@ -42,7 +42,7 @@ public class Name {
         StringBuilder formattedName = new StringBuilder();
         String[] nameLowerCase = name.toLowerCase().split(WORDS_REGEX);
 
-        for(String word : nameLowerCase) {
+        for (String word : nameLowerCase) {
             formattedName.append(word.toUpperCase().charAt(0));
             formattedName.append(word.substring(1));
             formattedName.append(" ");
