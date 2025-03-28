@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_RESERVATION_LIST =
             "No reservations found. Use the 'add' command to create a reservation\n"
                     + "or 'help' to view all commands.";
+    public static final String MESSAGE_NO_RESERVATIONS = "No reservations found.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

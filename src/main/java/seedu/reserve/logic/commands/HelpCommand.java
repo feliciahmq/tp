@@ -19,11 +19,13 @@ public class HelpCommand extends Command {
         + "4. delete - Delete a reservation \n"
         + "5. show - Display reservation details \n"
         + "6. list - Display a list of all reservations \n"
-        + "7. help - Display list of available commands \n"
-        + "8. find - Finds a reservation by name \n"
-        + "9. stats - Display reservation statistics. \n"
-        + "10. clear - Deletes all contacts \n"
-        + "11. exit - Exit the program";
+        + "7. help - Display a list of available commands \n"
+        + "8. find - Find reservations by names \n"
+        + "9. stats - Display reservation statistics \n"
+        + "10. free - Display all free time slots to the user \n"
+        + "11. filter - Filters all reservations which are between the two dates provided by the user \n"
+        + "12. clear - Deletes all contacts \n"
+        + "13. exit - Exit the program";
 
     @Override
     public CommandResult execute(Model model) {

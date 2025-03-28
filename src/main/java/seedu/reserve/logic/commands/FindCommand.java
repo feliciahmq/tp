@@ -1,6 +1,7 @@
 package seedu.reserve.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.reserve.logic.Messages.MESSAGE_NO_RESERVATIONS;
 
 import seedu.reserve.commons.util.ToStringBuilder;
 import seedu.reserve.logic.Messages;
@@ -16,9 +17,10 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all reservations whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "the specified keywords (case-insensitive).\n"
+            + "Parameters: NAME [MORE_NAMES]...\n"
+            + "Example: " + COMMAND_WORD + " alice Bob Charlie";
+
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -30,6 +32,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredReservationList(predicate);
+        if (model.getFilteredReservationList().isEmpty()) {
+            return new CommandResult(MESSAGE_NO_RESERVATIONS);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_RESERVATIONS_LISTED_OVERVIEW,
                         model.getFilteredReservationList().size()));
