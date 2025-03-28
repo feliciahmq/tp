@@ -35,7 +35,6 @@ public class FindCommand extends Command {
         if (model.getFilteredReservationList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_RESERVATIONS);
         }
-        assert !model.getFilteredReservationList().isEmpty();
         return new CommandResult(
                 String.format(Messages.MESSAGE_RESERVATIONS_LISTED_OVERVIEW,
                         model.getFilteredReservationList().size()));
