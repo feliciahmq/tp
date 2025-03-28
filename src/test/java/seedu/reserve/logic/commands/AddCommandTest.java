@@ -8,7 +8,6 @@ import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalReservation.ALICE;
 
 import java.nio.file.Path;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,8 +27,6 @@ import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandTest {
-
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     @Test
     public void constructor_nullReservation_throwsNullPointerException() {

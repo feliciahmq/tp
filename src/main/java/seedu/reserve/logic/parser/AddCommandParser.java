@@ -32,8 +32,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        String argLowerCase = args.toLowerCase().trim();
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+            ArgumentTokenizer.tokenize(argLowerCase, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_NUMBER_OF_DINERS, PREFIX_DATE_TIME, PREFIX_OCCASION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
