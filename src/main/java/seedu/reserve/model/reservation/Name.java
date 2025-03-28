@@ -12,12 +12,12 @@ public class Name {
     public static final int MAX_NAME_LENGTH = 50;
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain characters and spaces, should not be blank and not more than 50 characters.";
-
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
+    public static final String WORDS_REGEX = "\\s+";
     public final String fullName;
 
     /**
@@ -28,7 +28,26 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = formatName(name);
+    }
+
+    /**
+     * Formats the given name by capitalising the first letter of each word
+     * and converting the rest to lowercase.
+     *
+     * @param name The user input name string.
+     * @return A formatted name string.
+     */
+    private String formatName(String name) {
+        StringBuilder formattedName = new StringBuilder();
+        String[] nameLowerCase = name.toLowerCase().split(WORDS_REGEX);
+
+        for(String word : nameLowerCase) {
+            formattedName.append(word.toUpperCase().charAt(0));
+            formattedName.append(word.substring(1));
+            formattedName.append(" ");
+        }
+        return formattedName.toString().trim();
     }
 
     /**
@@ -66,7 +85,9 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        String otherFullNameLowerCase = otherName.fullName.toLowerCase();
+        String thisFullName = fullName.toLowerCase();
+        return thisFullName.equals(otherFullNameLowerCase);
     }
 
     @Override
