@@ -21,13 +21,13 @@ public class SampleDataUtil {
     public static Reservation[] getSampleReservations() {
         return new Reservation[]{
             new Reservation(new Name("John Doe"), new Phone("98765432"), new Email("johnd@example.com"),
-                new Diners("5"), new DateTime("2026-12-31 1800"),
+                new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
                 getTagSet("owesMoney", "friends")),
             new Reservation(new Name("Alexa Yeoh"), new Phone("98765431"), new Email("alexy@example.com"),
-                new Diners("5"), new DateTime("2026-12-31 1800"),
+                new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
                 getTagSet("owesMoney", "friends")),
             new Reservation(new Name("Mickey Mouse"), new Phone("98765435"), new Email("mickey@example.com"),
-                new Diners("5"), new DateTime("2026-12-30 1800"),
+                new Diners("5"), DateTime.fromFileString("2026-12-30 1800"),
                 getTagSet("owesMoney", "friends"))
         };
     }
@@ -36,6 +36,7 @@ public class SampleDataUtil {
         ReserveMate sampleAb = new ReserveMate();
         for (Reservation sampleReservation : getSampleReservations()) {
             sampleAb.addReservation(sampleReservation);
+
         }
         return sampleAb;
     }
