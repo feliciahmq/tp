@@ -12,7 +12,9 @@ public class Phone {
         "Phone numbers should only contain numbers,"
                 + " it should begins with either 8 or 9 and it must be exactly 8 digits long";
     public static final String VALIDATION_REGEX = "[89]\\d{7}";
+    private static String concatPhoneNumber;
     public final String value;
+
 
     /**
      * Constructs a {@code Phone}.
@@ -22,14 +24,14 @@ public class Phone {
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        value = concatPhoneNumber;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        String concatPhoneNumber = test.replaceAll("[^0-9]", "");
+        concatPhoneNumber = test.replaceAll("[^0-9]", "");
         return concatPhoneNumber.matches(VALIDATION_REGEX);
     }
 
