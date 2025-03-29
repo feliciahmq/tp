@@ -2,6 +2,7 @@ package seedu.reserve.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.reserve.logic.parser.CliSyntax.PREFIX_NAME;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.reserve.commons.core.index.Index;
+import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.tag.Tag;
@@ -38,9 +40,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String parse = argMultimap.getPreamble();
+
+            if (!StringUtil.isInteger(parse)) {
+                throw new NumberFormatException();
+            }
+            index = ParserUtil.parseIndex(parse);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
