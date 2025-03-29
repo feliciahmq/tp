@@ -12,12 +12,16 @@ public class NameTest {
     private Name name1;
     private Name name2;
     private Name name3;
+    private Name name4;
+    private Name name5;
 
     @BeforeEach
     public void setUp() {
         name1 = new Name("Valid Name");
         name2 = new Name("Valid Name");
         name3 = new Name("Another Valid Name");
+        name4 = new Name("JohN DoE");
+        name5 = new Name("jOhN DoE");
     }
 
     @Test
@@ -30,6 +34,7 @@ public class NameTest {
         String invalidName = "";
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
     }
+
 
     @Test
     public void isValidName() {
@@ -58,6 +63,9 @@ public class NameTest {
 
     @Test
     public void equals() {
+
+        // same value, different capitalization -> True
+        assertEquals(name5, name4);
 
         // same values -> returns true
         assertTrue(name1.equals(name2));
