@@ -43,9 +43,8 @@ public class ClearCommand extends Command {
      *
      * @param trimmedArgs The user input argument after trimming spaces.
      * @return {@code true} if the argument is valid, {@code false} otherwise.
-     * @throws ParseException If the confirmation argument contains multiple words.
      */
-    public static boolean isValidConfirm(String trimmedArgs) throws ParseException {
+    public static boolean isValidConfirm(String trimmedArgs) {
         String[] trimmedArgArray = trimmedArgs.split("\\s+");
         if (trimmedArgArray.length > 1) {
             return false;
