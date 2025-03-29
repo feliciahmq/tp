@@ -147,7 +147,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getReserveMate(), new UserPrefs());
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(deleteCommand, expectedModel, expectedMessage);
     }
 
 }
