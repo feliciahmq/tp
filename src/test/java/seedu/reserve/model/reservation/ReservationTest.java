@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_DINERS_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_OCCASION_BIRTHDAY;
 import static seedu.reserve.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -51,16 +52,33 @@ public class ReservationTest {
         editedAlice = new ReservationBuilder(ALICE).withDiners(VALID_DINERS_BOB).build();
         assertTrue(ALICE.isSameReservation(editedAlice));
 
-        // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> returns true
         editedAlice = new ReservationBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameReservation(editedAlice));
+        assertTrue(ALICE.isSameReservation(editedAlice));
 
-        // different phone number, all other attributes same -> returns false
+
+        // Same email, different name, all other attributes same -> returns true
+        editedAlice = new ReservationBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .build();
+        assertTrue(ALICE.isSameReservation(editedAlice));
+
+        // Same phone, different email -> returns true
+        editedAlice = new ReservationBuilder(ALICE)
+                .withEmail(VALID_EMAIL_BOB)
+                .build();
+        assertTrue(ALICE.isSameReservation(editedAlice));
+
+        // different phone number, all other attributes same -> returns true
         editedAlice = new ReservationBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.isSameReservation(editedAlice));
+        assertTrue(ALICE.isSameReservation(editedAlice));
 
         // different date and time, all other attributes same -> returns false
         editedAlice = new ReservationBuilder(ALICE).withDateTime(VALID_DATETIME_BOB).build();
+        assertFalse(ALICE.isSameReservation(editedAlice));
+
+        // different date and time, different name, all other attributes same -> returns false
+        editedAlice = new ReservationBuilder(ALICE).withDateTime(VALID_DATETIME_BOB).withName(VALID_NAME_AMY).build();
         assertFalse(ALICE.isSameReservation(editedAlice));
 
     }
