@@ -29,7 +29,8 @@ public class FreeCommandTest {
     @Test
     public void execute_hasFreeSlots_showsFreeSlots() {
         // Create reservations with gaps
-        Reservation r1 = new ReservationBuilder().withDateTime(now.format(FORMATTER)).build();
+        Reservation r1 = new ReservationBuilder().withDateTime(now.truncatedTo(ChronoUnit.HOURS)
+                .format(FORMATTER)).build();
         Reservation r2 = new ReservationBuilder().withDateTime(now.plusHours(2).format(FORMATTER)).build();
 
         Model modelWithGaps = new ModelManager();
@@ -38,9 +39,9 @@ public class FreeCommandTest {
 
         FreeCommand freeCommand = new FreeCommand();
         String expectedMessage = "Available free time slots: \n- "
-                + now.plusHours(1).format(FORMATTER) + " to "
-                + now.plusHours(2).format(FORMATTER) + "\n- "
-                + now.plusHours(3).format(FORMATTER) + " to "
+                + now.plusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + " to "
+                + now.plusHours(2).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + "\n- "
+                + now.plusHours(3).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + " to "
                 + now.plusDays(60).minusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER);
 
         assertCommandSuccess(freeCommand, modelWithGaps, expectedMessage, modelWithGaps);

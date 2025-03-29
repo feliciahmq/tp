@@ -12,6 +12,7 @@ import static seedu.reserve.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +40,13 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_DINERS_AMY = "2";
     public static final String VALID_DINERS_BOB = "4";
-    public static final String VALID_DATETIME_AMY = LocalDateTime.now().plusDays(30).format(FORMATTER);
-    public static final String VALID_DATETIME_BOB = LocalDateTime.now().plusDays(29).format(FORMATTER);
+    public static final String VALID_DATETIME_AMY = LocalDateTime.now()
+            .plusDays(30)
+            .truncatedTo(ChronoUnit.HOURS)
+            .format(FORMATTER);
+    public static final String VALID_DATETIME_BOB = LocalDateTime.now().plusDays(29)
+            .truncatedTo(ChronoUnit.HOURS)
+            .format(FORMATTER);
     public static final String VALID_OCCASION_BIRTHDAY = "Birthday";
     public static final String VALID_OCCASION_ANNIVERSARY = "Anniversary";
 

@@ -24,6 +24,7 @@ import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -185,7 +186,7 @@ public class EditCommandTest {
         model.addReservation(pastReservation);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-                .withDateTime(LocalDateTime.now().plusDays(29).format(FORMATTER))
+                .withDateTime(LocalDateTime.now().plusDays(29).truncatedTo(ChronoUnit.HOURS).format(FORMATTER))
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
