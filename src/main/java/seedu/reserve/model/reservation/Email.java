@@ -3,8 +3,6 @@ package seedu.reserve.model.reservation;
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.AppUtil.checkArgument;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Represents a Reservation's email in the reservation book.
