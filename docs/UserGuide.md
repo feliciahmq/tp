@@ -90,7 +90,7 @@ They come in several variations, based on whether they are **mandatory**, **opti
 **Notes:**
 
 1. **Optional prefixes** can be omitted, and the command will still execute successfully _(assuming all required parts of hte command are provided and correctly formatted)_.
-2. **Variadic prefixes** allow you to provide **multiple values** for the same field in a single command by repeating the prefix with different values.  
+2. **Variadic prefixes** allow you to provide **multiple values** for the same field in a single command by repeating the prefix with different values.
   For example:
    - `o/Birthday o/Anniversary` → Valid (multiple occasions)
 
@@ -114,10 +114,10 @@ The prefixes used in ReserveMate are universal across all commands.
 1. Prefixes are case-sensitive: `n/John` is different from `N/John`.
 2. Prefix order does not matter in commands.
 3. Optional prefixes may be omitted entirely.
-4. Variadic prefixes (like `o/`) can appear multiple times in a command. 
+4. Variadic prefixes (like `o/`) can appear multiple times in a command.
 5. Blank values (e.g., `n/`, `p/`) are invalid and will return an invalid format error.
 
- 
+
 ### Remarks
 
 
@@ -125,16 +125,16 @@ The prefixes used in ReserveMate are universal across all commands.
 
 #### `n/` — Customer Name
 
-- Names are **space-sensitive**:  
+- Names are **space-sensitive**:
   `n/AlexYeoh`, `n/Alex Yeoh`, and `n/Alex  Yeoh` are treated as different names.
 
-- Names are **case-insensitive**:  
+- Names are **case-insensitive**:
   `n/alex yeoh` is the same as `n/AlEx YeOh`.
 
-- **Duplicate names** are **not allowed** within the reservation list.  
+- **Duplicate names** are **not allowed** within the reservation list. 
   You cannot add two reservations with the exact same name (case-insensitive and space-normalized).
 
-- Names with **excessive leading/trailing spaces** are trimmed:  
+- Names with **excessive leading/trailing spaces** are trimmed:
   `n/   Alice Johnson   ` → `n/Alice Johnson`
 
 - 2 to 50 characters inclusive.
@@ -194,7 +194,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 ---
 
-To get started with ReserveMate, type the command in the command box and press `Enter` to execute it. 
+To get started with ReserveMate, type the command in the command box and press `Enter` to execute it.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -281,7 +281,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
 > Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
 > ```
-> 
+>
 > ---
 >
 > **User Error #2**: Missing `PHONE` field
@@ -294,7 +294,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
 > Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
 > ```
-> 
+>
 > ---
 >
 > **User Error #3**: Missing `DINER SIZE` field
@@ -307,7 +307,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
 > Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
 > ```
-> 
+>
 > ---
 >
 > **User Error #4**: Missing `DATE` field
@@ -320,14 +320,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
 > Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
 > ```
-> 
+>
 > ---
 >
-> **User Error #5**: Reservation already exists (duplicates) 
+> **User Error #5**: Reservation already exists (duplicates)
 >
 > **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
 >
-> **Output**: 
+> **Output**:
 > ``` This reservation already exists in the reservation book ```
 >
 > ---
@@ -350,7 +350,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Use Case #1**: Edit phone and email of reservation at index `1`.
 >
-> **Input:**  
+> **Input:** 
 > `edit 1 p/91234567 e/johndoe@example.com`
 >
 > **Output:**
@@ -362,19 +362,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Use Case #2**: Edit name and clear all occasions for reservation at index `2`.
 >
-> **Input:**  
+> **Input:**
 > `edit 2 n/Brittany o/`
 >
 > **Output:**
 > ```
-> Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion: 
+> Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion:
 > ```
 >
 > ---
 >
 > **Use Case #3**: Edit date and number of diners for reservation at index `3`.
 >
-> **Input:**  
+> **Input:**
 > `edit 3 d/2025-04-25 2000 x/6`
 >
 > **Output:**
@@ -391,7 +391,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **User Error #1**: No fields provided to edit.
 >
-> **Input:**  
+> **Input:**
 > `edit 1`
 >
 > **Output:**
@@ -403,7 +403,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **User Error #2**: Invalid index (0).
 >
-> **Input:**  
+> **Input:**
 > `edit 0 p/91234567`
 >
 > **Output:**
@@ -415,7 +415,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **User Error #3**: Reservation index does not exist.
 >
-> **Input:**  
+> **Input:**
 > `edit 99 n/Alex`
 > _(Assuming only 5 reservations exist)_
 >
@@ -428,7 +428,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **User Error #4**: Editing with invalid phone number.
 >
-> **Input:**  
+> **Input:**
 > `edit 1 p/12345678`
 >
 > **Output:**
@@ -440,7 +440,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **User Error #5**: Editing with past date.
 >
-> **Input:**  
+> **Input:**
 > `edit 2 d/2023-01-01 1200`
 >
 > **Output:**
@@ -467,8 +467,8 @@ Format: `delete <INDEX> cfm`
 >
 > **Use Case #1**: Deleting the 2nd reservation after listing all.
 >
-> **Input:**  
-> `list`  
+> **Input:**
+> `list`
 > `delete 2 cfm`
 >
 > **Output:**
@@ -480,8 +480,8 @@ Format: `delete <INDEX> cfm`
 >
 > **Use Case #2**: Deleting a reservation found through a filtered list.
 >
-> **Input:**  
-> `find Jane`  
+> **Input:**
+> `find Jane`
 > `delete 1 cfm`
 >
 > **Output:**
@@ -498,7 +498,7 @@ Format: `delete <INDEX> cfm`
 >
 > **User Error #1**: Missing confirmation flag.
 >
-> **Input:**  
+> **Input:**
 > `delete 1`
 >
 > **Output:**
@@ -510,12 +510,12 @@ Format: `delete <INDEX> cfm`
 >
 > **User Error #2**: Invalid index (zero).
 >
-> **Input:**  
+> **Input:**
 > `delete 0 cfm`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > delete: Deletes the reservation identified by the index number used in the reservation list.
 > Parameters: INDEX (must be a positive integer)
 > Example: delete 1 cfm
@@ -525,8 +525,8 @@ Format: `delete <INDEX> cfm`
 >
 > **User Error #3**: Index out of bounds.
 >
-> **Input:**  
-> `delete 10 cfm`  
+> **Input:**
+> `delete 10 cfm`
 > _(Assuming only 3 reservations exist)_
 >
 > **Output:**
@@ -538,7 +538,7 @@ Format: `delete <INDEX> cfm`
 >
 > **User Error #4**: Confirmation flag misspelled.
 >
-> **Input:**  
+> **Input:**
 > `delete 1 confirm`
 >
 > **Output:**
@@ -568,7 +568,7 @@ Format:
 >
 > **Use Case #1**: Saving a preference for Reservation 1.
 >
-> **Input:**  
+> **Input:**
 > `pref save 1 Window seat preferred, allergic to nuts`
 >
 > **Output:**
@@ -580,7 +580,7 @@ Format:
 >
 > **Use Case #2**: Showing an existing preference.
 >
-> **Input:**  
+> **Input:**
 > `pref show 1`
 >
 > **Output:**
@@ -592,7 +592,7 @@ Format:
 >
 > **Use Case #3**: Showing a reservation with no saved preference.
 >
-> **Input:**  
+> **Input:**
 > `pref show 3`
 >
 > **Output:**
@@ -609,12 +609,12 @@ Format:
 >
 > **User Error #1**: Saving without providing a preference description.
 >
-> **Input:**  
+> **Input:**
 > `pref save 2`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > pref: Saves or shows customer preferences for the reservation identified by the index number.
 > Parameters for saving: pref save INDEX PREFERENCE
 > Parameters for showing: pref show INDEX
@@ -626,12 +626,12 @@ Format:
 >
 > **User Error #2**: Missing index in `show`.
 >
-> **Input:**  
+> **Input:**
 > `pref show`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > pref: Saves or shows customer preferences for the reservation identified by the index number.
 > Parameters for saving: pref save INDEX PREFERENCE
 > Parameters for showing: pref show INDEX
@@ -643,8 +643,8 @@ Format:
 >
 > **User Error #3**: Index does not exist in the list.
 >
-> **Input:**  
-> `pref show 10`  
+> **Input:**
+> `pref show 10`
 > _(Assuming there are only 5 reservations)_
 >
 > **Output:**
@@ -656,12 +656,12 @@ Format:
 >
 > **User Error #4**: Invalid sub-command.
 >
-> **Input:**  
+> **Input:**
 > `pref update 1 Vegan menu`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > pref: Saves or shows customer preferences for the reservation identified by the index number.
 > Parameters for saving: pref save INDEX PREFERENCE
 > Parameters for showing: pref show INDEX
@@ -684,7 +684,7 @@ Format: `list`
 >
 > **Use Case #1**: Listing all reservations in the system.
 >
-> **Input:**  
+> **Input:**
 > `list`
 >
 > **Output:**
@@ -699,7 +699,7 @@ Format: `list`
 >
 > **Use Case #2**: Listing when no reservations exist.
 >
-> **Input:**  
+> **Input:**
 > `list`
 >
 > **Output:**
@@ -717,7 +717,7 @@ Format: `list`
 >
 > **User Error #1**: Providing unnecessary arguments.
 >
-> **Input:**  
+> **Input:**
 > `list all`
 >
 > **Output:**
@@ -729,7 +729,7 @@ Format: `list`
 >
 > **User Error #2**: Accidental typo.
 >
-> **Input:**  
+> **Input:**
 > `lst`
 >
 > **Output:**
@@ -755,7 +755,7 @@ Format: `show <INDEX>`
 >
 > **Use Case #1**: Viewing the details of the first reservation in the list.
 >
-> **Input:**  
+> **Input:**
 > `show 1`
 >
 > **Output:**
@@ -767,12 +767,12 @@ Format: `show <INDEX>`
 >
 > **Use Case #2**: Showing reservation details without any occasion.
 >
-> **Input:**  
+> **Input:**
 > `show 2`
 >
 > **Output:**
 > ```
-> Details of Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion: 
+> Details of Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion:
 > ```
 >
 > ---
@@ -784,7 +784,7 @@ Format: `show <INDEX>`
 >
 > **User Error #1**: Providing an index of 0.
 >
-> **Input:**  
+> **Input:**
 > `show 0`
 >
 > **Output:**
@@ -796,8 +796,8 @@ Format: `show <INDEX>`
 >
 > **User Error #2**: Providing an index larger than the list size.
 >
-> **Input:**  
-> `show 10`  
+> **Input:**
+> `show 10`
 > _(Assuming only 3 reservations exist)_
 >
 > **Output:**
@@ -809,12 +809,12 @@ Format: `show <INDEX>`
 >
 > **User Error #3**: Omitting the index.
 >
-> **Input:**  
+> **Input:**
 > `show`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > show: Shows the reservation details identified by the index number used in the displayed reservation list.
 > Parameters: INDEX (must be a positive integer)
 > Example: show 1
@@ -824,12 +824,12 @@ Format: `show <INDEX>`
 >
 > **User Error #4**: Inputting a non-numeric index.
 >
-> **Input:**  
+> **Input:**
 > `show first`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > show: Shows the reservation details identified by the index number used in the displayed reservation list.
 > Parameters: INDEX (must be a positive integer)
 > Example: show 1
@@ -857,7 +857,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **Use Case #1**: Finding a reservation by full name.
 >
-> **Input:**  
+> **Input:**
 > `find John`
 >
 > **Output:**
@@ -870,7 +870,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **Use Case #2**: Finding multiple matches with multiple keywords.
 >
-> **Input:**  
+> **Input:**
 > `find john jane`
 >
 > **Output:**
@@ -884,7 +884,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **Use Case #3**: Case-insensitive match.
 >
-> **Input:**  
+> **Input:**
 > `find john`
 >
 > **Output:**
@@ -902,7 +902,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **User Error #1**: No keyword provided.
 >
-> **Input:**  
+> **Input:**
 > `find`
 >
 > **Output:**
@@ -917,7 +917,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **User Error #2**: Keywords do not match any reservations.
 >
-> **Input:**  
+> **Input:**
 > `find Michael`
 >
 > **Output:**
@@ -929,8 +929,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **User Error #3**: Partial word search.
 >
-> **Input:**  
-> `find Han`  
+> **Input:**
+> `find Han`
 > _(Assuming only `Hans` exists)_
 >
 > **Output:**
@@ -958,7 +958,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **Use Case #1**: Filtering reservations from `2025-04-12 1400` to `2025-05-15 1400`.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2025-04-12 1400 ed/ 2025-05-15 1400`
 >
 > **Output:**
@@ -972,7 +972,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **Use Case #2**: No reservations in the given range.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2026-12-20 1200 ed/ 2026-12-22 1200`
 >
 > **Output:**
@@ -989,7 +989,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **User Error #1**: Start date is after end date.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2025-05-20 1400 ed/ 2025-04-18 1400`
 >
 > **Output:**
@@ -1001,7 +1001,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **User Error #2**: Invalid date format.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2026/12/12 1400 ed/ 2026-12-15 1400`
 >
 > **Output:**
@@ -1013,12 +1013,12 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **User Error #3**: Missing one or both parameters.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2026-12-12 1400`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > filter: Filters all reservations made between the given date range.
 > Parameters: sd/START DATE ed/END DATE
 > Example: filter sd/ 2026-12-31 1800 ed/ 2026-12-31 1900
@@ -1028,7 +1028,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **User Error #4**: Out-of-range date.
 >
-> **Input:**  
+> **Input:**
 > `filter sd/ 2027-01-01 1400 ed/ 2027-01-02 1400`
 >
 > **Output:**
@@ -1051,12 +1051,12 @@ Format: `free`
 >
 > **Use Case #1**: Viewing available slots.
 >
-> **Input:**  
+> **Input:**
 > `free`
 >
 > **Output:**
 > ```
-> Available free time slots: 
+> Available free time slots:
 > - 2025-04-12 1900 to 2025-04-20 1800
 > - 2025-04-20 1900 to 2025-05-28 1400
 > ```
@@ -1070,7 +1070,7 @@ Format: `free`
 >
 > **User Error #1**: Input with extra argument.
 >
-> **Input:**  
+> **Input:**
 > `free today`
 >
 > **Output:**
@@ -1105,7 +1105,7 @@ Format: `stats`
 >
 > **Use Case #1**: Generating statistics when reservations exist.
 >
-> **Input:**  
+> **Input:**
 > `stats`
 >
 > **Output:**
@@ -1122,7 +1122,7 @@ Format: `stats`
 >
 > **User Error #1**: Command used when no reservations exist.
 >
-> **Input:**  
+> **Input:**
 > `stats`
 >
 > **Output:**
@@ -1134,7 +1134,7 @@ Format: `stats`
 >
 > **User Error #2**: Command typed with extra argument.
 >
-> **Input:**  
+> **Input:**
 > `stats now`
 >
 > **Output:**
@@ -1163,7 +1163,7 @@ Format: `clear cfm`
 >
 > **Use Case #1**: Clearing all reservations with confirmation.
 >
-> **Input:**  
+> **Input:**
 > `clear cfm`
 >
 > **Output:**
@@ -1180,7 +1180,7 @@ Format: `clear cfm`
 >
 > **User Error #1**: Missing confirmation flag.
 >
-> **Input:**  
+> **Input:**
 > `clear`
 >
 > **Output:**
@@ -1193,12 +1193,12 @@ Format: `clear cfm`
 >
 > **User Error #2**: Typo in confirmation flag.
 >
-> **Input:**  
+> **Input:**
 > `clear confirm`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > clear: Clears the reservation in the reservation list.
 > Example: clear cfm
 > ```
@@ -1230,10 +1230,10 @@ Format: `help`
 >
 > **Use Case #1**: Displaying the help window.
 >
-> **Input:**  
+> **Input:**
 > `help`
 >
-> **Output:**  
+> **Output:**
 > ```
 > List of Commands:
 > 1. add - Enter a reservation
@@ -1258,7 +1258,7 @@ Format: `help`
 >
 > **User Error #1**: Command typed with extra arguments.
 >
-> **Input:**  
+> **Input:**
 > `help now`
 >
 > **Output:**
@@ -1270,7 +1270,7 @@ Format: `help`
 >
 > **User Error #2**: Misspelled command.
 >
-> **Input:**  
+> **Input:**
 > `halp`
 >
 > **Output:**
