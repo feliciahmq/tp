@@ -7,6 +7,7 @@ import static seedu.reserve.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class DateTimeTest {
      */
     private String getFormattedDateTime(int daysToAdd) {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime targetDateTime = now.plusDays(daysToAdd);
+        LocalDateTime targetDateTime = now.truncatedTo(ChronoUnit.HOURS).plusDays(daysToAdd);
         return targetDateTime.format(FORMATTER);
     }
 
@@ -71,8 +72,9 @@ public class DateTimeTest {
 
         // invalid date time
         assertFalse(DateTime.isValidDateTime(""));
-        assertFalse(DateTime.isValidDateTime("1990-12-12 1800"));
-        assertFalse(DateTime.isValidDateTime("2020-12-12 1800"));
+        assertFalse(DateTime.isValidDateTime("1990-12-12 1800")); // Past Date
+        assertFalse(DateTime.isValidDateTime("2020-12-12 1800")); // Past Date
+        assertFalse(DateTime.isValidDateTime("2025-12-12 1830")); // More than 60 days away and not hourly
         assertFalse(DateTime.isValidDateTime(INVALID_DATE_TIME_FORMAT_STR));
         assertFalse(DateTime.isValidDateTime(formattedYesterdayDateTime));
 
