@@ -2,6 +2,7 @@ package seedu.reserve.testutil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,11 +23,12 @@ public class ReservationBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DINERS = "2";
     public static final String DEFAULT_PREFERENCE = "None";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    public static final String DEFAULT_DATETIME = LocalDateTime.now().plusDays(29).format(FORMATTER);
+    public static final String DEFAULT_DATETIME = LocalDateTime.now().plusDays(29)
+            .truncatedTo(ChronoUnit.HOURS)
+            .format(FORMATTER);
 
     private Name name;
     private Phone phone;
