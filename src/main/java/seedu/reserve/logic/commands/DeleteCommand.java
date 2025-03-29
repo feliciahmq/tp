@@ -75,7 +75,7 @@ public class DeleteCommand extends Command {
         Reservation reservationToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         if (!isConfirmed) {
-            return new CommandResult(String.format(MESSAGE_CONFIRM_DELETE, this.targetIndex.getOneBased()));
+            throw new CommandException(String.format(MESSAGE_CONFIRM_DELETE, this.targetIndex.getOneBased()));
         }
 
         model.deleteReservation(reservationToDelete);

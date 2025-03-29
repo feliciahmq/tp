@@ -6,6 +6,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 import seedu.reserve.logic.parser.exceptions.ParseException;
 
@@ -15,12 +16,15 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
  */
 public class DateTime implements Comparable<DateTime> {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format YYYY-MM-DD HHmm "
-            + "and be a date-time after the current time but within 60 days from now.";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format YYYY-MM-DD HHmm "
+            + "and adhere to the following constraints: \n"
+            + "1. The date must be a valid calendar date. \n"
+            + "2. The time must be in hourly increments (e.g., 0000, 0100, etc.). \n"
+            + "3. The date-time must be after the current time but within 60 days from now.";
     public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static final LocalDateTime currentDateTime = LocalDateTime.now();
+    private static final LocalDateTime currentDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 
     public final LocalDateTime value;
 
@@ -59,11 +63,27 @@ public class DateTime implements Comparable<DateTime> {
             return false;
         }
         try {
+            if (!isHourlyTiming(test)) {
+                return false;
+            }
+
             LocalDateTime parsedDateTime = LocalDateTime.parse(test, FORMATTER);
             return isAfterCurrentTime(parsedDateTime) && isBeforeMaxBookingTime(parsedDateTime);
         } catch (DateTimeParseException | ParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if the time of the date-time string ends with "00".
+     *
+     * @param time The date-time string in format YYYY-MM-DD HHmm
+     * @return true if minutes are 00, false otherwise
+     */
+    private static boolean isHourlyTiming(String time) {
+        int minutesIndex = time.length() - 2;
+        String minutes = time.substring(minutesIndex);
+        return minutes.endsWith("00");
     }
 
     /**
