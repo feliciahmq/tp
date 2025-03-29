@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.TextFlow?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="ReserveMate" minWidth="700" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -52,6 +53,7 @@
             <padding>
               <Insets top="5" right="10" bottom="5" left="10" />
             </padding>
+            <TextFlow fx:id = "resultDisplayTextFlow" />
           </StackPane>
         </SplitPane>
 
