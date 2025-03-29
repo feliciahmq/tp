@@ -122,7 +122,7 @@ Actor: Restaurant Manager, ReserveMate
 
 * 1a. User enters an invalid command format.
 
-    * 1a1. ReserveMate shows an error message 
+    * 1a1. ReserveMate shows an error message
 
       Use case ends.
 
@@ -227,7 +227,7 @@ Use case ends.
 * 1a. User enters an invalid command format.
 
   * 1a1. ReserveMate shows an error message providing the correct format.
-    
+
   Use case resumes at step 1.
 
 * 2a. The user given index is not a valid reservation.
@@ -287,7 +287,7 @@ Use case ends
 * 1a. The user enters an invalid command.
 
   * 1a1 ReserveMate prompts user to input a valid command.
-  
+
   Use case resumes at step 1.
 
 * 2a. ReserveMate found no reservations between the 2 dates.
@@ -317,17 +317,17 @@ Use case ends
 
 * 1a. The user enters an invalid command format.
   * 1a1. ReserveMate shows an error message providing the correct format.
-  
+
     Use case resumes at step 1.
 
 * 1b. The specified index is invalid.
   * 1b1. ReserveMate shows an invalid reservation index error.
-  
+
     Use case resumes at step 1.
 
 * 2a. No preference has been set for the reservation.
   * 2a1. ReserveMate displays a message indicating no preference set.
-  
+
     Use case ends
 
 
