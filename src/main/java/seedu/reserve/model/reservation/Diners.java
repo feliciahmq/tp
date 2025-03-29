@@ -23,7 +23,15 @@ public class Diners {
     public Diners(String numberOfDiners) {
         requireNonNull(numberOfDiners);
         checkArgument(isValidDiners(numberOfDiners), MESSAGE_CONSTRAINTS);
-        value = numberOfDiners;
+        value = formatDiners(numberOfDiners);
+    }
+
+
+    /**
+     * Format the diners string by removing leading zeros.
+     */
+    private static String formatDiners(String diners) {
+        return String.valueOf(Integer.parseInt(diners));
     }
 
     /**

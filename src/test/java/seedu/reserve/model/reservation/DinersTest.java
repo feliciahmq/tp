@@ -1,5 +1,6 @@
 package seedu.reserve.model.reservation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.testutil.Assert.assertThrows;
@@ -17,6 +18,17 @@ public class DinersTest {
     public void constructor_invalidDiners_throwsIllegalArgumentException() {
         String invalidDiner = "1000";
         assertThrows(IllegalArgumentException.class, () -> new Diners(invalidDiner));
+    }
+
+    @Test
+    public void constructor_removeLeadingZeros_success() {
+        // Remove leading zero
+        assertEquals("1", new Diners("00001").value);
+        assertEquals("5", new Diners("005").value);
+        assertEquals("10", new Diners("010").value);
+
+        assertEquals("1", new Diners("1").value);
+        assertEquals("10", new Diners("10").value);
     }
 
     @Test
