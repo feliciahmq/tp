@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.reserve.logic.commands.exceptions.CommandException;
-import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ReserveMate;
 import seedu.reserve.model.reservation.Reservation;
@@ -43,9 +42,8 @@ public class ClearCommand extends Command {
      *
      * @param trimmedArgs The user input argument after trimming spaces.
      * @return {@code true} if the argument is valid, {@code false} otherwise.
-     * @throws ParseException If the confirmation argument contains multiple words.
      */
-    public static boolean isValidConfirm(String trimmedArgs) throws ParseException {
+    public static boolean isValidConfirm(String trimmedArgs) {
         String[] trimmedArgArray = trimmedArgs.split("\\s+");
         if (trimmedArgArray.length > 1) {
             return false;

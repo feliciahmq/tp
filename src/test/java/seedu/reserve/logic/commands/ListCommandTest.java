@@ -1,5 +1,7 @@
 package seedu.reserve.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
@@ -46,5 +48,51 @@ public class ListCommandTest {
 
         // Check for CommandException
         assertCommandFailure(new ListCommand(), emptyModel, Messages.MESSAGE_EMPTY_RESERVATION_LIST);
+    }
+
+    @Test
+    public void equals_sameInstance_returnsTrue() {
+        ListCommand listCommand = new ListCommand();
+        assert(listCommand.equals(listCommand));
+    }
+
+
+    @Test
+    public void equals_differentInstances_returnsTrue() {
+        ListCommand listCommand1 = new ListCommand();
+        ListCommand listCommand2 = new ListCommand();
+        assert(listCommand1.equals(listCommand2));
+    }
+
+
+    @Test
+    public void equals_differentObject_returnsFalse() {
+        ListCommand listCommand = new ListCommand();
+        Object other = new Object();
+        assert(!listCommand.equals(other));
+    }
+
+    @Test
+    public void isValidListCommand_validInputs_returnsTrue() {
+        // Empty input (valid case)
+        assertTrue(ListCommand.isValidListCommand(""));
+
+        // Input with spaces only (still valid because it trims)
+        assertTrue(ListCommand.isValidListCommand("   "));
+    }
+
+    @Test
+    public void isValidListCommand_invalidInputs_returnsFalse() {
+        // Non-empty text input
+        assertFalse(ListCommand.isValidListCommand("abc"));
+
+        // Random special characters
+        assertFalse(ListCommand.isValidListCommand("@!#"));
+
+        // Combination of spaces and text
+        assertFalse(ListCommand.isValidListCommand(" list "));
+
+        // Numeric values
+        assertFalse(ListCommand.isValidListCommand("123"));
     }
 }
