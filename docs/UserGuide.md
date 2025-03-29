@@ -6,7 +6,7 @@
 
 # User Guide
 
-ReserveMate is a **desktop app for managing reservations, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate can get your reservation management tasks done faster than traditional GUI apps.
+ReserveMate is a **desktop application for managing reservations, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate can get your reservation management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -23,39 +23,178 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 3. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/UI.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. <br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all available commands.<br>
-   Some example commands you can try:
+[//]: # (   ![Ui]&#40;images/UI.png&#41;)
 
-   * `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-12 1800 o/Birthday` : Adds a reservation named `John Doe` to the ReserveMate.
+[//]: # (5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will list all available commands.<br>)
 
-   * `edit 2 n/Bobby p/98765432 e/bobby@example.com` : Updates the 2nd reservation shown in the reservation list to reflect new details of at least one specified tag.
+[//]: # (   )
+[//]: # (6. Refer to the [Features]&#40;#features&#41; below for details of each command.)
 
-   * `pref save 3 Allergic to seafood` : saves the 3rd reservation's preference in the reservation list.
+### GUI Overview
 
-   * `pref show 3 ` : Displays the 3rd reservation's preference that is stored in the reservation list.
+ReserveMate GUI is organized into three parts.
 
-   * `delete 3` : Deletes the 3rd reservation shown in the reservation list.
+![Ui](images/UI.png)
 
-   * `show 1` : Displays additional details about the 1st reservation shown in the reservation list.
+- `Command Box`: This is where users enter commands to interact with ReserveMate.
+- `Reservation List`: Displays a list of all current reservations.
+- `Result Display`: Shows output messages in response to user commands, such as confirmations, error messages or summaries of the executed commands.
 
-   * `list` : Lists all reservations.
+### Command Structure
 
-   * `help` : Displays all available commands.
+Understanding how commands work in ReserveMate is important for using the app effectively. This section breaks down the **structure, arguments, and parameters** used across all commands.
 
-   * `find john` : Filters & displays reservations containing "john".
+Commands in ReserveMate have the following structure:
 
-   * `clear` : Deletes all reservations.
-   
-   * `filter sd/ 2026-12-12 1800 ed/ 2026-12-15 1400` : Filters all reservations between the 2 dates.
+<p style="text-align: center;">
+    <code>command_word (REFERENCE) (PARAMETERS)</code>
+</p>
+<br>
 
-   * `stats` : Display the statistics of reservations.
-   
-     * `exit` : Exits the app.
+| command_word                                                   | REFERENCE                                                 | PARAMETERS                                                       |
+|----------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|
+| The command to be performed. Command words are **case-sensitive**. | Often used to reference an index in the reservation list. | Used to specify additional details for a given `command_word`. |
 
-6. Refer to the [Features](#features) below for details of each command.
+#### Reference Types
+
+| Reference             | Meaning                                  | Constraints                                                                         | Remarks                                                                      |
+|-----------------------|------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `INDEX`<sup>1,2</sup> | Index of reservation in reservation list | Must be a positive integer `>= 1` | Used in commands like `edit` and `delete` to refer to a specific reservation |
+
+**Notes:**
+
+1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
+2. ReserveMate handles `INDEX` errors in two ways:
+   1. If the index is an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid command format.
+   2. If the index is a valid positive integer but exceeds the size of the current reservation list, it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
+
+#### Prefixes
+
+Prefixes are in the format:
+
+<p style="text-align: center;">
+    <code>prefix/Value</code>
+</p>
+
+---
+They come in several variations, based on whether they are **mandatory**, **optional**, or **repeatable** (variadic):
+
+|                          | **Mandatory**        | **Optional<sup>1</sup>**     |
+|--------------------------|----------------------|-------------------------------|
+| **Not variadic**         | `prefix/Value`       | `[prefix/Value]`              |
+| **Variadic<sup>2</sup>** | `prefix/Value...`    | `[prefix/Value]...`           |
+---
+
+**Notes:**
+
+1. **Optional prefixes** can be omitted, and the command will still execute successfully _(assuming all required parts of hte command are provided and correctly formatted)_.
+2. **Variadic prefixes** allow you to provide **multiple values** for the same field in a single command by repeating the prefix with different values.  
+  For example:
+   - `o/Birthday o/Anniversary` → Valid (multiple occasions)
+
+#### Prefix Types
+
+The prefixes used in ReserveMate are universal across all commands.
+
+| Prefix | Description             | Constraints                                                                                                                                                                                                                                                                                                                                                              | Valid                                      | Invalid                                       |
+|--------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|-----------------------------------------------|
+| `n/`   | Customer Name           | 2–50 characters, only `alphanumeric` characters and `spaces`. Case-insensitive.                                                                                                                                                                                                                                                                                          | `n/John Doe`, `n/Mary-Anne`, `n/Bobby Tan` | `n/J0hn`, `n/`, `n/@John`                     |
+| `p/`   | Contact Number          | Exactly 8 digits and must start with `8` or `9`.                                                                                                                                                                                                                                                                                                                         | `p/91234567`, `p/87654321`                 | `p/1234567`, `p/01234567`, `p/`               |
+| `e/`   | Email Address           | Must be a valid email format of `local-part@domain`. The local-part should only contain `alphanumeric` characters and these special characters, excluding the parentheses, `(+_.-)`. The local-part cannot start or end with any special characters. This is followed by a `@` and then a domain name. The domain name is made up of domain labels separated by periods. | `e/john@example.com`                       | `e/`, `e/john@.com`                           |
+| `x/`   | Number of Diners        | Integer from 1 to 10 inclusive.                                                                                                                                                                                                                                                                                                                                          | `x/1`, `x/5`, `x/10`                       | `x/0`, `x/11`, `x/-2`, `x/ten`                |
+| `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days.                                                                                                                                                                                                                                                                                                                  | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
+| `sd/`  | Start Date (Filter)     | Format: `YYYY-MM-DD HHmm`. Must be earlier than `ed/`.                                                                                                                                                                                                                                                                                                                   | `sd/2025-05-01 1800`                       | `sd/2025-13-01`, `sd/invalid`, `sd/`          |
+| `ed/`  | End Date (Filter)       | Format: `YYYY-MM-DD HHmm`. Must be later than `sd/`.                                                                                                                                                                                                                                                                                                                     | `ed/2025-05-15 2200`                       | `ed/2025-01-01`, `ed/late`, `ed/`             |
+| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and is `variadic`. Optional??                                                                                                                                                                                                                                                                                                       | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
+
+**Notes:**
+
+1. Prefixes are case-sensitive: `n/John` is different from `N/John`.
+2. Prefix order does not matter in commands.
+3. Optional prefixes may be omitted entirely.
+4. Variadic prefixes (like `o/`) can appear multiple times in a command. 
+5. Blank values (e.g., `n/`, `p/`) are invalid and will return an invalid format error.
+
+ 
+### Remarks
+
+
+---
+
+#### `n/` — Customer Name
+
+- Names are **space-sensitive**:  
+  `n/AlexYeoh`, `n/Alex Yeoh`, and `n/Alex  Yeoh` are treated as different names.
+
+- Names are **case-insensitive**:  
+  `n/alex yeoh` is the same as `n/AlEx YeOh`.
+
+- **Duplicate names** are **not allowed** within the reservation list.  
+  You cannot add two reservations with the exact same name (case-insensitive and space-normalized).
+
+- Names with **excessive leading/trailing spaces** are trimmed:  
+  `n/   Alice Johnson   ` → `n/Alice Johnson`
+
+- 2 to 50 characters inclusive.
+
+- Names can be:
+    - Entirely numeric (e.g., `n/123456`) — though discouraged due to confusion with indexes.
+    - A **single character or initial** (e.g., `n/A`) — valid but potentially confusing in lists.
+
+---
+
+#### `p/` — Contact Number
+
+- Phone numbers **must start with `8` or `9`** and be exactly 8 digits long.
+- Multiple reservations can share the **same phone number** — duplicates allowed.
+
+---
+
+#### `e/` — Email Address
+
+- Emails must match a **basic regex pattern**, but:
+    - Technically valid emails may be **functionally incorrect** (e.g., `123@123`).
+    - Strange but valid domains (e.g., `user@x-y.com`, `a@123.co`) are allowed.
+
+---
+
+#### `x/` — Number of Diners
+
+- Accepts integers from **1 to 10**, inclusive.
+- Non-integer or out-of-range values (e.g., `x/0`, `x/15`) are rejected.
+- `x/0` or `x/one` → invalid input.
+
+---
+
+#### `d/` — Reservation Date & Time
+
+- Format: `YYYY-MM-DD HHmm`
+- Date must be:
+    - Within the next **60 days**
+
+---
+
+#### `o/` — Occasion
+
+- Prefix is **optional and variadic** (can appear multiple times).
+- Accepts alphanumeric values and basic punctuation.
+- Blank values (e.g., `o/`) will clear the occasions for the specific reservation.
+- No enforcement of case — `o/birthday` and `o/Birthday` are treated the same.
+
+---
+
+#### `sd/` and `ed/` — Start and End Date for Filtering
+
+- Format: `YYYY-MM-DD HHmm`
+- `sd/` must be **before** `ed/`
+- Both must be **valid future or current dates**
+- If both are valid but incorrectly ordered, an error is thrown.
+
+---
+
+To get started with ReserveMate, type the command in the command box and press `Enter` to execute it. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,18 +211,18 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
   e.g. in `edit <INDEX> p/96214711`, `PHONE_NUMBER` is a parameter which can be used as `add n/John Doe p/96214711`.
 
 * Items in square brackets are optional.<br>
-  e.g `edit <INDEX> [o/OCCASION]` can be used as `n/John Doe o/Birthday` or as `n/John Doe`.
+  e.g. `edit <INDEX> [o/OCCASION]` can be used as `n/John Doe o/Birthday` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…` are variadic, meaning they can be used zero or more times.<br>
   e.g. `[o/OCCASION]…​` can be used as ` ` (i.e. 0 times), `o/Birthday`, `o/Birthday o/Graduation` etc.
 
-* Parameters can be in any order.<br>
+* Prefix order does not matter. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be invalid.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as invalid.
 
-* All commands are not case-sensitive.
+* All commands are case-insensitive.
   e.g. if the command specifies `list` or `LIST` will be accepted as valid commands.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -91,10 +230,992 @@ ReserveMate is a **desktop app for managing reservations, optimized for use via 
 
 ### Viewing User Guide : `User Guide`
 
-Refers user to github ReserveMate user guide documentation.
+Refers user to GitHub ReserveMate user guide documentation.
 
 ![help message](images/userGuideMessage.png)
 
+
+### Adding a reservation: `add`
+
+Adds a new `Reservation` to ReserveMate.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`
+
+**Constraints**
+* A reservation can have any number of occasion (including 0)
+* Phone number should start with either 8 or 9 and must be 8 digits.
+* Date time should be after current time but within 60 days from it.
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Adding a reservation under `John Doe` with phone number `98765432`, email `johnd@example.com`, diner size of `5` on `2025-04-12 1800` for a `birthday`.
+>
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+>
+> **Output**: <br>
+> ```
+> New reservation added: John Doe; Phone: 98765432; Email: johnd@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+>```
+> ---
+>
+> **Use Case #2**: Adding a reservation under `Jane Doe` with phone number `81234567`, email `betsycrowe@example.com`, diner size of `3` on `2025-04-20 1800` for a `graduation`.
+>
+> **Input**: `add n/Jane Doe e/betsycrowe@example.com x/3 p/81234567 o/GRADUATION d/2025-04-20 1800`
+>
+> **Output**: <br>
+> ```
+> New reservation added: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion: [GRADUATION]
+> ```
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Missing `NAME` field
+>
+> **Input**: `add p/93828282 e/johnd@example.com x/5 d/2026-12-31 1800`
+>
+> **Output**: <br>
+> ```
+> Invalid command format!
+> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
+> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> ```
+> 
+> ---
+>
+> **User Error #2**: Missing `PHONE` field
+>
+> **Input**: `add n/John Doe e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday`
+>
+> **Output**: <br>
+> ```
+> Invalid command format!
+> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
+> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> ```
+> 
+> ---
+>
+> **User Error #3**: Missing `DINER SIZE` field
+>
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com d/2026-12-31 1800 o/Birthday`
+>
+> **Output**: <br>
+> ```
+> Invalid command format!
+> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
+> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> ```
+> 
+> ---
+>
+> **User Error #4**: Missing `DATE` field
+>
+> **Input**: `add n/John Doe p/98765432 x/5 o/Birthday`
+>
+> **Output**: <br>
+> ```
+> Invalid command format!
+> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
+> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> ```
+> 
+> ---
+>
+> **User Error #5**: Reservation already exists (duplicates) 
+>
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+>
+> **Output**: 
+> ``` This reservation already exists in the reservation book ```
+>
+> ---
+---
+
+### Editing a reservation : `edit`
+
+Edits an existing `Reservation` in ReserveMate.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [o/OCCASION]…​`
+
+**Constraints**
+* `INDEX` **must be a positive integer** referring to a valid reservation in the list.
+* At least one of field (prefix) must be provided.
+* Editing occasion replaces the full list of occasions. Use `o/` with no value to clear.
+* Dates must be within 60 days from now and in the future.
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Edit phone and email of reservation at index `1`.
+>
+> **Input:**  
+> `edit 1 p/91234567 e/johndoe@example.com`
+>
+> **Output:**
+> ```
+> Edited Reservation: John Doe; Phone: 91234567; Email: johndoe@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+> ```
+>
+> ---
+>
+> **Use Case #2**: Edit name and clear all occasions for reservation at index `2`.
+>
+> **Input:**  
+> `edit 2 n/Brittany o/`
+>
+> **Output:**
+> ```
+> Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion: 
+> ```
+>
+> ---
+>
+> **Use Case #3**: Edit date and number of diners for reservation at index `3`.
+>
+> **Input:**  
+> `edit 3 d/2025-04-25 2000 x/6`
+>
+> **Output:**
+> ```
+> Edited Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 6; Occasion: [GRADUATION]
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: No fields provided to edit.
+>
+> **Input:**  
+> `edit 1`
+>
+> **Output:**
+> ```
+> At least one field to edit must be provided.
+> ```
+>
+> ---
+>
+> **User Error #2**: Invalid index (0).
+>
+> **Input:**  
+> `edit 0 p/91234567`
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #3**: Reservation index does not exist.
+>
+> **Input:**  
+> `edit 99 n/Alex`
+> _(Assuming only 5 reservations exist)_
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #4**: Editing with invalid phone number.
+>
+> **Input:**  
+> `edit 1 p/12345678`
+>
+> **Output:**
+> ```
+> Phone numbers should only contain numbers, it should begins with either 8 or 9 and it must be exactly 8 digits long
+> ```
+>
+> ---
+>
+> **User Error #5**: Editing with past date.
+>
+> **Input:**  
+> `edit 2 d/2023-01-01 1200`
+>
+> **Output:**
+> ```
+> DateTime must be in the format YYYY-MM-DD HHmm and be a date-time after the current time but within 60 days from now.
+> ```
+>
+> ---
+
+### Deleting a reservation : `delete`
+
+Deletes the specified `Reservation` from ReserveMate.
+
+Format: `delete <INDEX> cfm`
+
+**Constraints**
+* `INDEX` **must be a positive integer** referring to a valid reservation in the list.
+* A confirmation flag 'cfm' is **required** **and case-sensitive**
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Deleting the 2nd reservation after listing all.
+>
+> **Input:**  
+> `list`  
+> `delete 2 cfm`
+>
+> **Output:**
+> ```
+> Reservation 2 deleted successfully
+> ```
+>
+> ---
+>
+> **Use Case #2**: Deleting a reservation found through a filtered list.
+>
+> **Input:**  
+> `find Jane`  
+> `delete 1 cfm`
+>
+> **Output:**
+> ```
+> Reservation 1 deleted successfully
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Missing confirmation flag.
+>
+> **Input:**  
+> `delete 1`
+>
+> **Output:**
+> ```
+> Are you sure you want to delete 1? Type 'delete 1 cfm'
+> ```
+>
+> ---
+>
+> **User Error #2**: Invalid index (zero).
+>
+> **Input:**  
+> `delete 0 cfm`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> delete: Deletes the reservation identified by the index number used in the reservation list.
+> Parameters: INDEX (must be a positive integer)
+> Example: delete 1 cfm
+> ```
+>
+> ---
+>
+> **User Error #3**: Index out of bounds.
+>
+> **Input:**  
+> `delete 10 cfm`  
+> _(Assuming only 3 reservations exist)_
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #4**: Confirmation flag misspelled.
+>
+> **Input:**  
+> `delete 1 confirm`
+>
+> **Output:**
+> ```
+> Are you sure you want to delete 1? Type 'delete 1 cfm'
+> ```
+>
+> ---
+
+### Managing reservation preferences : `pref`
+
+Saves or displays a `Reservation` preference in ReserveMate.
+
+Format:
+* To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
+* To show a preference: `pref show <INDEX>`
+
+**Notes**:
+* `INDEX` **must be a positive integer** referring to a valid reservation in the list.
+* `PREFERENCE_DESCRIPTION` can include dietary needs, seating preferences, or other customer requests.
+* Showing a preference will indicate if `None` has been set yet.
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Saving a preference for Reservation 1.
+>
+> **Input:**  
+> `pref save 1 Window seat preferred, allergic to nuts`
+>
+> **Output:**
+> ```
+> Saved preference for reservation: 1
+> ```
+>
+> ---
+>
+> **Use Case #2**: Showing an existing preference.
+>
+> **Input:**  
+> `pref show 1`
+>
+> **Output:**
+> ```
+> Preference for reservation 1: Window seat preferred, allergic to nuts
+> ```
+>
+> ---
+>
+> **Use Case #3**: Showing a reservation with no saved preference.
+>
+> **Input:**  
+> `pref show 3`
+>
+> **Output:**
+> ```
+> Preference for reservation 3: None
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Saving without providing a preference description.
+>
+> **Input:**  
+> `pref save 2`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> pref: Saves or shows customer preferences for the reservation identified by the index number.
+> Parameters for saving: pref save INDEX PREFERENCE
+> Parameters for showing: pref show INDEX
+> Example: pref save 1 No nuts, allergic to seafood
+> Example: pref show 1
+> ```
+>
+> ---
+>
+> **User Error #2**: Missing index in `show`.
+>
+> **Input:**  
+> `pref show`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> pref: Saves or shows customer preferences for the reservation identified by the index number.
+> Parameters for saving: pref save INDEX PREFERENCE
+> Parameters for showing: pref show INDEX
+> Example: pref save 1 No nuts, allergic to seafood
+> Example: pref show 1
+> ```
+>
+> ---
+>
+> **User Error #3**: Index does not exist in the list.
+>
+> **Input:**  
+> `pref show 10`  
+> _(Assuming there are only 5 reservations)_
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #4**: Invalid sub-command.
+>
+> **Input:**  
+> `pref update 1 Vegan menu`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> pref: Saves or shows customer preferences for the reservation identified by the index number.
+> Parameters for saving: pref save INDEX PREFERENCE
+> Parameters for showing: pref show INDEX
+> Example: pref save 1 No nuts, allergic to seafood
+> Example: pref show 1
+> ```
+>
+> ---
+
+### Listing all reservations : `list`
+
+Shows a list of all `Reservation` in the ReserveMate.
+
+Format: `list`
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Listing all reservations in the system.
+>
+> **Input:**  
+> `list`
+>
+> **Output:**
+> ```
+> Listed all reservations
+> 1. John Doe (5 diners) - 2025-04-12 1800
+> 2. Jane Doe (3 diners) - 2025-04-20 1800
+> 3. Bobby (1 diner) - 2025-04-18 1900
+> ```
+>
+> ---
+>
+> **Use Case #2**: Listing when no reservations exist.
+>
+> **Input:**  
+> `list`
+>
+> **Output:**
+> ```
+> No reservations found. Use the 'add' command to create a reservation
+> or 'help' to view all commands.
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Providing unnecessary arguments.
+>
+> **Input:**  
+> `list all`
+>
+> **Output:**
+> ```
+> Invalid command.
+> ```
+>
+> ---
+>
+> **User Error #2**: Accidental typo.
+>
+> **Input:**  
+> `lst`
+>
+> **Output:**
+> ```
+> Unknown command
+> ```
+>
+> ---`
+
+### Showing reservation details : `show`
+
+Show additional details of a specific `Reservation`.
+
+Format: `show <INDEX>`
+
+**Constraints**:
+* `INDEX` **must be a positive integer** referring to a valid reservation in the list.
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Viewing the details of the first reservation in the list.
+>
+> **Input:**  
+> `show 1`
+>
+> **Output:**
+> ```
+> Details of Reservation: John Doe; Phone: 98765432; Email: johnd@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+> ```
+>
+> ---
+>
+> **Use Case #2**: Showing reservation details without any occasion.
+>
+> **Input:**  
+> `show 2`
+>
+> **Output:**
+> ```
+> Details of Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion: 
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Providing an index of 0.
+>
+> **Input:**  
+> `show 0`
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #2**: Providing an index larger than the list size.
+>
+> **Input:**  
+> `show 10`  
+> _(Assuming only 3 reservations exist)_
+>
+> **Output:**
+> ```
+> The reservation index provided is invalid
+> ```
+>
+> ---
+>
+> **User Error #3**: Omitting the index.
+>
+> **Input:**  
+> `show`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> show: Shows the reservation details identified by the index number used in the displayed reservation list.
+> Parameters: INDEX (must be a positive integer)
+> Example: show 1
+> ```
+>
+> ---
+>
+> **User Error #4**: Inputting a non-numeric index.
+>
+> **Input:**  
+> `show first`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> show: Shows the reservation details identified by the index number used in the displayed reservation list.
+> Parameters: INDEX (must be a positive integer)
+> Example: show 1
+> ```
+>
+> ---
+
+### Locating reservations by name: `find`
+
+Finds `Reservation` whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+**Constraints**
+- The search is **case-insensitive**.
+- The order of keywords does **not** matter.
+- Only **full words** will be matched (e.g., `Han` will not match `Hans`).
+- Searches are done on the **name field only**.
+- Matches are based on **OR** logic (any one keyword match is sufficient).
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Finding a reservation by full name.
+>
+> **Input:**  
+> `find John`
+>
+> **Output:**
+> ```
+> 1 reservations listed!
+> 1. John Doe (5 diners) - 2025-04-12 1800
+> ```
+>
+> ---
+>
+> **Use Case #2**: Finding multiple matches with multiple keywords.
+>
+> **Input:**  
+> `find john jane`
+>
+> **Output:**
+> ```
+> 1 reservations listed!
+> 1. John Doe (5 diners) - 2025-04-12 1800
+> 2. Jane Doe (3 diners) - 2025-04-20 1800
+> ```
+>
+> ---
+>
+> **Use Case #3**: Case-insensitive match.
+>
+> **Input:**  
+> `find john`
+>
+> **Output:**
+> ```
+> 1 reservations listed!
+> 1. John Doe (5 diners) - 2025-04-12 1800
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: No keyword provided.
+>
+> **Input:**  
+> `find`
+>
+> **Output:**
+> ```
+> Invalid command format!
+> find: Finds all reservations whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+> Parameters: KEYWORD [MORE_KEYWORDS]...
+> Example: find alice bob charlie
+> ```
+>
+> ---
+>
+> **User Error #2**: Keywords do not match any reservations.
+>
+> **Input:**  
+> `find Michael`
+>
+> **Output:**
+> ```
+> No reservations found matching the keyword(s).
+> ```
+>
+> ---
+>
+> **User Error #3**: Partial word search.
+>
+> **Input:**  
+> `find Han`  
+> _(Assuming only `Hans` exists)_
+>
+> **Output:**
+> ```
+> No reservations found matching the keyword(s).
+> ```
+>
+> ---
+
+### Filtering the reservations: `filter`
+
+Filters `Reservation` between the specified date and time range.
+
+Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
+
+**Constraints**
+- Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
+-`DATE_TIME` provided must be valid (within 60 days) and follow the format: `YYYY-MM-DD HHmm`.
+- The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Filtering reservations from `2025-04-12 1400` to `2025-05-15 1400`.
+>
+> **Input:**  
+> `filter sd/ 2025-04-12 1400 ed/ 2025-05-15 1400`
+>
+> **Output:**
+> ```
+> Here are the available reservations for the date range.
+> 1. John Doe (5 diners) - 2025-04-12 1800
+> 2. Jane Doe (3 diners) - 2025-04-20 1800
+> ```
+>
+> ---
+>
+> **Use Case #2**: No reservations in the given range.
+>
+> **Input:**  
+> `filter sd/ 2026-12-20 1200 ed/ 2026-12-22 1200`
+>
+> **Output:**
+> ```
+> No reservations found for the date range.
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Start date is after end date.
+>
+> **Input:**  
+> `filter sd/ 2025-05-20 1400 ed/ 2025-04-18 1400`
+>
+> **Output:**
+> ```
+> Start date must be before end date
+> ```
+>
+> ---
+>
+> **User Error #2**: Invalid date format.
+>
+> **Input:**  
+> `filter sd/ 2026/12/12 1400 ed/ 2026-12-15 1400`
+>
+> **Output:**
+> ```
+> DateTime must be in the format YYYY-MM-DD HHmm
+> ```
+>
+> ---
+>
+> **User Error #3**: Missing one or both parameters.
+>
+> **Input:**  
+> `filter sd/ 2026-12-12 1400`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> filter: Filters all reservations made between the given date range.
+> Parameters: sd/START DATE ed/END DATE
+> Example: filter sd/ 2026-12-31 1800 ed/ 2026-12-31 1900
+> ```
+>
+> ---
+>
+> **User Error #4**: Out-of-range date.
+>
+> **Input:**  
+> `filter sd/ 2027-01-01 1400 ed/ 2027-01-02 1400`
+>
+> **Output:**
+> ```
+> Date out of supported range: Only dates within 60 days from today are allowed.
+> ```
+>
+> ---
+
+### Free reservations: `free`
+
+Displays all available `Reservation` time slots within the next 60 days.
+
+Format: `free`
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Viewing available slots.
+>
+> **Input:**  
+> `free`
+>
+> **Output:**
+> ```
+> Available free time slots: 
+> - 2025-04-12 1900 to 2025-04-20 1800
+> - 2025-04-20 1900 to 2025-05-28 1400
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Input with extra argument.
+>
+> **Input:**  
+> `free today`
+>
+> **Output:**
+> ```
+> Invalid command.
+> ```
+>
+> ---
+>
+> **User Error #2**: Typo in command.
+>
+> **Input:**  
+> `freeslot`
+>
+> **Output:**
+> ```
+> Unknown command
+> ```
+>
+> ---
+
+### Display reservation statistics : `stats`
+
+Displays statistics of `Reservation` in ReserveMate.
+
+Format: `stats`
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Generating statistics when reservations exist.
+>
+> **Input:**  
+> `stats`
+>
+> **Output:**
+> *(Pie chart appears showing distribution of number of reservations by diner size.)*
+>
+> ![stats_command.png](images/statsCommand.png)
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Command used when no reservations exist.
+>
+> **Input:**  
+> `stats`
+>
+> **Output:**
+> ```
+> No reservation data available to generate statistics. Please add reservations first.
+> ```
+>
+> ---
+>
+> **User Error #2**: Command typed with extra argument.
+>
+> **Input:**  
+> `stats now`
+>
+> **Output:**
+> ```
+> Invalid command.
+> ```
+>
+> ---
+
+### Clearing all entries : `clear`
+
+Clears all `Reservation` from the ReserveMate.
+
+Format: `clear cfm`
+
+**Constraints**
+- The confirmation flag `cfm` is **mandatory** and **case-sensitive**.
+- This action **cannot be undone**.
+- Used with caution to reset the reservation list completely.
+
+
+---
+
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Clearing all reservations with confirmation.
+>
+> **Input:**  
+> `clear cfm`
+>
+> **Output:**
+> ```
+> Reservation book has been cleared!
+> ```
+>
+> ---
+
+---
+
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Missing confirmation flag.
+>
+> **Input:**  
+> `clear`
+>
+> **Output:**
+> ```
+> Clear command requires confirmation.
+> Please enter: clear cfm
+> ```
+>
+> ---
+>
+> **User Error #2**: Typo in confirmation flag.
+>
+> **Input:**  
+> `clear confirm`
+>
+> **Output:**
+> ```
+> Invalid command format! 
+> clear: Clears the reservation in the reservation list.
+> Example: clear cfm
+> ```
+>
+> ---
+>
+> **User Error #3**: Command issued when list is already empty.
+>
+> **Input:**  
+> `clear cfm`
+>
+> **Output:**
+> ```
+> Reservation List is empty. No reservations found to clear!
+> ```
+>
+> ---
 
 ### Displaying commands : `help`
 
@@ -102,153 +1223,62 @@ Displays a list of available commands.
 
 Format: `help`
 
-Examples:
-* `help`
+---
 
-### Showing reservation details : `show`
+- **Successful Execution:**
+> ---
+>
+> **Use Case #1**: Displaying the help window.
+>
+> **Input:**  
+> `help`
+>
+> **Output:**  
+> ```
+> List of Commands:
+> 1. add - Enter a reservation
+> 2. edit - Edit a reservation
+> 3. delete - Delete a reservation
+> 4. pref - Saves or displays a reservation preference
+> 5. list - Displays a list of all reservations
+> 6. show - Displays reservation details
+> 7. find - Finds a reservation by name
+> 8. filter - Filters reservations by the specified data and time range
+> 9. free - Displays all available time slots within the next 60 days
+> 10. stats - Displays reservation statistics
+> 11. clear - Deletes all reservations
+> 12. help - Displays a list of available commands
+> 13. exit - Exit the program
+> ```
 
-Show additional details of a specific reservation.
+---
 
-Format: `show <INDEX>`
-
-Examples:
-* `show 1`
-
-### Managing reservation preferences : `pref`
-
-Saves or displays a reservation preference.
-
-Format: 
-* To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
-* To show a preference: `pref show <INDEX>`
-
-* The index refers to the index number shown in the displayed reservation list and must be a positive integer within range of reservation list. 
-* When saving a preference, the text can include any special dietary requirements, seating preferences, or other customer requests.
-* When showing a preference, if no preference has been set, a message indicating this will be displayed.
-
-![savePreferenceCommand.png](images/savePreferenceCommand.png)
-![showPreferenceCommand.png](images/showPreferenceCommand.png)
-Examples:
-* `pref save 1 Window seat preferred, allergic to nuts` saves this preference for the 1st reservation.
-* `pref show 2` displays any saved preferences for the 2nd reservation.
-
-### Adding a reservation: `add`
-
-Adds a reservation to the ReserveMate.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`
-
-<box type="constraint" seamless>
-
-**Constraint**
-- A reservation can have any number of tags (including 0)
-- Phone number should start with either 8 or 9 and must be 8 numbers long.
-- Date time should be after current time but within 60 days from it.
-</box>
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
-* `add n/Jane Doe t/friend e/betsycrowe@example.com x/5 p/81234567 o/GRADUATION d/2025-04-20 1800`
-
-### Listing all reservations : `list`
-
-Shows a list of all reservations in the ReserveMate.
-
-Format: `list`
-
-Examples:
-* `list`
-
-### Editing a reservation : `edit`
-
-Edits an existing reservation in ReserveMate.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [o/OCCASION]…​`
-
-* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed reservation list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the reservation will be removed i.e adding of tags is not cumulative.
-* You can remove all the reservation’s tags by typing `t/` without
-    specifying any tags after it.
-* Attempts to edit reservations with dates/times before the current time will be rejected.
-![editCommandResult.png](images/editCommandResult.png)
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st reservation to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower o/` Edits the name of the 2nd reservation to be `Betsy Crower` and clears all existing occasions.
-
-### Locating reservations by name: `find`
-
-Finds reservations whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Reservation matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a reservation : `delete`
-
-Deletes the specified reservation from ReserveMate.
-
-Format: `delete <INDEX cfm>`
-
-* Deletes the reservation at the specified `INDEX`.
-* The index refers to the index number shown in the displayed in ReserveMate.
-* The index **must be a positive integer** 1, 2, 3, …​
-* A confirmation flag **'cfm' is required** to confirm the deletion action
-  * If cfm is not included, the deletion will not occur.
-  * keyword 'cfm' is case-sensitive
-
-Examples:
-* `list` followed by `delete 2 cfm` deletes the 2nd reservation in ReserveMate.
-* `find Betsy` followed by `delete 1 cfm` deletes the 1st reservation in the results of the `find` command.
-
-![img_1.png](images/deleteCommandResult.png)
-### Clearing all entries : `clear`
-
-Clears all entries from the ReserveMate
-
-Format: `clear cfm`
-
-* A confirmation flag **'cfm' is required** to confirm the clear action
-    * If cfm is not included, the clear action will not occur.
-    * keyword 'cfm' is case-sensitive
-
-### Filtering the reservations: `filter`
-
-Filters reservations between the given date range.
-
-Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
-
-* Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
-* `DATE_TIME` provided must be valid
-* The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
-
-Examples:
-* `filter sd/ 2026-12-12 1400 ed/ 2026-12-15 1400` filters all reservations between 12/12/2026 1400 and 15/12/2026 1400
-
-![filter_command.png](images/filterCommand.png)
-
-### View reservation statistics : `stats`
-
-Show statistics of reservations in ReserveMate.
-
-Format: `stats`
-
-Examples:
-* `stats`
-
-![stats_command.png](images/statsCommand.png)
+- **Failed Execution:**
+> ---
+>
+> **User Error #1**: Command typed with extra arguments.
+>
+> **Input:**  
+> `help now`
+>
+> **Output:**
+> ```
+> Invalid command.
+> ```
+>
+> ---
+>
+> **User Error #2**: Misspelled command.
+>
+> **Input:**  
+> `halp`
+>
+> **Output:**
+> ```
+> Unknown command
+> ```
+>
+> ---
 
 ### Exiting the program : `exit`
 
@@ -270,13 +1300,6 @@ ReserveMate data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, ReserveMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ReserveMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### View all free time slots : `free`
-
-View all free time slots for reservation within a window of 60days from current time.
-
-Format: `free`
-
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -300,17 +1323,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add <n/NAME> <p/PHONE_NUMBER> <e/EMAIL> <x/NUMBER_OF_DINER> <d/DATE_TIME> <o/OCCASION…​>` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Preference** | `pref save INDEX PREFERENCE_TEXT` or `pref show INDEX`<br> e.g., `pref save 1 Window seat preferred` or `pref show 1`
-**Show**   | `show INDEX`<br> e.g., `show 2`
-**Free**   | `free`
-**List**   | `list`
-**Filter** | `filter sd/DATE_TIME ed/DATE_TIME` <br> e.g., `filter sd/ 2026-12-12 1400 ed/2025-12-14 1400`
-**Help**   | `help`
-**Exit**   | `exit`
+| Action         | Format, Examples                                                                                                                                                           |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`<br>e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday` |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br>e.g., `edit 2 n/James Lee e/jameslee@example.com`                    |
+| **Delete**     | `delete INDEX cfm`<br>e.g., `delete 3 cfm`                                                                                                                                 |
+| **Preference** | `pref save INDEX PREFERENCE_TEXT`<br>`pref show INDEX`<br>e.g., `pref save 1 Window seat preferred`<br>e.g., `pref show 1`                                                 |
+| **List**       | `list`<br>e.g., `list`                                                                                                                                                     |
+| **Show**       | `show INDEX`<br>e.g., `show 2`                                                                                                                                             |
+| **Find**       | `find NAME [MORE_NAMES]`<br>e.g., `find James Jake`                                                                                                                        |
+| **Filter**     | `filter sd/DATE_TIME ed/DATE_TIME`<br>e.g., `filter sd/2026-12-12 1400 ed/2026-12-14 1400`                                                                                 |
+| **Free**       | `free`<br>e.g., `free`                                                                                                                                                     |
+| **Stats**      | `stats`<br>e.g., `stats`                                                                                                                                                   |
+| **Clear**      | `clear cfm`<br>e.g., `clear cfm`                                                                                                                                           |
+| **Help**       | `help`<br>e.g., `help`                                                                                                                                                     |
+| **Exit**       | `exit`<br>e.g., `exit`                                                                                                                                                     |
