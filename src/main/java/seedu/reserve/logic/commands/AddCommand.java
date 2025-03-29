@@ -39,7 +39,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
-            "This reservation already exists in the reservation book";
+            "A reservation already exists for this customer (same email or phone) at the chosen date-time.";
     public static final String MESSAGE_NO_OCCASION = "Please indicate an occasion \n"
         + "Example: " + PREFIX_OCCASION + "Birthday \n"
         + "Example: " + PREFIX_OCCASION + "None";

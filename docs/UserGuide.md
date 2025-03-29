@@ -328,7 +328,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
 >
 > **Output**:
-> ``` This reservation already exists in the reservation book ```
+> ```"A reservation already exists for this customer (same email or phone) at the chosen date-time.```
 >
 > ---
 ---
