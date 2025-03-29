@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all reservations";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all reservations in the reservation book.\n"
+            + ": Lists all reservations in the reservation book.\n\n"
             + "Example: " + COMMAND_WORD;
 
     /**
