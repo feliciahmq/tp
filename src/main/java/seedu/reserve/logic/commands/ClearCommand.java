@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.reserve.logic.commands.exceptions.CommandException;
-import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ReserveMate;
 import seedu.reserve.model.reservation.Reservation;

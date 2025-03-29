@@ -7,7 +7,6 @@ import java.util.List;
 
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
-import seedu.reserve.logic.parser.exceptions.ParseException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.reservation.Reservation;
 
