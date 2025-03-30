@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "List of Commands: \n"
+    public static final String SHOWING_HELP_MESSAGE = "List of Commands:\n"
         + "1. add - Enter a reservation \n"
         + "2. edit - Edit a reservation \n"
         + "3. pref - Saves or displays a reservation preference \n"

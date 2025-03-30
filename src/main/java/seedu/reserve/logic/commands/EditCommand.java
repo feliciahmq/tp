@@ -40,24 +40,23 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the reservation identified "
             + "by the index number used in the displayed reservation list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS] "
-            + "[" + PREFIX_DATE_TIME + "DATETIME] "
-            + "[" + PREFIX_OCCASION + "OCCASION]...\n"
+            + "Existing values will be overwritten by the input values.\n\n"
+            + "Parameters:\n"
+            + "- " + "INDEX (must be a positive integer)\n"
+            + "- " + "[" + PREFIX_NAME + "NAME]\n"
+            + "- " + "[" + PREFIX_PHONE + "PHONE]\n"
+            + "- " + "[" + PREFIX_EMAIL + "EMAIL]\n"
+            + "- " + "[" + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS]\n"
+            + "- " + "[" + PREFIX_DATE_TIME + "DATETIME]\n"
+            + "- " + "[" + PREFIX_OCCASION + "OCCASION]...\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_NUMBER_OF_DINERS + "5 "
             + PREFIX_DATE_TIME + "2026-12-31 1800 ";
 
-    public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation: %1$s";
+    public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RESERVATION =
-            "This reservation already exists in the reservation book.";
     public static final String MESSAGE_FUTURE_RESERVATION_REQUIRED = "Past reservation cannot be edited.";
 
 
@@ -104,7 +103,7 @@ public class EditCommand extends Command {
         }
 
         if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
-            throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
 
         }
 

@@ -131,7 +131,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Names are **case-insensitive**:
   `n/alex yeoh` is the same as `n/AlEx YeOh`.
 
-- **Duplicate names** are **not allowed** within the reservation list. 
+- **Duplicate names** are **not allowed** within the reservation list.
   You cannot add two reservations with the exact same name (case-insensitive and space-normalized).
 
 - Names with **excessive leading/trailing spaces** are trimmed:
@@ -328,7 +328,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
 >
 > **Output**:
-> ``` This reservation already exists in the reservation book ```
+> ```A reservation already exists for this customer (same email or phone) at the chosen date-time.```
 >
 > ---
 ---
@@ -350,7 +350,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Use Case #1**: Edit phone and email of reservation at index `1`.
 >
-> **Input:** 
+> **Input:**
 > `edit 1 p/91234567 e/johndoe@example.com`
 >
 > **Output:**
@@ -1082,7 +1082,7 @@ Format: `free`
 >
 > **User Error #2**: Typo in command.
 >
-> **Input:**  
+> **Input:**
 > `freeslot`
 >
 > **Output:**
@@ -1207,7 +1207,7 @@ Format: `clear cfm`
 >
 > **User Error #3**: Command issued when list is already empty.
 >
-> **Input:**  
+> **Input:**
 > `clear cfm`
 >
 > **Output:**
