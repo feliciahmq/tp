@@ -231,8 +231,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code occasions} to this object's {@code occasions}.
+         * A defensive copy of {@code occasions} is used internally.
          */
         public void setOccasions(Set<Occasion> occasions) {
             this.occasions = (occasions != null) ? new HashSet<>(occasions) : null;
