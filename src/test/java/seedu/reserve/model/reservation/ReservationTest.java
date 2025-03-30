@@ -117,7 +117,7 @@ public class ReservationTest {
         editedAlice = new ReservationBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different occasions -> returns false
         editedAlice = new ReservationBuilder(ALICE).withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(ALICE.equals(editedAlice));
     }

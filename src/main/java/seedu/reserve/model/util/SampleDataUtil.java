@@ -42,7 +42,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns an occasion set containing the list of strings given.
      */
     public static Set<Occasion> getOccasionSet(String... strings) {
         return Arrays.stream(strings)

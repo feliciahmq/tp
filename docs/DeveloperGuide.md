@@ -47,7 +47,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 | `* *`    | Beginner user       | Receive a notification when double-booking a table                                     | Avoid booking conflicts                                             |
 | `* *`    | Long-time user      | Store and manage customer contact details securely                                     | Protect customer privacy and ensure communication                   |
 | `* *`    | Frequent user       | Sort reservations by table type (e.g. window seat, private room)                       | View reservations by seating preference                             |
-| `* *`    | Long-time user      | Tag reservations by special request (e.g. Birthday, Allergy)                           | Handle them accordingly                                             |
+| `* *`    | Long-time user      | Occasion reservations by special request (e.g. Birthday, Allergy)                      | Handle them accordingly                                             |
 | `* *`    | Forgetful user      | Automatically record customer preferences (e.g. dietary restrictions, seating choices) | Provide better service without relying on memory                    |
 | `* *`    | Cost-conscious user | Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
 | `* *`    | Overwhelmed user    | Automatically decline overbooking requests                                             | Don’t have to manually reject customers                             |

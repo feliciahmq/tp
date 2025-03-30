@@ -197,7 +197,7 @@ public class EditCommandTest {
     @Test
     public void execute_clearOccasions_success() {
         model = new ModelManager(new ReserveMate(), new UserPrefs());
-        Reservation futureReservationWithTag = new ReservationBuilder()
+        Reservation futureReservationWithOccasion = new ReservationBuilder()
             .withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
@@ -206,16 +206,16 @@ public class EditCommandTest {
             .withOccasions(VALID_OCCASION_BIRTHDAY)
             .build();
 
-        model.addReservation(futureReservationWithTag);
+        model.addReservation(futureReservationWithOccasion);
         Index targetIndex = INDEX_FIRST_RESERVATION; // Use first index since we cleared the model
 
-        // Create descriptor to clear tags
+        // Create descriptor to clear occasions
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-            .withOccasions().build(); // Empty tags to clear occasions
+            .withOccasions().build(); // Empty occasions to clear occasions
         EditCommand editCommand = new EditCommand(targetIndex, descriptor);
 
-        // Create the expected reservation after editing (same as original but without tags)
-        Reservation editedReservation = new ReservationBuilder(futureReservationWithTag)
+        // Create the expected reservation after editing (same as original but without occasions)
+        Reservation editedReservation = new ReservationBuilder(futureReservationWithOccasion)
             .withOccasions().build();
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
@@ -223,7 +223,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
             new UserPrefs());
-        expectedModel.setReservation(futureReservationWithTag, editedReservation);
+        expectedModel.setReservation(futureReservationWithOccasion, editedReservation);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
