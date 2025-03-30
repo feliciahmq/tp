@@ -17,8 +17,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all reservations whose names contain any of "
-            + "the specified keywords (case-insensitive).\n"
-            + "Parameters: NAME [MORE_NAMES]...\n"
+            + "the specified keywords (case-insensitive).\n\n"
+            + "Parameters: NAME [MORE_NAMES]...\n\n"
             + "Example: " + COMMAND_WORD + " alice Bob Charlie";
 
 
