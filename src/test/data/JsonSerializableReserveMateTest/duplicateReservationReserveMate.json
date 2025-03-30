@@ -5,7 +5,7 @@
     "email": "alice@example.com",
     "diners": "3",
     "dateTime": "2025-04-25 1200",
-    "tags": [ "friends" ]
+    "occasions": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

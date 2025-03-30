@@ -19,7 +19,7 @@ Class "<<interface>>\nReserveMateStorage" as ReserveMateStorage
 Class JsonReserveMateStorage
 Class JsonSerializableReserveMate
 Class JsonAdaptedReservation
-Class JsonAdaptedTag
+Class JsonAdaptedOccasion
 }
 
 }
@@ -38,6 +38,6 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonReserveMateStorage .up.|> ReserveMateStorage
 JsonReserveMateStorage ..> JsonSerializableReserveMate
 JsonSerializableReserveMate --> "*" JsonAdaptedReservation
-JsonAdaptedReservation --> "*" JsonAdaptedTag
+JsonAdaptedReservation --> "*" JsonAdaptedOccasion
 
 @enduml

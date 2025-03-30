@@ -172,7 +172,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code occasions} is used internally.
          */
         public EditReservationDescriptor(EditReservationDescriptor toCopy) {
             setName(toCopy.name);

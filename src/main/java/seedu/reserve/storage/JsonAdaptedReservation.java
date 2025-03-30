@@ -39,7 +39,7 @@ class JsonAdaptedReservation {
     public JsonAdaptedReservation(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("diners") String diners,
                                   @JsonProperty("dateTime") String dateTime,
-                                  @JsonProperty("tags") List<JsonAdaptedOccasion> occasions) {
+                                  @JsonProperty("occasions") List<JsonAdaptedOccasion> occasions) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -71,8 +71,8 @@ class JsonAdaptedReservation {
      */
     public Reservation toModelType() throws IllegalValueException {
         final List<Occasion> reservationOccasions = new ArrayList<>();
-        for (JsonAdaptedOccasion tag : occasions) {
-            reservationOccasions.add(tag.toModelType());
+        for (JsonAdaptedOccasion occasion : occasions) {
+            reservationOccasions.add(occasion.toModelType());
         }
 
         if (name == null) {

@@ -46,6 +46,7 @@ public class TypicalReservation {
             .withEmail("heinz@example.com")
             .withDiners("2")
             .withDateTime("2025-04-15 1400")
+            .withOccasions("Birthday")
             .build();
 
     public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
@@ -61,6 +62,7 @@ public class TypicalReservation {
             .withEmail("werner@example.com")
             .withDiners("1")
             .withDateTime("2025-04-05 1000")
+            .withOccasions("Birthday")
             .build();
 
     public static final Reservation FIONA = new ReservationBuilder().withName("Fiona Kunz")
@@ -68,6 +70,7 @@ public class TypicalReservation {
             .withEmail("lydia@example.com")
             .withDiners("7")
             .withDateTime("2025-04-12 1100")
+            .withOccasions("Birthday")
             .build();
 
     public static final Reservation GEORGE = new ReservationBuilder().withName("George Best")
@@ -75,6 +78,7 @@ public class TypicalReservation {
             .withEmail("anna@example.com")
             .withDiners("10")
             .withDateTime("2025-04-18 1300")
+            .withOccasions("Anniversary")
             .build();
 
     public static final Reservation HOON = new ReservationBuilder().withName("Hoon Meier")
@@ -82,6 +86,7 @@ public class TypicalReservation {
             .withEmail("stefan@example.com")
             .withDiners("6")
             .withDateTime("2025-04-07 0900")
+            .withOccasions("Birthday")
             .build();
 
     public static final Reservation IDA = new ReservationBuilder().withName("Ida Mueller")
@@ -89,6 +94,7 @@ public class TypicalReservation {
             .withEmail("hans@example.com")
             .withDiners("8")
             .withDateTime("2025-04-08 1700")
+            .withOccasions("Birthday")
             .build();
 
     // Manually added - Reservation's details found in {@code CommandTestUtil}

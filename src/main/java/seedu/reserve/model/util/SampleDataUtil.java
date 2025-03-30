@@ -21,13 +21,13 @@ public class SampleDataUtil {
     public static Reservation[] getSampleReservations() {
         return new Reservation[]{
             new Reservation(new Name("John Doe"), new Phone("98765432"), new Email("johnd@example.com"),
-                new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
+                new Diners("5"), DateTime.fromFileString("2025-04-13 1800"),
                 getOccasionSet("Anniversary", "Birthday")),
             new Reservation(new Name("Alexa Yeoh"), new Phone("98765431"), new Email("alexy@example.com"),
-                new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
+                new Diners("5"), DateTime.fromFileString("2025-04-15 1800"),
                 getOccasionSet("Graduation", "Christmas")),
             new Reservation(new Name("Mickey Mouse"), new Phone("98765435"), new Email("mickey@example.com"),
-                new Diners("5"), DateTime.fromFileString("2026-12-30 1800"),
+                new Diners("5"), DateTime.fromFileString("2025-04-15 2000"),
                 getOccasionSet("CNY", "Reunion"))
         };
     }
@@ -42,7 +42,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns an occasion set containing the list of strings given.
      */
     public static Set<Occasion> getOccasionSet(String... strings) {
         return Arrays.stream(strings)

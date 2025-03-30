@@ -5,14 +5,14 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 ReserveMate *-right-> "1" UniqueReservationList
-ReserveMate *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueReservationList
-UniqueTagList -[hidden]down- UniqueReservationList
+ReserveMate *-right-> "1" UniqueOccasionList
+UniqueOccasionList -[hidden]down- UniqueReservationList
+UniqueOccasionList -[hidden]down- UniqueReservationList
 
-UniqueTagList -right-> "*" Tag
+UniqueOccasionList -right-> "*" Occasion
 UniqueReservationList -right-> Reservation
 
-Reservation -up-> "*" Tag
+Reservation -up-> "*" Occasion
 
 Reservation *--> Name
 Reservation *--> Phone
