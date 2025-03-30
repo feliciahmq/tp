@@ -1,8 +1,8 @@
 package seedu.reserve.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
-import static seedu.reserve.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.reserve.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DINERS_DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -59,7 +59,8 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
     @Test
