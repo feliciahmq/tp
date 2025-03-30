@@ -18,8 +18,9 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows the reservation details identified by the index number used in the displayed reservation list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Shows the reservation details identified by the index number "
+            + "used in the displayed reservation list.\n\n"
+            + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SHOW_RESERVATION_SUCCESS = "Details of Reservation: %1$s";

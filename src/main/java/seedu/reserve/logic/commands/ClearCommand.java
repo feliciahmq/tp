@@ -18,13 +18,14 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Reservation book has been cleared!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears all reservations from the reservation book.\n"
+            + ": Clears all reservations from the reservation book.\n\n"
             + "Parameters: 'cfm' must be provided to confirm the action\n"
-            + "Keyword 'cfm' is case sensitive\n"
+            + "Keyword 'cfm' is case sensitive\n\n"
             + "Example: " + COMMAND_WORD + " cfm";
     public static final String MESSAGE_ADD_CONFIRM_CLEAR_RESERVATION =
-            "Are you sure you want to clear ALL reservations? Type 'clear cfm'\n"
-        + "Keyword 'cfm' is case sensitive";
+            "Are you sure you want to clear ALL reservations?\n\n"
+            + "Type 'clear cfm'\n"
+            + "Keyword 'cfm' is case sensitive";
     public static final String MESSAGE_NO_RESERVATIONS_TO_CLEAR =
             "Reservation List is empty. No reservations found to clear!";
 

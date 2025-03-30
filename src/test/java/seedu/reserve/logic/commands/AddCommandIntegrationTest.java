@@ -42,7 +42,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicateReservation_throwsCommandException() {
         Reservation reservationInList = model.getReserveMate().getReservationList().get(0);
         assertCommandFailure(new AddCommand(reservationInList), model,
-                AddCommand.MESSAGE_DUPLICATE_RESERVATION);
+                Messages.MESSAGE_DUPLICATE_RESERVATION);
     }
 
 }

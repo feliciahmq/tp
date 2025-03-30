@@ -118,6 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getReserveMateFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 

@@ -21,12 +21,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the reservation identified by the index number used in the reservation list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the reservation identified by the index number used in the reservation list.\n\n"
+            + "Parameters: INDEX (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1 cfm";
 
     public static final String MESSAGE_DELETE_RESERVATION_SUCCESS = "Reservation %1$s deleted successfully";
-    public static final String MESSAGE_CONFIRM_DELETE = "Are you sure you want to delete %1$s? Type 'delete %1$s cfm'";
+    public static final String MESSAGE_CONFIRM_DELETE = "Are you sure you want to delete %1$s?\n\n"
+        + "Type 'delete %1$s cfm'";
     private static final int INDEX_POSITION = 0;
 
     private final Index targetIndex;

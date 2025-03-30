@@ -110,8 +110,8 @@ public class Reservation {
         }
 
         return otherReservation != null
-                && otherReservation.getName().equals(getName())
-                && otherReservation.getPhone().equals(getPhone())
+                && (otherReservation.getEmail().equals(getEmail())
+                || otherReservation.getPhone().equals(getPhone()))
                 && otherReservation.getDateTime().equals(getDateTime());
     }
 
