@@ -146,15 +146,32 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+/* For the container */
+.result-display-container {
+    -fx-padding: 5px;
+}
+
+/* For the TextArea */
 .result-display {
     -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-padding: 5px;
+    -fx-border-width: 0;
 }
 
-.result-display .label {
-    -fx-text-fill: black !important;
+/* Remove the default TextArea border and focus highlight */
+.result-display .content {
+    -fx-background-color: transparent;
+    -fx-cursor: default;
+}
+
+.result-display:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .status-bar .label {

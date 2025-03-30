@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.reserve.logic.parser.Prefix;
 import seedu.reserve.model.reservation.Reservation;
+import seedu.reserve.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -37,20 +38,24 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code Reservation} for display to the user.
+     * Formats the {@code Reservation} for display to the user with each detail on a new line.
      */
     public static String format(Reservation reservation) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(reservation.getName())
-                .append("; Phone: ")
-                .append(reservation.getPhone())
-                .append("; Email: ")
-                .append(reservation.getEmail())
-                .append("; Number of Diners: ")
-                .append(reservation.getDiners().value)
-                .append("; Occasion: ");
-        reservation.getTags().forEach(builder::append);
+        builder.append("Name: ")
+                .append(reservation.getName().fullName).append("\n")
+                .append("Phone: ")
+                .append(reservation.getPhone().value).append("\n")
+                .append("Email: ")
+                .append(reservation.getEmail().value).append("\n")
+                .append("Number of Diners: ")
+                .append(reservation.getDiners().value).append("\n")
+                .append("Date/Time: ")
+                .append(reservation.getDateTime().toString()).append("\n")
+                .append("Occasion: ")
+                .append(reservation.getTags().stream()
+                        .map(Tag::toString)
+                        .collect(Collectors.joining(", ")));
         return builder.toString();
     }
-
 }

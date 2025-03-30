@@ -18,11 +18,11 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all reservations made between the given"
-            + " date range. \n"
-            + "Parameters: "
-            + PREFIX_START_DATE + "START DATE "
-            + PREFIX_END_DATE + "END DATE \n"
-            + "Example: " + COMMAND_WORD + " sd/" + " 2026-12-31 1800 " + "ed/" + " 2026-12-31 1900";
+            + " date range. \n\n"
+            + "Parameters:\n"
+            + "- " + PREFIX_START_DATE + "START DATE "
+            + "- " + PREFIX_END_DATE + "END DATE \n\n"
+            + "Example: " + COMMAND_WORD + " sd/" + " 2025-04-01 1800 " + "ed/" + " 2025-06-31 1900";
 
     public static final String MESSAGE_SUCCESS = "Here are the available reservations for the date range.";
     public static final String MESSAGE_NO_RESERVATIONS = "No reservations found for the date range.";

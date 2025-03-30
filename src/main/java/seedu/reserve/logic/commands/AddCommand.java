@@ -21,23 +21,23 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reservation to the reservation book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS "
-            + PREFIX_DATE_TIME + "DATETIME "
-            + "[" + PREFIX_OCCASION + "OCCASION]...\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reservation to the reservation book.\n\n"
+            + "Parameters:\n"
+            + "- " + PREFIX_NAME + "NAME\n"
+            + "- " + PREFIX_PHONE + "PHONE\n"
+            + "- " + PREFIX_EMAIL + "EMAIL\n"
+            + "- " + PREFIX_NUMBER_OF_DINERS + "NUMBER OF DINERS\n"
+            + "- " + PREFIX_DATE_TIME + "DATETIME\n"
+            + "- " + "[" + PREFIX_OCCASION + "OCCASION]...\n\n"
+            + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NUMBER_OF_DINERS + "5 "
-            + PREFIX_DATE_TIME + "2026-12-31 1800 "
+            + PREFIX_DATE_TIME + "2025-04-28 1800 "
             + PREFIX_OCCASION + "Birthday ";
 
-    public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New reservation added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
             "This reservation already exists in the reservation book";
     public static final String MESSAGE_NO_OCCASION = "Please indicate an occasion \n"

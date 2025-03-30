@@ -20,9 +20,11 @@ public class PreferenceCommand extends Command {
     public static final String COMMAND_WORD = "pref";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves or shows customer preferences for the reservation identified by the index number.\n"
-            + "Parameters for saving: " + COMMAND_WORD + " save INDEX PREFERENCE\n"
-            + "Parameters for showing: " + COMMAND_WORD + " show INDEX\n"
+            + ": Saves or shows customer preferences for the reservation identified by the index number.\n\n"
+            + "Parameters for saving:\n"
+            + "- " + COMMAND_WORD + " save INDEX PREFERENCE\n\n"
+            + "Parameters for showing:\n"
+            + "- " + COMMAND_WORD + " show INDEX\n\n"
             + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n"
             + "Example: " + COMMAND_WORD + " show 1";
 
