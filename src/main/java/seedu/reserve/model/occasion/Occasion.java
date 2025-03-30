@@ -2,6 +2,7 @@ package seedu.reserve.model.occasion;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.AppUtil.checkArgument;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
 
 /**
  * Represents an Occasion in the reservation book.
@@ -9,8 +10,11 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
  */
 public class Occasion {
 
-    public static final String MESSAGE_CONSTRAINTS = "Occasion name must not be empty and must be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_OCCASION_CONSTRAINTS = "Please indicate an occasion: \n"
+        + "Example: " + PREFIX_OCCASION + "Birthday \n"
+        + "Example: " + PREFIX_OCCASION + "None \n"
+        + "Occasion name must not be empty and must be alphanumeric";
 
     public final String occasionName;
 
@@ -21,7 +25,7 @@ public class Occasion {
      */
     public Occasion(String occasionName) {
         requireNonNull(occasionName);
-        checkArgument(isValidOccasionName(occasionName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidOccasionName(occasionName), MESSAGE_OCCASION_CONSTRAINTS);
         this.occasionName = occasionName;
     }
 

@@ -124,7 +124,7 @@ public class ParserUtil {
         requireNonNull(occasion);
         String trimmedOccasion = occasion.trim();
         if (!Occasion.isValidOccasionName(trimmedOccasion)) {
-            throw new ParseException(Occasion.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Occasion.MESSAGE_OCCASION_CONSTRAINTS);
         }
         return new Occasion(trimmedOccasion);
     }

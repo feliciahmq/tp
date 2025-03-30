@@ -40,9 +40,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
             "This reservation already exists in the reservation book";
-    public static final String MESSAGE_NO_OCCASION = "Please indicate an occasion \n"
+    public static final String MESSAGE_OCCASION_CONSTRAINTS = "Please indicate an occasion: \n"
         + "Example: " + PREFIX_OCCASION + "Birthday \n"
-        + "Example: " + PREFIX_OCCASION + "None";
+        + "Example: " + PREFIX_OCCASION + "None \n"
+        + "Occasion name must not be empty and must be alphanumeric";
 
     private final Reservation toAdd;
 
@@ -63,7 +64,7 @@ public class AddCommand extends Command {
         }
 
         if (toAdd.getOccasions().isEmpty()) {
-            throw new CommandException(MESSAGE_NO_OCCASION);
+            throw new CommandException(MESSAGE_OCCASION_CONSTRAINTS);
         }
 
         model.addReservation(toAdd);

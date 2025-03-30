@@ -171,7 +171,7 @@ public class AddCommandParserTest {
         // invalid occasion
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + INVALID_OCC_DESC
-                + VALID_OCCASION_ANNIVERSARY, Occasion.MESSAGE_CONSTRAINTS);
+                + VALID_OCCASION_ANNIVERSARY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB

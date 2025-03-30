@@ -40,7 +40,7 @@ class JsonAdaptedOccasion {
      */
     public Occasion toModelType() throws IllegalValueException {
         if (!Occasion.isValidOccasionName(occasionName)) {
-            throw new IllegalValueException(Occasion.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Occasion.MESSAGE_OCCASION_CONSTRAINTS);
         }
         return new Occasion(occasionName);
     }

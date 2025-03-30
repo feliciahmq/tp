@@ -84,7 +84,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Occasion.MESSAGE_CONSTRAINTS); // invalid occasion
+        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Occasion.MESSAGE_OCCASION_CONSTRAINTS); // invalid occasion
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -92,11 +92,11 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_OCCASION} alone will reset the occasions of the {@code Reservation} being edited,
         // parsing it together with a valid occasion results in error
         assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY
-            + OCCASION_EMPTY, Occasion.MESSAGE_CONSTRAINTS);
+            + OCCASION_EMPTY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
         assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCCASION_EMPTY
-            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_CONSTRAINTS);
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
         assertParseFailure(parser, "1" + OCCASION_EMPTY + OCC_DESC_ANNIVERSARY
-            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_CONSTRAINTS);
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,

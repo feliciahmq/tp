@@ -62,7 +62,7 @@ public class AddCommandTest {
 
         AddCommand addCommand = new AddCommand(reservationWithoutOccasion);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_NO_OCCASION, ()
+        assertThrows(CommandException.class, AddCommand.MESSAGE_OCCASION_CONSTRAINTS, ()
             -> addCommand.execute(modelStub));
     }
 
