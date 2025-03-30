@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.ReserveMate;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code ReserveMate} with sample data.
@@ -22,13 +22,13 @@ public class SampleDataUtil {
         return new Reservation[]{
             new Reservation(new Name("John Doe"), new Phone("98765432"), new Email("johnd@example.com"),
                 new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
-                getTagSet("owesMoney", "friends")),
+                getOccasionSet("Anniversary", "Birthday")),
             new Reservation(new Name("Alexa Yeoh"), new Phone("98765431"), new Email("alexy@example.com"),
                 new Diners("5"), DateTime.fromFileString("2026-12-31 1800"),
-                getTagSet("owesMoney", "friends")),
+                getOccasionSet("Graduation", "Christmas")),
             new Reservation(new Name("Mickey Mouse"), new Phone("98765435"), new Email("mickey@example.com"),
                 new Diners("5"), DateTime.fromFileString("2026-12-30 1800"),
-                getTagSet("owesMoney", "friends"))
+                getOccasionSet("CNY", "Reunion"))
         };
     }
 
@@ -44,9 +44,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Occasion> getOccasionSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Occasion::new)
                 .collect(Collectors.toSet());
     }
 

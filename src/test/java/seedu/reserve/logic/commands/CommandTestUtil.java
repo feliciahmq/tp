@@ -69,7 +69,7 @@ public class CommandTestUtil {
     public static final String INVALID_DINERS_DESC = " " + PREFIX_NUMBER_OF_DINERS + "0"; // '0' not in range
     public static final String INVALID_DATETIME_DESC = " "
             + PREFIX_DATE_TIME + LocalDateTime.now().plusDays(28).format(FORMATTER); // not a valid date time
-    public static final String INVALID_OCC_DESC = " " + PREFIX_OCCASION + "graduation*"; // '*' not allowed in tags
+    public static final String INVALID_OCC_DESC = " " + PREFIX_OCCASION + "graduation*"; // '*' not allowed in occasions
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -81,11 +81,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditReservationDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withDiners(VALID_DINERS_AMY).withDateTime(VALID_DATETIME_AMY)
-                .withTags(VALID_OCCASION_ANNIVERSARY).build();
+                .withOccasions(VALID_OCCASION_ANNIVERSARY).build();
         DESC_BOB = new EditReservationDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY).build();
     }
 
     /**

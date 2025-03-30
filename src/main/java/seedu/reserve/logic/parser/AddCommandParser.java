@@ -13,13 +13,13 @@ import java.util.Set;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object.
@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Diners diners = ParserUtil.parseDiners(argMultimap.getValue(PREFIX_NUMBER_OF_DINERS).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get());
-        Set<Tag> occasionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_OCCASION));
+        Set<Occasion> occasionList = ParserUtil.parseOccasions(argMultimap.getAllValues(PREFIX_OCCASION));
 
         Reservation reservation = new Reservation(name, phone, email, diners, dateTime, occasionList);
 

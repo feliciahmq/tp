@@ -6,13 +6,13 @@ import java.util.stream.Stream;
 
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * A utility class to help with building EditReservationDescriptor objects.
@@ -39,7 +39,7 @@ public class EditReservationDescriptorBuilder {
         descriptor.setEmail(reservation.getEmail());
         descriptor.setDiners(reservation.getDiners());
         descriptor.setDateTime(reservation.getDateTime());
-        descriptor.setTags(reservation.getTags());
+        descriptor.setOccasions(reservation.getOccasions());
     }
 
     /**
@@ -83,12 +83,12 @@ public class EditReservationDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditReservationDescriptor}
+     * Parses the {@code occasions} into a {@code Set<Occasion>} and set it to the {@code EditReservationDescriptor}
      * that we are building.
      */
-    public EditReservationDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditReservationDescriptorBuilder withOccasions(String... occasions) {
+        Set<Occasion> occasionSet = Stream.of(occasions).map(Occasion::new).collect(Collectors.toSet());
+        descriptor.setOccasions(occasionSet);
         return this;
     }
 

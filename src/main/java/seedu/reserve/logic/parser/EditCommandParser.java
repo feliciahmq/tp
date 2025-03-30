@@ -19,7 +19,7 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.occasion.Occasion;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -75,7 +75,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editReservationDescriptor
                     .setDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_OCCASION)).ifPresent(editReservationDescriptor::setTags);
+        parseOccasionsForEdit(argMultimap.getAllValues(PREFIX_OCCASION))
+            .ifPresent(editReservationDescriptor::setOccasions);
 
         if (!editReservationDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -85,18 +86,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> occasions} into a {@code Set<Occasion>} if {@code occasions} is non-empty.
+     * If {@code occasions} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Occasion>} containing zero occasions.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Occasion>> parseOccasionsForEdit(Collection<String> occasions) throws ParseException {
+        assert occasions != null;
 
-        if (tags.isEmpty()) {
+        if (occasions.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> occasionSet =
+            occasions.size() == 1 && occasions.contains("") ? Collections.emptySet() : occasions;
+        return Optional.of(ParserUtil.parseOccasions(occasionSet));
     }
 
 }

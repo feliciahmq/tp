@@ -18,7 +18,7 @@ Class Diners
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Occasion
 Class DateTime
 
 Class I #FFFFFF
@@ -43,7 +43,7 @@ Reservation *--> Phone
 Reservation *--> Email
 Reservation *--> Diners
 Reservation *--> DateTime
-Reservation *--> "*" Tag
+Reservation *--> "*" Occasion
 
 Reservation -[hidden]up--> I
 UniqueReservationList -[hidden]right-> I

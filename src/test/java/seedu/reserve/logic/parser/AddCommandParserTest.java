@@ -38,11 +38,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.AddCommand;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandParserTest {
@@ -50,7 +50,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Reservation expectedReservation = new ReservationBuilder(BOB).withTags(VALID_OCCASION_BIRTHDAY).build();
+        Reservation expectedReservation = new ReservationBuilder(BOB).withOccasions(VALID_OCCASION_BIRTHDAY).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -58,17 +58,17 @@ public class AddCommandParserTest {
                 + OCC_DESC_BIRTHDAY, new AddCommand(expectedReservation));
 
 
-        // multiple tags - all accepted
-        Reservation expectedReservationMultipleTags = new ReservationBuilder(BOB)
-                .withTags(VALID_OCCASION_ANNIVERSARY, VALID_OCCASION_BIRTHDAY).build();
+        // multiple occasions - all accepted
+        Reservation expectedReservationMultipleOccasions = new ReservationBuilder(BOB)
+                .withOccasions(VALID_OCCASION_ANNIVERSARY, VALID_OCCASION_BIRTHDAY).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY,
-                new AddCommand(expectedReservationMultipleTags));
+                new AddCommand(expectedReservationMultipleOccasions));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonOccasionValue_failure() {
         String validExpectedReservationString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY;
 
@@ -122,8 +122,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Reservation expectedReservation = new ReservationBuilder(AMY).withTags().build();
+        // zero occasions
+        Reservation expectedReservation = new ReservationBuilder(AMY).withOccasions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + DINERS_DESC_AMY + DATETIME_DESC_AMY, new AddCommand(expectedReservation));
     }
@@ -171,7 +171,7 @@ public class AddCommandParserTest {
         // invalid occasion
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + INVALID_OCC_DESC
-                + VALID_OCCASION_ANNIVERSARY, Tag.MESSAGE_CONSTRAINTS);
+                + VALID_OCCASION_ANNIVERSARY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB

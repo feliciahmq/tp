@@ -16,18 +16,18 @@ import org.junit.jupiter.api.Test;
 import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_OCCASION = "#gambling";
     private static final String INVALID_DINERS = "0";
     private static final String INVALID_DATETIME = "2030-04-12 180";
     private static final String INVALID_FILTER_DATETIME = "2025-13-01 1900";
@@ -38,8 +38,8 @@ public class ParserUtilTest {
     private static final String VALID_DINERS = "2";
     private static final String VALID_DATETIME = "2025-04-12 1800";
     private static final String VALID_FILTER_DATETIME = "2025-01-01 1400";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_OCCASION_1 = "Birthday";
+    private static final String VALID_OCCASION_2 = "Anniversary";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -205,49 +205,51 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseOccasion_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOccasion(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseOccasion_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOccasion(INVALID_OCCASION));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseOccasion_validValueWithoutWhitespace_returnsOccasion() throws Exception {
+        Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
+        assertEquals(expectedOccasion, ParserUtil.parseOccasion(VALID_OCCASION_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseOccasion_validValueWithWhitespace_returnsTrimmedOccasion() throws Exception {
+        String occasionWithWhitespace = WHITESPACE + VALID_OCCASION_1 + WHITESPACE;
+        Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
+        assertEquals(expectedOccasion, ParserUtil.parseOccasion(occasionWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseOccasions_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOccasions(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseOccasions_collectionWithInvalidOccasions_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseOccasions(Arrays.asList(VALID_OCCASION_1, INVALID_OCCASION)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseOccasions_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseOccasions(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseOccasions_collectionWithValidOccasions_returnsOccasionSet() throws Exception {
+        Set<Occasion> actualOccasionSet = ParserUtil.parseOccasions(Arrays.asList(VALID_OCCASION_1, VALID_OCCASION_2));
+        Set<Occasion> expectedOccasionSet = new HashSet<Occasion>(Arrays
+            .asList(new Occasion(VALID_OCCASION_1), new Occasion(VALID_OCCASION_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedOccasionSet, actualOccasionSet);
     }
 
     @Test

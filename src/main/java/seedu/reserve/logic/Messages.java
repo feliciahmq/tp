@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.reserve.logic.parser.Prefix;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -55,8 +55,8 @@ public class Messages {
                 .append("Date/Time: ")
                 .append(reservation.getDateTime().toString()).append("\n")
                 .append("Occasion: ")
-                .append(reservation.getTags().stream()
-                        .map(Tag::toString)
+                .append(reservation.getOccasions().stream()
+                        .map(Occasion::toString)
                         .collect(Collectors.joining(", ")));
         return builder.toString();
     }

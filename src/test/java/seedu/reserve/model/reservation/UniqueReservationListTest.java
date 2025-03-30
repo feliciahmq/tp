@@ -44,7 +44,7 @@ public class UniqueReservationListTest {
     public void contains_reservationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueReservationList.add(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertTrue(uniqueReservationList.contains(editedAlice));
     }
 
@@ -87,7 +87,7 @@ public class UniqueReservationListTest {
     public void setReservation_editedReservationHasSameIdentity_success() {
         uniqueReservationList.add(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
         uniqueReservationList.setReservation(ALICE, editedAlice);
         UniqueReservationList expectedUniqueReservationList = new UniqueReservationList();
         expectedUniqueReservationList.add(editedAlice);

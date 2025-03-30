@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.reserve.commons.util.ToStringBuilder;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.occasion.Occasion;
 
 /**
  * Represents a reservation in the reservation book.
@@ -24,21 +24,21 @@ public class Reservation {
     // Data fields
     private final Diners diners;
     private final DateTime dateTime;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Occasion> occasions = new HashSet<>();
     private final String preference; // New field for customer preferences
 
     /**
      * Every field must be present and not null.
      */
     public Reservation(Name name, Phone phone, Email email, Diners diners,
-                    DateTime dateTime, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, diners, tags);
+                    DateTime dateTime, Set<Occasion> occasions) {
+        requireAllNonNull(name, phone, email, diners, occasions);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.diners = diners;
         this.dateTime = dateTime;
-        this.tags.addAll(tags);
+        this.occasions.addAll(occasions);
         this.preference = "None"; // Initialize with empty preference
     }
 
@@ -47,14 +47,14 @@ public class Reservation {
      * This constructor includes preference.
      */
     public Reservation(Name name, Phone phone, Email email, Diners diners,
-                    DateTime dateTime, Set<Tag> tags, String preference) {
-        requireAllNonNull(name, phone, email, diners, tags);
+                       DateTime dateTime, Set<Occasion> occasions, String preference) {
+        requireAllNonNull(name, phone, email, diners, occasions);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.diners = diners;
         this.dateTime = dateTime;
-        this.tags.addAll(tags);
+        this.occasions.addAll(occasions);
         this.preference = preference;
     }
 
@@ -80,11 +80,11 @@ public class Reservation {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable occasion set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Occasion> getOccasions() {
+        return Collections.unmodifiableSet(occasions);
     }
 
     public String getPreference() {
@@ -96,7 +96,8 @@ public class Reservation {
      */
     public Reservation withPreference(String preference) {
         Objects.requireNonNull(preference);
-        return new Reservation(this.name, this.phone, this.email, this.diners, this.dateTime, this.tags, preference);
+        return new Reservation(this.name, this.phone, this.email,
+            this.diners, this.dateTime, this.occasions, preference);
     }
 
     /**
@@ -135,14 +136,14 @@ public class Reservation {
                 && email.equals(otherReservation.email)
                 && diners.equals(otherReservation.diners)
                 && dateTime.equals(otherReservation.dateTime)
-                && tags.equals(otherReservation.tags)
+                && occasions.equals(otherReservation.occasions)
                 && preference.equals(otherReservation.preference);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, diners, dateTime, tags, preference);
+        return Objects.hash(name, phone, email, diners, dateTime, occasions, preference);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class Reservation {
                 .add("email", email)
                 .add("diners", diners)
                 .add("dateTime", dateTime)
-                .add("occasion", tags)
+                .add("occasion", occasions)
                 .add("preference", preference)
                 .toString();
     }

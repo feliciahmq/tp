@@ -181,7 +181,7 @@ public class LogicManagerTest {
         // Triggers the saveReserveMate method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
             + EMAIL_DESC_AMY + DINERS_DESC_AMY + DATETIME_DESC_AMY + OCC_DESC_ANNIVERSARY;
-        Reservation expectedReservation = new ReservationBuilder(AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
+        Reservation expectedReservation = new ReservationBuilder(AMY).withOccasions(VALID_OCCASION_ANNIVERSARY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addReservation(expectedReservation);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -74,11 +74,11 @@ public class EditCommandTest {
         ReservationBuilder reservationInList = new ReservationBuilder(lastReservation);
         Reservation editedReservation = reservationInList.withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withDiners(VALID_DINERS_BOB).withDateTime(VALID_DATETIME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withPhone(VALID_PHONE_BOB).withOccasions(VALID_OCCASION_BIRTHDAY).build();
         EditCommand editCommand = new EditCommand(indexLastReservation, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
@@ -203,7 +203,7 @@ public class EditCommandTest {
             .withEmail(VALID_EMAIL_AMY)
             .withDiners(VALID_DINERS_AMY)
             .withDateTime(LocalDateTime.now().plusDays(1).format(FORMATTER))
-            .withTags(VALID_OCCASION_BIRTHDAY)
+            .withOccasions(VALID_OCCASION_BIRTHDAY)
             .build();
 
         model.addReservation(futureReservationWithTag);
@@ -211,12 +211,12 @@ public class EditCommandTest {
 
         // Create descriptor to clear tags
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-            .withTags().build(); // Empty tags to clear occasions
+            .withOccasions().build(); // Empty tags to clear occasions
         EditCommand editCommand = new EditCommand(targetIndex, descriptor);
 
         // Create the expected reservation after editing (same as original but without tags)
         Reservation editedReservation = new ReservationBuilder(futureReservationWithTag)
-            .withTags().build();
+            .withOccasions().build();
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
             Messages.format(editedReservation));
@@ -229,17 +229,17 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_clearTagsFromPastReservation_failure() {
-        // Create a past reservation with a tag
-        Reservation pastReservationWithTag = new ReservationBuilder()
+    public void execute_clearOccasionsFromPastReservation_failure() {
+        // Create a past reservation with an occasion
+        Reservation pastReservationWithOccasion = new ReservationBuilder()
             .withDateTime("2020-01-01 1200") // Past date
-            .withTags(VALID_OCCASION_BIRTHDAY)
+            .withOccasions(VALID_OCCASION_BIRTHDAY)
             .build();
 
-        model.setReservation(model.getFilteredReservationList().get(0), pastReservationWithTag);
+        model.setReservation(model.getFilteredReservationList().get(0), pastReservationWithOccasion);
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-            .withTags().build();
+            .withOccasions().build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
         // The command should fail because we can't edit past reservations

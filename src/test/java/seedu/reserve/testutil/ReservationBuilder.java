@@ -6,13 +6,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 import seedu.reserve.model.util.SampleDataUtil;
 
 /**
@@ -35,7 +35,7 @@ public class ReservationBuilder {
     private Email email;
     private Diners diners;
     private DateTime dateTime;
-    private Set<Tag> tags;
+    private Set<Occasion> occasions;
     private String preference;
 
     /**
@@ -47,7 +47,7 @@ public class ReservationBuilder {
         email = new Email(DEFAULT_EMAIL);
         diners = new Diners(DEFAULT_DINERS);
         dateTime = new DateTime(DEFAULT_DATETIME);
-        tags = new HashSet<>();
+        occasions = new HashSet<>();
         preference = DEFAULT_PREFERENCE;
     }
 
@@ -60,7 +60,7 @@ public class ReservationBuilder {
         email = reservationToCopy.getEmail();
         diners = reservationToCopy.getDiners();
         dateTime = reservationToCopy.getDateTime();
-        tags = new HashSet<>(reservationToCopy.getTags());
+        occasions = new HashSet<>(reservationToCopy.getOccasions());
         preference = reservationToCopy.getPreference();
     }
 
@@ -73,10 +73,11 @@ public class ReservationBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Reservation} that we are building.
+     * Parses the {@code occasions} into a {@code Set<Occasion>}
+     * and set it to the {@code Reservation} that we are building.
      */
-    public ReservationBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public ReservationBuilder withOccasions(String ... occasions) {
+        this.occasions = SampleDataUtil.getOccasionSet(occasions);
         return this;
     }
 
@@ -121,6 +122,6 @@ public class ReservationBuilder {
     }
 
     public Reservation build() {
-        return new Reservation(name, phone, email, diners, dateTime, tags, preference);
+        return new Reservation(name, phone, email, diners, dateTime, occasions, preference);
     }
 }

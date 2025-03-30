@@ -34,15 +34,15 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Tag;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_OCCASION;
+    private static final String OCCASION_EMPTY = " " + PREFIX_OCCASION;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -84,16 +84,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Occasion.MESSAGE_OCCASION_CONSTRAINTS); // invalid occasion
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Reservation} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + TAG_EMPTY + OCC_DESC_BIRTHDAY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY, Tag.MESSAGE_CONSTRAINTS);
+        // while parsing {@code PREFIX_OCCASION} alone will reset the occasions of the {@code Reservation} being edited,
+        // parsing it together with a valid occasion results in error
+        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY
+            + OCCASION_EMPTY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
+        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCCASION_EMPTY
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
+        assertParseFailure(parser, "1" + OCCASION_EMPTY + OCC_DESC_ANNIVERSARY
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_OCCASION_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
@@ -108,7 +111,7 @@ public class EditCommandParserTest {
 
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -149,9 +152,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
 
-        // tags
+        // occasions
         userInput = targetIndex.getOneBased() + OCC_DESC_ANNIVERSARY;
-        descriptor = new EditReservationDescriptorBuilder().withTags(VALID_OCCASION_ANNIVERSARY).build();
+        descriptor = new EditReservationDescriptorBuilder().withOccasions(VALID_OCCASION_ANNIVERSARY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -159,7 +162,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddCommandParserTest#parse_repeatedNonOccasionValue_failure()
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_RESERVATION;
@@ -189,11 +192,11 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetOccasions_success() {
         Index targetIndex = INDEX_THIRD_RESERVATION;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + OCCASION_EMPTY;
 
-        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withTags().build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withOccasions().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

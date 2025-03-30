@@ -10,13 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.reserve.commons.exceptions.IllegalValueException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Reservation}.
@@ -30,7 +30,7 @@ class JsonAdaptedReservation {
     private final String email;
     private final String diners;
     private final String dateTime;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedOccasion> occasions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedReservation} with the given reservation details.
@@ -39,14 +39,14 @@ class JsonAdaptedReservation {
     public JsonAdaptedReservation(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("diners") String diners,
                                   @JsonProperty("dateTime") String dateTime,
-                                  @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                                  @JsonProperty("tags") List<JsonAdaptedOccasion> occasions) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.diners = diners;
         this.dateTime = dateTime;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (occasions != null) {
+            this.occasions.addAll(occasions);
         }
     }
 
@@ -59,8 +59,8 @@ class JsonAdaptedReservation {
         email = source.getEmail().value;
         diners = source.getDiners().toString();
         dateTime = source.getDateTime().toString();
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        occasions.addAll(source.getOccasions().stream()
+                .map(JsonAdaptedOccasion::new)
                 .collect(Collectors.toList()));
     }
 
@@ -70,9 +70,9 @@ class JsonAdaptedReservation {
      * @throws IllegalValueException if there were any data constraints violated in the adapted reservation.
      */
     public Reservation toModelType() throws IllegalValueException {
-        final List<Tag> reservationTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            reservationTags.add(tag.toModelType());
+        final List<Occasion> reservationOccasions = new ArrayList<>();
+        for (JsonAdaptedOccasion tag : occasions) {
+            reservationOccasions.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -118,8 +118,8 @@ class JsonAdaptedReservation {
         }
         final DateTime modelDateTime = DateTime.fromFileString(dateTime);
 
-        final Set<Tag> modelTags = new HashSet<>(reservationTags);
-        return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelTags);
+        final Set<Occasion> modelOccasions = new HashSet<>(reservationOccasions);
+        return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelOccasions);
     }
 
 }

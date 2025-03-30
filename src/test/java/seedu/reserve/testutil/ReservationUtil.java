@@ -11,8 +11,8 @@ import java.util.Set;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.commands.EditCommand;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * A utility class for Reservation.
@@ -36,7 +36,7 @@ public class ReservationUtil {
         sb.append(PREFIX_EMAIL + reservation.getEmail().value + " ");
         sb.append(PREFIX_NUMBER_OF_DINERS + reservation.getDiners().value + " ");
         sb.append(PREFIX_DATE_TIME + reservation.getDateTime().toString() + " ");
-        reservation.getTags().stream().forEach(
+        reservation.getOccasions().stream().forEach(
             s -> sb.append(PREFIX_OCCASION + s.occasionName + " ")
         );
         return sb.toString();
@@ -57,12 +57,12 @@ public class ReservationUtil {
                 .append(diner.value).append(" "));
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATE_TIME)
                 .append(dateTime.toString()).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+        if (descriptor.getOccasions().isPresent()) {
+            Set<Occasion> occasions = descriptor.getOccasions().get();
+            if (occasions.isEmpty()) {
                 sb.append(PREFIX_OCCASION);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_OCCASION).append(s.occasionName).append(" "));
+                occasions.forEach(s -> sb.append(PREFIX_OCCASION).append(s.occasionName).append(" "));
             }
         }
         return sb.toString();

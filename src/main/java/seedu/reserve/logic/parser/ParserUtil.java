@@ -14,12 +14,12 @@ import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.ClearCommand;
 import seedu.reserve.logic.commands.DeleteCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -115,30 +115,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String occasion} into a {@code Occasion}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code occasion} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Occasion parseOccasion(String occasion) throws ParseException {
+        requireNonNull(occasion);
+        String trimmedOccasion = occasion.trim();
+        if (!Occasion.isValidOccasionName(trimmedOccasion)) {
+            throw new ParseException(Occasion.MESSAGE_OCCASION_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Occasion(trimmedOccasion);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> occasions} into a {@code Set<Occasion>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Occasion> parseOccasions(Collection<String> occasions) throws ParseException {
+        requireNonNull(occasions);
+        final Set<Occasion> occasionSet = new HashSet<>();
+        for (String occasionName : occasions) {
+            occasionSet.add(parseOccasion(occasionName));
         }
-        return tagSet;
+        return occasionSet;
     }
 
     /**
