@@ -29,6 +29,27 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false, false);
+    }
+
+    /**
+     * Validates whether the input arguments for the HelpCommand are correct.
+     *
+     * @param args The input arguments provided by the user.
+     * @return {@code true} if the arguments are valid (empty input), {@code false} otherwise.
+     */
+    public static boolean isValidHelpCommand(String args) {
+        String trimmedArgs = args.trim();
+        return trimmedArgs.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof HelpCommand;
+    }
+
+    @Override
+    public int hashCode() {
+        return HelpCommand.class.hashCode();
     }
 }

@@ -195,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             statisticsWindow.setPieChart(logic.getReservationStatistics());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isShowUserGuide()) {
                 handleHelp();
             }
 

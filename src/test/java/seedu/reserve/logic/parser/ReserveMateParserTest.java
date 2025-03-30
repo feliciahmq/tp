@@ -3,7 +3,6 @@ package seedu.reserve.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.reserve.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.reserve.testutil.Assert.assertThrows;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 
@@ -124,8 +123,11 @@ public class ReserveMateParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
+        // Empty help command should work
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+
+        // Invalid help command should throw exception
+        assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -180,7 +182,8 @@ public class ReserveMateParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("unknownCommand"));
     }
 
 }

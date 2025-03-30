@@ -1,7 +1,6 @@
 package seedu.reserve.logic.parser;
 
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.reserve.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -80,7 +79,7 @@ public class ReserveMateParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
@@ -98,7 +97,7 @@ public class ReserveMateParser {
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 
