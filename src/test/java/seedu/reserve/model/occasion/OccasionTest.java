@@ -1,4 +1,4 @@
-package seedu.reserve.model.tag;
+package seedu.reserve.model.occasion;
 
 import static seedu.reserve.testutil.Assert.assertThrows;
 

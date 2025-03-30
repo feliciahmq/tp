@@ -13,13 +13,13 @@ import java.util.Set;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Occasion;
 
 /**
  * Parses input arguments and creates a new AddCommand object.

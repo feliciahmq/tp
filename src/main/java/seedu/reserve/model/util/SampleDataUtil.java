@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.reserve.model.ReadOnlyReserveMate;
 import seedu.reserve.model.ReserveMate;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Occasion;
 
 /**
  * Contains utility methods for populating {@code ReserveMate} with sample data.

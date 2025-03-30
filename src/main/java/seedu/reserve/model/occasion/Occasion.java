@@ -1,4 +1,4 @@
-package seedu.reserve.model.tag;
+package seedu.reserve.model.occasion;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.AppUtil.checkArgument;

@@ -11,8 +11,8 @@ import java.util.Set;
 
 import seedu.reserve.logic.commands.AddCommand;
 import seedu.reserve.logic.commands.EditCommand;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Occasion;
 
 /**
  * A utility class for Reservation.

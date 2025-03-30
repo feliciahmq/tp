@@ -31,8 +31,8 @@ public class JsonAdaptedReservationTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_DINERS = BENSON.getDiners().toString();
     private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedOccasion> VALID_TAGS = BENSON.getTags().stream()
+            .map(JsonAdaptedOccasion::new)
             .collect(Collectors.toList());
 
     @Test
@@ -128,8 +128,8 @@ public class JsonAdaptedReservationTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        List<JsonAdaptedOccasion> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedOccasion(INVALID_TAG));
         JsonAdaptedReservation reservation =
                 new JsonAdaptedReservation(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_DINERS, VALID_DATETIME, invalidTags);

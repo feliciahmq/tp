@@ -14,12 +14,12 @@ import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.ClearCommand;
 import seedu.reserve.logic.commands.DeleteCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Occasion;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

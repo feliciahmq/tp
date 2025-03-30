@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.reserve.commons.util.ToStringBuilder;
-import seedu.reserve.model.tag.Occasion;
+import seedu.reserve.model.occasion.Occasion;
 
 /**
  * Represents a reservation in the reservation book.

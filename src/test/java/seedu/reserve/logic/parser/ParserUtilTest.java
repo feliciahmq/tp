@@ -16,12 +16,12 @@ import org.junit.jupiter.api.Test;
 import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Occasion;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

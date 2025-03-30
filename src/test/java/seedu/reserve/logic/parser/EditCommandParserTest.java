@@ -34,10 +34,10 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Occasion;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 public class EditCommandParserTest {

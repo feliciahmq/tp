@@ -38,11 +38,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.AddCommand;
+import seedu.reserve.model.occasion.Occasion;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Occasion;
 import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandParserTest {

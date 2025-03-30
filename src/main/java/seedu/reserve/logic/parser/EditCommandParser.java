@@ -19,7 +19,7 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.tag.Occasion;
+import seedu.reserve.model.occasion.Occasion;
 
 /**
  * Parses input arguments and creates a new EditCommand object
