@@ -9,7 +9,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
  */
 public class Occasion {
 
-    public static final String MESSAGE_CONSTRAINTS = "Occasion names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Occasion name must not be empty and must be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String occasionName;
