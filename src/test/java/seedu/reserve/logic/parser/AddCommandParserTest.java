@@ -58,17 +58,17 @@ public class AddCommandParserTest {
                 + OCC_DESC_BIRTHDAY, new AddCommand(expectedReservation));
 
 
-        // multiple tags - all accepted
-        Reservation expectedReservationMultipleTags = new ReservationBuilder(BOB)
+        // multiple occasions - all accepted
+        Reservation expectedReservationMultipleOccasions = new ReservationBuilder(BOB)
                 .withOccasions(VALID_OCCASION_ANNIVERSARY, VALID_OCCASION_BIRTHDAY).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY,
-                new AddCommand(expectedReservationMultipleTags));
+                new AddCommand(expectedReservationMultipleOccasions));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonOccasionValue_failure() {
         String validExpectedReservationString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + OCC_DESC_ANNIVERSARY;
 
@@ -122,7 +122,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero occasions
         Reservation expectedReservation = new ReservationBuilder(AMY).withOccasions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + DINERS_DESC_AMY + DATETIME_DESC_AMY, new AddCommand(expectedReservation));

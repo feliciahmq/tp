@@ -75,7 +75,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editReservationDescriptor
                     .setDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get()));
         }
-        parseOccasionsForEdit(argMultimap.getAllValues(PREFIX_OCCASION)).ifPresent(editReservationDescriptor::setTags);
+        parseOccasionsForEdit(argMultimap.getAllValues(PREFIX_OCCASION))
+            .ifPresent(editReservationDescriptor::setOccasions);
 
         if (!editReservationDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

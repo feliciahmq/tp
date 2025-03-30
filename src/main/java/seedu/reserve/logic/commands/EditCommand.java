@@ -181,7 +181,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setDiners(toCopy.diners);
             setDateTime(toCopy.dateTime);
-            setTags(toCopy.occasions);
+            setOccasions(toCopy.occasions);
         }
 
         /**
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Occasion> occasions) {
+        public void setOccasions(Set<Occasion> occasions) {
             this.occasions = (occasions != null) ? new HashSet<>(occasions) : null;
         }
 

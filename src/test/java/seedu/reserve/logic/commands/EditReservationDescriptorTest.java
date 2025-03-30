@@ -49,7 +49,7 @@ public class EditReservationDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different occasions -> returns false
-        editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withTags(VALID_OCCASION_BIRTHDAY).build();
+        editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

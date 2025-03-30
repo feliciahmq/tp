@@ -39,7 +39,7 @@ public class EditReservationDescriptorBuilder {
         descriptor.setEmail(reservation.getEmail());
         descriptor.setDiners(reservation.getDiners());
         descriptor.setDateTime(reservation.getDateTime());
-        descriptor.setTags(reservation.getOccasions());
+        descriptor.setOccasions(reservation.getOccasions());
     }
 
     /**
@@ -83,12 +83,12 @@ public class EditReservationDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditReservationDescriptor}
+     * Parses the {@code occasions} into a {@code Set<Occasion>} and set it to the {@code EditReservationDescriptor}
      * that we are building.
      */
-    public EditReservationDescriptorBuilder withTags(String... tags) {
-        Set<Occasion> occasionSet = Stream.of(tags).map(Occasion::new).collect(Collectors.toSet());
-        descriptor.setTags(occasionSet);
+    public EditReservationDescriptorBuilder withOccasions(String... occasions) {
+        Set<Occasion> occasionSet = Stream.of(occasions).map(Occasion::new).collect(Collectors.toSet());
+        descriptor.setOccasions(occasionSet);
         return this;
     }
 

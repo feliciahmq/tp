@@ -27,7 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_OCCASION = "#friend";
+    private static final String INVALID_OCCASION = "#gambling";
     private static final String INVALID_DINERS = "0";
     private static final String INVALID_DATETIME = "2030-04-12 180";
     private static final String INVALID_FILTER_DATETIME = "2025-13-01 1900";
@@ -210,21 +210,21 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
+    public void parseOccasion_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseOccasion(INVALID_OCCASION));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsOccasion() throws Exception {
+    public void parseOccasion_validValueWithoutWhitespace_returnsOccasion() throws Exception {
         Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
         assertEquals(expectedOccasion, ParserUtil.parseOccasion(VALID_OCCASION_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedOccasion() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_OCCASION_1 + WHITESPACE;
+    public void parseOccasion_validValueWithWhitespace_returnsTrimmedOccasion() throws Exception {
+        String occasionWithWhitespace = WHITESPACE + VALID_OCCASION_1 + WHITESPACE;
         Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
-        assertEquals(expectedOccasion, ParserUtil.parseOccasion(tagWithWhitespace));
+        assertEquals(expectedOccasion, ParserUtil.parseOccasion(occasionWithWhitespace));
     }
 
     @Test
@@ -233,7 +233,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
+    public void parseOccasions_collectionWithInvalidOccasions_throwsParseException() {
         assertThrows(ParseException.class, () ->
             ParserUtil.parseOccasions(Arrays.asList(VALID_OCCASION_1, INVALID_OCCASION)));
     }
@@ -244,7 +244,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithValidOccasions_returnsOccasionSet() throws Exception {
+    public void parseOccasions_collectionWithValidOccasions_returnsOccasionSet() throws Exception {
         Set<Occasion> actualOccasionSet = ParserUtil.parseOccasions(Arrays.asList(VALID_OCCASION_1, VALID_OCCASION_2));
         Set<Occasion> expectedOccasionSet = new HashSet<Occasion>(Arrays
             .asList(new Occasion(VALID_OCCASION_1), new Occasion(VALID_OCCASION_2)));
