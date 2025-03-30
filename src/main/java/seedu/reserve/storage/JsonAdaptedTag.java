@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.reserve.commons.exceptions.IllegalValueException;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Occasion}.
  */
 class JsonAdaptedTag {
 
@@ -24,7 +24,7 @@ class JsonAdaptedTag {
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
+    public JsonAdaptedTag(Occasion source) {
         tagName = source.occasionName;
     }
 
@@ -38,11 +38,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Occasion toModelType() throws IllegalValueException {
+        if (!Occasion.isValidTagName(tagName)) {
+            throw new IllegalValueException(Occasion.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Occasion(tagName);
     }
 
 }

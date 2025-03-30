@@ -12,7 +12,7 @@ import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
  * A utility class to help with building EditReservationDescriptor objects.
@@ -87,8 +87,8 @@ public class EditReservationDescriptorBuilder {
      * that we are building.
      */
     public EditReservationDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Occasion> occasionSet = Stream.of(tags).map(Occasion::new).collect(Collectors.toSet());
+        descriptor.setTags(occasionSet);
         return this;
     }
 

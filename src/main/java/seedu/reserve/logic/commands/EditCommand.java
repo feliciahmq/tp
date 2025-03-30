@@ -29,7 +29,7 @@ import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
  * Edits the details of an existing reservation in the reservation book.
@@ -126,10 +126,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editReservationDescriptor.getEmail().orElse(reservationToEdit.getEmail());
         Diners updateDiners = editReservationDescriptor.getDiners().orElse(reservationToEdit.getDiners());
         DateTime updateDateTime = editReservationDescriptor.getDateTime().orElse(reservationToEdit.getDateTime());
-        Set<Tag> updatedTags = editReservationDescriptor.getTags().orElse(reservationToEdit.getTags());
+        Set<Occasion> updatedOccasions = editReservationDescriptor.getTags().orElse(reservationToEdit.getTags());
 
         return new Reservation(updatedName, updatedPhone, updatedEmail,
-                updateDiners, updateDateTime, updatedTags);
+                updateDiners, updateDateTime, updatedOccasions);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
         private Email email;
         private Diners diners;
         private DateTime dateTime;
-        private Set<Tag> tags;
+        private Set<Occasion> occasions;
 
         public EditReservationDescriptor() {}
 
@@ -180,14 +180,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setDiners(toCopy.diners);
             setDateTime(toCopy.dateTime);
-            setTags(toCopy.tags);
+            setTags(toCopy.occasions);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, diners, dateTime, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, diners, dateTime, occasions);
         }
 
         public void setName(Name name) {
@@ -234,8 +234,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Occasion> occasions) {
+            this.occasions = (occasions != null) ? new HashSet<>(occasions) : null;
         }
 
         /**
@@ -243,8 +243,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Occasion>> getTags() {
+            return (occasions != null) ? Optional.of(Collections.unmodifiableSet(occasions)) : Optional.empty();
         }
 
         @Override
@@ -264,7 +264,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditReservationDescriptor.email)
                     && Objects.equals(diners, otherEditReservationDescriptor.diners)
                     && Objects.equals(dateTime, otherEditReservationDescriptor.dateTime)
-                    && Objects.equals(tags, otherEditReservationDescriptor.tags);
+                    && Objects.equals(occasions, otherEditReservationDescriptor.occasions);
         }
 
         @Override
@@ -275,7 +275,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("diners", diners)
                     .add("dateTime", dateTime)
-                    .add("tags", tags)
+                    .add("tags", occasions)
                     .toString();
         }
     }

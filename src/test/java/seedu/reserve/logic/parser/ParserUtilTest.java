@@ -21,7 +21,7 @@ import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -216,15 +216,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        Occasion expectedOccasion = new Occasion(VALID_TAG_1);
+        assertEquals(expectedOccasion, ParserUtil.parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        Occasion expectedOccasion = new Occasion(VALID_TAG_1);
+        assertEquals(expectedOccasion, ParserUtil.parseTag(tagWithWhitespace));
     }
 
     @Test
@@ -244,10 +244,11 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Occasion> actualOccasionSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Occasion> expectedOccasionSet = new HashSet<Occasion>(Arrays
+            .asList(new Occasion(VALID_TAG_1), new Occasion(VALID_TAG_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedOccasionSet, actualOccasionSet);
     }
 
     @Test

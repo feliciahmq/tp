@@ -12,7 +12,7 @@ import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
  * Contains utility methods for populating {@code ReserveMate} with sample data.
@@ -44,9 +44,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Occasion> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Occasion::new)
                 .collect(Collectors.toSet());
     }
 

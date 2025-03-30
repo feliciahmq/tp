@@ -7,7 +7,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
  * Represents a Tag in the reservation book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Occasion {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
@@ -19,7 +19,7 @@ public class Tag {
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
+    public Occasion(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.occasionName = tagName;
@@ -39,12 +39,12 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof Occasion)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
-        return occasionName.equals(otherTag.occasionName);
+        Occasion otherOccasion = (Occasion) other;
+        return occasionName.equals(otherOccasion.occasionName);
     }
 
     @Override

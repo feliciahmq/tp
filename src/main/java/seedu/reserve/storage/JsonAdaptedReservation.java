@@ -16,7 +16,7 @@ import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
  * Jackson-friendly version of {@link Reservation}.
@@ -70,9 +70,9 @@ class JsonAdaptedReservation {
      * @throws IllegalValueException if there were any data constraints violated in the adapted reservation.
      */
     public Reservation toModelType() throws IllegalValueException {
-        final List<Tag> reservationTags = new ArrayList<>();
+        final List<Occasion> reservationOccasions = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            reservationTags.add(tag.toModelType());
+            reservationOccasions.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -118,8 +118,8 @@ class JsonAdaptedReservation {
         }
         final DateTime modelDateTime = DateTime.fromFileString(dateTime);
 
-        final Set<Tag> modelTags = new HashSet<>(reservationTags);
-        return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelTags);
+        final Set<Occasion> modelOccasions = new HashSet<>(reservationOccasions);
+        return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelOccasions);
     }
 
 }

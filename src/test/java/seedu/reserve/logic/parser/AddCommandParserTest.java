@@ -42,7 +42,7 @@ import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
 import seedu.reserve.model.reservation.Reservation;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 import seedu.reserve.testutil.ReservationBuilder;
 
 public class AddCommandParserTest {
@@ -171,7 +171,7 @@ public class AddCommandParserTest {
         // invalid occasion
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + DINERS_DESC_BOB + DATETIME_DESC_BOB + INVALID_OCC_DESC
-                + VALID_OCCASION_ANNIVERSARY, Tag.MESSAGE_CONSTRAINTS);
+                + VALID_OCCASION_ANNIVERSARY, Occasion.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB

@@ -19,7 +19,7 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.commands.EditCommand;
 import seedu.reserve.logic.parser.exceptions.ParseException;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -89,7 +89,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Occasion>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

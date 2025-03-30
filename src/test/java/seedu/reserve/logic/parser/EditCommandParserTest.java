@@ -37,12 +37,12 @@ import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
-import seedu.reserve.model.tag.Tag;
+import seedu.reserve.model.tag.Occasion;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_OCCASION;
+    private static final String OCCASION_EMPTY = " " + PREFIX_OCCASION;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -84,16 +84,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_OCC_DESC, Occasion.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Reservation} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + TAG_EMPTY + OCC_DESC_BIRTHDAY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCC_DESC_BIRTHDAY
+            + OCCASION_EMPTY, Occasion.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + OCC_DESC_ANNIVERSARY + OCCASION_EMPTY
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + OCCASION_EMPTY + OCC_DESC_ANNIVERSARY
+            + OCC_DESC_BIRTHDAY, Occasion.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
@@ -191,7 +194,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_RESERVATION;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + OCCASION_EMPTY;
 
         EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
