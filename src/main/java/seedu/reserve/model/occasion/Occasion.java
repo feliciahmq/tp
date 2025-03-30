@@ -4,31 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the reservation book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents an Occasion in the reservation book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidOccasionName(String)}
  */
 public class Occasion {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Occasion names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String occasionName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Occasion}.
      *
-     * @param tagName A valid tag name.
+     * @param occasionName A valid occasion name.
      */
-    public Occasion(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.occasionName = tagName;
+    public Occasion(String occasionName) {
+        requireNonNull(occasionName);
+        checkArgument(isValidOccasionName(occasionName), MESSAGE_CONSTRAINTS);
+        this.occasionName = occasionName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid occasion name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidOccasionName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

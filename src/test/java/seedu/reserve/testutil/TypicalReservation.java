@@ -30,7 +30,7 @@ public class TypicalReservation {
             .withPhone("94351253")
             .withDiners("5")
             .withDateTime("2025-04-10 1800")
-            .withTags("friends")
+            .withOccasions("friends")
             .build();
 
     public static final Reservation BENSON = new ReservationBuilder().withName("Benson Meier")
@@ -38,7 +38,7 @@ public class TypicalReservation {
             .withPhone("98765432")
             .withDiners("3")
             .withDateTime("2025-04-25 1200")
-            .withTags("owesMoney", "friends")
+            .withOccasions("owesMoney", "friends")
             .build();
 
     public static final Reservation CARL = new ReservationBuilder().withName("Carl Kurz")
@@ -53,7 +53,7 @@ public class TypicalReservation {
             .withEmail("cornelia@example.com")
             .withDiners("4")
             .withDateTime("2025-04-20 1600")
-            .withTags("friends")
+            .withOccasions("friends")
             .build();
 
     public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
@@ -94,10 +94,10 @@ public class TypicalReservation {
     // Manually added - Reservation's details found in {@code CommandTestUtil}
     public static final Reservation AMY = new ReservationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withDiners(VALID_DINERS_AMY)
-            .withDateTime(VALID_DATETIME_AMY).withTags(VALID_OCCASION_ANNIVERSARY).build();
+            .withDateTime(VALID_DATETIME_AMY).withOccasions(VALID_OCCASION_ANNIVERSARY).build();
     public static final Reservation BOB = new ReservationBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withDiners(VALID_DINERS_BOB)
-            .withDateTime(VALID_DATETIME_BOB).withTags(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY)
+            .withDateTime(VALID_DATETIME_BOB).withOccasions(VALID_OCCASION_BIRTHDAY, VALID_OCCASION_ANNIVERSARY)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

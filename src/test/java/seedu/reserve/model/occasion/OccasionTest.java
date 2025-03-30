@@ -12,15 +12,15 @@ public class OccasionTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Occasion(invalidTagName));
+    public void constructor_invalidOccasionName_throwsIllegalArgumentException() {
+        String invalidOccasionName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Occasion(invalidOccasionName));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
-        assertThrows(NullPointerException.class, () -> Occasion.isValidTagName(null));
+    public void isValidOccasionName() {
+        // null occasion name
+        assertThrows(NullPointerException.class, () -> Occasion.isValidOccasionName(null));
     }
 
 }

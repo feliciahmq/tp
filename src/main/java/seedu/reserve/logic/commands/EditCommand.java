@@ -126,7 +126,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editReservationDescriptor.getEmail().orElse(reservationToEdit.getEmail());
         Diners updateDiners = editReservationDescriptor.getDiners().orElse(reservationToEdit.getDiners());
         DateTime updateDateTime = editReservationDescriptor.getDateTime().orElse(reservationToEdit.getDateTime());
-        Set<Occasion> updatedOccasions = editReservationDescriptor.getTags().orElse(reservationToEdit.getTags());
+        Set<Occasion> updatedOccasions = editReservationDescriptor
+            .getOccasions().orElse(reservationToEdit.getOccasions());
 
         return new Reservation(updatedName, updatedPhone, updatedEmail,
                 updateDiners, updateDateTime, updatedOccasions);
@@ -239,11 +240,11 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable occasion set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code occasions} is null.
          */
-        public Optional<Set<Occasion>> getTags() {
+        public Optional<Set<Occasion>> getOccasions() {
             return (occasions != null) ? Optional.of(Collections.unmodifiableSet(occasions)) : Optional.empty();
         }
 
@@ -275,7 +276,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("diners", diners)
                     .add("dateTime", dateTime)
-                    .add("tags", occasions)
+                    .add("occasions", occasions)
                     .toString();
         }
     }

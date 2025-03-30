@@ -115,28 +115,28 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String occasion} into a {@code Occasion}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code occasion} is invalid.
      */
-    public static Occasion parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Occasion.isValidTagName(trimmedTag)) {
+    public static Occasion parseOccasion(String occasion) throws ParseException {
+        requireNonNull(occasion);
+        String trimmedOccasion = occasion.trim();
+        if (!Occasion.isValidOccasionName(trimmedOccasion)) {
             throw new ParseException(Occasion.MESSAGE_CONSTRAINTS);
         }
-        return new Occasion(trimmedTag);
+        return new Occasion(trimmedOccasion);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> occasions} into a {@code Set<Occasion>}.
      */
-    public static Set<Occasion> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Occasion> parseOccasions(Collection<String> occasions) throws ParseException {
+        requireNonNull(occasions);
         final Set<Occasion> occasionSet = new HashSet<>();
-        for (String tagName : tags) {
-            occasionSet.add(parseTag(tagName));
+        for (String occasionName : occasions) {
+            occasionSet.add(parseOccasion(occasionName));
         }
         return occasionSet;
     }

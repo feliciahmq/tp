@@ -49,7 +49,7 @@ public class Messages {
                 .append("; Number of Diners: ")
                 .append(reservation.getDiners().value)
                 .append("; Occasion: ");
-        reservation.getTags().forEach(builder::append);
+        reservation.getOccasions().forEach(builder::append);
         return builder.toString();
     }
 

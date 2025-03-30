@@ -80,10 +80,10 @@ public class Reservation {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable occasion set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Occasion> getTags() {
+    public Set<Occasion> getOccasions() {
         return Collections.unmodifiableSet(occasions);
     }
 

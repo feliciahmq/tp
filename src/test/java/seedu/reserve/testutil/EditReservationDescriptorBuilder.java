@@ -39,7 +39,7 @@ public class EditReservationDescriptorBuilder {
         descriptor.setEmail(reservation.getEmail());
         descriptor.setDiners(reservation.getDiners());
         descriptor.setDateTime(reservation.getDateTime());
-        descriptor.setTags(reservation.getTags());
+        descriptor.setTags(reservation.getOccasions());
     }
 
     /**

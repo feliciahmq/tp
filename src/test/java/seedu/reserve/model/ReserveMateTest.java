@@ -50,7 +50,7 @@ public class ReserveMateTest {
     public void resetData_withDuplicateReservations_throwsDuplicateReservationException() {
         // Two reservations with the same identity fields
         Reservation editedAlice = new ReservationBuilder(ALICE)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
         List<Reservation> newReservations = Arrays.asList(ALICE, editedAlice);
         ReserveMateStub newData = new ReserveMateStub(newReservations);
 
@@ -77,7 +77,7 @@ public class ReserveMateTest {
     public void hasReservation_reservationWithSameIdentityFieldsInReserveMate_returnsTrue() {
         reserveMate.addReservation(ALICE);
         Reservation editedAlice = new ReservationBuilder(ALICE)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertTrue(reserveMate.hasReservation(editedAlice));
     }
 
@@ -121,7 +121,7 @@ public class ReserveMateTest {
                 .withPhone("93748263")
                 .withDiners("3")
                 .withDateTime("2025-04-24 1200")
-                .withTags("friends")
+                .withOccasions("friends")
                 .build();
         ReserveMate reserveMate = new ReserveMateBuilder()
                 .withReservation(BENSON)

@@ -45,7 +45,7 @@ public class ReservationPreferenceTest {
         assertEquals(originalReservation.getEmail(), updatedReservation.getEmail());
         assertEquals(originalReservation.getDiners(), updatedReservation.getDiners());
         assertEquals(originalReservation.getDateTime(), updatedReservation.getDateTime());
-        assertEquals(originalReservation.getTags(), updatedReservation.getTags());
+        assertEquals(originalReservation.getOccasions(), updatedReservation.getOccasions());
     }
 
     @Test

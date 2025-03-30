@@ -62,7 +62,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
         }
 
-        if (toAdd.getTags().isEmpty()) {
+        if (toAdd.getOccasions().isEmpty()) {
             throw new CommandException(MESSAGE_NO_OCCASION);
         }
 

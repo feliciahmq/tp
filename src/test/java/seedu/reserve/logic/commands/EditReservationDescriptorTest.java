@@ -48,7 +48,7 @@ public class EditReservationDescriptorTest {
         editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different occasions -> returns false
         editedAmy = new EditReservationDescriptorBuilder(DESC_AMY).withTags(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
@@ -61,8 +61,8 @@ public class EditReservationDescriptorTest {
                 + editReservationDescriptor.getPhone().orElse(null) + ", email="
                 + editReservationDescriptor.getEmail().orElse(null) + ", diners="
                 + editReservationDescriptor.getDiners().orElse(null) + ", dateTime="
-                + editReservationDescriptor.getDateTime().orElse(null) + ", tags="
-                + editReservationDescriptor.getTags().orElse(null) + "}";
+                + editReservationDescriptor.getDateTime().orElse(null) + ", occasions="
+                + editReservationDescriptor.getOccasions().orElse(null) + "}";
         assertEquals(expected, editReservationDescriptor.toString());
     }
 }

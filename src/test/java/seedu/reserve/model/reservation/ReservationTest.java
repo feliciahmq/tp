@@ -22,7 +22,7 @@ public class ReservationTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Reservation reservation = new ReservationBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> reservation.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> reservation.getOccasions().remove(0));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ReservationTest {
 
         // same name, phone number and date time, all other attributes different -> returns true
         Reservation editedAlice = new ReservationBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_OCCASION_BIRTHDAY).build();
+                .withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertTrue(ALICE.isSameReservation(editedAlice));
 
         // name differs in case, all other attributes same -> returns True
@@ -100,7 +100,7 @@ public class ReservationTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ReservationBuilder(ALICE).withTags(VALID_OCCASION_BIRTHDAY).build();
+        editedAlice = new ReservationBuilder(ALICE).withOccasions(VALID_OCCASION_BIRTHDAY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -109,7 +109,7 @@ public class ReservationTest {
         String expected = Reservation.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", diners="
                 + ALICE.getDiners() + ", dateTime=" + ALICE.getDateTime() + ", occasion="
-                + ALICE.getTags() + ", preference=" + ALICE.getPreference() + "}";
+                + ALICE.getOccasions() + ", preference=" + ALICE.getPreference() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

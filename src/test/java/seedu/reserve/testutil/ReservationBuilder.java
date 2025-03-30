@@ -60,7 +60,7 @@ public class ReservationBuilder {
         email = reservationToCopy.getEmail();
         diners = reservationToCopy.getDiners();
         dateTime = reservationToCopy.getDateTime();
-        occasions = new HashSet<>(reservationToCopy.getTags());
+        occasions = new HashSet<>(reservationToCopy.getOccasions());
         preference = reservationToCopy.getPreference();
     }
 
@@ -73,10 +73,11 @@ public class ReservationBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Reservation} that we are building.
+     * Parses the {@code occasions} into a {@code Set<Occasion>}
+     * and set it to the {@code Reservation} that we are building.
      */
-    public ReservationBuilder withTags(String ... tags) {
-        this.occasions = SampleDataUtil.getTagSet(tags);
+    public ReservationBuilder withOccasions(String ... occasions) {
+        this.occasions = SampleDataUtil.getOccasionSet(occasions);
         return this;
     }
 

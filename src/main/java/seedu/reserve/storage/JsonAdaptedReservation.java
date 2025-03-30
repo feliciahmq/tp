@@ -59,7 +59,7 @@ class JsonAdaptedReservation {
         email = source.getEmail().value;
         diners = source.getDiners().toString();
         dateTime = source.getDateTime().toString();
-        occasions.addAll(source.getTags().stream()
+        occasions.addAll(source.getOccasions().stream()
                 .map(JsonAdaptedOccasion::new)
                 .collect(Collectors.toList()));
     }

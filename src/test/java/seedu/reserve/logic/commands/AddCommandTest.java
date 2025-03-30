@@ -36,7 +36,7 @@ public class AddCommandTest {
     @Test
     public void execute_reservationAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingReservationAdded modelStub = new ModelStubAcceptingReservationAdded();
-        Reservation validReservation = new ReservationBuilder().withTags("Birthday").build();;
+        Reservation validReservation = new ReservationBuilder().withOccasions("Birthday").build();;
 
         CommandResult commandResult = new AddCommand(validReservation).execute(modelStub);
 
@@ -47,7 +47,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateReservation_throwsCommandException() {
-        Reservation validReservation = new ReservationBuilder().withTags("Birthday").build();;
+        Reservation validReservation = new ReservationBuilder().withOccasions("Birthday").build();;
         AddCommand addCommand = new AddCommand(validReservation);
         ModelStub modelStub = new ModelStubWithReservation(validReservation);
 
@@ -58,7 +58,7 @@ public class AddCommandTest {
     @Test
     public void execute_missingOccasion_throwsCommandException() {
         ModelStubAcceptingReservationAdded modelStub = new ModelStubAcceptingReservationAdded();
-        Reservation reservationWithoutOccasion = new ReservationBuilder().withTags().build(); // No occasion
+        Reservation reservationWithoutOccasion = new ReservationBuilder().withOccasions().build(); // No occasion
 
         AddCommand addCommand = new AddCommand(reservationWithoutOccasion);
 
