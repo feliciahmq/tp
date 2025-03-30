@@ -36,10 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_NUMBER_OF_DINERS + "5 "
             + PREFIX_DATE_TIME + "2025-04-28 1800 "
             + PREFIX_OCCASION + "Birthday ";
-
     public static final String MESSAGE_SUCCESS = "New reservation added:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_RESERVATION =
-            "This reservation already exists in the reservation book";
     public static final String MESSAGE_NO_OCCASION = "Please indicate an occasion \n"
         + "Example: " + PREFIX_OCCASION + "Birthday \n"
         + "Example: " + PREFIX_OCCASION + "None";
@@ -59,7 +56,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasReservation(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
         }
 
         if (toAdd.getTags().isEmpty()) {

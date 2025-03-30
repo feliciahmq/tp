@@ -57,8 +57,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RESERVATION =
-            "This reservation already exists in the reservation book.";
     public static final String MESSAGE_FUTURE_RESERVATION_REQUIRED = "Past reservation cannot be edited.";
 
 
@@ -105,7 +103,7 @@ public class EditCommand extends Command {
         }
 
         if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
-            throw new CommandException(MESSAGE_DUPLICATE_RESERVATION);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
 
         }
 

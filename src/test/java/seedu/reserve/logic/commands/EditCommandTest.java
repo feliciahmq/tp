@@ -137,7 +137,7 @@ public class EditCommandTest {
                 new EditReservationDescriptorBuilder(firstReservation).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_RESERVATION, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESERVATION);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
@@ -149,7 +149,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
                 new EditReservationDescriptorBuilder(reservationInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESERVATION);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test

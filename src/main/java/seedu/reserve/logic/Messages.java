@@ -24,6 +24,8 @@ public class Messages {
             "No reservations found. Use the 'add' command to create a reservation\n"
                     + "or 'help' to view all commands.";
     public static final String MESSAGE_NO_RESERVATIONS = "No reservations found.";
+    public static final String MESSAGE_DUPLICATE_RESERVATION =
+            "A reservation already exists for this customer (same email or phone) at the chosen date-time.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
