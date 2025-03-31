@@ -15,7 +15,7 @@ public class PreferenceCommandParserTest {
         "The reservation index provided is invalid";
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
-    private static final String VALID_PREFERENCE = "No nuts, allergic to seafood";
+    private static final String VALID_PREFERENCE = "No nuts and allergic to seafood";
 
     private final PreferenceParser parser = new PreferenceParser();
 
@@ -87,5 +87,18 @@ public class PreferenceCommandParserTest {
         }
         String userInput = "save 1 " + longPreference;
         assertParseFailure(parser, userInput, PreferenceParser.MESSAGE_PREFERENCE_TOO_LONG);
+    }
+
+    @Test
+    public void parse_invalidPreferenceCharacters_failure() {
+        // Test with special characters
+        assertParseFailure(parser, "save 1 Invalid!@#", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+
+        // Test with underscore
+        assertParseFailure(parser, "save 1 Invalid_Preference", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+
+        // Test with other symbols
+        assertParseFailure(parser, "save 1 Preference$", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+        assertParseFailure(parser, "save 1 Preference&Text", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
     }
 }
