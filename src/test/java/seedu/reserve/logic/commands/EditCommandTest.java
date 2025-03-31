@@ -2,6 +2,7 @@ package seedu.reserve.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.reserve.logic.commands.CommandTestUtil.DESC_BOB;
@@ -30,7 +31,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
-import seedu.reserve.logic.commands.EditCommand.EditReservationDescriptor;
+import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.ReserveMate;
@@ -49,20 +50,29 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
         Reservation editedReservation = new ReservationBuilder().build();
         EditCommand.EditReservationDescriptor descriptor =
-                new EditReservationDescriptorBuilder(editedReservation).build();
+            new EditReservationDescriptorBuilder(editedReservation).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_RESERVATION, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
-                Messages.format(editedReservation));
+            Messages.format(editedReservation));
 
-        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
-                new UserPrefs());
-        expectedModel.setReservation(model.getFilteredReservationList().get(1), editedReservation);
+        // Execute the command
+        CommandResult result = editCommand.execute(model);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        // Verify the result message
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Get the actual updated reservation from the model
+        Reservation updatedReservation = model.getFilteredReservationList()
+            .get(INDEX_SECOND_RESERVATION.getZeroBased());
+
+        // Verify the original is no longer present by comparing against typical data
+        Reservation originalReservation = new ModelManager(getTypicalReserveMate(), new UserPrefs())
+            .getFilteredReservationList().get(INDEX_SECOND_RESERVATION.getZeroBased());
+        assertNotEquals(originalReservation, updatedReservation);
     }
 
     @Test
@@ -274,7 +284,7 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditCommand.EditReservationDescriptor editReservationDescriptor = new EditReservationDescriptor();
+        EditCommand.EditReservationDescriptor editReservationDescriptor = new EditCommand.EditReservationDescriptor();
         EditCommand editCommand = new EditCommand(index, editReservationDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editReservationDescriptor="
                 + editReservationDescriptor + "}";

@@ -29,6 +29,7 @@ import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Preference;
 import seedu.reserve.model.reservation.Reservation;
 
 /**
@@ -127,9 +128,10 @@ public class EditCommand extends Command {
         DateTime updateDateTime = editReservationDescriptor.getDateTime().orElse(reservationToEdit.getDateTime());
         Set<Occasion> updatedOccasions = editReservationDescriptor
             .getOccasions().orElse(reservationToEdit.getOccasions());
-
+        Preference updatedPreference = editReservationDescriptor
+            .getPreference().orElse(reservationToEdit.getPreference());
         return new Reservation(updatedName, updatedPhone, updatedEmail,
-                updateDiners, updateDateTime, updatedOccasions);
+                updateDiners, updateDateTime, updatedOccasions, updatedPreference);
     }
 
     @Override
@@ -167,6 +169,7 @@ public class EditCommand extends Command {
         private Diners diners;
         private DateTime dateTime;
         private Set<Occasion> occasions;
+        private Preference preference;
 
         public EditReservationDescriptor() {}
 
@@ -181,6 +184,7 @@ public class EditCommand extends Command {
             setDiners(toCopy.diners);
             setDateTime(toCopy.dateTime);
             setOccasions(toCopy.occasions);
+            setPreference(toCopy.preference);
         }
 
         /**
@@ -238,6 +242,14 @@ public class EditCommand extends Command {
             this.occasions = (occasions != null) ? new HashSet<>(occasions) : null;
         }
 
+        public void setPreference(Preference preference) {
+            this.preference = preference;
+        }
+
+        public Optional<Preference> getPreference() {
+            return Optional.ofNullable(preference);
+        }
+
         /**
          * Returns an unmodifiable occasion set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -264,7 +276,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditReservationDescriptor.email)
                     && Objects.equals(diners, otherEditReservationDescriptor.diners)
                     && Objects.equals(dateTime, otherEditReservationDescriptor.dateTime)
-                    && Objects.equals(occasions, otherEditReservationDescriptor.occasions);
+                    && Objects.equals(occasions, otherEditReservationDescriptor.occasions)
+                    && Objects.equals(preference, otherEditReservationDescriptor.preference);
         }
 
         @Override
@@ -276,6 +289,7 @@ public class EditCommand extends Command {
                     .add("diners", diners)
                     .add("dateTime", dateTime)
                     .add("occasions", occasions)
+                    .add("preferences", preference)
                     .toString();
         }
     }

@@ -2,6 +2,7 @@ package seedu.reserve.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.commands.PreferenceCommand;
@@ -12,10 +13,11 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
  */
 public class PreferenceParser implements Parser<PreferenceCommand> {
 
+    public static final String MESSAGE_INVALID_PREFERENCE_CHARACTERS =
+        "Preferences should only contain spaces and alphanumeric characters.";
     private static final int MAX_PREFERENCE_LENGTH = 50;
     public static final String MESSAGE_PREFERENCE_TOO_LONG =
-            "Preference text cannot exceed " + MAX_PREFERENCE_LENGTH + " characters.";
-
+        "Preference text cannot exceed " + MAX_PREFERENCE_LENGTH + " characters.";
     /**
      * Parses the given {@code String} of arguments in the context of the PreferenceCommand
      * and returns a PreferenceCommand object for execution.
@@ -35,8 +37,7 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
         try {
             index = ParserUtil.parseIndex(parts[1]);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
         }
 
         return createCommand(subCommand, index, parts);
@@ -87,11 +88,12 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
     private PreferenceCommand createSaveCommand(Index index, String[] parts) throws ParseException {
         if (parts.length < 3) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
         }
 
         String preference = parts[2];
         validatePreferenceLength(preference);
+        validatePreferenceContent(preference);
 
         return new PreferenceCommand(index, preference);
     }
@@ -103,6 +105,16 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
     private void validatePreferenceLength(String preference) throws ParseException {
         if (preference.length() > MAX_PREFERENCE_LENGTH) {
             throw new ParseException(MESSAGE_PREFERENCE_TOO_LONG);
+        }
+    }
+
+    /**
+     * Validates that the preference text contains only alphanumeric characters.
+     * @throws ParseException if the preference contains invalid characters
+     */
+    private void validatePreferenceContent(String preference) throws ParseException {
+        if (!preference.matches("[a-zA-Z0-9 ]+")) {
+            throw new ParseException(MESSAGE_INVALID_PREFERENCE_CHARACTERS);
         }
     }
 }

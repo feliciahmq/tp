@@ -11,9 +11,11 @@ import seedu.reserve.logic.commands.PreferenceCommand;
 
 public class PreferenceCommandParserTest {
 
-    private static final String VALID_PREFERENCE = "No nuts, allergic to seafood";
+    public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX =
+        "The reservation index provided is invalid";
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
+        String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
+    private static final String VALID_PREFERENCE = "No nuts and allergic to seafood";
 
     private final PreferenceParser parser = new PreferenceParser();
 
@@ -44,16 +46,16 @@ public class PreferenceCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         // negative index
-        assertParseFailure(parser, "save -5 " + VALID_PREFERENCE, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "show -5", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "save -5 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "show -5", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "save 0 " + VALID_PREFERENCE, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "show 0", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "save 0 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "show 0", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // invalid characters in index
-        assertParseFailure(parser, "save abc " + VALID_PREFERENCE, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "show abc", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "save abc ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "show abc", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -85,5 +87,18 @@ public class PreferenceCommandParserTest {
         }
         String userInput = "save 1 " + longPreference;
         assertParseFailure(parser, userInput, PreferenceParser.MESSAGE_PREFERENCE_TOO_LONG);
+    }
+
+    @Test
+    public void parse_invalidPreferenceCharacters_failure() {
+        // Test with special characters
+        assertParseFailure(parser, "save 1 Invalid!@#", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+
+        // Test with underscore
+        assertParseFailure(parser, "save 1 Invalid_Preference", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+
+        // Test with other symbols
+        assertParseFailure(parser, "save 1 Preference$", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
+        assertParseFailure(parser, "save 1 Preference&Text", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
     }
 }

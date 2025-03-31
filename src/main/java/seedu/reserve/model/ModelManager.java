@@ -170,10 +170,13 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return reserveMate.equals(otherModelManager.reserveMate)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredReservations.equals(otherModelManager.filteredReservations)
-                && reservationStatistics.equals(otherModelManager.reservationStatistics);
-    }
 
+        // Compare the underlying data structures, not the filtered views
+        return reserveMate.equals(otherModelManager.reserveMate)
+            && userPrefs.equals(otherModelManager.userPrefs)
+            // Compare the content of filtered lists instead of the list objects themselves
+            && getFilteredReservationList().size() == otherModelManager.getFilteredReservationList().size()
+            && getFilteredReservationList().containsAll(otherModelManager.getFilteredReservationList())
+            && reservationStatistics.equals(otherModelManager.reservationStatistics);
+    }
 }

@@ -17,28 +17,29 @@ public class ReservationPreferenceTest {
 
     @Test
     public void getPreference_defaultConstructor_returnsNone() {
-        Reservation reservation = new ReservationBuilder().build();
-        assertEquals("None", reservation.getPreference());
+        assertEquals("None", new ReservationBuilder().build().getPreference().toString());
     }
 
     @Test
     public void getPreference_customPreference_returnsCorrectPreference() {
-        Reservation reservation = new ReservationBuilder().withPreference(TEST_PREFERENCE).build();
-        assertEquals(TEST_PREFERENCE, reservation.getPreference());
+        assertEquals(TEST_PREFERENCE, new ReservationBuilder()
+            .withPreference(TEST_PREFERENCE).build().getPreference().toString());
     }
 
     @Test
     public void withPreference_nullPreference_throwsNullPointerException() {
-        Reservation reservation = new ReservationBuilder().build();
-        assertThrows(NullPointerException.class, () -> reservation.withPreference(null));
+        assertThrows(NullPointerException.class, () -> new ReservationBuilder()
+            .withPreference(null).build());
     }
 
     @Test
     public void withPreference_validPreference_returnsReservationWithUpdatedPreference() {
         Reservation originalReservation = new ReservationBuilder().build();
-        Reservation updatedReservation = originalReservation.withPreference(TEST_PREFERENCE);
+        Reservation updatedReservation = new ReservationBuilder(originalReservation)
+            .withPreference(TEST_PREFERENCE)
+            .build();
         // Check that the preference was updated
-        assertEquals(TEST_PREFERENCE, updatedReservation.getPreference());
+        assertEquals(TEST_PREFERENCE, updatedReservation.getPreference().toString());
         // Check that other fields remain the same
         assertEquals(originalReservation.getName(), updatedReservation.getName());
         assertEquals(originalReservation.getPhone(), updatedReservation.getPhone());
