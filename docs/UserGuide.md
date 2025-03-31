@@ -111,7 +111,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 **Notes:**
 
-1. Prefixes are case-sensitive: `n/John` is different from `N/John`.
+1. Prefixes are case-insensitive: `n/John` is the same as `N/John`.
 2. Prefix order does not matter in commands.
 3. Optional prefixes may be omitted entirely.
 4. Variadic prefixes (like `o/`) can appear multiple times in a command.
@@ -131,9 +131,6 @@ The prefixes used in ReserveMate are universal across all commands.
 - Names are **case-insensitive**:
   `n/alex yeoh` is the same as `n/AlEx YeOh`.
 
-- **Duplicate names** are **not allowed** within the reservation list.
-  You cannot add two reservations with the exact same name (case-insensitive and space-normalized).
-
 - Names with **excessive leading/trailing spaces** are trimmed:
   `n/   Alice Johnson   ` → `n/Alice Johnson`
 
@@ -148,7 +145,7 @@ The prefixes used in ReserveMate are universal across all commands.
 #### `p/` — Contact Number
 
 - Phone numbers **must start with `8` or `9`** and be exactly 8 digits long.
-- Multiple reservations can share the **same phone number** — duplicates allowed.
+- Multiple reservations can share the **same phone number** and **different date-time** — duplicates allowed.
 
 ---
 
@@ -157,6 +154,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Emails must match a **basic regex pattern**, but:
     - Technically valid emails may be **functionally incorrect** (e.g., `123@123`).
     - Strange but valid domains (e.g., `user@x-y.com`, `a@123.co`) are allowed.
+    - Multiple reservations can share the **same email** and **different date-time** — duplicates allowed.
 
 ---
 
@@ -173,6 +171,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Format: `YYYY-MM-DD HHmm`
 - Date must be:
     - Within the next **60 days**
+    - Cannot be a past date-time
 
 ---
 
@@ -239,7 +238,7 @@ Refers user to GitHub ReserveMate user guide documentation.
 
 Adds a new `Reservation` to ReserveMate.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…`
 
 **Constraints**
 * A reservation can have any number of occasion (including 0)
@@ -337,7 +336,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 
 Edits an existing `Reservation` in ReserveMate.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [o/OCCASION]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINERS] [o/OCCASION]…`
 
 **Constraints**
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
@@ -369,7 +368,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 > ```
 > Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion:
 > ```
->\
+>
 > ---
 >
 > **Use Case #3**: Edit date and number of diners for reservation at index `3`.
