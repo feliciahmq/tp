@@ -61,7 +61,8 @@ public class PreferenceCommand extends Command {
         List<Reservation> lastShownList = model.getFilteredReservationList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX,
+                index.getOneBased()));
         }
 
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());

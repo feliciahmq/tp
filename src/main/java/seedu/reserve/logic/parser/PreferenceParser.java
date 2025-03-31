@@ -2,6 +2,7 @@ package seedu.reserve.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.commands.PreferenceCommand;
@@ -35,8 +36,7 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
         try {
             index = ParserUtil.parseIndex(parts[1]);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
         }
 
         return createCommand(subCommand, index, parts);
