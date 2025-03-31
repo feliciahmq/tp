@@ -25,7 +25,7 @@ public class Reservation {
     private final Diners diners;
     private final DateTime dateTime;
     private final Set<Occasion> occasions = new HashSet<>();
-    private final String preference; // New field for customer preferences
+    private final Preference preference; // New field for customer preferences
 
     /**
      * Every field must be present and not null.
@@ -39,7 +39,7 @@ public class Reservation {
         this.diners = diners;
         this.dateTime = dateTime;
         this.occasions.addAll(occasions);
-        this.preference = "None"; // Initialize with empty preference
+        this.preference = new Preference("None"); // Initialize with empty preference
     }
 
     /**
@@ -47,7 +47,7 @@ public class Reservation {
      * This constructor includes preference.
      */
     public Reservation(Name name, Phone phone, Email email, Diners diners,
-                       DateTime dateTime, Set<Occasion> occasions, String preference) {
+                       DateTime dateTime, Set<Occasion> occasions, Preference preference) {
         requireAllNonNull(name, phone, email, diners, occasions);
         this.name = name;
         this.phone = phone;
@@ -87,17 +87,8 @@ public class Reservation {
         return Collections.unmodifiableSet(occasions);
     }
 
-    public String getPreference() {
+    public Preference getPreference() {
         return preference;
-    }
-
-    /**
-     * Returns a copy of this reservation with the updated preference.
-     */
-    public Reservation withPreference(String preference) {
-        Objects.requireNonNull(preference);
-        return new Reservation(this.name, this.phone, this.email,
-            this.diners, this.dateTime, this.occasions, preference);
     }
 
     /**

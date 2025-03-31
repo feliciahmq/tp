@@ -12,6 +12,7 @@ import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Preference;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.model.util.SampleDataUtil;
 
@@ -36,7 +37,7 @@ public class ReservationBuilder {
     private Diners diners;
     private DateTime dateTime;
     private Set<Occasion> occasions;
-    private String preference;
+    private Preference preference;
 
     /**
      * Creates a {@code ReservationBuilder} with the default details.
@@ -48,7 +49,7 @@ public class ReservationBuilder {
         diners = new Diners(DEFAULT_DINERS);
         dateTime = new DateTime(DEFAULT_DATETIME);
         occasions = new HashSet<>();
-        preference = DEFAULT_PREFERENCE;
+        preference = new Preference(DEFAULT_PREFERENCE);
     }
 
     /**
@@ -117,7 +118,7 @@ public class ReservationBuilder {
      * Sets the {@code Preference} of the {@code Reservation} that we are building.
      */
     public ReservationBuilder withPreference(String preference) {
-        this.preference = preference;
+        this.preference = new Preference(preference);
         return this;
     }
 

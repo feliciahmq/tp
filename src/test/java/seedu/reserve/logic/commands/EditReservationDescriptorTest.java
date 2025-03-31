@@ -62,7 +62,8 @@ public class EditReservationDescriptorTest {
                 + editReservationDescriptor.getEmail().orElse(null) + ", diners="
                 + editReservationDescriptor.getDiners().orElse(null) + ", dateTime="
                 + editReservationDescriptor.getDateTime().orElse(null) + ", occasions="
-                + editReservationDescriptor.getOccasions().orElse(null) + "}";
+                + editReservationDescriptor.getOccasions().orElse(null) + ", preferences="
+                + editReservationDescriptor.getPreference().orElse(null) + '}';
         assertEquals(expected, editReservationDescriptor.toString());
     }
 }

@@ -2,7 +2,6 @@ package seedu.reserve.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.reserve.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 
 import java.util.List;
 
@@ -10,6 +9,7 @@ import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
+import seedu.reserve.model.reservation.Preference;
 import seedu.reserve.model.reservation.Reservation;
 
 /**
@@ -20,13 +20,11 @@ public class PreferenceCommand extends Command {
     public static final String COMMAND_WORD = "pref";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves or shows customer preferences for the reservation identified by the index number.\n\n"
-            + "Parameters for saving:\n"
-            + "- " + COMMAND_WORD + " save INDEX PREFERENCE\n\n"
-            + "Parameters for showing:\n"
-            + "- " + COMMAND_WORD + " show INDEX\n\n"
-            + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n"
-            + "Example: " + COMMAND_WORD + " show 1";
+        + ": Saves or shows customer preferences for the reservation identified by the index number.\n"
+        + "Parameters for saving: " + COMMAND_WORD + " save INDEX PREFERENCE\n"
+        + "Parameters for showing: " + COMMAND_WORD + " show INDEX\n"
+        + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n"
+        + "Example: " + COMMAND_WORD + " show 1";
 
     public static final String MESSAGE_SAVE_PREFERENCE_SUCCESS = "Saved preference for reservation: %1$s";
     public static final String MESSAGE_SHOW_PREFERENCE_SUCCESS = "Preference for reservation %1$s: %2$s";
@@ -35,7 +33,7 @@ public class PreferenceCommand extends Command {
 
     private final Index index;
     private final boolean isShow;
-    private final String preference;
+    private final Preference preference;
 
     /**
      * Constructor for showing preference.
@@ -50,11 +48,11 @@ public class PreferenceCommand extends Command {
     /**
      * Constructor for saving preference.
      */
-    public PreferenceCommand(Index index, String preference) {
-        requireAllNonNull(index, preference);
+    public PreferenceCommand(Index index, String preferenceText) {
+        requireAllNonNull(index, preferenceText);
         this.index = index;
         this.isShow = false;
-        this.preference = preference;
+        this.preference = new Preference(preferenceText);
     }
 
     @Override
@@ -82,12 +80,12 @@ public class PreferenceCommand extends Command {
      * @return CommandResult containing the preference message
      */
     private CommandResult executeShowPreference(Reservation reservation) {
-        String preferenceToShow = reservation.getPreference();
-        if (preferenceToShow.isEmpty()) {
+        Preference reservationPreference = reservation.getPreference();
+        if (reservationPreference.isEmpty()) {
             return new CommandResult(MESSAGE_NO_PREFERENCE);
         }
         return new CommandResult(String.format(MESSAGE_SHOW_PREFERENCE_SUCCESS,
-                index.getOneBased(), preferenceToShow));
+            index.getOneBased(), reservationPreference.toString()));
     }
 
     /**
@@ -96,11 +94,27 @@ public class PreferenceCommand extends Command {
      * @param reservation The reservation to save preference for
      * @return CommandResult indicating success
      */
-    private CommandResult executeSavePreference(Model model, Reservation reservation) {
-        Reservation editedReservation = reservation.withPreference(preference);
-        model.setReservation(reservation, editedReservation);
-        model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+    private CommandResult executeSavePreference(Model model, Reservation reservation) throws CommandException {
+        // Create a new reservation with the updated preference
+        Reservation updatedReservation = createUpdatedReservation(reservation);
+        // Update the model
+        model.setReservation(reservation, updatedReservation);
+        // Return success message with the index
         return new CommandResult(String.format(MESSAGE_SAVE_PREFERENCE_SUCCESS, index.getOneBased()));
+    }
+    /**
+     * Creates and returns a {@code Reservation} with the updated preference.
+     */
+    private Reservation createUpdatedReservation(Reservation reservationToEdit) {
+        assert reservationToEdit != null : MESSAGE_INVALID_INDEX;
+        return new Reservation(
+                reservationToEdit.getName(),
+                reservationToEdit.getPhone(),
+                reservationToEdit.getEmail(),
+                reservationToEdit.getDiners(),
+                reservationToEdit.getDateTime(),
+                reservationToEdit.getOccasions(),
+                preference);
     }
 
     @Override
@@ -115,8 +129,8 @@ public class PreferenceCommand extends Command {
 
         PreferenceCommand otherCommand = (PreferenceCommand) other;
         return index.equals(otherCommand.index)
-                && isShow == otherCommand.isShow
-                && (preference == null ? otherCommand.preference == null
-                : preference.equals(otherCommand.preference));
+            && isShow == otherCommand.isShow
+            && (preference == null ? otherCommand.preference == null
+            : preference.equals(otherCommand.preference));
     }
 }
