@@ -369,7 +369,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 > ```
 > Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion:
 > ```
->
+>\
 > ---
 >
 > **Use Case #3**: Edit date and number of diners for reservation at index `3`.
@@ -558,8 +558,8 @@ Format:
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* `PREFERENCE_DESCRIPTION` can include dietary needs, seating preferences, or other customer requests.
-* Showing a preference will indicate if `None` has been set yet.
+* `PREFERENCE_DESCRIPTION` can contain spaces and must be alphanumeric (E.g. include dietary needs, seating preferences, or other customer requests).
+* Showing a preference will indicate `None` if it has not been set.
 
 ---
 
