@@ -16,6 +16,7 @@ import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Preference;
 import seedu.reserve.model.reservation.Reservation;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedReservation {
     private final String diners;
     private final String dateTime;
     private final List<JsonAdaptedOccasion> occasions = new ArrayList<>();
+    private final String preference;
 
     /**
      * Constructs a {@code JsonAdaptedReservation} with the given reservation details.
@@ -39,7 +41,8 @@ class JsonAdaptedReservation {
     public JsonAdaptedReservation(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("diners") String diners,
                                   @JsonProperty("dateTime") String dateTime,
-                                  @JsonProperty("occasions") List<JsonAdaptedOccasion> occasions) {
+                                  @JsonProperty("occasions") List<JsonAdaptedOccasion> occasions,
+                                  @JsonProperty("preference") String preference) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +51,7 @@ class JsonAdaptedReservation {
         if (occasions != null) {
             this.occasions.addAll(occasions);
         }
+        this.preference = preference;
     }
 
     /**
@@ -62,6 +66,7 @@ class JsonAdaptedReservation {
         occasions.addAll(source.getOccasions().stream()
                 .map(JsonAdaptedOccasion::new)
                 .collect(Collectors.toList()));
+        preference = source.getPreference().toString();
     }
 
     /**
@@ -119,7 +124,13 @@ class JsonAdaptedReservation {
         final DateTime modelDateTime = DateTime.fromFileString(dateTime);
 
         final Set<Occasion> modelOccasions = new HashSet<>(reservationOccasions);
-        return new Reservation(modelName, modelPhone, modelEmail, modelDiners, modelDateTime, modelOccasions);
+
+        if (!Preference.isValidPreference(preference)) {
+            throw new IllegalValueException(Preference.MESSAGE_CONSTRAINTS);
+        }
+        final Preference modelPreference = new Preference(preference);
+        return new Reservation(modelName, modelPhone, modelEmail, modelDiners,
+            modelDateTime, modelOccasions, modelPreference);
     }
 
 }

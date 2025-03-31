@@ -7,7 +7,8 @@
       "email": "alice@example.com",
       "diners": "5",
       "dateTime": "2025-04-10 1800",
-      "occasions": ["friends"]
+      "occasions": ["friends"],
+      "preference": "No seafood"
     },
     {
       "name": "Benson Meier",
@@ -15,7 +16,8 @@
       "email": "johnd@example.com",
       "diners": "3",
       "dateTime": "2025-04-25 1200",
-      "occasions": ["owesMoney", "friends"]
+      "occasions": ["owesMoney", "friends"],
+      "preference": "Extra spicy"
     },
     {
       "name": "Carl Kurz",
@@ -23,7 +25,8 @@
       "email": "heinz@example.com",
       "diners": "2",
       "dateTime": "2025-04-15 1400",
-      "occasions": ["Birthday"]
+      "occasions": ["Birthday"],
+      "preference": "No nuts"
     },
     {
       "name": "Daniel Meier",
@@ -31,7 +34,8 @@
       "email": "cornelia@example.com",
       "diners": "4",
       "dateTime": "2025-04-20 1600",
-      "occasions": ["friends"]
+      "occasions": ["friends"],
+      "preference": "Likes window seats"
     },
     {
       "name": "Elle Meyer",
@@ -39,7 +43,8 @@
       "email": "werner@example.com",
       "diners": "1",
       "dateTime": "2025-04-05 1000",
-      "occasions": ["Birthday"]
+      "occasions": ["Birthday"],
+      "preference": "Less salty"
     },
     {
       "name": "Fiona Kunz",
@@ -47,7 +52,8 @@
       "email": "lydia@example.com",
       "diners": "7",
       "dateTime": "2025-04-12 1100",
-      "occasions": ["Birthday"]
+      "occasions": ["Birthday"],
+      "preference": "None"
     },
     {
       "name": "George Best",
@@ -55,7 +61,8 @@
       "email": "anna@example.com",
       "diners": "10",
       "dateTime": "2025-04-18 1300",
-      "occasions": ["Anniversary"]
+      "occasions": ["Anniversary"],
+      "preference": "More sugar"
     }
   ]
 }

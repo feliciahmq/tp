@@ -31,6 +31,7 @@ public class TypicalReservation {
             .withDiners("5")
             .withDateTime("2025-04-10 1800")
             .withOccasions("friends")
+            .withPreference("No seafood")
             .build();
 
     public static final Reservation BENSON = new ReservationBuilder().withName("Benson Meier")
@@ -39,6 +40,7 @@ public class TypicalReservation {
             .withDiners("3")
             .withDateTime("2025-04-25 1200")
             .withOccasions("owesMoney", "friends")
+            .withPreference("Extra spicy")
             .build();
 
     public static final Reservation CARL = new ReservationBuilder().withName("Carl Kurz")
@@ -47,6 +49,7 @@ public class TypicalReservation {
             .withDiners("2")
             .withDateTime("2025-04-15 1400")
             .withOccasions("Birthday")
+            .withPreference("No nuts")
             .build();
 
     public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
@@ -55,6 +58,7 @@ public class TypicalReservation {
             .withDiners("4")
             .withDateTime("2025-04-20 1600")
             .withOccasions("friends")
+            .withPreference("Likes window seats")
             .build();
 
     public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
@@ -63,6 +67,7 @@ public class TypicalReservation {
             .withDiners("1")
             .withDateTime("2025-04-05 1000")
             .withOccasions("Birthday")
+            .withPreference("Less salty")
             .build();
 
     public static final Reservation FIONA = new ReservationBuilder().withName("Fiona Kunz")
@@ -71,6 +76,7 @@ public class TypicalReservation {
             .withDiners("7")
             .withDateTime("2025-04-12 1100")
             .withOccasions("Birthday")
+            .withPreference("None")
             .build();
 
     public static final Reservation GEORGE = new ReservationBuilder().withName("George Best")
@@ -79,6 +85,7 @@ public class TypicalReservation {
             .withDiners("10")
             .withDateTime("2025-04-18 1300")
             .withOccasions("Anniversary")
+            .withPreference("More sugar")
             .build();
 
     public static final Reservation HOON = new ReservationBuilder().withName("Hoon Meier")
@@ -87,6 +94,7 @@ public class TypicalReservation {
             .withDiners("6")
             .withDateTime("2025-04-07 0900")
             .withOccasions("Birthday")
+            .withPreference("None")
             .build();
 
     public static final Reservation IDA = new ReservationBuilder().withName("Ida Mueller")
@@ -95,6 +103,7 @@ public class TypicalReservation {
             .withDiners("8")
             .withDateTime("2025-04-08 1700")
             .withOccasions("Birthday")
+            .withPreference("None")
             .build();
 
     // Manually added - Reservation's details found in {@code CommandTestUtil}

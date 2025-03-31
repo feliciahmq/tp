@@ -5,12 +5,15 @@
     "email": "alice@example.com",
     "diners": "3",
     "dateTime": "2025-04-25 1200",
-    "occasions": [ "friends" ]
+    "occasions": [ "birthday" ],
+    "preference" : "No seafood"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "diners": "3",
-    "dateTime": "2025-04-25 1200"
+    "dateTime": "2025-04-25 1200",
+    "occasions": [ "anniversary" ],
+    "preference" : "Extra spicy"
   } ]
 }
