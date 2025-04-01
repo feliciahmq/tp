@@ -3,8 +3,51 @@
   title: "Developer Guide"
   pageNav: 3
 ---
+# ReserveMate Developer Guide
 
-# Developer Guide
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-and-getting-started)
+- [Design]()
+  - [Architecture]()
+  - [UI component]()
+  - [Logic component]()
+  - [Model component]()
+  - [Storage component]()
+  - [Common classes]()
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope]()
+  - [User stories](#user-stories)
+  - [User cases](#use-cases)
+  - [Non-functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing]()
+  - [Launch and shutdown]()
+  - [Deleting a reservation]()
+  - [Saving data]()
+
+## Acknowledgements
+This project is based on the **AddressBook-Level3** 
+project created by the [SE-EDU initiative](https://se-education.org).
+
+Generative AI tools (ChatGPT, GitHub Copilot and DeepSeek) were used for:
+- Ideation and creation of JUnit test cases
+- Generating method name suggestions
+- Writing detailed Javadoc comments
+
+## Setting up and getting started
+Refer to the guide [Setting up and getting started](https://se-education.org/addressbook-level3/SettingUp.html).
+
+## Documentation, logging, testing, configuration, dev-ops
+- [Documentation guide]()
+- [Testing guide]()
+- [Logging guide]()
+- [Configuration guide]()
+- [DevOps guide]()
+
+
+## Appendix: Requirements
 
 **Team**: F08-1
 
@@ -15,49 +58,43 @@
 
 **Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to customer contact details.
 
-# Table of Contents
-1. [User stories](#user-stories)
-2. [User cases](#use-cases)
-3. [Non-functional Requirements](#non-functional-requirements)
-4. [Glossary](#glossary)
-
 
 ### User stories
 
 Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Extension) - `*`
 
-| Priority | As a …​             | I want to …​                                                                           | So that I can…​                                                     |
-|----------|---------------------|----------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| `* * *`  | Frequent user       | Delete reservations by customer name                                                   | Quickly remove a cancelled booking                                  |
-| `* * *`  | Productive user     | Know how many diners for each reservation                                              | Plan the seating arrangement beforehand                             |
-| `* * *`  | Beginner            | Enter reservations using a simple command format                                       | Quickly add customers without getting overwhelmed                   |
-| `* * *`  | Beginner            | View a list of commands within the app                                                 | Don’t have to remember them all                                     |
-| `* * *`  | Hardworking user    | View the schedule                                                                      | Know when are the reservations                                      |
-| `* *`    | frequent user       | filter reservations by date and time,                                                  | I can check upcoming bookings easily                                |
-| `* *`    | frequent user       | blacklist customers who repeatedly cancel or don’t show up                             | I can manage reservations more effectively and avoid late customers |
-| `* *`    | Advanced user       | Sort reservations by table number                                                      | Optimise seating arrangements                                       |
-| `* *`    | Beginner            | Navigate around the app using minimal keystrokes                                       | Learn how to use the app quickly                                    |
-| `* *`    | Beginner            | Receive confirmation prompts before deleting a reservation                             | Don’t accidentally remove a customer                                |
-| `* *`    | Forgetful user      | Know shortcuts to different actions                                                    | Look up the input format every time I use the app                   |
-| `* *`    | Impatient user      | Find free time slots                                                                   | Quickly schedule reservations                                       |
-| `* *`    | Thoughtful user     | Reschedule reservations                                                                | Accommodate customer needs                                          |
-| `* *`    | Long-time user      | Sort reservations in ascending date order                                              | Know when customers are arriving                                    |
-| `* *`    | Long-time user      | Search for reservations                                                                | Get customer information easily                                     |
-| `* *`    | Long-time user      | Update reservations                                                                    | Change reservations based on customer requests                      |
-| `* *`    | Beginner user       | Receive a notification when double-booking a table                                     | Avoid booking conflicts                                             |
-| `* *`    | Long-time user      | Store and manage customer contact details securely                                     | Protect customer privacy and ensure communication                   |
-| `* *`    | Frequent user       | Sort reservations by table type (e.g. window seat, private room)                       | View reservations by seating preference                             |
-| `* *`    | Long-time user      | Occasion reservations by special request (e.g. Birthday, Allergy)                      | Handle them accordingly                                             |
-| `* *`    | Forgetful user      | Automatically record customer preferences (e.g. dietary restrictions, seating choices) | Provide better service without relying on memory                    |
-| `* *`    | Cost-conscious user | Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
-| `* *`    | Overwhelmed user    | Automatically decline overbooking requests                                             | Don’t have to manually reject customers                             |
-| `*`      | Advanced user       | Export reservation data to a CSV file                                                  | Review past bookings or analyse trends                              |
-| `*`      | Overwhelmed user    | Archive reservations                                                                   | Gather insights on customers                                        |
-| `*`      | Productive user     | See statistics on customers                                                            | Identify regular customers                                          |
-| `*`      | Long-time user      | Send automated reminders and confirmations                                             | Reduce last-minute cancellations                                    |
-| `*`      | Frequent user       | Add custom shortcuts for frequently used commands                                      | Increase efficiency                                                 |
-| `*`      | Frequent user       | See visuals of booked tables and available seats                                       | Assign tables to customers easily                                   |
-| `*`      | Beginner user       | Add table size for each type of table                                                  | Organise seating more effectively                                   |
+| Priority | As a …             | I want to …                                                                         | So that I can…                                               |
+|----------|--------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | Frequent user      | Delete reservations by customer name                                                | Quickly remove a cancelled booking                           |
+| `* * *`  | Productive user    | Know how many diners for each reservation                                           | Plan the seating arrangement beforehand                      |
+| `* * *`  | Beginner           | Enter reservations using a simple command format                                    | Quickly add customers without getting overwhelmed            |
+| `* * *`  | Beginner           | View a list of commands within the app                                              | Don’t have to remember them all                              |
+| `* * *`  | Hardworking user   | View the schedule                                                                   | Know when are the reservations                               |
+| `* *`    | frequent user      | filter reservations by date and time,                                               | I can check upcoming bookings easily                         |
+| `* *`    | frequent user      | blacklist customers who repeatedly cancel or don’t show up                          | I can manage reservations more effectively and avoid late customers |
+| `* *`    | Advanced user      | Sort reservations by table number                                                   | Optimise seating arrangements                                |
+| `* *`    | Beginner           | Navigate around the app using minimal keystrokes                                    | Learn how to use the app quickly                             |
+| `* *`    | Beginner           | Receive confirmation prompts before deleting a reservation                          | Don’t accidentally remove a customer                         |
+| `* *`    | Forgetful user     | Know shortcuts to different actions                                                 | Look up the input format every time I use the app            |
+| `* *`    | Impatient user     | Find free time slots                                                                | Quickly schedule reservations                                |
+| `* *`    | Thoughtful user    | Reschedule reservations                                                             | Accommodate customer needs                                   |
+| `* *`    | Long-time user     | Sort reservations in ascending date order                                           | Know when customers are arriving                             |
+| `* *`    | Long-time user     | Search for reservations                                                             | Get customer information easily                              |
+| `* *`    | Long-time user     | Update reservations                                                                 | Change reservations based on customer requests               |
+| `* *`    | Beginner user      | Receive a notification when double-booking a table                                  | Avoid booking conflicts                                      |
+| `* *`    | Long-time user     | Store and manage customer contact details securely                                  | Protect customer privacy and ensure communication            |
+| `* *`    | Frequent user      | Sort reservations by table type (e.g. window seat, private room)                    | View reservations by seating preference                      |
+| `* *`    | Long-time user     | Occasion reservations by special request (e.g. Birthday, Allergy)                   | Handle them accordingly                                      |
+| `* *`    | Forgetful user     | Automatically record customer preferences (e.g. dietary restrictions, seating choices) | Provide better service without relying on memory             |
+| `* *`    | Cost-conscious user | Set up reservation deposit requirements                                             | Reduce cancellations and ensure customer commitment          |
+| `* *`    | Overwhelmed user   | Automatically decline overbooking requests                                          | Don’t have to manually reject customers                      |
+| `*`      | Advanced user      | Export reservation data to a CSV file                                               | Review past bookings or analyse trends                       |
+| `*`      | Overwhelmed user   | Archive reservations                                                                | Gather insights on customers                                 |
+| `*`      | Productive user    | See statistics on customers                                                         | Identify regular customers                                   |
+| `*`      | Long-time user     | Send automated reminders and confirmations                                          | Reduce last-minute cancellations                             |
+| `*`      | Frequent user      | Add custom shortcuts for frequently used commands                                   | Increase efficiency                                          |
+| `*`      | Frequent user      | See visuals of booked tables and available seats                                    | Assign tables to customers easily                            |
+| `*`      | Beginner user      | Add table size for each type of table                                               | Organise seating more effectively                            |
 
 
 ### Use cases
@@ -107,6 +144,11 @@ Actor: Restaurant Manager, ReserveMate
     * 3a1. ReserveMate shows an error message.
     * 3a2. User enters new input.
     * Steps 3a1 - 3a2 are repeated until user input is correct.
+    * Use case resumes at step 4.
+* 3b. ReserveMate detects a duplicate reservation.
+    * 3b1. ReserveMate display the duplicate reservation error message.
+    * 3b2. User modify the reservation details.
+    * Steps 3b1 - 3b2 are repeated until the reservation details are unique.
     * Use case resumes at step 4.
 
 **Use case: UC03 - Listing Commands**
@@ -244,7 +286,7 @@ Use case ends.
 
 * 3a. The new user details would cause duplicate reservation.
 
-  * 3a1. ReserveMate shows "This would conflict with existing reservation" error.
+  * 3a1. ReserveMate shows duplicate reservation message.
 
   Use case resumes at step 1.
 
