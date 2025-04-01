@@ -136,8 +136,9 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - 2 to 50 characters inclusive.
 
+- Names should contain only characters and spaces
+
 - Names can be:
-    - Entirely numeric (e.g., `n/123456`) — though discouraged due to confusion with indexes.
     - A **single character or initial** (e.g., `n/A`) — valid but potentially confusing in lists.
 
 ---
@@ -947,7 +948,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
 **Constraints**
 - Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
--`DATE_TIME` provided must be valid (within 60 days) and follow the format: `YYYY-MM-DD HHmm`.
+-`DATE_TIME` provided must be valid and follow the format: `YYYY-MM-DD HHmm`.
 - The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
 
 ---
