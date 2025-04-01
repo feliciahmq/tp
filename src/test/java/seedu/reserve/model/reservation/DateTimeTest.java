@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.reserve.testutil.Assert.assertThrows;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -17,6 +18,7 @@ public class DateTimeTest {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final String INVALID_DATE_TIME_FORMAT_STR = "2025-12-12 180";
+    private static final String INVALID_DATE_TIME = "2025-02-29 1800";
     private static final DateTime endDate = DateTime.fromFileString("2025-12-15 1800");
     private static final DateTime middleDate = DateTime.fromFileString("2025-12-13 1400");
     private static final DateTime outOfBoundsDate = DateTime.fromFileString("2025-12-16 1800");
@@ -85,6 +87,14 @@ public class DateTimeTest {
     }
 
     @Test
+    public void isInvalidDateTime() {
+        assertFalse(DateTime.isValidDateTime(INVALID_DATE_TIME));
+
+        assertThrows(IllegalArgumentException.class, () -> new DateTime(INVALID_DATE_TIME));
+        assertThrows(DateTimeException.class, () -> DateTime.fromFileString(INVALID_DATE_TIME));
+    }
+
+    @Test
     public void isValidFileInputDateTime() {
         // invalid date time
         assertFalse(DateTime.isValidFileInputDateTime(""));
@@ -93,6 +103,7 @@ public class DateTimeTest {
         // valid date time
         assertTrue(DateTime.isValidFileInputDateTime(formattedYesterdayDateTime));
         assertTrue(DateTime.isValidFileInputDateTime(formattedTomorrowDateTime));
+        assertEquals(DateTime.class, DateTime.fromFileString(formattedYesterdayDateTime).getClass());
 
     }
 
