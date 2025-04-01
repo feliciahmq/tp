@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "User Guide"
+  title: "Developer Guide"
   pageNav: 3
 ---
 # ReserveMate Developer Guide
@@ -148,7 +148,7 @@ Actor: Restaurant Manager, ReserveMate
 * 3b. ReserveMate detects a duplicate reservation.
     * 3b1. ReserveMate display the duplicate reservation error message.
     * 3b2. User modify the reservation details.
-    * Steps 3b1 - 3b2 are repeated until no duplicate reservation exist.
+    * Steps 3b1 - 3b2 are repeated until the reservation details are unique.
     * Use case resumes at step 4.
 
 **Use case: UC03 - Listing Commands**
