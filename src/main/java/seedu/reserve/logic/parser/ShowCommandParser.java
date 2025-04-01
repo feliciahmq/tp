@@ -1,6 +1,6 @@
 package seedu.reserve.logic.parser;
 
-import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.commands.ShowCommand;
@@ -22,7 +22,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             return new ShowCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
         }
     }
 }
