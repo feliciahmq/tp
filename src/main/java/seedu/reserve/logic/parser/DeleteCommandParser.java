@@ -1,6 +1,5 @@
 package seedu.reserve.logic.parser;
 
-import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import javafx.util.Pair;
