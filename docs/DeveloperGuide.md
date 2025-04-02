@@ -291,13 +291,13 @@ Use case ends.
   Use case resumes at step 1.
 
 
-**Use case: UC08 - View all free time slots**
+**Use case: UC08 - View all free time slots for a specific day**
 
 **MSS**
 
-1. User requests to view all free time slots.
+1. User requests to view free time slots for a specific day.
 
-2. ReserveMate retrieve all free time slots and display it to User.
+2. ReserveMate retrieve all free time slots for that specific day and display it to User.
 
 Use case ends.
 
@@ -309,7 +309,7 @@ Use case ends.
 
       Use Case ends.
 
-* 2a. The reservation list is empty.
+* 1a. User enters an invalid date.
 
     * 2a1. ReserveMate shows an error message.
 

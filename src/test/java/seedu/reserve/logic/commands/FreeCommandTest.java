@@ -1,89 +1,94 @@
 package seedu.reserve.logic.commands;
 
-import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.reserve.logic.Messages;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
+import seedu.reserve.model.UserPrefs;
+import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.ReservationBuilder;
 
 public class FreeCommandTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static final LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
+    private static final DateTime TEST_DATE = new DateTime("2025-05-01 0000");
+    private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
 
     @Test
-    public void execute_emptyReservationList_throwsCommandException() {
-        Model emptyModel = new ModelManager();
-        FreeCommand freeCommand = new FreeCommand();
-        assertCommandFailure(freeCommand, emptyModel, Messages.MESSAGE_EMPTY_RESERVATION_LIST);
+    public void execute_noReservationsOnDate_allDayFree() {
+        FreeCommand freeCommand = new FreeCommand(TEST_DATE);
+        String expectedMessage = FreeCommand.MESSAGE_ALL_FREE_SLOTS;
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
 
     @Test
     public void execute_hasFreeSlots_showsFreeSlots() {
-        // Create reservations with gaps
-        Reservation r1 = new ReservationBuilder().withDateTime(now.truncatedTo(ChronoUnit.HOURS)
-                .format(FORMATTER)).build();
-        Reservation r2 = new ReservationBuilder().withDateTime(now.plusHours(2).format(FORMATTER)).build();
+        // Add reservations with gaps
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(10).format(FORMATTER))
+                .build();
+        Reservation r2 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(14).format(FORMATTER))
+                .build();
+        model.addReservation(r1);
+        model.addReservation(r2);
 
-        Model modelWithGaps = new ModelManager();
-        modelWithGaps.addReservation(r1);
-        modelWithGaps.addReservation(r2);
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0000 to 2025-05-01 1000"
+                + "\n- 2025-05-01 1100 to 2025-05-01 1400"
+                + "\n- 2025-05-01 1500 to 2025-05-02 0000";
 
-        FreeCommand freeCommand = new FreeCommand();
-        String expectedMessage = "Available free time slots: \n- "
-                + now.plusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + " to "
-                + now.plusHours(2).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + "\n- "
-                + now.plusHours(3).truncatedTo(ChronoUnit.HOURS).format(FORMATTER) + " to "
-                + now.plusDays(60).minusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER);
-
-        assertCommandSuccess(freeCommand, modelWithGaps, expectedMessage, modelWithGaps);
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void execute_hasMultipleFreeSlots_showsAllFreeSlots() {
-        Reservation r1 = new ReservationBuilder().withDateTime(now.format(FORMATTER)).build();
-        Reservation r2 = new ReservationBuilder().withDateTime(now.plusHours(2).format(FORMATTER)).build();
-        Reservation r3 = new ReservationBuilder().withDateTime(now.plusHours(4).format(FORMATTER)).build();
+    public void execute_noFreeSlots_showsNoSlotsMessage() {
+        // Add reservations covering the entire day
+        for (int i = 0; i < 24; i++) {
+            Reservation r = new ReservationBuilder()
+                    .withDateTime(TEST_DATE.value.plusHours(i).format(FORMATTER))
+                    .build();
+            model.addReservation(r);
+        }
 
-        Model modelWithMultipleGaps = new ModelManager();
-        modelWithMultipleGaps.addReservation(r1);
-        modelWithMultipleGaps.addReservation(r2);
-        modelWithMultipleGaps.addReservation(r3);
-
-        FreeCommand freeCommand = new FreeCommand();
-        String expectedMessage = "Available free time slots: \n- "
-                + now.plusHours(1).format(FORMATTER) + " to "
-                + now.plusHours(2).format(FORMATTER) + "\n- "
-                + now.plusHours(3).format(FORMATTER) + " to "
-                + now.plusHours(4).format(FORMATTER) + "\n- "
-                + now.plusHours(5).format(FORMATTER) + " to "
-                + now.plusDays(60).minusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER);
-
-        assertCommandSuccess(freeCommand, modelWithMultipleGaps, expectedMessage, modelWithMultipleGaps);
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = FreeCommand.MESSAGE_NO_FREE_SLOTS;
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void execute_hasFreeSlotAfterLastReservation_showsFutureSlot() {
-        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
-        Reservation r1 = new ReservationBuilder().withDateTime(now.format(FORMATTER)).build();
+    public void execute_freeSlotBeforeFirstReservation_showsEarlySlot() {
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(12).format(FORMATTER))
+                .build();
+        model.addReservation(r1);
 
-        Model modelWithFutureSlot = new ModelManager();
-        modelWithFutureSlot.addReservation(r1);
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0000 to 2025-05-01 1200"
+                + "\n- 2025-05-01 1300 to 2025-05-02 0000";
 
-        FreeCommand freeCommand = new FreeCommand();
-        String expectedMessage = "Available free time slots: \n- "
-                + now.plusHours(1).format(FORMATTER) + " to "
-                + now.plusDays(60).minusHours(1).format(FORMATTER);
-
-        assertCommandSuccess(freeCommand, modelWithFutureSlot, expectedMessage, modelWithFutureSlot);
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
 
+    @Test
+    public void execute_freeSlotAfterLastReservation_showsLateSlot() {
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(8).format(FORMATTER))
+                .build();
+        model.addReservation(r1);
+
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0000 to 2025-05-01 0800"
+                + "\n- 2025-05-01 0900 to 2025-05-02 0000";
+
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
+    }
 }

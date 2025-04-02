@@ -11,6 +11,7 @@ import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -25,10 +26,11 @@ import seedu.reserve.model.reservation.ReservationBetweenDatePredicate;
 public class FilterCommandTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static DateTime endDate = DateTime.fromFileString(LocalDateTime.now().plusDays(1)
+            .truncatedTo(ChronoUnit.HOURS).format(FORMATTER).toString());
+    private static DateTime startDate = DateTime.fromFileString(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS)
             .format(FORMATTER).toString());
-    private static DateTime startDate = DateTime.fromFileString(LocalDateTime.now().format(FORMATTER).toString());
     private static DateTime startDate2 = DateTime.fromFileString(LocalDateTime.now()
-            .plusHours(1).format(FORMATTER).toString());
+            .plusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER).toString());
 
     private Model model = new ModelManager(getTypicalReserveMate(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalReserveMate(), new UserPrefs());
