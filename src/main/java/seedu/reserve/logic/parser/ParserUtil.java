@@ -179,6 +179,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String dateTime} into a {@code DateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static DateTime parseDateTimeFree(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS_FREE);
+        }
+        return new DateTime(trimmedDateTime);
+    }
+
+    /**
      * Parses a {@code dateTimeFile} to a {@code  DateTime}. Does not check if {@code dateTimeFile}
      * is after today's date.
      *
