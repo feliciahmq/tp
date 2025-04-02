@@ -110,21 +110,21 @@ public class ReserveMate implements ReadOnlyReserveMate {
         return reservations.asUnmodifiableObservableList();
     }
 
-    HashMap<String, Integer> getSumOfReservationsPerDiner() {
+    public HashMap<String, Integer> getSumOfReservationsPerDiner() {
         HashMap<String, Integer> sumOfReservationsPerDiner = new HashMap<>();
-        ObservableList<Reservation> reservationList = getReservationList();
 
+        for (int i = 1; i <= 10; i++) {
+            sumOfReservationsPerDiner.put(String.valueOf(i), 0);
+        }
+
+        ObservableList<Reservation> reservationList = getReservationList();
         for (Reservation r : reservationList) {
             int numOfDiners = Integer.parseInt(r.getDiners().value);
 
-            String key = numOfDiners >= 5 ? "5+" : String.valueOf(numOfDiners);
-
-            if (!sumOfReservationsPerDiner.containsKey(key)) {
-                sumOfReservationsPerDiner.put(key, 0);
+            if (numOfDiners >= 1 && numOfDiners <= 10) {
+                String key = String.valueOf(numOfDiners);
+                sumOfReservationsPerDiner.put(key, sumOfReservationsPerDiner.get(key) + 1);
             }
-
-            Integer count = sumOfReservationsPerDiner.get(key);
-            sumOfReservationsPerDiner.put(key, count + 1);
         }
 
         return sumOfReservationsPerDiner;

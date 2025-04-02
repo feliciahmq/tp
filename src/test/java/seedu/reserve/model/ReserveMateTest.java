@@ -97,6 +97,10 @@ public class ReserveMateTest {
     public void getSumOfReservationsPerDiners_reservationsHaveZeroDinerGroup_success() {
         ReserveMate reserveMate = new ReserveMateBuilder().build();
         HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        for (int i = 1; i <= 10; i++) {
+            expectedStatistics.put(String.valueOf(i), 0);
+        }
+
         HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
 
         assertEquals(expectedStatistics, actualStatistics);
@@ -107,8 +111,13 @@ public class ReserveMateTest {
         ReserveMate reserveMate = new ReserveMateBuilder()
                 .withReservation(BENSON)
                 .build();
+
         HashMap<String, Integer> expectedStatistics = new HashMap<>();
+        for (int i = 1; i <= 10; i++) {
+            expectedStatistics.put(String.valueOf(i), 0);
+        }
         expectedStatistics.put("3", 1);
+
         HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
 
         assertEquals(expectedStatistics, actualStatistics);
@@ -128,7 +137,9 @@ public class ReserveMateTest {
                 .withReservation(anotherReservation)
                 .build();
         HashMap<String, Integer> expectedStatistics = new HashMap<>();
-        expectedStatistics.put("3", 1);
+        for (int i = 1; i <= 10; i++) {
+            expectedStatistics.put(String.valueOf(i), 0);
+        }
         expectedStatistics.put("3", 2);
         HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
 
@@ -142,8 +153,12 @@ public class ReserveMateTest {
                 .withReservation(ELLE)
                 .build();
         HashMap<String, Integer> expectedStatistics = new HashMap<>();
-        expectedStatistics.put("3", 1);
+        for (int i = 1; i <= 10; i++) {
+            expectedStatistics.put(String.valueOf(i), 0);
+        }
         expectedStatistics.put("1", 1);
+        expectedStatistics.put("3", 1);
+
         HashMap<String, Integer> actualStatistics = reserveMate.getSumOfReservationsPerDiner();
 
         assertEquals(expectedStatistics, actualStatistics);

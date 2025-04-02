@@ -133,7 +133,7 @@ public class ReserveMateParserTest {
     @Test
     public void parseCommand_statistics() throws Exception {
         assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD) instanceof StatisticsCommand);
-        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD + " 3") instanceof StatisticsCommand);
+        assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD + " ") instanceof StatisticsCommand);
     }
 
     @Test
