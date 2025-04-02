@@ -348,7 +348,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 3b. User enters a duplicate reservation.
 
     * 3b1. ReserveMate display the duplicate reservation error message.
-  
+
     * 3b2. User modifies the reservation details.
 
     * Steps 3b1 - 3b2 are repeated until the reservation details are unique.
@@ -490,7 +490,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 * 2a. The user given index is not a valid reservation.
 
   * 2a1. ReserveMate shows invalid reservation index error.
-  
+
       Use case resumes at step 1.
 
 * 2b. The reservation date has already passed.
@@ -558,7 +558,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
   * 1b2. User enters new dates.
 
   * Steps b1-1b2 are repeated until valid dates are provided.
-  
+
     Use case resumes at step 2.
 
 * 2a. ReserveMate found no reservations between the 2 dates.
