@@ -24,8 +24,8 @@ public class FreeCommand extends Command {
     public static final String COMMAND_WORD = "free";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Find all free time slots in a given day\n\n"
-            + "Parameters: " + PREFIX_DATE_TIME + "DATE (Time must be 0000)\n\n"
-            + "Example: " + COMMAND_WORD + " d/2025-05-01 0000";
+            + "Parameters: " + PREFIX_DATE_TIME + "DATE\n\n"
+            + "Example: " + COMMAND_WORD + " d/2025-05-01";
     public static final String MESSAGE_NO_FREE_SLOTS = "No available free time slots found.";
     public static final String MESSAGE_ALL_FREE_SLOTS = "All timings are available on this date.";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -116,8 +116,7 @@ public class FreeCommand extends Command {
      */
     private String formatFreeSlots(List<TimeSlot> freeSlots) {
         StringBuilder message = new StringBuilder("Available free time slots:");
-        freeSlots.forEach(slot ->
-                message.append(formatTimeSlot(slot.start(), slot.end())));
+        freeSlots.forEach(message::append);
         return message.toString();
     }
 
@@ -127,19 +126,14 @@ public class FreeCommand extends Command {
      * @param start The start time of the slot
      * @param end The end time of the slot
      */
-    private record TimeSlot(LocalDateTime start, LocalDateTime end) {}
+    private record TimeSlot(LocalDateTime start, LocalDateTime end) {
 
-    /**
-     * Formats a single time slot range.
-     *
-     * @param start Start time of the slot
-     * @param end End time of the slot
-     * @return Formatted time slot string
-     */
-    private String formatTimeSlot(LocalDateTime start, LocalDateTime end) {
-        return String.format("\n- %s to %s",
-                start.format(FORMATTER),
-                end.format(FORMATTER));
+        @Override
+        public String toString() {
+            return String.format("\n- %s to %s",
+                    start.format(FORMATTER),
+                    end.format(FORMATTER));
+        }
     }
 
     @Override

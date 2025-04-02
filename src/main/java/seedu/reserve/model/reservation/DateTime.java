@@ -22,6 +22,10 @@ public class DateTime implements Comparable<DateTime> {
             + "2. The time must be in hourly increments (e.g., 0000, 0100, etc.). \n"
             + "3. The date-time must be after the current time but within 60 days from now.";
     public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm";
+    public static final String MESSAGE_CONSTRAINTS_FREE = "Date must be in the format YYYY-MM-DD "
+            + "and adhere to the following constraints: \n"
+            + "1. The date must be a valid calendar date. \n"
+            + "2. The date must be after the current date but within 60 days from now.";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final LocalDateTime currentDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);

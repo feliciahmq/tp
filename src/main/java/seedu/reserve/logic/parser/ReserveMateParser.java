@@ -83,6 +83,7 @@ public class ReserveMateParser {
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
+
         case FreeCommand.COMMAND_WORD:
             return new FreeCommandParser().parse(arguments);
 

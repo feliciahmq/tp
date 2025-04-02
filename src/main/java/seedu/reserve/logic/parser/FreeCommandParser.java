@@ -29,7 +29,7 @@ public class FreeCommandParser implements Parser<FreeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FreeCommand.MESSAGE_USAGE));
         }
 
-        DateTime date = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get());
+        DateTime date = ParserUtil.parseDateTimeFree(argMultimap.getValue(PREFIX_DATE_TIME).get() + " 0000");
 
         if (!date.toString().endsWith("0000")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FreeCommand.MESSAGE_USAGE));

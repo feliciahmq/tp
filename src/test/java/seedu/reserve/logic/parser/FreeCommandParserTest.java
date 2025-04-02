@@ -12,7 +12,6 @@ import seedu.reserve.logic.commands.FreeCommand;
 import seedu.reserve.model.reservation.DateTime;
 
 public class FreeCommandParserTest {
-
     private FreeCommandParser parser = new FreeCommandParser();
 
     @Test

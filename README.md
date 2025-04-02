@@ -121,15 +121,15 @@ find Bobby
 Find Bobby
 ```
 
-### Feature: View all free time slots
-**Purpose:** View all free time slots for reservation within a window of 60days from current time.
+### Feature: View all free time slots for a specific day
+**Purpose:** View all free time slots for reservation for a specific day.
 
-**Command format:** `free`
+**Command format:** `free <DATE>`
 
 **Example commands:**
 ```
-free
-Free
+free d/2025-04-28
+Free d/2025-04-28
 ```
 
 ### Feature: Clearing all reservations
