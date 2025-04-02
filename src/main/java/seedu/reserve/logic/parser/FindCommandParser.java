@@ -14,8 +14,7 @@ import seedu.reserve.model.reservation.NameContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    public static final String MESSAGE_INVALID_NAME = "Invalid name format. Only alphabets, "
-            + "hyphens(-) and apostrophes(') are allowed.";
+    public static final String MESSAGE_INVALID_NAME = "Invalid name format. Name should contain only letters.";
     public static final String MESSAGE_SHORT_NAME = "Invalid name. The name must have at least 2 characters.";
     public static final String MESSAGE_LONG_NAME = "Invalid name. The name must be 50 characters or less.";
 
@@ -38,19 +37,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (String keyword : nameKeywords) {
             String trimmedKeyword = keyword.trim();
 
-            if (trimmedKeyword.length() < 2) {
-                throw new ParseException(MESSAGE_SHORT_NAME);
-            }
-
-            if (trimmedKeyword.length() > 50) {
-                throw new ParseException(MESSAGE_LONG_NAME);
-            }
-
-            if (!trimmedKeyword.matches("[A-Za-z' -]+")) {
+            if (!trimmedKeyword.matches("[A-Za-z]+")) {
                 throw new ParseException(MESSAGE_INVALID_NAME);
             }
 
+            else if (trimmedKeyword.length() < 2) {
+                throw new ParseException(MESSAGE_SHORT_NAME);
+            }
+
+            else if (trimmedKeyword.length() > 50) {
+                throw new ParseException(MESSAGE_LONG_NAME);
+            }
+
             validKeywords.add(trimmedKeyword.toLowerCase());
+        }
+
+        if (validKeywords.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_NAME);
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(validKeywords));
