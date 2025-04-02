@@ -107,7 +107,7 @@ The prefixes used in ReserveMate are universal across all commands.
 | `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days.                                                                                                                                                                                                                                                                                                                  | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
 | `sd/`  | Start Date (Filter)     | Format: `YYYY-MM-DD HHmm`. Must be earlier than `ed/`.                                                                                                                                                                                                                                                                                                                   | `sd/2025-05-01 1800`                       | `sd/2025-13-01`, `sd/invalid`, `sd/`          |
 | `ed/`  | End Date (Filter)       | Format: `YYYY-MM-DD HHmm`. Must be later than `sd/`.                                                                                                                                                                                                                                                                                                                     | `ed/2025-05-15 2200`                       | `ed/2025-01-01`, `ed/late`, `ed/`             |
-| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and is `variadic`. Optional??                                                                                                                                                                                                                                                                                                       | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
+| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and is `variadic`. It is optional.                                                                                                                                                                                                                                                                                                  | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
 
 **Notes:**
 
@@ -180,7 +180,8 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Prefix is **optional and variadic** (can appear multiple times).
 - Accepts alphanumeric values and basic punctuation.
-- Blank values (e.g., `o/`) will clear the occasions for the specific reservation.
+- Blank values (e.g., `o/`) will clear the occasions for the specific reservation when used in `edit` command it will
+result in an error when used in `add` command
 - No enforcement of case — `o/birthday` and `o/Birthday` are treated the same.
 
 ---
@@ -341,7 +342,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 **Constraints**
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
 * At least one of field (prefix) must be provided.
-* Editing occasion replaces the full list of occasions. Use `o/` with no value to clear.
+* Editing occasion replaces the existing list of occasions. Use `o/` with no value to clear.
 * Dates must be within 60 days from now and in the future.
 
 - **Successful Execution:**
