@@ -876,7 +876,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **Output:**
 > ```
-> 1 reservations listed!
+> 2 reservations listed!
 > 1. John Doe (5 diners) - 2025-04-12 1800
 > 2. Jane Doe (3 diners) - 2025-04-20 1800
 > ```
@@ -1029,9 +1029,9 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
 ### Free reservations: `free`
 
-Displays all available `Reservation` time slots within the next 60 days.
+Displays all available `Reservation` time slots in user specified day.
 
-Format: `free`
+Format: `free <DATE>`
 
 ---
 
@@ -1041,13 +1041,13 @@ Format: `free`
 > **Use Case #1**: Viewing available slots.
 >
 > **Input:**
-> `free`
+> `free d/2025-04-28`
 >
 > **Output:**
 > ```
 > Available free time slots:
-> - 2025-04-12 1900 to 2025-04-20 1800
-> - 2025-04-20 1900 to 2025-05-28 1400
+> - 2025-04-28 1600 to 2025-04-28 1700
+> - 2025-04-28 2000 to 2025-04-28 2100
 > ```
 >
 > ---
@@ -1057,14 +1057,19 @@ Format: `free`
 - **Failed Execution:**
 > ---
 >
-> **User Error #1**: Input with extra argument.
+> **User Error #1**: Missing date.
 >
 > **Input:**
-> `free today`
+> `free`
 >
 > **Output:**
 > ```
-> Invalid command.
+> Invalid command format!
+> free: Find all free time slots in a given day
+> 
+> Parameters: d/DATE
+> 
+> Example: free d/2025-05-01
 > ```
 >
 > ---
@@ -1076,7 +1081,22 @@ Format: `free`
 >
 > **Output:**
 > ```
-> Unknown command
+> Invalid command format! 
+> help: Shows program usage instructions.
+> Example: help
+> ```
+>
+> ---
+> > **User Error #3**: Invalid date format.
+>
+> **Input:**
+> `free d/04-28-2025`
+>
+> **Output:**
+> ```
+> Date must be in the format YYYY-MM-DD and adhere to the following constraints:
+> 1. The date must be a valid calendar date.
+> 2. The date must be after the current date but within 60 days from now.
 > ```
 >
 > ---
