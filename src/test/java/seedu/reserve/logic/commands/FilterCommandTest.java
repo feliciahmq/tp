@@ -27,7 +27,8 @@ public class FilterCommandTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static DateTime endDate = DateTime.fromFileString(LocalDateTime.now().plusDays(1)
             .truncatedTo(ChronoUnit.HOURS).format(FORMATTER).toString());
-    private static DateTime startDate = DateTime.fromFileString(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).format(FORMATTER).toString());
+    private static DateTime startDate = DateTime.fromFileString(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS)
+            .format(FORMATTER).toString());
     private static DateTime startDate2 = DateTime.fromFileString(LocalDateTime.now()
             .plusHours(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER).toString());
 
