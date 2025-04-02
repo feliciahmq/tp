@@ -93,7 +93,7 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if a given string from an input file a valid date-time in the format YYYY-MM-DD HHmm.
      */
     public static boolean isValidFileInputDateTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isHourlyTiming(test);
     }
 
     /**
