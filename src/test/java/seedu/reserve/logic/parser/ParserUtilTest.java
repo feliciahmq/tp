@@ -31,6 +31,7 @@ public class ParserUtilTest {
     private static final String INVALID_DINERS = "0";
     private static final String INVALID_DATETIME = "2030-04-12 180";
     private static final String INVALID_FILTER_DATETIME = "2025-13-01 1900";
+    private static final String INVALID_DATETIME_NON_HOURLY = "2025-04-03 1430";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "98765432";
@@ -187,6 +188,7 @@ public class ParserUtilTest {
     public void parseDateTimeFilter_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeFilter(INVALID_FILTER_DATETIME));
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeFilter(INVALID_DATETIME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeFilter(INVALID_DATETIME_NON_HOURLY));
     }
 
     @Test
