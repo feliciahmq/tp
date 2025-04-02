@@ -40,6 +40,14 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void filterParse_invalidDates() throws Exception {
+        assertParseFailure(parser, " sd/ 2026-12-15 1530 ed/ 2025-12-12 1400",
+                DateTime.MESSAGE_CONSTRAINTS_FILTER);
+        assertParseFailure(parser, " sd/ 2026-12-15 130 ed/ 2025-12-12 1400",
+                DateTime.MESSAGE_CONSTRAINTS_FILTER);
+    }
+
+    @Test
     public void filterParse_success() throws Exception {
         DateTime startDate = DateTime.fromFileString("2026-12-01 1300");
         DateTime endDate = DateTime.fromFileString("2026-12-01 1400");
