@@ -22,7 +22,7 @@ import seedu.reserve.model.reservation.Reservation;
  */
 
 public class SampleDataUtil {
-    private static String dateTimeTommorow;
+    private static String dateTimeTomorrow;
     private static String dateTimeNextMonth;
     private static String dateTimePlusFiftyDays;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -30,7 +30,7 @@ public class SampleDataUtil {
         setDateTime();
         return new Reservation[]{
             new Reservation(new Name("John Doe"), new Phone("98765432"), new Email("johnd@example.com"),
-                new Diners("5"), DateTime.fromFileString(dateTimeTommorow),
+                new Diners("5"), DateTime.fromFileString(dateTimeTomorrow),
                 getOccasionSet("Anniversary", "Birthday")),
             new Reservation(new Name("Alexa Yeoh"), new Phone("98765431"), new Email("alexy@example.com"),
                 new Diners("5"), DateTime.fromFileString(dateTimeNextMonth),
@@ -43,7 +43,7 @@ public class SampleDataUtil {
 
     private static void setDateTime() {
         LocalDateTime dateTime = LocalDateTime.now();
-        dateTimeTommorow = dateTime.plusDays(1).withHour(8).withMinute(0).withSecond(0).format(FORMATTER);
+        dateTimeTomorrow = dateTime.plusDays(1).withHour(8).withMinute(0).withSecond(0).format(FORMATTER);
         dateTimeNextMonth = dateTime.plusDays(31).withHour(10).withMinute(0).withSecond(0).format(FORMATTER);
         dateTimePlusFiftyDays = dateTime.plusDays(50).withHour(20).withMinute(0).withSecond(0).format(FORMATTER);
 
