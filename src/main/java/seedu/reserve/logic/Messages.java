@@ -13,10 +13,9 @@ import seedu.reserve.model.reservation.Reservation;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX =
-            "The reservation index provided is invalid";
+            "The reservation index must be within the reservation list range";
     public static final String MESSAGE_RESERVATIONS_LISTED_OVERVIEW = "%1$d reservations listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -54,6 +53,8 @@ public class Messages {
                 .append(reservation.getDiners().value).append("\n")
                 .append("Date/Time: ")
                 .append(reservation.getDateTime().toString()).append("\n")
+                .append("Preference: ")
+                .append(reservation.getPreference()).append("\n")
                 .append("Occasion: ")
                 .append(reservation.getOccasions().stream()
                         .map(Occasion::toString)

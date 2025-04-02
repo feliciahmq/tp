@@ -31,7 +31,7 @@ public class TypicalReservation {
             .withDiners("5")
             .withDateTime("2025-04-10 1800")
             .withOccasions("friends")
-            .withPreference("No seafood")
+            .withPreference("None")
             .build();
 
     public static final Reservation BENSON = new ReservationBuilder().withName("Benson Meier")

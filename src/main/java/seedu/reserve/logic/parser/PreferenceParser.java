@@ -2,7 +2,7 @@ package seedu.reserve.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
+import static seedu.reserve.logic.parser.ParserUtil.parsePrefIndex;
 
 import seedu.reserve.commons.core.index.Index;
 import seedu.reserve.logic.commands.PreferenceCommand;
@@ -31,14 +31,8 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
         String[] parts = trimmedArgs.split("\\s+", 3);
         validateArgsLength(parts);
 
-        String subCommand = parts[0].toLowerCase();
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(parts[1]);
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
-        }
+        String subCommand = validateAndExtractSubCommand(parts[0]);
+        Index index = parsePrefIndex(parts[1]);
 
         return createCommand(subCommand, index, parts);
     }
@@ -71,13 +65,11 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
      */
     private PreferenceCommand createCommand(String subCommand, Index index, String[] parts) throws ParseException {
         switch (subCommand) {
-        case "show":
-            return new PreferenceCommand(index, true);
         case "save":
             return createSaveCommand(index, parts);
         default:
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
         }
     }
 
@@ -116,5 +108,18 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
         if (!preference.matches("[a-zA-Z0-9 ]+")) {
             throw new ParseException(MESSAGE_INVALID_PREFERENCE_CHARACTERS);
         }
+    }
+
+    /**
+     * Validates the subcommand and returns it in lowercase.
+     * @throws ParseException if the subcommand is not valid
+     */
+    private String validateAndExtractSubCommand(String subCommand) throws ParseException {
+        String lowerCaseSubCommand = subCommand.toLowerCase();
+        if (!lowerCaseSubCommand.equals("save")) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
+        }
+        return lowerCaseSubCommand;
     }
 }

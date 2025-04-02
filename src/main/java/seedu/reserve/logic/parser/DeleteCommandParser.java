@@ -1,6 +1,6 @@
 package seedu.reserve.logic.parser;
 
-import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import javafx.util.Pair;
 import seedu.reserve.commons.core.index.Index;
@@ -25,8 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(parsedArgs.getKey(), parsedArgs.getValue());
 
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX, pe);
         }
     }
 
