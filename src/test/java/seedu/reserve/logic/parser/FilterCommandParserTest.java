@@ -1,11 +1,14 @@
 package seedu.reserve.logic.parser;
 
 import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.reserve.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.reserve.logic.Messages;
 import seedu.reserve.logic.commands.FilterCommand;
 import seedu.reserve.model.reservation.DateTime;
 
@@ -37,6 +40,13 @@ public class FilterCommandParserTest {
     public void filterParse_startDateBeforeEndDate() throws Exception {
         assertParseFailure(parser, " sd/ 2026-12-15 1500 ed/ 2025-12-12 1400",
                 FilterCommandParser.MESSAGE_INVALID_ORDER);
+    }
+
+    @Test
+    public void filterParse_duplicatePrefix() throws Exception {
+        assertParseFailure(parser, " sd/2025-04-28 0030 ed/2025-04-28 1900 "
+                + "sd/2025-04-28 1400 ed/2025-04-28 2000",
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START_DATE, PREFIX_END_DATE));
     }
 
     @Test
