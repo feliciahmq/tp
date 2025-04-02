@@ -56,14 +56,15 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_missingOccasion_throwsCommandException() {
+    public void execute_missingOccasion_success() throws CommandException {
         ModelStubAcceptingReservationAdded modelStub = new ModelStubAcceptingReservationAdded();
-        Reservation reservationWithoutOccasion = new ReservationBuilder().withOccasions().build(); // No occasion
+        Reservation validReservation = new ReservationBuilder().withOccasions().build(); // No occasion
 
-        AddCommand addCommand = new AddCommand(reservationWithoutOccasion);
+        CommandResult addCommandResult = new AddCommand(validReservation).execute(modelStub);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_OCCASION_CONSTRAINTS, ()
-            -> addCommand.execute(modelStub));
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validReservation)),
+                addCommandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validReservation), modelStub.reservationsAdded);
     }
 
     @Test

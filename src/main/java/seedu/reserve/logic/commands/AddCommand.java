@@ -37,10 +37,6 @@ public class AddCommand extends Command {
             + PREFIX_DATE_TIME + "2025-04-28 1800 "
             + PREFIX_OCCASION + "Birthday ";
     public static final String MESSAGE_SUCCESS = "New reservation added:\n%1$s";
-    public static final String MESSAGE_OCCASION_CONSTRAINTS = "Please indicate an occasion: \n"
-        + "Example: " + PREFIX_OCCASION + "Birthday \n"
-        + "Example: " + PREFIX_OCCASION + "None \n"
-        + "Occasion name must not be empty and must be alphanumeric";
 
     private final Reservation toAdd;
 
@@ -58,10 +54,6 @@ public class AddCommand extends Command {
 
         if (model.hasReservation(toAdd)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
-        }
-
-        if (toAdd.getOccasions().isEmpty()) {
-            throw new CommandException(MESSAGE_OCCASION_CONSTRAINTS);
         }
 
         model.addReservation(toAdd);
