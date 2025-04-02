@@ -32,6 +32,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START_DATE, PREFIX_END_DATE);
         DateTime startDate = ParserUtil.parseDateTimeFilter(argMultimap.getValue(PREFIX_START_DATE).get());
         DateTime endDate = ParserUtil.parseDateTimeFilter(argMultimap.getValue(PREFIX_END_DATE).get());
         // Checks if the start date is after the end date
