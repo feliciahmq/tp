@@ -39,13 +39,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (!trimmedKeyword.matches("[A-Za-z]+")) {
                 throw new ParseException(MESSAGE_INVALID_NAME);
-            }
-
-            else if (trimmedKeyword.length() < 2) {
+            } else if (trimmedKeyword.length() < 2) {
                 throw new ParseException(MESSAGE_SHORT_NAME);
-            }
-
-            else if (trimmedKeyword.length() > 50) {
+            } else if (trimmedKeyword.length() > 50) {
                 throw new ParseException(MESSAGE_LONG_NAME);
             }
 
