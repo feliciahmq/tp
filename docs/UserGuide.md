@@ -189,7 +189,6 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Format: `YYYY-MM-DD HHmm`
 - `sd/` must be **before** `ed/`
-- Both must be **valid future or current dates**
 - If both are valid but incorrectly ordered, an error is thrown.
 
 ---
@@ -1022,18 +1021,6 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 > filter: Filters all reservations made between the given date range.
 > Parameters: sd/START DATE ed/END DATE
 > Example: filter sd/ 2026-12-31 1800 ed/ 2026-12-31 1900
-> ```
->
-> ---
->
-> **User Error #4**: Out-of-range date.
->
-> **Input:**
-> `filter sd/ 2027-01-01 1400 ed/ 2027-01-02 1400`
->
-> **Output:**
-> ```
-> Date out of supported range: Only dates within 60 days from today are allowed.
 > ```
 >
 > ---
