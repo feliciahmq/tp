@@ -11,8 +11,8 @@ import seedu.reserve.logic.commands.PreferenceCommand;
 
 public class PreferenceCommandParserTest {
 
-    public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX =
-        "The reservation index provided is invalid";
+    public static final String MESSAGE_NEGATIVE_INDEX =
+        "The reservation index must be a non-negative integer greater than 0!";
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
     private static final String VALID_PREFERENCE = "No nuts and allergic to seafood";
@@ -26,7 +26,6 @@ public class PreferenceCommandParserTest {
 
         // no index specified
         assertParseFailure(parser, "save", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "show", MESSAGE_INVALID_FORMAT);
 
         // no preference specified for save
         assertParseFailure(parser, "save 1", MESSAGE_INVALID_FORMAT);
@@ -46,16 +45,13 @@ public class PreferenceCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         // negative index
-        assertParseFailure(parser, "save -5 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show -5", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save -5 " + VALID_PREFERENCE, MESSAGE_NEGATIVE_INDEX);
 
         // zero index
-        assertParseFailure(parser, "save 0 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show 0", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save 0 " + VALID_PREFERENCE, MESSAGE_NEGATIVE_INDEX);
 
         // invalid characters in index
-        assertParseFailure(parser, "save abc ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show abc", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save abc " + VALID_PREFERENCE, MESSAGE_NEGATIVE_INDEX);
     }
 
     @Test
@@ -66,16 +62,6 @@ public class PreferenceCommandParserTest {
 
         // multiple spaces between parts
         assertParseSuccess(parser, "save    1   " + VALID_PREFERENCE, expectedSaveCommand);
-    }
-
-    @Test
-    public void parse_validShowArgs_returnsPreferenceCommand() {
-        // valid show command
-        PreferenceCommand expectedShowCommand = new PreferenceCommand(INDEX_FIRST_RESERVATION, true);
-        assertParseSuccess(parser, "show 1", expectedShowCommand);
-
-        // multiple spaces between parts
-        assertParseSuccess(parser, "show    1", expectedShowCommand);
     }
 
     @Test

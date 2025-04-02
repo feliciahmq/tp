@@ -1,6 +1,6 @@
 package seedu.reserve.logic.parser;
 
-import static seedu.reserve.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.reserve.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
@@ -27,6 +27,6 @@ public class ShowCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 }

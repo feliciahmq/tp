@@ -552,11 +552,10 @@ Format: `delete <INDEX> cfm`
 
 ### Managing reservation preferences : `pref`
 
-Saves or displays a `Reservation` preference in ReserveMate.
+Saves a `Reservation` preference in ReserveMate.
 
 Format:
 * To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
-* To show a preference: `pref show <INDEX>`
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
@@ -579,31 +578,6 @@ Format:
 > ```
 >
 > ---
->
-> **Use Case #2**: Showing an existing preference.
->
-> **Input:**
-> `pref show 1`
->
-> **Output:**
-> ```
-> Preference for reservation 1: Window seat preferred, allergic to nuts
-> ```
->
-> ---
->
-> **Use Case #3**: Showing a reservation with no saved preference.
->
-> **Input:**
-> `pref show 3`
->
-> **Output:**
-> ```
-> Preference for reservation 3: None
-> ```
->
-> ---
-
 ---
 
 - **Failed Execution:**
@@ -616,59 +590,43 @@ Format:
 >
 > **Output:**
 > ```
-> Invalid command format!
-> pref: Saves or shows customer preferences for the reservation identified by the index number.
-> Parameters for saving: pref save INDEX PREFERENCE
-> Parameters for showing: pref show INDEX
-> Example: pref save 1 No nuts, allergic to seafood
-> Example: pref show 1
+>Invalid command format!
+>pref: Saves customer preferences for the reservation identified by the index number.
+
+>Parameters for saving: pref save <INDEX> <PREFERENCE>
+
+>Ensure all parameters are entered and valid
+>Example: pref save 1 No nuts, allergic to seafood
 > ```
 >
 > ---
 >
-> **User Error #2**: Missing index in `show`.
+> **User Error #2**: Missing or invalid index in `save`.
 >
 > **Input:**
-> `pref show`
+> `pref save -10`
 >
 > **Output:**
 > ```
-> Invalid command format!
-> pref: Saves or shows customer preferences for the reservation identified by the index number.
-> Parameters for saving: pref save INDEX PREFERENCE
-> Parameters for showing: pref show INDEX
-> Example: pref save 1 No nuts, allergic to seafood
-> Example: pref show 1
+> The reservation index must be a non-negative integer greater than 0!
 > ```
 >
 > ---
 >
-> **User Error #3**: Index does not exist in the list.
->
-> **Input:**
-> `pref show 10`
-> _(Assuming there are only 5 reservations)_
->
-> **Output:**
-> ```
-> The reservation index provided is invalid
-> ```
->
-> ---
->
-> **User Error #4**: Invalid sub-command.
+> **User Error #3**: Invalid sub-command.
 >
 > **Input:**
 > `pref update 1 Vegan menu`
 >
 > **Output:**
 > ```
-> Invalid command format!
-> pref: Saves or shows customer preferences for the reservation identified by the index number.
-> Parameters for saving: pref save INDEX PREFERENCE
-> Parameters for showing: pref show INDEX
-> Example: pref save 1 No nuts, allergic to seafood
-> Example: pref show 1
+>Invalid command format!
+>pref: Saves customer preferences for the reservation identified by the index number.
+
+>Parameters for saving: pref save <INDEX> <PREFERENCE>
+
+>Ensure all parameters are entered and valid
+>Example: pref save 1 No nuts, allergic to seafood
 > ```
 >
 > ---
@@ -1338,7 +1296,7 @@ _Details coming soon ..._
 | **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`<br>e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday` |
 | **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br>e.g., `edit 2 n/James Lee e/jameslee@example.com`                    |
 | **Delete**     | `delete INDEX cfm`<br>e.g., `delete 3 cfm`                                                                                                                                 |
-| **Preference** | `pref save INDEX PREFERENCE_TEXT`<br>`pref show INDEX`<br>e.g., `pref save 1 Window seat preferred`<br>e.g., `pref show 1`                                                 |
+| **Preference** | `pref save INDEX PREFERENCE_TEXT`<br>e.g., `pref save 1 Window seat preferred`                                                                                             |
 | **List**       | `list`<br>e.g., `list`                                                                                                                                                     |
 | **Show**       | `show INDEX`<br>e.g., `show 2`                                                                                                                                             |
 | **Find**       | `find NAME [MORE_NAMES]`<br>e.g., `find James Jake`                                                                                                                        |

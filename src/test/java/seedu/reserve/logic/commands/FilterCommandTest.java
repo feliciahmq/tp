@@ -64,7 +64,7 @@ public class FilterCommandTest {
         // target result
         ReservationBetweenDatePredicate predicate = new ReservationBetweenDatePredicate(startDate, endDate);
         expectedModel.updateFilteredReservationList(predicate);
-        String expectedMessage = FilterCommand.MESSAGE_NO_RESERVATIONS;
+        String expectedMessage = FilterCommand.MESSAGE_NO_RESERVATIONS_FILTER;
         // model
         FilterCommand filterCommand = new FilterCommand(startDate, endDate);
 

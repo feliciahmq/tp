@@ -25,7 +25,7 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " sd/" + " 2025-04-01 1800 " + "ed/" + " 2025-06-31 1900";
 
     public static final String MESSAGE_SUCCESS = "Here are the available reservations for the date range.";
-    public static final String MESSAGE_NO_RESERVATIONS = "No reservations found for the date range.";
+    public static final String MESSAGE_NO_RESERVATIONS_FILTER = "No reservations found for the date range.";
 
     private final ReservationBetweenDatePredicate predicate;
 
@@ -39,7 +39,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredReservationList(predicate);
         if (model.getFilteredReservationList().isEmpty()) {
-            return new CommandResult(MESSAGE_NO_RESERVATIONS);
+            return new CommandResult(MESSAGE_NO_RESERVATIONS_FILTER);
         }
         assert !model.getFilteredReservationList().isEmpty();
         return new CommandResult(MESSAGE_SUCCESS);
