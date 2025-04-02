@@ -71,13 +71,11 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
      */
     private PreferenceCommand createCommand(String subCommand, Index index, String[] parts) throws ParseException {
         switch (subCommand) {
-        case "show":
-            return new PreferenceCommand(index, true);
         case "save":
             return createSaveCommand(index, parts);
         default:
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE));
         }
     }
 

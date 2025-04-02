@@ -23,8 +23,7 @@ public class PreferenceCommand extends Command {
         + ": Saves or shows customer preferences for the reservation identified by the index number.\n"
         + "Parameters for saving: " + COMMAND_WORD + " save INDEX PREFERENCE\n"
         + "Parameters for showing: " + COMMAND_WORD + " show INDEX\n"
-        + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n"
-        + "Example: " + COMMAND_WORD + " show 1";
+        + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n";
 
     public static final String MESSAGE_SAVE_PREFERENCE_SUCCESS = "Saved preference for reservation: %1$s";
     public static final String MESSAGE_SHOW_PREFERENCE_SUCCESS = "Preference for reservation %1$s: %2$s";
@@ -32,18 +31,7 @@ public class PreferenceCommand extends Command {
     public static final String MESSAGE_INVALID_INDEX = "Reservation at the specified index cannot be null";
 
     private final Index index;
-    private final boolean isShow;
     private final Preference preference;
-
-    /**
-     * Constructor for showing preference.
-     */
-    public PreferenceCommand(Index index, boolean isShow) {
-        requireNonNull(index);
-        this.index = index;
-        this.isShow = isShow;
-        this.preference = null;
-    }
 
     /**
      * Constructor for saving preference.
@@ -51,7 +39,6 @@ public class PreferenceCommand extends Command {
     public PreferenceCommand(Index index, String preferenceText) {
         requireAllNonNull(index, preferenceText);
         this.index = index;
-        this.isShow = false;
         this.preference = new Preference(preferenceText);
     }
 
@@ -68,11 +55,7 @@ public class PreferenceCommand extends Command {
         Reservation reservationToEdit = lastShownList.get(index.getZeroBased());
         assert reservationToEdit != null : MESSAGE_INVALID_INDEX;
 
-        if (isShow) {
-            return executeShowPreference(reservationToEdit);
-        } else {
-            return executeSavePreference(model, reservationToEdit);
-        }
+        return executeSavePreference(model, reservationToEdit);
     }
 
     /**
@@ -130,7 +113,6 @@ public class PreferenceCommand extends Command {
 
         PreferenceCommand otherCommand = (PreferenceCommand) other;
         return index.equals(otherCommand.index)
-            && isShow == otherCommand.isShow
             && (preference == null ? otherCommand.preference == null
             : preference.equals(otherCommand.preference));
     }

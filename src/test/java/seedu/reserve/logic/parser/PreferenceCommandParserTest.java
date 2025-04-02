@@ -69,16 +69,6 @@ public class PreferenceCommandParserTest {
     }
 
     @Test
-    public void parse_validShowArgs_returnsPreferenceCommand() {
-        // valid show command
-        PreferenceCommand expectedShowCommand = new PreferenceCommand(INDEX_FIRST_RESERVATION, true);
-        assertParseSuccess(parser, "show 1", expectedShowCommand);
-
-        // multiple spaces between parts
-        assertParseSuccess(parser, "show    1", expectedShowCommand);
-    }
-
-    @Test
     public void parse_preferenceTextTooLong_throwsParseException() {
         // Generate a preference text that exceeds the maximum length (50 characters)
         StringBuilder longPreference = new StringBuilder();

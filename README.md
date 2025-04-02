@@ -41,19 +41,16 @@ EDIT 1 n/John Doe e/johnd@example.com x/5 d/2025-04-12 1800 o/None p/98765432
 edit 1 d/2022-04-12 1800
 ```
 
-### Feature: Managing customer preferences
-**Purpose:** To save or display customer preferences for a specific reservation.
+### Feature: Saving customer preferences
+**Purpose:** Saving customer preferences for a specific reservation.
 
 **Command format:**
 - To save: `pref save <INDEX> <PREFERENCE_TEXT>`
-- To show: `pref show <INDEX>`
 
 **Example commands:**
 ```
 pref save 3 Allergic to seafood
-pref show 3
 PREF save 3 Prefers window seat
-PREF SHOW 3
 ```
 
 ### Feature: Delete reservation by reservation number
@@ -176,7 +173,7 @@ Exit
 | View reservation list       | `list`                                                                                      | View the entire reservation schedule                                                  |
 | View help list              | `help`                                                                                      | Display the available list of commands to the user                                    |
 | Find reservation by name    | `find <RESERVATION NAME>`                                                                   | Retrieve reservation information                                                      |
-| Manage preferences          | `pref save <INDEX> <PREFERENCE_TEXT>` or `pref show <INDEX>`                                | Save or display reservation preferences                                               |
+| Manage preferences          | `pref save <INDEX> <PREFERENCE_TEXT>`                               | Saves reservation preferences                                                         |
 | Clearing all reservations   | `clear`                                                                                     | Deletes all reservations in ReserveMate                                               |
 | View reservation statistics | `stats`                                                                                     | Display reservation statistics of ReserveMate                                         |
 | Filter reservations by date | `filter sd/<DATETIME> ed/<DATETIME>`                                                        | Display reservations between given dates                                              |

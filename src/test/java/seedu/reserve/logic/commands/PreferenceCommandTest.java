@@ -40,37 +40,4 @@ public class PreferenceCommandTest {
 
         assertCommandSuccess(preferenceCommand, model, expectedMessage, expectedModel);
     }
-
-    @Test
-    public void execute_showPreference_success() {
-        // First save a preference using ReservationBuilder
-        Reservation reservationInFilteredList = model.getFilteredReservationList()
-            .get(INDEX_FIRST_RESERVATION.getZeroBased());
-        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList)
-            .withPreference(TEST_PREFERENCE)
-            .build();
-        model.setReservation(reservationInFilteredList, editedReservation);
-
-        // Then show the preference
-        PreferenceCommand preferenceCommand = new PreferenceCommand(INDEX_FIRST_RESERVATION, true);
-
-        String expectedMessage = String.format(PreferenceCommand.MESSAGE_SHOW_PREFERENCE_SUCCESS,
-            INDEX_FIRST_RESERVATION.getOneBased(), TEST_PREFERENCE);
-
-        assertCommandSuccess(preferenceCommand, model, expectedMessage, model);
-    }
-
-    @Test
-    public void execute_showEmptyPreference_returnsNoPreferenceMessage() {
-        // Ensure the reservation has no preference set
-        Reservation reservationInFilteredList = model.getFilteredReservationList()
-            .get(INDEX_FIRST_RESERVATION.getZeroBased());
-        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList)
-            .withPreference("")
-            .build();
-        model.setReservation(reservationInFilteredList, editedReservation);
-
-        PreferenceCommand preferenceCommand = new PreferenceCommand(INDEX_FIRST_RESERVATION, true);
-        assertCommandSuccess(preferenceCommand, model, PreferenceCommand.MESSAGE_NO_PREFERENCE, model);
-    }
 }
