@@ -212,7 +212,7 @@ public class EditCommandTest {
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withDiners(VALID_DINERS_AMY)
-            .withDateTime(LocalDateTime.now().plusDays(1).format(FORMATTER))
+            .withDateTime(LocalDateTime.now().plusDays(1).truncatedTo(ChronoUnit.HOURS).format(FORMATTER))
             .withOccasions(VALID_OCCASION_BIRTHDAY)
             .build();
 

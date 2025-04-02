@@ -19,6 +19,7 @@ public class DateTimeTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final String INVALID_DATE_TIME_FORMAT_STR = "2025-12-12 180";
     private static final String INVALID_DATE_TIME = "2025-02-29 1800";
+    private static final String INVALID_DATE_TIME_NON_HOURLY = "2025-12-12 1830";
     private static final DateTime endDate = DateTime.fromFileString("2025-12-15 1800");
     private static final DateTime middleDate = DateTime.fromFileString("2025-12-13 1400");
     private static final DateTime outOfBoundsDate = DateTime.fromFileString("2025-12-16 1800");
@@ -99,6 +100,7 @@ public class DateTimeTest {
         // invalid date time
         assertFalse(DateTime.isValidFileInputDateTime(""));
         assertFalse(DateTime.isValidFileInputDateTime(INVALID_DATE_TIME_FORMAT_STR));
+        assertFalse(DateTime.isValidFileInputDateTime(INVALID_DATE_TIME_NON_HOURLY));
 
         // valid date time
         assertTrue(DateTime.isValidFileInputDateTime(formattedYesterdayDateTime));

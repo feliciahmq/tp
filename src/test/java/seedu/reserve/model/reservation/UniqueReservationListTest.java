@@ -10,6 +10,7 @@ import static seedu.reserve.testutil.TypicalReservation.BOB;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -139,8 +140,8 @@ public class UniqueReservationListTest {
         UniqueReservationList reservationList = new UniqueReservationList();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        String tomorrow = LocalDateTime.now().plusDays(1).format(formatter);
-        String dayAfterTomorrow = LocalDateTime.now().plusDays(2).format(formatter);
+        String tomorrow = LocalDateTime.now().plusDays(1).truncatedTo(ChronoUnit.HOURS).format(formatter);
+        String dayAfterTomorrow = LocalDateTime.now().plusDays(2).truncatedTo(ChronoUnit.HOURS).format(formatter);
 
         Reservation earlierReservation = new ReservationBuilder().withDateTime(tomorrow).build();
         Reservation laterReservation = new ReservationBuilder().withDateTime(dayAfterTomorrow).build();
