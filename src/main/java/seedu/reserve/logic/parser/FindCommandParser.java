@@ -48,10 +48,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             validKeywords.add(trimmedKeyword.toLowerCase());
         }
 
-        if (validKeywords.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_NAME);
-        }
-
         return new FindCommand(new NameContainsKeywordsPredicate(validKeywords));
     }
 
