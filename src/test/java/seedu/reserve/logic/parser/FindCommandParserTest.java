@@ -20,7 +20,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -38,21 +39,60 @@ public class FindCommandParserTest {
     public void parse_shortArgs_throwsParseException() {
         // name length < 2
         String userInput = "a";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_SHORT_NAME, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, MESSAGE_SHORT_NAME);
     }
 
     @Test
     public void parse_longArgs_throwsParseException() {
         // name length > 50
         String userInput = "sadhsfajnkfbsghdorewjkjrfkshguriewoklmsdlnfbgkjshrekwmdanfsbgrekalndfjsbghirjknjgd";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_LONG_NAME, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, MESSAGE_LONG_NAME);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // name contains numbers or special symbols
         String userInput = "p0tAt0";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_NAME, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_NAME);
     }
+
+    @Test
+    public void parse_multipleShortNames_throwsParseException() {
+        String userInput = "a b";
+        assertParseFailure(parser, userInput, MESSAGE_SHORT_NAME);
+    }
+
+    @Test
+    public void parse_mixedValidAndInvalidNames_throwsParseException() {
+        String userInput = "alice 123";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_NAME);
+    }
+
+    @Test
+    public void parse_nameWithSpecialCharacters_throwsParseException() {
+        assertParseFailure(parser, "john!", MESSAGE_INVALID_NAME);
+        assertParseFailure(parser, "al!ce", MESSAGE_INVALID_NAME);
+        assertParseFailure(parser, "jo@hn", MESSAGE_INVALID_NAME);
+    }
+
+    @Test
+    public void parse_emptyKeywordBetweenSpaces_throwsParseException() {
+        String userInput = "john  ";
+        FindCommand expected = new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("john")));
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_caseInsensitivity_returnsLowercasedKeywords() {
+        FindCommand expected = new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("alice", "bob")));
+        assertParseSuccess(parser, "ALICE BoB", expected);
+    }
+
+    @Test
+    public void parse_nameWithHyphenOrApostrophe_throwsParseException() {
+        assertParseFailure(parser, "Anne-Marie", MESSAGE_INVALID_NAME);
+        assertParseFailure(parser, "O'Connor", MESSAGE_INVALID_NAME);
+    }
+
 
 }

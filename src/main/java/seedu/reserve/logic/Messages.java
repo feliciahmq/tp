@@ -22,7 +22,8 @@ public class Messages {
     public static final String MESSAGE_EMPTY_RESERVATION_LIST =
             "No reservations found. Use the 'add' command to create a reservation\n"
                     + "or 'help' to view all commands.";
-    public static final String MESSAGE_NO_RESERVATIONS = "No reservations found.";
+    public static final String MESSAGE_NO_RESERVATIONS = "No reservations found. Try using the full name. "
+            + "For example, use 'John' instead of just 'Jo'.";
     public static final String MESSAGE_DUPLICATE_RESERVATION =
             "A reservation already exists for this customer (same email or phone) at the chosen date-time.";
 
