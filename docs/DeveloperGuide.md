@@ -8,24 +8,24 @@
 ## Table of Contents
 - [Acknowledgements](#acknowledgements)
 - [Setting up, getting started](#setting-up-and-getting-started)
-- [Design]()
+- [Design](#design)
   - [Architecture]()
-  - [UI component]()
-  - [Logic component]()
-  - [Model component]()
-  - [Storage component]()
-  - [Common classes]()
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
-  - [Product scope]()
+  - [Product scope](#architecture)
   - [User stories](#user-stories)
   - [User cases](#use-cases)
   - [Non-functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
-- [Appendix: Instructions for manual testing]()
-  - [Launch and shutdown]()
-  - [Deleting a reservation]()
-  - [Saving data]()
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a reservation](#clearing-data)
+  - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -49,6 +49,7 @@ Refer to the guide [Setting up and getting started](https://se-education.org/add
 💡 Tip: The .puml files for generating diagrams in this document are located in the [diagrams](https://github.com/AY2425S2-CS2103-F08-1/tp/tree/master/docs/diagrams) folder. 
 For guidance on creating and modifying these diagrams, check out the [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) for more info.
 
+### Architecture
 
 The ***Architecture Diagram*** below illustrates the high-level structure of the application.
 
@@ -217,6 +218,7 @@ Classes used by multiple components are in the `seedu.reserve.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Implementation
+
 This section describes some noteworthy details on how certain features are implemented.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -227,11 +229,11 @@ This section describes some noteworthy details on how certain features are imple
 --------------------------------------------------------------------------------------------------------------------
 
 ## Documentation, logging, testing, configuration, dev-ops
-- [Documentation guide]()
-- [Testing guide]()
-- [Logging guide]()
-- [Configuration guide]()
-- [DevOps guide]()
+- [Documentation guide](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/Documentation.md)
+- [Testing guide](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/Testing.md)
+- [Logging guide](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/Logging.md)
+- [Configuration guide](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/Configuration.md)
+- [DevOps guide](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/docs/DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
