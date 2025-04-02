@@ -874,7 +874,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > **Output:**
 > ```
-> 1 reservations listed!
+> 2 reservations listed!
 > 1. John Doe (5 diners) - 2025-04-12 1800
 > 2. Jane Doe (3 diners) - 2025-04-20 1800
 > ```
