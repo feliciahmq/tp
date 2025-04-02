@@ -29,6 +29,8 @@ public class FreeCommandParser implements Parser<FreeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FreeCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE_TIME);
+
         DateTime date = ParserUtil.parseDateTimeFree(argMultimap.getValue(PREFIX_DATE_TIME).get() + " 0000");
 
         if (!date.toString().endsWith("0000")) {
