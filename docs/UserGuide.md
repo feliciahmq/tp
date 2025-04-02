@@ -173,6 +173,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Date must be:
     - Within the next **60 days**
     - Cannot be a past date-time
+    - Time must be in hourly increments, ending with `00` (e.g., `1400`).
 
 ---
 
@@ -190,6 +191,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Format: `YYYY-MM-DD HHmm`
 - `sd/` must be **before** `ed/`
 - If both are valid but incorrectly ordered, an error is thrown.
+- Time must be in hourly increments, ending with `00` (e.g., `1400`).
 
 ---
 
