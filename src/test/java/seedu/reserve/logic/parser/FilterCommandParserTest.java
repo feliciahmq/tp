@@ -44,9 +44,9 @@ public class FilterCommandParserTest {
 
     @Test
     public void filterParse_duplicatePrefix() throws Exception {
-        assertParseFailure(parser,  " sd/2025-04-28 0030 ed/2025-04-28 1900 "
+        assertParseFailure(parser, " sd/2025-04-28 0030 ed/2025-04-28 1900 "
                 + "sd/2025-04-28 1400 ed/2025-04-28 2000",
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START_DATE, PREFIX_END_DATE) );
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START_DATE, PREFIX_END_DATE));
     }
 
     @Test
