@@ -68,7 +68,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DINERS_DESC = " " + PREFIX_NUMBER_OF_DINERS + "0"; // '0' not in range
     public static final String INVALID_DATETIME_DESC = " "
-            + PREFIX_DATE_TIME + LocalDateTime.now().plusDays(28).format(FORMATTER); // not a valid date time
+            + PREFIX_DATE_TIME + LocalDateTime.now().plusDays(28)
+            .truncatedTo(ChronoUnit.HOURS).format(FORMATTER); // not a valid date time
     public static final String INVALID_OCC_DESC = " " + PREFIX_OCCASION + "graduation*"; // '*' not allowed in occasions
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
