@@ -1,6 +1,7 @@
 package seedu.reserve.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.reserve.logic.Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows the reservation details identified by the index number "
             + "used in the displayed reservation list.\n\n"
-            + "Parameters: INDEX (must be a positive integer)\n\n"
+            + "Parameters: INDEX (must be a positive integer) and shown in the list\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SHOW_RESERVATION_SUCCESS = "Details of Reservation: %1$s";
+    public static final String MESSAGE_SHOW_RESERVATION_SUCCESS = "Details of Reservation:\n%1$s";
 
     private final Index targetIndex;
 
@@ -37,7 +38,7 @@ public class ShowCommand extends Command {
         List<Reservation> lastShownList = model.getFilteredReservationList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
         }
 
         Reservation reservationToShow = lastShownList.get(targetIndex.getZeroBased());
