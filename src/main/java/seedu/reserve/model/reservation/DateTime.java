@@ -6,6 +6,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoUnit;
 
 import seedu.reserve.logic.parser.exceptions.ParseException;
@@ -21,9 +22,11 @@ public class DateTime implements Comparable<DateTime> {
             + "1. The date must be a valid calendar date. \n"
             + "2. The time must be in hourly increments (e.g., 0000, 0100, etc.). \n"
             + "3. The date-time must be after the current time but within 60 days from now.";
-    public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm";
+    public static final String MESSAGE_CONSTRAINTS_FILTER = "DateTime must be in the format YYYY-MM-DD HHmm and "
+            + "must be a valid calendar date. \n";
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{4}$";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm")
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final LocalDateTime currentDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 
     public final LocalDateTime value;
