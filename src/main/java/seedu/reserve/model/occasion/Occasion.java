@@ -33,7 +33,7 @@ public class Occasion {
      * Returns true if a given string is a valid occasion name.
      */
     public static boolean isValidOccasionName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && (test.length() >= 2 && test.length() <= 50);
     }
 
     @Override
