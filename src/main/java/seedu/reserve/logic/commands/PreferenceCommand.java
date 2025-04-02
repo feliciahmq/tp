@@ -20,9 +20,10 @@ public class PreferenceCommand extends Command {
     public static final String COMMAND_WORD = "pref";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Saves customer preferences for the reservation identified by the index number.\n"
-        + "Parameters for saving: " + COMMAND_WORD + " save INDEX PREFERENCE\n"
-        + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n";
+        + ": Saves customer preferences for the reservation identified by the index number. \n\n"
+        + "Parameters for saving: " + COMMAND_WORD + " save <INDEX> <PREFERENCE> \n\n"
+        + "Ensure all parameters are entered and valid \n"
+        + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood \n";
 
     public static final String MESSAGE_SAVE_PREFERENCE_SUCCESS = "Saved preference for reservation: %1$s";
     public static final String MESSAGE_INVALID_INDEX = "Reservation at the specified index cannot be null";
@@ -44,7 +45,7 @@ public class PreferenceCommand extends Command {
         requireNonNull(model);
         List<Reservation> lastShownList = model.getFilteredReservationList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() < 0 || index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX,
                 index.getOneBased()));
         }
