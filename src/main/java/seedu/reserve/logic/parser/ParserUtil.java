@@ -26,7 +26,7 @@ import seedu.reserve.model.reservation.Phone;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "The reservation index provided is invalid";
     private static final String CONFIRMATION_KEYWORD = "cfm";
     private static final int INDEX_POSITION = 0; // Index is expected at position 0
     private static final int CONFIRMATION_POSITION = 1; // "confirm" keyword is expect at position 1

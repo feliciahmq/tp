@@ -26,7 +26,6 @@ public class PreferenceCommandParserTest {
 
         // no index specified
         assertParseFailure(parser, "save", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "show", MESSAGE_INVALID_FORMAT);
 
         // no preference specified for save
         assertParseFailure(parser, "save 1", MESSAGE_INVALID_FORMAT);
@@ -46,16 +45,13 @@ public class PreferenceCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         // negative index
-        assertParseFailure(parser, "save -5 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show -5", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save -5 " + VALID_PREFERENCE, MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "save 0 ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show 0", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save 0 " + VALID_PREFERENCE, MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // invalid characters in index
-        assertParseFailure(parser, "save abc ", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
-        assertParseFailure(parser, "show abc", MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertParseFailure(parser, "save abc " + VALID_PREFERENCE, MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test

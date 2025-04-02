@@ -20,14 +20,11 @@ public class PreferenceCommand extends Command {
     public static final String COMMAND_WORD = "pref";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Saves or shows customer preferences for the reservation identified by the index number.\n"
+        + ": Saves customer preferences for the reservation identified by the index number.\n"
         + "Parameters for saving: " + COMMAND_WORD + " save INDEX PREFERENCE\n"
-        + "Parameters for showing: " + COMMAND_WORD + " show INDEX\n"
         + "Example: " + COMMAND_WORD + " save 1 No nuts, allergic to seafood\n";
 
     public static final String MESSAGE_SAVE_PREFERENCE_SUCCESS = "Saved preference for reservation: %1$s";
-    public static final String MESSAGE_SHOW_PREFERENCE_SUCCESS = "Preference for reservation %1$s: %2$s";
-    public static final String MESSAGE_NO_PREFERENCE = "No preference has been set for this reservation.";
     public static final String MESSAGE_INVALID_INDEX = "Reservation at the specified index cannot be null";
 
     private final Index index;
@@ -56,20 +53,6 @@ public class PreferenceCommand extends Command {
         assert reservationToEdit != null : MESSAGE_INVALID_INDEX;
 
         return executeSavePreference(model, reservationToEdit);
-    }
-
-    /**
-     * Executes the show preference functionality.
-     * @param reservation The reservation to show preference for
-     * @return CommandResult containing the preference message
-     */
-    private CommandResult executeShowPreference(Reservation reservation) {
-        Preference reservationPreference = reservation.getPreference();
-        if (reservationPreference.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_PREFERENCE);
-        }
-        return new CommandResult(String.format(MESSAGE_SHOW_PREFERENCE_SUCCESS,
-            index.getOneBased(), reservationPreference.toString()));
     }
 
     /**
