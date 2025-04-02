@@ -552,7 +552,7 @@ Format: `delete <INDEX> cfm`
 
 ### Managing reservation preferences : `pref`
 
-Saves or displays a `Reservation` preference in ReserveMate.
+Saves a `Reservation` preference in ReserveMate.
 
 Format:
 * To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
@@ -590,10 +590,13 @@ Format:
 >
 > **Output:**
 > ```
-> Invalid command format!
-> pref: Saves customer preferences for the reservation identified by the index number.
-> Parameters for saving: pref save INDEX PREFERENCE
-> Example: pref save 1 No nuts, allergic to seafood
+>Invalid command format!
+>pref: Saves customer preferences for the reservation identified by the index number.
+
+>Parameters for saving: pref save <INDEX> <PREFERENCE>
+
+>Ensure all parameters are entered and valid
+>Example: pref save 1 No nuts, allergic to seafood
 > ```
 >
 > ---
@@ -605,7 +608,7 @@ Format:
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be a non-negative integer greater than 0!
 > ```
 >
 > ---
@@ -617,10 +620,13 @@ Format:
 >
 > **Output:**
 > ```
-> Invalid command format!
-> pref: Saves customer preferences for the reservation identified by the index number.
-> Parameters for saving: pref save INDEX PREFERENCE
-> Example: pref save 1 No nuts, allergic to seafood
+>Invalid command format!
+>pref: Saves customer preferences for the reservation identified by the index number.
+
+>Parameters for saving: pref save <INDEX> <PREFERENCE>
+
+>Ensure all parameters are entered and valid
+>Example: pref save 1 No nuts, allergic to seafood
 > ```
 >
 > ---
