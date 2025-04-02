@@ -121,10 +121,8 @@ public class ReserveMate implements ReadOnlyReserveMate {
         for (Reservation r : reservationList) {
             int numOfDiners = Integer.parseInt(r.getDiners().value);
 
-            if (numOfDiners >= 1 && numOfDiners <= 10) {
-                String key = String.valueOf(numOfDiners);
-                sumOfReservationsPerDiner.put(key, sumOfReservationsPerDiner.get(key) + 1);
-            }
+            String key = String.valueOf(numOfDiners);
+            sumOfReservationsPerDiner.put(key, sumOfReservationsPerDiner.get(key) + 1);
         }
 
         return sumOfReservationsPerDiner;

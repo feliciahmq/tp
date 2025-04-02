@@ -164,6 +164,13 @@ public class ReserveMateTest {
         assertEquals(expectedStatistics, actualStatistics);
     }
 
+    @Test
+    public void reservationWithInvalidDinerCount_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new ReservationBuilder().withDiners("11").build()
+        );
+    }
+
     /**
      * A stub ReadOnlyReserveMate whose reservations list can violate interface constraints.
      */

@@ -30,9 +30,4 @@ public class StatisticsCommand extends Command {
     public boolean equals(Object other) {
         return other instanceof StatisticsCommand;
     }
-
-    @Override
-    public int hashCode() {
-        return StatisticsCommand.class.hashCode();
-    }
 }
