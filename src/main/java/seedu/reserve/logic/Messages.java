@@ -53,6 +53,8 @@ public class Messages {
                 .append(reservation.getDiners().value).append("\n")
                 .append("Date/Time: ")
                 .append(reservation.getDateTime().toString()).append("\n")
+                .append("Preference: ")
+                .append(reservation.getPreference()).append("\n")
                 .append("Occasion: ")
                 .append(reservation.getOccasions().stream()
                         .map(Occasion::toString)
