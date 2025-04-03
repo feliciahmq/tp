@@ -161,7 +161,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 ![img.png](images/ParserClasses.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`
+<div markdown="span" class="alert alert-info">💡 **Note:** The lifeline for `DeleteCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -190,7 +190,7 @@ bound to this list so that the UI automatically updates when the data in the lis
 * Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
 should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP)
+<div markdown="span" class="alert alert-info">💡 **Note:** An alternative (arguably, a more OOP)
 model is given below. It has a `Occasion` list in the `ReserveMate`, which `Reservation` references. This allows
 `ReserveMate` to only require one `Occasion` object per unique occasion, instead of each `Reservation` needing their
 own `Occasion` objects.<br>
@@ -640,13 +640,12 @@ one which relies on the mouse.
 4) The system should use Gradle as a build automation tool, and it must run on any OS which has Java 17.
 5) All reservation details will be stored in a file saved locally which should allow read and write access to the
 system.
-6) The maximum number of reservation the system can hold is 100.
-7) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
-8) The system is designed for a single-user.
-9) The response to any commands carried out by the user should become visible within 5 seconds.
-10) The user is not required to have an internet connection in order for the application to function.
-11) Data should be stored consistently even after closing and reopening the app.
-12) Should work on any mainstream OS as long as it has java 17 installed
+6) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability. 
+7) The system is designed for a single-user. 
+8) The response to any commands carried out by the user should become visible within 5 seconds. 
+9) The user is not required to have an internet connection in order for the application to function. 
+10) Data should be stored consistently even after closing and reopening the app. 
+11) Should work on any mainstream OS as long as it has java 17 installed
 
 ### Glossary
 
@@ -660,7 +659,7 @@ system.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-info">💡 **Note:**
 These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
