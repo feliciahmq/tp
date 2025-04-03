@@ -14,8 +14,8 @@ import seedu.reserve.model.reservation.Diners;
 import seedu.reserve.model.reservation.Email;
 import seedu.reserve.model.reservation.Name;
 import seedu.reserve.model.reservation.Phone;
+import seedu.reserve.model.reservation.Preference;
 import seedu.reserve.model.reservation.Reservation;
-
 
 /**
  * Contains utility methods for populating {@code ReserveMate} with sample data.
@@ -31,13 +31,13 @@ public class SampleDataUtil {
         return new Reservation[]{
             new Reservation(new Name("John Doe"), new Phone("98765432"), new Email("johnd@example.com"),
                 new Diners("5"), DateTime.fromFileString(dateTimeTomorrow),
-                getOccasionSet("Anniversary", "Birthday")),
+                getOccasionSet("Anniversary", "Birthday"), new Preference("Less Salt")),
             new Reservation(new Name("Alexa Yeoh"), new Phone("98765431"), new Email("alexy@example.com"),
                 new Diners("5"), DateTime.fromFileString(dateTimeNextMonth),
-                getOccasionSet("Graduation", "Christmas")),
+                getOccasionSet("Graduation", "Christmas"), new Preference("Extra spicy")),
             new Reservation(new Name("Mickey Mouse"), new Phone("98765435"), new Email("mickey@example.com"),
                 new Diners("5"), DateTime.fromFileString(dateTimePlusFiftyDays),
-                getOccasionSet("CNY", "Reunion"))
+                getOccasionSet("CNY", "Reunion"), new Preference("Likes window seats"))
         };
     }
 
