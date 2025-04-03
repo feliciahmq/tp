@@ -14,7 +14,8 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
 public class PreferenceParser implements Parser<PreferenceCommand> {
 
     public static final String MESSAGE_INVALID_PREFERENCE_CHARACTERS =
-        "Preferences should only contain spaces and alphanumeric characters.";
+        "Preferences should only can contain alphabets, numbers, spaces, and the following characters: "
+                + "- ' . , & ! ( ) /.";
     private static final int MAX_PREFERENCE_LENGTH = 50;
     public static final String MESSAGE_PREFERENCE_TOO_LONG =
         "Preference text cannot exceed " + MAX_PREFERENCE_LENGTH + " characters.";
@@ -105,7 +106,7 @@ public class PreferenceParser implements Parser<PreferenceCommand> {
      * @throws ParseException if the preference contains invalid characters
      */
     private void validatePreferenceContent(String preference) throws ParseException {
-        if (!preference.matches("[a-zA-Z0-9 ]+")) {
+        if (!preference.matches("^[a-zA-Z0-9 \\-'.,&!()/]*$")) {
             throw new ParseException(MESSAGE_INVALID_PREFERENCE_CHARACTERS);
         }
     }

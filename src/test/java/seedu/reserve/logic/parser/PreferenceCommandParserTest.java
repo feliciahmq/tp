@@ -16,6 +16,7 @@ public class PreferenceCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PreferenceCommand.MESSAGE_USAGE);
     private static final String VALID_PREFERENCE = "No nuts and allergic to seafood";
+    private static final String VALID_PREFERENCE_SYMBOLS = "meat-free!&(no meat)";
 
     private final PreferenceParser parser = new PreferenceParser();
 
@@ -62,6 +63,11 @@ public class PreferenceCommandParserTest {
 
         // multiple spaces between parts
         assertParseSuccess(parser, "save    1   " + VALID_PREFERENCE, expectedSaveCommand);
+
+        // valid preference with symbols
+        PreferenceCommand expectedSaveCommandSymbols = new PreferenceCommand(INDEX_FIRST_RESERVATION,
+                VALID_PREFERENCE_SYMBOLS);
+        assertParseSuccess(parser, "save    1   " + VALID_PREFERENCE_SYMBOLS, expectedSaveCommandSymbols);
     }
 
     @Test
@@ -80,11 +86,5 @@ public class PreferenceCommandParserTest {
         // Test with special characters
         assertParseFailure(parser, "save 1 Invalid!@#", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
 
-        // Test with underscore
-        assertParseFailure(parser, "save 1 Invalid_Preference", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
-
-        // Test with other symbols
-        assertParseFailure(parser, "save 1 Preference$", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
-        assertParseFailure(parser, "save 1 Preference&Text", PreferenceParser.MESSAGE_INVALID_PREFERENCE_CHARACTERS);
     }
 }
