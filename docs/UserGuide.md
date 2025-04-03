@@ -36,7 +36,7 @@ ReserveMate is a **desktop application for managing reservations, optimized for 
 
 ReserveMate GUI is organized into three parts.
 
-![Ui](images/UI.png)
+![Ui](images/Ui.png)
 
 - `Command Box`: This is where users enter commands to interact with ReserveMate.
 - `Reservation List`: Displays a list of all current reservations.
