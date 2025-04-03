@@ -82,6 +82,12 @@ public class EditReservationDescriptorBuilder {
         return this;
     }
 
+    public EditReservationDescriptorBuilder withEditedDateTime(String dateTime) {
+        descriptor.setDateTime(DateTime.fromEditedDateString(dateTime));
+        return this;
+    }
+
+
     /**
      * Parses the {@code occasions} into a {@code Set<Occasion>} and set it to the {@code EditReservationDescriptor}
      * that we are building.

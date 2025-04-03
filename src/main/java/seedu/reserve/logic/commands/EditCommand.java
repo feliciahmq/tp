@@ -58,8 +58,9 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_FUTURE_RESERVATION_REQUIRED = "Past reservation cannot be edited.";
-
+    public static final String MESSAGE_EDIT_PAST_RESERVATION_WARNING = "Warning: You modified a past reservation!\n";
+    public static final String MESSAGE_CANNOT_CHANGE_FUTURE_TO_PAST =
+            "You cannot change a future reservation date to a past date.\n";
 
     private final Index index;
     private final EditReservationDescriptor editReservationDescriptor;
@@ -89,6 +90,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        String out = "";
         requireNonNull(model);
         List<Reservation> lastShownList = model.getFilteredReservationList();
 
@@ -100,17 +102,21 @@ public class EditCommand extends Command {
         Reservation editedReservation = createEditedReservation(reservationToEdit, editReservationDescriptor);
 
         if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
-            throw new CommandException(MESSAGE_FUTURE_RESERVATION_REQUIRED);
+            out = MESSAGE_EDIT_PAST_RESERVATION_WARNING;
+        } else {
+            if (!DateTime.isValidDateTime(editedReservation.getDateTime().toString())) {
+                throw new CommandException(MESSAGE_CANNOT_CHANGE_FUTURE_TO_PAST + DateTime.MESSAGE_CONSTRAINTS);
+            }
         }
 
         if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
-
         }
 
         model.setReservation(reservationToEdit, editedReservation);
         model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation)));
+        return new CommandResult(String.format(out
+                + MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation)));
     }
 
     /**
