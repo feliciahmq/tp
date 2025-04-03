@@ -174,6 +174,7 @@ The prefixes used in ReserveMate are universal across all commands.
     - Cannot be a past date-time
     - Time must be in hourly increments, ending with `00` (e.g., `1400`).
     - For the `free` command, `HHmm` is omitted. 
+    - For the `edit` command, the date & time cannot be in the past.
 
 ---
 
@@ -342,7 +343,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
 * At least one of field (prefix) must be provided.
 * Editing occasion replaces the existing list of occasions. Use `o/` or `o/<WHITE_SPACE>` with no value to clear.
-* Dates must be within 60 days from now and in the future.
+* Date and time must be within 60 days from now and in the future, time must be in hourly increments.
+* When editing a future reservation, the new date-time cannot be in the past.
 
 - **Successful Execution:**
 > ---
