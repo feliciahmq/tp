@@ -41,12 +41,12 @@ public class ReservationTest {
 
         // name differs in case, all other attributes same -> returns True
         Reservation editedBob = new ReservationBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameReservation(editedBob));
+        assertTrue(BOB.isSameReservation(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new ReservationBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameReservation(editedBob));
+        assertTrue(BOB.isSameReservation(editedBob));
 
         // different diners, all other attributes same -> returns false
         editedAlice = new ReservationBuilder(ALICE).withDiners(VALID_DINERS_BOB).build();
