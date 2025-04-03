@@ -640,13 +640,12 @@ one which relies on the mouse.
 4) The system should use Gradle as a build automation tool, and it must run on any OS which has Java 17.
 5) All reservation details will be stored in a file saved locally which should allow read and write access to the
 system.
-6) The maximum number of reservation the system can hold is 100.
-7) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
-8) The system is designed for a single-user.
-9) The response to any commands carried out by the user should become visible within 5 seconds.
-10) The user is not required to have an internet connection in order for the application to function.
-11) Data should be stored consistently even after closing and reopening the app.
-12) Should work on any mainstream OS as long as it has java 17 installed
+6) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability. 
+7) The system is designed for a single-user. 
+8) The response to any commands carried out by the user should become visible within 5 seconds. 
+9) The user is not required to have an internet connection in order for the application to function. 
+10) Data should be stored consistently even after closing and reopening the app. 
+11) Should work on any mainstream OS as long as it has java 17 installed
 
 ### Glossary
 
