@@ -161,7 +161,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 ![img.png](images/ParserClasses.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`
+<div markdown="span" class="alert alert-info">💡 **Note:** The lifeline for `DeleteCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -190,7 +190,7 @@ bound to this list so that the UI automatically updates when the data in the lis
 * Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
 should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP)
+<div markdown="span" class="alert alert-info">💡 **Note:** An alternative (arguably, a more OOP)
 model is given below. It has a `Occasion` list in the `ReserveMate`, which `Reservation` references. This allows
 `ReserveMate` to only require one `Occasion` object per unique occasion, instead of each `Reservation` needing their
 own `Occasion` objects.<br>
@@ -660,7 +660,7 @@ system.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-info">💡 **Note:**
 These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
