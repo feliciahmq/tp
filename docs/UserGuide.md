@@ -67,8 +67,7 @@ Commands in ReserveMate have the following structure:
 
 1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
 2. ReserveMate handles `INDEX` errors in two ways:
-   1. If the index is an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid command format.
-   2. If the index is a valid positive integer but exceeds the size of the current reservation list, it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
+   1. If the index is a valid positive integer but exceeds the size of the current reservation list or an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
 
 #### Prefixes
 
@@ -104,10 +103,10 @@ The prefixes used in ReserveMate are universal across all commands.
 | `p/`   | Contact Number          | Exactly 8 digits and must start with `8` or `9`.                                                                                                                                                                                                                                                                                                                         | `p/91234567`, `p/87654321`                 | `p/1234567`, `p/01234567`, `p/`               |
 | `e/`   | Email Address           | Must be a valid email format of `local-part@domain`. The local-part should only contain `alphanumeric` characters and these special characters, excluding the parentheses, `(+_.-)`. The local-part cannot start or end with any special characters. This is followed by a `@` and then a domain name. The domain name is made up of domain labels separated by periods. | `e/john@example.com`                       | `e/`, `e/john@.com`                           |
 | `x/`   | Number of Diners        | Integer from 1 to 10 inclusive.                                                                                                                                                                                                                                                                                                                                          | `x/1`, `x/5`, `x/10`                       | `x/0`, `x/11`, `x/-2`, `x/ten`                |
-| `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days.                                                                                                                                                                                                                                                                                                                  | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
+| `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days. (For `free` HHmm need not be included)                                                                                                                                                                                                                                                                           | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
 | `sd/`  | Start Date (Filter)     | Format: `YYYY-MM-DD HHmm`. Must be earlier than `ed/`.                                                                                                                                                                                                                                                                                                                   | `sd/2025-05-01 1800`                       | `sd/2025-13-01`, `sd/invalid`, `sd/`          |
 | `ed/`  | End Date (Filter)       | Format: `YYYY-MM-DD HHmm`. Must be later than `sd/`.                                                                                                                                                                                                                                                                                                                     | `ed/2025-05-15 2200`                       | `ed/2025-01-01`, `ed/late`, `ed/`             |
-| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and is `variadic`. It is optional.                                                                                                                                                                                                                                                                                                  | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
+| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and common symbols (`- ' . , & ! ( ) /.`. It is `variadic`                                                                                                                                                                                                                                                        | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
 
 **Notes:**
 
@@ -116,6 +115,7 @@ The prefixes used in ReserveMate are universal across all commands.
 3. Optional prefixes may be omitted entirely.
 4. Variadic prefixes (like `o/`) can appear multiple times in a command.
 5. Blank values (e.g., `n/`, `p/`) are invalid and will return an invalid format error.
+6. Use only the prefix stated in the table above to minimize unexpected behaviour.
 
 
 ### Remarks
@@ -125,18 +125,18 @@ The prefixes used in ReserveMate are universal across all commands.
 
 #### `n/` — Customer Name
 
-- Names are **space-sensitive**:
-  `n/AlexYeoh`, `n/Alex Yeoh`, and `n/Alex  Yeoh` are treated as different names.
-
 - Names are **case-insensitive**:
-  `n/alex yeoh` is the same as `n/AlEx YeOh`.
+  `n/alex yeoh` is the same as `n/AlEx YeOh` they will be parsed to `n/Alex Yeoh`
 
 - Names with **excessive leading/trailing spaces** are trimmed:
   `n/   Alice Johnson   ` → `n/Alice Johnson`
 
-- 2 to 50 characters inclusive.
+- Names with **excessive spaces in between** are trimmed:
+  `n/Alex     Yeoh` → `n/Alex Yeoh`
 
-- Names should contain only characters and spaces
+- Can be maximum 50 characters long. 
+
+- Names should contain only (english) characters and spaces
 
 - Names can be:
     - A **single character or initial** (e.g., `n/A`) — valid but potentially confusing in lists.
@@ -162,8 +162,7 @@ The prefixes used in ReserveMate are universal across all commands.
 #### `x/` — Number of Diners
 
 - Accepts integers from **1 to 10**, inclusive.
-- Non-integer or out-of-range values (e.g., `x/0`, `x/15`) are rejected.
-- `x/0` or `x/one` → invalid input.
+- Non-integer or out-of-range values (e.g., `x/0`, `x/15`, `x/one`) are rejected.
 
 ---
 
@@ -174,16 +173,19 @@ The prefixes used in ReserveMate are universal across all commands.
     - Within the next **60 days**
     - Cannot be a past date-time
     - Time must be in hourly increments, ending with `00` (e.g., `1400`).
+    - For the `free` command, `HHmm` is omitted. 
+    - For the `edit` command, the date & time cannot be in the past.
 
 ---
 
 #### `o/` — Occasion
 
 - Prefix is **optional and variadic** (can appear multiple times).
-- Accepts alphanumeric values and basic punctuation.
+- Must be between 2 and 50 characters long.
+- Accepts only alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)
 - Blank values (e.g., `o/`) will clear the occasions for the specific reservation when used in `edit` command it will
 result in an error when used in `add` command
-- No enforcement of case — `o/birthday` and `o/Birthday` are treated the same.
+- `o/birthday` and `o/Birthday` are treated differently.
 
 ---
 
@@ -191,7 +193,6 @@ result in an error when used in `add` command
 
 - Format: `YYYY-MM-DD HHmm`
 - `sd/` must be **before** `ed/`
-- If both are valid but incorrectly ordered, an error is thrown.
 - Time must be in hourly increments, ending with `00` (e.g., `1400`).
 
 ---
@@ -206,14 +207,11 @@ To get started with ReserveMate, type the command in the command box and press `
 
 **Notes about the command format:**<br>
 
-* Words in `<UPPER_CASE>` are mandatory parameters to be supplied by the user.<br>
+* Items in `<UPPER_CASE>` are mandatory parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Words in `[UPPER_CASE]` are optional parameters to be supplied by the user.<br>
+* Items in `[UPPER_CASE]` are optional parameters to be supplied by the user.<br>
   e.g. in `edit <INDEX> p/96214711`, `PHONE_NUMBER` is a parameter which can be used as `add n/John Doe p/96214711`.
-
-* Items in square brackets are optional.<br>
-  e.g. `edit <INDEX> [o/OCCASION]` can be used as `n/John Doe o/Birthday` or as `n/John Doe`.
 
 * Items with `…` are variadic, meaning they can be used zero or more times.<br>
   e.g. `[o/OCCASION]…​` can be used as ` ` (i.e. 0 times), `o/Birthday`, `o/Birthday o/Graduation` etc.
@@ -344,8 +342,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 **Constraints**
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
 * At least one of field (prefix) must be provided.
-* Editing occasion replaces the existing list of occasions. Use `o/` with no value to clear.
-* Dates must be within 60 days from now and in the future.
+* Editing occasion replaces the existing list of occasions. Use `o/` or `o/<WHITE_SPACE>` with no value to clear.
+* Date and time must be within 60 days from now and in the future, time must be in hourly increments.
+* When editing a future reservation, the new date-time cannot be in the past.
 
 - **Successful Execution:**
 > ---
@@ -410,7 +409,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -423,7 +422,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -460,7 +459,7 @@ Format: `delete <INDEX> cfm`
 
 **Constraints**
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* A confirmation flag 'cfm' is **required** **and case-sensitive**
+* A confirmation flag 'cfm' is **required** **and case-sensitive** to successfully delete the reservation. 
 
 ---
 
@@ -517,10 +516,7 @@ Format: `delete <INDEX> cfm`
 >
 > **Output:**
 > ```
-> Invalid command format!
-> delete: Deletes the reservation identified by the index number used in the reservation list.
-> Parameters: INDEX (must be a positive integer)
-> Example: delete 1 cfm
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -533,7 +529,7 @@ Format: `delete <INDEX> cfm`
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -559,9 +555,9 @@ Format:
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* `PREFERENCE_DESCRIPTION` can contain spaces and must be alphanumeric (E.g. include dietary needs, seating
+* `PREFERENCE_DESCRIPTION` can contain alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)(E.g. include dietary needs, seating
 preferences, or other customer requests).
-* Showing a preference will indicate `None` if it has not been set.
+* Preference would be `None` by default.
 
 ---
 
@@ -614,7 +610,7 @@ preferences, or other customer requests).
 >
 > ---
 >
-> **User Error #3**: Invalid sub-command.
+> **User Error #3**: Invalid command.
 >
 > **Input:**
 > `pref update 1 Vegan menu`
@@ -698,7 +694,8 @@ Format: `list`
 > Unknown command
 > ```
 >
-> ---`
+> ---
+> 
 
 ### Showing reservation details : `show`
 
@@ -750,7 +747,7 @@ Format: `show <INDEX>`
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -763,7 +760,7 @@ Format: `show <INDEX>`
 >
 > **Output:**
 > ```
-> The reservation index provided is invalid
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -790,10 +787,7 @@ Format: `show <INDEX>`
 >
 > **Output:**
 > ```
-> Invalid command format!
-> show: Shows the reservation details identified by the index number used in the displayed reservation list.
-> Parameters: INDEX (must be a positive integer)
-> Example: show 1
+> The reservation index must be within the reservation list range
 > ```
 >
 > ---
@@ -908,7 +902,7 @@ Filters `Reservation` between the specified date and time range.
 Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
 **Constraints**
-- Filters all reservations between the given `DATE_TIME`, inclusive of the `DATE_TIME` provided.
+- Filters all reservations between the given `DATE_TIME`s, inclusive of the `DATE_TIME` provided.
 -`DATE_TIME` provided must be valid and follow the format: `YYYY-MM-DD HHmm`.
 - The `DATE_TIME` provided for `sd/` must be before the date and time provided for `ed/`
 
@@ -967,7 +961,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **Output:**
 > ```
-> DateTime must be in the format YYYY-MM-DD HHmm
+> DateTime must be in the format YYYY-MM-DD HHmm, must be a valid calendar date and the time must be in hourly increments.
 > ```
 >
 > ---
@@ -992,6 +986,9 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 Displays all available `Reservation` time slots in user specified day.
 
 Format: `free <DATE>`
+
+**Constraints**
+- Date must be in `YYYY-MM-DD` format. Do not include `HHmm`. 
 
 ---
 
@@ -1125,7 +1122,7 @@ Format: `clear cfm`
 **Constraints**
 - The confirmation flag `cfm` is **mandatory** and **case-sensitive**.
 - This action **cannot be undone**.
-- Used with caution to reset the reservation list completely.
+- Used with caution to reset the reservation list **completely**.
 
 
 ---
@@ -1216,7 +1213,7 @@ Format: `help`
 > 6. show - Displays reservation details
 > 7. find - Finds a reservation by name
 > 8. filter - Filters reservations by the specified data and time range
-> 9. free - Displays all available time slots within the next 60 days
+> 9. free - Displays all available time slots on the date provided
 > 10. stats - Displays reservation statistics
 > 11. clear - Deletes all reservations
 > 12. help - Displays a list of available commands
@@ -1305,7 +1302,7 @@ _Details coming soon ..._
 | **Show**       | `show INDEX`<br>e.g., `show 2`                                                                                                                                             |
 | **Find**       | `find NAME [MORE_NAMES]`<br>e.g., `find James Jake`                                                                                                                        |
 | **Filter**     | `filter sd/DATE_TIME ed/DATE_TIME`<br>e.g., `filter sd/2026-12-12 1400 ed/2026-12-14 1400`                                                                                 |
-| **Free**       | `free`<br>e.g., `free`                                                                                                                                                     |
+| **Free**       | `free d/DATE_TIME`<br>e.g., `free d/2025-04-28`                                                                                                                            |
 | **Stats**      | `stats`<br>e.g., `stats`                                                                                                                                                   |
 | **Clear**      | `clear cfm`<br>e.g., `clear cfm`                                                                                                                                           |
 | **Help**       | `help`<br>e.g., `help`                                                                                                                                                     |
