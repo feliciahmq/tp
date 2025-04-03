@@ -67,8 +67,7 @@ Commands in ReserveMate have the following structure:
 
 1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
 2. ReserveMate handles `INDEX` errors in two ways:
-   1. If the index is an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid command format.
-   2. If the index is a valid positive integer but exceeds the size of the current reservation list, it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
+   1. If the index is a valid positive integer but exceeds the size of the current reservation list or an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
 
 #### Prefixes
 
@@ -107,7 +106,7 @@ The prefixes used in ReserveMate are universal across all commands.
 | `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days. (For `free` HHmm need not be included)                                                                                                                                                                                                                                                                           | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
 | `sd/`  | Start Date (Filter)     | Format: `YYYY-MM-DD HHmm`. Must be earlier than `ed/`.                                                                                                                                                                                                                                                                                                                   | `sd/2025-05-01 1800`                       | `sd/2025-13-01`, `sd/invalid`, `sd/`          |
 | `ed/`  | End Date (Filter)       | Format: `YYYY-MM-DD HHmm`. Must be later than `sd/`.                                                                                                                                                                                                                                                                                                                     | `ed/2025-05-15 2200`                       | `ed/2025-01-01`, `ed/late`, `ed/`             |
-| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and is `variadic`. It is optional.                                                                                                                                                                                                                                                                                                  | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
+| `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and common symbols (`- ' . , & ! ( ) /.`. It is `variadic`                                                                                                                                                                                                                                                        | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
 
 **Notes:**
 
@@ -116,6 +115,7 @@ The prefixes used in ReserveMate are universal across all commands.
 3. Optional prefixes may be omitted entirely.
 4. Variadic prefixes (like `o/`) can appear multiple times in a command.
 5. Blank values (e.g., `n/`, `p/`) are invalid and will return an invalid format error.
+6. Use only the prefix stated in the table above to minimize unexpected behaviour.
 
 
 ### Remarks
@@ -705,7 +705,8 @@ Format: `list`
 > Unknown command
 > ```
 >
-> ---`
+> ---
+> 
 
 ### Showing reservation details : `show`
 
@@ -998,7 +999,7 @@ Displays all available `Reservation` time slots in user specified day.
 Format: `free <DATE>`
 
 **Constraints**
-- Date must be in `yyyy-MM-dd` format. 
+- Date must be in `YYYY-MM-DD` format. Do not include `HHmm`. 
 
 ---
 
