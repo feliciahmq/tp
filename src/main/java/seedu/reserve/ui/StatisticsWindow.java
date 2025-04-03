@@ -121,7 +121,6 @@ public class StatisticsWindow extends UiPart<Stage> {
         if (series.getData().isEmpty()) {
             logger.warning("No data was added to the BarChart.");
         } else {
-            barChart.getData().add(series);
             logger.fine("BarChart data set successfully.");
         }
 
