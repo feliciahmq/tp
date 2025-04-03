@@ -559,7 +559,8 @@ Format:
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* `PREFERENCE_DESCRIPTION` can contain spaces and must be alphanumeric (E.g. include dietary needs, seating preferences, or other customer requests).
+* `PREFERENCE_DESCRIPTION` can contain spaces and must be alphanumeric (E.g. include dietary needs, seating
+preferences, or other customer requests).
 * Showing a preference will indicate `None` if it has not been set.
 
 ---
@@ -1025,9 +1026,9 @@ Format: `free <DATE>`
 > ```
 > Invalid command format!
 > free: Find all free time slots in a given day
-> 
+>
 > Parameters: d/DATE
-> 
+>
 > Example: free d/2025-05-01
 > ```
 >
@@ -1040,7 +1041,7 @@ Format: `free <DATE>`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > help: Shows program usage instructions.
 > Example: help
 > ```
