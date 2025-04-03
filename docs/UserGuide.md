@@ -181,7 +181,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Prefix is **optional and variadic** (can appear multiple times).
 - Must be between 2 and 50 characters long.
-- Accepts only alphanumeric values and common symbols.
+- Accepts only alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)
 - Blank values (e.g., `o/`) will clear the occasions for the specific reservation when used in `edit` command it will
 result in an error when used in `add` command
 - `o/birthday` and `o/Birthday` are treated differently.
@@ -566,7 +566,7 @@ Format:
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* `PREFERENCE_DESCRIPTION` can contain spaces and must be alphanumeric (E.g. include dietary needs, seating
+* `PREFERENCE_DESCRIPTION` can contain alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)(E.g. include dietary needs, seating
 preferences, or other customer requests).
 * Preference would be `None` by default.
 
