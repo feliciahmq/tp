@@ -58,7 +58,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RESERVATION_SUCCESS = "Edited Reservation:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_EDIT_PAST_RESERVATION_WARNING = "Warning: You modified a past reservation!\n";
+    public static final String MESSAGE_EDIT_RESERVATION_WARNING = "Warning: You modified a past reservation!\n";
     public static final String MESSAGE_CANNOT_CHANGE_FUTURE_TO_PAST =
             "You cannot change a future reservation date to a past date.\n";
 
@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         Reservation editedReservation = createEditedReservation(reservationToEdit, editReservationDescriptor);
 
         if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
-            out = MESSAGE_EDIT_PAST_RESERVATION_WARNING;
+            out = MESSAGE_EDIT_RESERVATION_WARNING;
         } else {
             if (!DateTime.isValidDateTime(editedReservation.getDateTime().toString())
                     && isDateTimeBeforeCurrentTime(editedReservation.getDateTime())) {

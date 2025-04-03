@@ -190,7 +190,7 @@ public class ParserUtil {
         if (!DateTime.isValidFileInputDateTime(trimmedDateTime)) {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        return DateTime.fromEditedDateString(trimmedDateTime);
+        return DateTime.fromFileString(trimmedDateTime);
     }
 
     /**

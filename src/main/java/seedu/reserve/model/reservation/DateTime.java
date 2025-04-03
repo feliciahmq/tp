@@ -63,18 +63,6 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Constructs a {@code DateTime} from a string input without validation.
-     *
-     * @param dateTime A date-time string.
-     * @return A DateTime object if the string is valid, otherwise null.
-     */
-    public static DateTime fromEditedDateString(String dateTime) {
-        requireNonNull(dateTime);
-        checkArgument(isValidFileInputDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        return new DateTime(LocalDateTime.parse(dateTime, FORMATTER));
-    }
-
-    /**
      * Returns true if a given string is a valid date-time in the format YYYY-MM-DD HHmm and after current date-time.
      */
     public static boolean isValidDateTime(String test) {

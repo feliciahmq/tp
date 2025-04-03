@@ -210,7 +210,7 @@ public class EditCommandTest {
                 new UserPrefs());
         expectedModel.setReservation(pastReservation, editedReservation);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PAST_RESERVATION_WARNING
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_WARNING
                         + EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation));
         // Assert that the command fails with the correct error message
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

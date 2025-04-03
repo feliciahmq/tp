@@ -266,7 +266,7 @@ public class ParserUtilTest {
     @Test
     public void parseEditedDateTime_validInput_success() throws ParseException {
         String validDateTime = "2025-12-31 1800";
-        DateTime expectedDateTime = DateTime.fromEditedDateString(validDateTime);
+        DateTime expectedDateTime = DateTime.fromFileString(validDateTime);
         assertEquals(expectedDateTime, ParserUtil.parseEditedDateTime(validDateTime));
     }
 
