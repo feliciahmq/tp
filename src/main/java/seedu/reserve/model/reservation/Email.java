@@ -58,7 +58,7 @@ public class Email {
         String domain = test.substring(domainIndex + 1);
         String locale = test.substring(0, domainIndex);
 
-        if (locale.length() > 63) {
+        if (locale.length() > 64) {
             return false;
         }
 
