@@ -42,7 +42,7 @@ public class FreeCommandTest {
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 1000"
                 + "\n- 2025-05-01 1100 to 2025-05-01 1400"
-                + "\n- 2025-05-01 1500 to 2025-05-02 0000";
+                + "\n- 2025-05-01 1500 to 2025-05-01 2300";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
@@ -72,7 +72,7 @@ public class FreeCommandTest {
         FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 1200"
-                + "\n- 2025-05-01 1300 to 2025-05-02 0000";
+                + "\n- 2025-05-01 1300 to 2025-05-01 2300";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
@@ -87,7 +87,7 @@ public class FreeCommandTest {
         FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 0800"
-                + "\n- 2025-05-01 0900 to 2025-05-02 0000";
+                + "\n- 2025-05-01 0900 to 2025-05-01 2300";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
