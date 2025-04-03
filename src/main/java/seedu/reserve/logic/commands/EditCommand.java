@@ -104,8 +104,11 @@ public class EditCommand extends Command {
         if (isDateTimeBeforeCurrentTime(reservationToEdit.getDateTime())) {
             out = MESSAGE_EDIT_PAST_RESERVATION_WARNING;
         } else {
-            if (!DateTime.isValidDateTime(editedReservation.getDateTime().toString())) {
+            if (!DateTime.isValidDateTime(editedReservation.getDateTime().toString())
+                    && isDateTimeBeforeCurrentTime(editedReservation.getDateTime())) {
                 throw new CommandException(MESSAGE_CANNOT_CHANGE_FUTURE_TO_PAST + DateTime.MESSAGE_CONSTRAINTS);
+            } else if (!DateTime.isValidDateTime(editedReservation.getDateTime().toString())) {
+                throw new CommandException(DateTime.MESSAGE_CONSTRAINTS);
             }
         }
 
