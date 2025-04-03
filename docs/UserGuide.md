@@ -343,7 +343,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 * At least one of field (prefix) must be provided.
 * Editing occasion replaces the existing list of occasions. Use `o/` or `o/<WHITE_SPACE>` with no value to clear.
 * Dates must be within 60 days from now and in the future.
-* Past reservations (`DATE_TIME` of reservation before the current time) cannot be edited.
 
 - **Successful Execution:**
 > ---
@@ -448,18 +447,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 > DateTime must be in the format YYYY-MM-DD HHmm and be a date-time after the current time but within 60 days from now.
 > ```
 >
-> ---
-> 
->  **User Error #6**: Editing a past reservation.
-> 
-> **Input:** (Assume current date time is 2025-04-03 1400 and reservation 2 has a date time of 2025-04-02 1500)
-> `edit 2 x/5`
-> 
-> **Output:**
-> ```
-> Past reservations cannot be edited.
-> ```
-> 
 > ---
 
 ### Deleting a reservation : `delete`
