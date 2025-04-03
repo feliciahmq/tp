@@ -800,16 +800,16 @@ Format: `show <INDEX>`
 
 ### Locating reservations by name: `find`
 
-Finds `Reservation` whose names contain any of the given keywords.
+Finds `Reservation` with names that contain any of the specified keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find NAME [MORE_NAMES]`
 
 **Constraints**
-- The search is **case-insensitive**.
+- The search is **case-insensitive**, similar to saerch platforms like Google or Contacts.
 - The order of keywords does **not** matter.
 - Only **full words** will be matched (e.g., `Han` will not match `Hans`).
 - Searches are done on the **name field only**.
-- Matches are based on **OR** logic (any one keyword match is sufficient).
+- Matches are based on **OR** logic (any one name match is sufficient).
 
 ---
 
@@ -1078,7 +1078,7 @@ Format: `stats`
 > `stats`
 >
 > **Output:**
-> *(Pie chart appears showing distribution of number of reservations by diner size.)*
+> *(Bar chart appears showing distribution of number of reservations by diner size.)*
 >
 > ![stats_command.png](images/statsCommand.png)
 >
@@ -1096,7 +1096,8 @@ Format: `stats`
 >
 > **Output:**
 > ```
-> No reservation data available to generate statistics. Please add reservations first.
+> There are no reservations to generate statistics from. 
+> Use the 'add' command to create a reservation.
 > ```
 >
 > ---
@@ -1108,7 +1109,9 @@ Format: `stats`
 >
 > **Output:**
 > ```
-> Invalid command.
+> Invalid command format! 
+> stats: Displays statistics of all reservations in the reservation book.
+> Example: stats
 > ```
 >
 > ---
