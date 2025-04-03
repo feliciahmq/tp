@@ -83,7 +83,7 @@ public class EditReservationDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditReservationDescriptor} that we are building.
+     * Sets the {@code DateTime} of the {@code EditReservationDescriptor} that we are building.
      */
     public EditReservationDescriptorBuilder withEditedDateTime(String dateTime) {
         descriptor.setDateTime(DateTime.fromEditedDateString(dateTime));
