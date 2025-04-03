@@ -43,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_FILTER_DATETIME = "2025-01-01 1400";
     private static final String VALID_OCCASION_1 = "Birthday";
     private static final String VALID_OCCASION_2 = "Anniversary";
+    private static final String VALID_OCCASION_SYMBOL = "pre-wedding!(b4 wedding) - ' . , & ! ( ) /.";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -224,6 +225,12 @@ public class ParserUtilTest {
     public void parseOccasion_validValueWithoutWhitespace_returnsOccasion() throws Exception {
         Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
         assertEquals(expectedOccasion, ParserUtil.parseOccasion(VALID_OCCASION_1));
+    }
+
+    @Test
+    public void parseOccasion_validValueWithSymbols_returnsOccasion() throws Exception {
+        Occasion expectedOccasion = new Occasion(VALID_OCCASION_SYMBOL);
+        assertEquals(expectedOccasion, ParserUtil.parseOccasion(VALID_OCCASION_SYMBOL));
     }
 
     @Test
