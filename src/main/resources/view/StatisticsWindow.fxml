@@ -39,7 +39,7 @@
                         </xAxis>
                         <yAxis>
                             <NumberAxis fx:id="yAxis"
-                                label="Reservations"
+                                label="Number of Reservations"
                                 tickUnit="1"
                                 minorTickCount="0"
                                 lowerBound="0"
