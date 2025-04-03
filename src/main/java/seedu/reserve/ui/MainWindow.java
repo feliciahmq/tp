@@ -1,7 +1,10 @@
 package seedu.reserve.ui;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +19,8 @@ import seedu.reserve.logic.Logic;
 import seedu.reserve.logic.commands.CommandResult;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.logic.parser.exceptions.ParseException;
+import seedu.reserve.model.Model;
+import seedu.reserve.model.reservation.Reservation;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     private ReservationListPanel reservationListPanel;
@@ -54,12 +60,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -68,6 +75,13 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         statisticsWindow = new StatisticsWindow();
+
+        model.getFilteredReservationList().addListener((ListChangeListener<Reservation>) change -> {
+            HashMap<String, Integer> updatedStats = model.getReservationStatistics();
+            Platform.runLater(() -> {
+                statisticsWindow.setBarChart(updatedStats);
+            });
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -193,7 +207,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            statisticsWindow.setPieChart(logic.getReservationStatistics());
+            Platform.runLater(() -> {
+                statisticsWindow.setBarChart(logic.getReservationStatistics());
+            });
 
             if (commandResult.isShowUserGuide()) {
                 handleHelp();

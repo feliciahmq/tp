@@ -5,6 +5,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <fx:root resizable="false"
          title="ReserveMate Statistics"
          type="javafx.stage.Stage"
@@ -12,6 +16,9 @@
          minHeight="500.0"
          xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/bar_chart.png" />
+    </icons>
     <scene>
         <Scene>
             <VBox fx:id="messageContainer"
@@ -19,14 +26,27 @@
                   spacing="10"
                   style="-fx-padding: 20;">
                 <children>
-                <Label fx:id="statisticsMessage"
-                       text="Reservation Statistics"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold;"
-                />
-                <PieChart fx:id="pieChart"
-                          prefWidth="400"
-                          prefHeight="300"
-                />
+                    <Label fx:id="statisticsMessage"
+                           text="Reservation Statistics"
+                           style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                    />
+                    <BarChart fx:id="barChart"
+                              title="Reservations by Number of Diners"
+                              VBox.vgrow="ALWAYS"
+                              maxWidth="1.7976931348623157E308">
+                    <xAxis>
+                            <CategoryAxis label="Number of Diners"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis fx:id="yAxis"
+                                label="Reservations"
+                                tickUnit="1"
+                                minorTickCount="0"
+                                lowerBound="0"
+                                upperBound="10"
+                            />
+                        </yAxis>
+                    </BarChart>
                 </children>
             </VBox>
         </Scene>

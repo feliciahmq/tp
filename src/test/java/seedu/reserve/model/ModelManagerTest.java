@@ -106,7 +106,10 @@ public class ModelManagerTest {
         modelManager = new ModelManager(reserveMate, userPrefs);
 
         HashMap<String, Integer> expectedStatistics = new HashMap<>();
-        expectedStatistics.put("5+", 1);
+        for (int i = 1; i <= 10; i++) {
+            expectedStatistics.put(String.valueOf(i), 0);
+        }
+        expectedStatistics.put("5", 1);
         expectedStatistics.put("3", 1);
         expectedStatistics.put("2", 1);
 
