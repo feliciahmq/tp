@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.reserve.commons.core.LogsCenter;
 import seedu.reserve.logic.commands.exceptions.CommandException;
 import seedu.reserve.model.Model;
 import seedu.reserve.model.reservation.DateTime;
@@ -28,6 +30,7 @@ public class FreeCommand extends Command {
             + "Example: " + COMMAND_WORD + " d/2025-05-01";
     public static final String MESSAGE_NO_FREE_SLOTS = "No available free time slots found.";
     public static final String MESSAGE_ALL_FREE_SLOTS = "All timings are available on this date.";
+    private static final Logger logger = LogsCenter.getLogger(FreeCommand.class);
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     private final ReservationBetweenDatePredicate predicate;
@@ -40,10 +43,12 @@ public class FreeCommand extends Command {
      * @param date The starting date/time to search for free slots
      */
     public FreeCommand(DateTime date) {
+        requireNonNull(date);
         this.searchStart = date.value;
-        this.searchEnd = date.value.plusDays(1);
+        this.searchEnd = date.value.plusHours(23);
         this.predicate = new ReservationBetweenDatePredicate(date,
                 new DateTime(this.searchEnd.format(FORMATTER)));
+        logger.fine("Created FreeCommand for date: " + date);
     }
 
     @Override
@@ -59,11 +64,13 @@ public class FreeCommand extends Command {
 
         List<TimeSlot> freeSlots = getAllFreeSlots(reservations);
         if (freeSlots.isEmpty()) {
+            logger.info("No free time slots available");
             model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
             return new CommandResult(MESSAGE_NO_FREE_SLOTS);
         }
 
         model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        logger.info("Found free time slots: " + freeSlots.size());
 
         return new CommandResult(formatFreeSlots(freeSlots));
     }
@@ -75,6 +82,7 @@ public class FreeCommand extends Command {
      * @return List of available time slots (each at least 1 hour long)
      */
     private List<TimeSlot> getAllFreeSlots(List<Reservation> reservations) {
+        requireNonNull(reservations);
         List<TimeSlot> freeSlots = new ArrayList<>();
 
         // Check slot before first reservation
@@ -115,6 +123,7 @@ public class FreeCommand extends Command {
      * @return Formatted string showing all available time slots
      */
     private String formatFreeSlots(List<TimeSlot> freeSlots) {
+        requireNonNull(freeSlots);
         StringBuilder message = new StringBuilder("Available free time slots:");
         freeSlots.forEach(message::append);
         return message.toString();
