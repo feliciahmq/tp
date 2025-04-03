@@ -807,7 +807,7 @@ Format: `find NAME [MORE_NAMES]`
 **Constraints**
 - The search is **case-insensitive**, similar to saerch platforms like Google or Contacts.
 - The order of keywords does **not** matter.
-- Only **full words** will be matched (e.g., `Han` will not match `Hans`), as full name
+- Only **full words** will be matched (e.g., `Han` will not match `Hans`).
 - Searches are done on the **name field only**.
 - Matches are based on **OR** logic (any one name match is sufficient).
 
