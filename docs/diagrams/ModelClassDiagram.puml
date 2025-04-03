@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Occasion
 Class DateTime
+Class Preference
 
 Class I #FFFFFF
 }
@@ -44,6 +45,7 @@ Reservation *--> Email
 Reservation *--> Diners
 Reservation *--> DateTime
 Reservation *--> "*" Occasion
+Reservation *--> Preference
 
 Reservation -[hidden]up--> I
 UniqueReservationList -[hidden]right-> I

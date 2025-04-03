@@ -91,7 +91,7 @@ public class ReserveMateParser {
             return new FilterCommandParser().parse(arguments);
 
         case StatisticsCommand.COMMAND_WORD:
-            return new StatisticsCommand();
+            return new StatsCommandParser().parse(arguments);
 
         case PreferenceCommand.COMMAND_WORD:
             return new PreferenceParser().parse(arguments);

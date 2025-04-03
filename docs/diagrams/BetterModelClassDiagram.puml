@@ -19,4 +19,5 @@ Reservation *--> Phone
 Reservation *--> Email
 Reservation *--> Number_of_Diners
 Reservation *--> Date_Time
+Reservation *--> Preference
 @enduml
