@@ -1302,7 +1302,7 @@ _Details coming soon ..._
 | **Show**       | `show INDEX`<br>e.g., `show 2`                                                                                                                                             |
 | **Find**       | `find NAME [MORE_NAMES]`<br>e.g., `find James Jake`                                                                                                                        |
 | **Filter**     | `filter sd/DATE_TIME ed/DATE_TIME`<br>e.g., `filter sd/2026-12-12 1400 ed/2026-12-14 1400`                                                                                 |
-| **Free**       | `free d/DATE_TIME`<br>e.g., `free d/04-28-2025`                                                                                                                                      |
+| **Free**       | `free d/DATE_TIME`<br>e.g., `free d/2025-04-28`                                                                                                                            |
 | **Stats**      | `stats`<br>e.g., `stats`                                                                                                                                                   |
 | **Clear**      | `clear cfm`<br>e.g., `clear cfm`                                                                                                                                           |
 | **Help**       | `help`<br>e.g., `help`                                                                                                                                                     |
