@@ -556,7 +556,7 @@ Format:
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
 * `PREFERENCE_DESCRIPTION` can contain alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)(E.g. include dietary needs, seating
-preferences, or other customer requests).
+  preferences, or other customer requests).
 * Preference would be `None` by default.
 
 ---
@@ -587,21 +587,21 @@ preferences, or other customer requests).
 >
 > **Output:**
 > ```
->Invalid command format!
->pref: Saves customer preferences for the reservation identified by the index number.
-
->Parameters for saving: pref save <INDEX> <PREFERENCE>
-
->Ensure all parameters are entered and valid
->Example: pref save 1 No nuts, allergic to seafood
+> Invalid command format!
+> pref: Saves customer preferences for the reservation identified by the index number.
+> Parameters for saving: pref save <INDEX> <PREFERENCE>
+> Ensure all parameters are entered and valid
+> Example: pref save 1 No nuts, allergic to seafood
 > ```
 >
 > ---
 >
-> **User Error #2**: Missing or invalid index in `save`.
+> **User Error #2**: Negative or invalid index in `save`.
 >
 > **Input:**
 > `pref save -10`
+>  OR **Input:**
+> `pref save abc`
 >
 > **Output:**
 > ```
@@ -610,22 +610,31 @@ preferences, or other customer requests).
 >
 > ---
 >
-> **User Error #3**: Invalid command.
+> > **User Error #3**: Positive Index outside of reservation list range.
+>
+> **Input:**
+> `pref save 10 less salty`
+>
+> **Output:**
+> ```
+> The reservation index must be within the reservation list range
+> ```
+>
+> ---
+>
+> **User Error #4**: Invalid command.
 >
 > **Input:**
 > `pref update 1 Vegan menu`
 >
 > **Output:**
 > ```
->Invalid command format!
->pref: Saves customer preferences for the reservation identified by the index number.
-
->Parameters for saving: pref save <INDEX> <PREFERENCE>
-
->Ensure all parameters are entered and valid
->Example: pref save 1 No nuts, allergic to seafood
+> Invalid command format!
+> pref: Saves customer preferences for the reservation identified by the index number.
+> Parameters for saving: pref save <INDEX> <PREFERENCE>
+> Ensure all parameters are entered and valid
+> Example: pref save 1 No nuts, allergic to seafood
 > ```
->
 > ---
 
 ### Listing all reservations : `list`
