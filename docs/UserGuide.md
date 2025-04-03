@@ -255,7 +255,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 >
 > **Output**: <br>
 > ```
-> New reservation added: John Doe; Phone: 98765432; Email: johnd@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+> New reservation added:
+> Name: John Doe
+> Phone: 98765432
+> Email: johnd@example.com
+> Number of Diners: 5
+> Date/Time: 2025-04-12 1800
+> Preference: None
+> Occasion: [BIRTHDAY]
 >```
 > ---
 >
@@ -265,7 +272,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 >
 > **Output**: <br>
 > ```
-> New reservation added: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion: [GRADUATION]
+> New reservation added:
+> Name: Jane Doe
+> Phone: 81234567
+> Email: betsycrowe@example.com
+> Number of Diners: 3
+> Date/Time: 2025-04-20 1800
+> Preference: None
+> Occasion: [GRADUATION]
 > ```
 
 - **Failed Execution:**
@@ -273,39 +287,69 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 >
 > **User Error #1**: Missing `NAME` field
 >
-> **Input**: `add p/93828282 e/johnd@example.com x/5 d/2026-12-31 1800`
+> **Input**: `add p/93828282 e/johnd@example.com x/5 d/2025-5-01 1800`
 >
 > **Output**: <br>
 > ```
 > Invalid command format!
-> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
-> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> add: Adds a reservation to the reservation book.
+>
+> Parameters:
+> - n/NAME
+> - p/PHONE
+> - e/EMAIL
+> - x/NUMBER OF DINERS
+> - d/DATETIME
+> - [o/OCCASION]...
+>
+> Example:
+> add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-28 1800 o/Birthday
 > ```
 >
 > ---
 >
 > **User Error #2**: Missing `PHONE` field
 >
-> **Input**: `add n/John Doe e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday`
+> **Input**: `add n/John Doe e/johnd@example.com x/5 d/2025-05-01 1800 o/Birthday`
 >
 > **Output**: <br>
 > ```
 > Invalid command format!
-> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
-> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> add: Adds a reservation to the reservation book.
+>
+> Parameters:
+> - n/NAME
+> - p/PHONE
+> - e/EMAIL
+> - x/NUMBER OF DINERS
+> - d/DATETIME
+> - [o/OCCASION]...
+>
+> Example:
+> add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-28 1800 o/Birthday
 > ```
 >
 > ---
 >
 > **User Error #3**: Missing `DINER SIZE` field
 >
-> **Input**: `add n/John Doe p/98765432 e/johnd@example.com d/2026-12-31 1800 o/Birthday`
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com d/2025-05-01 1800 o/Birthday`
 >
 > **Output**: <br>
 > ```
 > Invalid command format!
-> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
-> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> add: Adds a reservation to the reservation book.
+>
+> Parameters:
+> - n/NAME
+> - p/PHONE
+> - e/EMAIL
+> - x/NUMBER OF DINERS
+> - d/DATETIME
+> - [o/OCCASION]...
+>
+> Example:
+> add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-28 1800 o/Birthday
 > ```
 >
 > ---
@@ -317,8 +361,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 > **Output**: <br>
 > ```
 > Invalid command format!
-> add: Adds a reservation to the reservation book. Parameters: n/NAME p/PHONE e/EMAIL x/NUMBER OF DINERS d/DATETIME [o/OCCASION]... <br>
-> Example: add n/John Doe p/98765432 e/johnd@example.com x/5 d/2026-12-31 1800 o/Birthday
+> add: Adds a reservation to the reservation book.
+>
+> Parameters:
+> - n/NAME
+> - p/PHONE
+> - e/EMAIL
+> - x/NUMBER OF DINERS
+> - d/DATETIME
+> - [o/OCCASION]...
+>
+> Example:
+> add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-28 1800 o/Birthday
 > ```
 >
 > ---
@@ -356,7 +410,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> Edited Reservation: John Doe; Phone: 91234567; Email: johndoe@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+> Edited Reservation:
+> Name: John Doe
+> Phone: 91234567
+> Email: johndoe@example.com
+> Number of Diners: 5
+> Date/Time: 2025-04-05 0800
+> Preference: Less Salt
+> Occasion: [Anniversary], [Birthday]
 > ```
 >
 > ---
@@ -368,7 +429,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> Edited Reservation: Brittany; Phone: 91236474; Email: johnny@example.com; Number of Diners: 1; Occasion:
+> Edited Reservation:
+> Name: Brittany
+> Phone: 98765432
+> Email: johnd@example.com
+> Number of Diners: 5
+> Date/Time: 2025-04-12 1800
+> Preference: None
+> Occasion:
 > ```
 >
 > ---
@@ -380,7 +448,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> Edited Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 6; Occasion: [GRADUATION]
+> Edited Reservation:
+> Name: Jane Doe
+> Phone: 81234567
+> Email: betsycrowe@example.com
+> Number of Diners: 6
+> Date/Time: 2025-04-25 2000
+> Preference: None
+> Occasion: [GRADUATION]
 > ```
 >
 > ---
@@ -446,7 +521,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >
 > **Output:**
 > ```
-> DateTime must be in the format YYYY-MM-DD HHmm and be a date-time after the current time but within 60 days from now.
+> You cannot change a future reservation date to a past date.
+> DateTime should be of the format YYYY-MM-DD HHmm and adhere to the following constraints:
+> 1. The date must be a valid calendar date.
+> 2. The time must be in hourly increments (e.g., 0000, 0100, etc.).
+> 3. The date-time must be after the current time but within 60 days from now.
 > ```
 >
 > ---
@@ -504,7 +583,9 @@ Format: `delete <INDEX> cfm`
 >
 > **Output:**
 > ```
-> Are you sure you want to delete 1? Type 'delete 1 cfm'
+> Are you sure you want to delete 1?
+>
+> Type 'delete 1 cfm'
 > ```
 >
 > ---
@@ -516,7 +597,12 @@ Format: `delete <INDEX> cfm`
 >
 > **Output:**
 > ```
-> The reservation index must be within the reservation list range
+> Invalid command format!
+> delete: Deletes the reservation identified by the index number used in the reservation list.
+>
+> Parameters: INDEX (must be a positive integer)
+>
+> Example: delete 1 cfm
 > ```
 >
 > ---
@@ -541,7 +627,9 @@ Format: `delete <INDEX> cfm`
 >
 > **Output:**
 > ```
-> Are you sure you want to delete 1? Type 'delete 1 cfm'
+> Are you sure you want to delete 1?
+>
+> Type 'delete 1 cfm'
 > ```
 >
 > ---
@@ -589,7 +677,9 @@ Format:
 > ```
 > Invalid command format!
 > pref: Saves customer preferences for the reservation identified by the index number.
+>
 > Parameters for saving: pref save <INDEX> <PREFERENCE>
+>
 > Ensure all parameters are entered and valid
 > Example: pref save 1 No nuts, allergic to seafood
 > ```
@@ -631,7 +721,9 @@ Format:
 > ```
 > Invalid command format!
 > pref: Saves customer preferences for the reservation identified by the index number.
+>
 > Parameters for saving: pref save <INDEX> <PREFERENCE>
+>
 > Ensure all parameters are entered and valid
 > Example: pref save 1 No nuts, allergic to seafood
 > ```
@@ -656,9 +748,6 @@ Format: `list`
 > **Output:**
 > ```
 > Listed all reservations
-> 1. John Doe (5 diners) - 2025-04-12 1800
-> 2. Jane Doe (3 diners) - 2025-04-20 1800
-> 3. Bobby (1 diner) - 2025-04-18 1900
 > ```
 >
 > ---
@@ -688,7 +777,10 @@ Format: `list`
 >
 > **Output:**
 > ```
-> Invalid command.
+> Invalid command format!
+> list: Lists all reservations in the reservation book.
+>
+> Example: list
 > ```
 >
 > ---
@@ -700,7 +792,9 @@ Format: `list`
 >
 > **Output:**
 > ```
-> Unknown command
+> Invalid command format!
+> help: Shows program usage instructions.
+> Example: help
 > ```
 >
 > ---
@@ -727,7 +821,14 @@ Format: `show <INDEX>`
 >
 > **Output:**
 > ```
-> Details of Reservation: John Doe; Phone: 98765432; Email: johnd@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
+> Details of Reservation:
+> Name: John Doe
+> Phone: 98765432
+> Email: johnd@example.com
+> Number of Diners: 5
+> Date/Time: 2025-04-28 1800
+> Preference: None
+> Occasion: [Birthday]
 > ```
 >
 > ---
@@ -739,7 +840,14 @@ Format: `show <INDEX>`
 >
 > **Output:**
 > ```
-> Details of Reservation: Jane Doe; Phone: 81234567; Email: betsycrowe@example.com; Number of Diners: 3; Occasion:
+> Details of Reservation:
+> Name: Jane Doe
+> Phone: 81234567
+> Email: betsycrowe@example.com
+> Number of Diners: 3
+> Date/Time: 2025-04-29 2000
+> Preference: None
+> Occasion: [None]
 > ```
 >
 > ---
@@ -783,7 +891,9 @@ Format: `show <INDEX>`
 > ```
 > Invalid command format!
 > show: Shows the reservation details identified by the index number used in the displayed reservation list.
-> Parameters: INDEX (must be a positive integer)
+>
+> Parameters: INDEX (must be a positive integer) and shown in the list
+>
 > Example: show 1
 > ```
 >
@@ -827,7 +937,6 @@ Format: `find NAME [MORE_NAMES]`
 > **Output:**
 > ```
 > 1 reservations listed!
-> 1. John Doe (5 diners) - 2025-04-12 1800
 > ```
 >
 > ---
@@ -840,8 +949,6 @@ Format: `find NAME [MORE_NAMES]`
 > **Output:**
 > ```
 > 2 reservations listed!
-> 1. John Doe (5 diners) - 2025-04-12 1800
-> 2. Jane Doe (3 diners) - 2025-04-20 1800
 > ```
 >
 > ---
@@ -854,7 +961,6 @@ Format: `find NAME [MORE_NAMES]`
 > **Output:**
 > ```
 > 1 reservations listed!
-> 1. John Doe (5 diners) - 2025-04-12 1800
 > ```
 >
 > ---
@@ -872,9 +978,11 @@ Format: `find NAME [MORE_NAMES]`
 > **Output:**
 > ```
 > Invalid command format!
-> find: Finds all reservations whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-> Parameters: KEYWORD [MORE_KEYWORDS]...
-> Example: find alice bob charlie
+> find: Finds all reservations whose names contain any of the specified keywords (case-insensitive).
+>
+> Parameters: NAME [MORE_NAMES]...
+>
+> Example: find alice Bob Charlie
 > ```
 >
 > ---
@@ -886,7 +994,7 @@ Format: `find NAME [MORE_NAMES]`
 >
 > **Output:**
 > ```
-> No reservations found matching the keyword(s).
+> No reservations found. Try using the full name. For example, use 'John' instead of just 'Jo'.
 > ```
 >
 > ---
@@ -899,7 +1007,7 @@ Format: `find NAME [MORE_NAMES]`
 >
 > **Output:**
 > ```
-> No reservations found matching the keyword(s).
+> No reservations found. Try using the full name. For example, use 'John' instead of just 'Jo'.
 > ```
 >
 > ---
@@ -928,8 +1036,6 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 > **Output:**
 > ```
 > Here are the available reservations for the date range.
-> 1. John Doe (5 diners) - 2025-04-12 1800
-> 2. Jane Doe (3 diners) - 2025-04-20 1800
 > ```
 >
 > ---
@@ -970,7 +1076,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **Output:**
 > ```
-> DateTime must be in the format YYYY-MM-DD HHmm, must be a valid calendar date and the time must be in hourly increments.
+> DateTime must be in the format YYYY-MM-DD HHmm, must be a valid calendar date and the time must be in hourly increments. 
 > ```
 >
 > ---
@@ -984,8 +1090,11 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 > ```
 > Invalid command format!
 > filter: Filters all reservations made between the given date range.
-> Parameters: sd/START DATE ed/END DATE
-> Example: filter sd/ 2026-12-31 1800 ed/ 2026-12-31 1900
+>
+> Parameters:
+> - sd/START DATE - ed/END DATE
+>
+> Example: filter sd/ 2025-04-01 1800 ed/ 2025-06-31 1900
 > ```
 >
 > ---
@@ -1012,8 +1121,8 @@ Format: `free <DATE>`
 > **Output:**
 > ```
 > Available free time slots:
-> - 2025-04-28 1600 to 2025-04-28 1700
-> - 2025-04-28 2000 to 2025-04-28 2100
+> - 2025-04-28 0000 to 2025-04-28 1800
+> - 2025-04-28 1900 to 2025-04-28 2300
 > ```
 >
 > ---
@@ -1102,8 +1211,7 @@ Format: `stats`
 >
 > **Output:**
 > ```
-> There are no reservations to generate statistics from. 
-> Use the 'add' command to create a reservation.
+> There are no reservations to generate statistics from. Use the 'add' command to create a reservation
 > ```
 >
 > ---
@@ -1115,8 +1223,9 @@ Format: `stats`
 >
 > **Output:**
 > ```
-> Invalid command format! 
+> Invalid command format!
 > stats: Displays statistics of all reservations in the reservation book.
+>
 > Example: stats
 > ```
 >
@@ -1163,8 +1272,10 @@ Format: `clear cfm`
 >
 > **Output:**
 > ```
-> Clear command requires confirmation.
-> Please enter: clear cfm
+> Are you sure you want to clear ALL reservations?
+>
+> Type 'clear cfm'
+> Keyword 'cfm' is case sensitive
 > ```
 >
 > ---
@@ -1176,9 +1287,10 @@ Format: `clear cfm`
 >
 > **Output:**
 > ```
-> Invalid command format!
-> clear: Clears the reservation in the reservation list.
-> Example: clear cfm
+> Are you sure you want to clear ALL reservations?
+>
+> Type 'clear cfm'
+> Keyword 'cfm' is case sensitive
 > ```
 >
 > ---
@@ -1216,16 +1328,16 @@ Format: `help`
 > List of Commands:
 > 1. add - Enter a reservation
 > 2. edit - Edit a reservation
-> 3. delete - Delete a reservation
-> 4. pref - Saves or displays a reservation preference
-> 5. list - Displays a list of all reservations
-> 6. show - Displays reservation details
-> 7. find - Finds a reservation by name
-> 8. filter - Filters reservations by the specified data and time range
-> 9. free - Displays all available time slots on the date provided
-> 10. stats - Displays reservation statistics
-> 11. clear - Deletes all reservations
-> 12. help - Displays a list of available commands
+> 3. pref - Saves or displays a reservation preference
+> 4. delete - Delete a reservation
+> 5. show - Display reservation details
+> 6. list - Display a list of all reservations
+> 7. help - Display a list of available commands
+> 8. find - Find reservations by names
+> 9. stats - Display reservation statistics
+> 10. free - Display all free time slots to the user
+> 11. filter - Filters all reservations which are between the two dates provided by the user
+> 12. clear - Deletes all contacts
 > 13. exit - Exit the program
 > ```
 
@@ -1241,7 +1353,9 @@ Format: `help`
 >
 > **Output:**
 > ```
-> Invalid command.
+> Invalid command format!
+> help: Shows program usage instructions.
+> Example: help
 > ```
 >
 > ---
@@ -1253,7 +1367,9 @@ Format: `help`
 >
 > **Output:**
 > ```
-> Unknown command
+> Invalid command format!
+> help: Shows program usage instructions.
+> Example: help
 > ```
 >
 > ---
@@ -1310,7 +1426,7 @@ _Details coming soon ..._
 | **List**       | `list`<br>e.g., `list`                                                                                                                                                     |
 | **Show**       | `show INDEX`<br>e.g., `show 2`                                                                                                                                             |
 | **Find**       | `find NAME [MORE_NAMES]`<br>e.g., `find James Jake`                                                                                                                        |
-| **Filter**     | `filter sd/DATE_TIME ed/DATE_TIME`<br>e.g., `filter sd/2026-12-12 1400 ed/2026-12-14 1400`                                                                                 |
+| **Filter**     | `filter sd/DATE_TIME ed/DATE_TIME`<br>e.g., `filter sd/2025-04-20 1400 ed/2025-05-05 1400`                                                                                 |
 | **Free**       | `free d/DATE_TIME`<br>e.g., `free d/2025-04-28`                                                                                                                            |
 | **Stats**      | `stats`<br>e.g., `stats`                                                                                                                                                   |
 | **Clear**      | `clear cfm`<br>e.g., `clear cfm`                                                                                                                                           |
