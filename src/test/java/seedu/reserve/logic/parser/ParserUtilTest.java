@@ -271,6 +271,30 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseEditedDateTime_validInput_success() throws ParseException {
+        String validDateTime = "2025-12-31 1800";
+        DateTime expectedDateTime = DateTime.fromFileString(validDateTime);
+        assertEquals(expectedDateTime, ParserUtil.parseEditedDateTime(validDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_invalidInput_throwsParseException() {
+        String invalidDateTime = "30-12-2025 10"; // Wrong format
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditedDateTime(invalidDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_emptyInput_throwsParseException() {
+        String emptyDateTime = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditedDateTime(emptyDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEditedDateTime(null));
+    }
+
+    @Test
     public void parseDeleteArgs_validInputWithSpacesWithConfirmation_success() throws ParseException {
         String input = "1             cfm";
         Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
