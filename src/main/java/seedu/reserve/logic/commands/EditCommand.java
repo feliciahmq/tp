@@ -87,6 +87,15 @@ public class EditCommand extends Command {
         LocalDateTime currentDateTime = LocalDateTime.now();
         return dateTime.value.isBefore(currentDateTime);
     }
+    private boolean isDuplicateReservation(Model model, int selfIndex, Reservation edited) {
+        List<Reservation> reservations = model.getFilteredReservationList();
+
+        return reservations.stream()
+                .filter(existing -> reservations.indexOf(existing) != selfIndex)
+                .anyMatch(existing -> existing.getDateTime().equals(edited.getDateTime())
+                        && (existing.getEmail().equals(edited.getEmail())
+                        || existing.getPhone().equals(edited.getPhone())));
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -112,7 +121,7 @@ public class EditCommand extends Command {
             }
         }
 
-        if (!reservationToEdit.isSameReservation(editedReservation) && model.hasReservation(editedReservation)) {
+        if (isDuplicateReservation(model, index.getZeroBased(), editedReservation)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_RESERVATION);
         }
 
@@ -120,7 +129,10 @@ public class EditCommand extends Command {
         model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
         return new CommandResult(String.format(out
                 + MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation)));
+
     }
+
+
 
     /**
      * Creates and returns a {@code Reservation} with the details of {@code reservationToEdit}
@@ -158,6 +170,8 @@ public class EditCommand extends Command {
         return index.equals(otherEditCommand.index)
                 && editReservationDescriptor.equals(otherEditCommand.editReservationDescriptor);
     }
+
+
 
     @Override
     public String toString() {

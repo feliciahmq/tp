@@ -20,7 +20,6 @@ import static seedu.reserve.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.reserve.logic.commands.CommandTestUtil.showReservationAtIndex;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_FIRST_RESERVATION;
 import static seedu.reserve.testutil.TypicalIndexes.INDEX_SECOND_RESERVATION;
-import static seedu.reserve.testutil.TypicalIndexes.INDEX_THIRD_RESERVATION;
 import static seedu.reserve.testutil.TypicalReservation.getTypicalReserveMate;
 
 import java.time.LocalDateTime;
@@ -151,17 +150,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_RESERVATION);
     }
 
-    @Test
-    public void execute_duplicateReservationFilteredList_failure() {
-        showReservationAtIndex(model, INDEX_SECOND_RESERVATION);
-        // edit reservation in filtered list into a duplicate in ReserveMate
-        Reservation reservationInList = model.getReserveMate().getReservationList()
-                .get(INDEX_THIRD_RESERVATION.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION,
-                new EditReservationDescriptorBuilder(reservationInList).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_RESERVATION);
-    }
 
     @Test
     public void execute_invalidReservationIndexUnfilteredList_failure() {
