@@ -141,6 +141,7 @@ public class ModelManager implements Model {
      */
     @Override
     public HashMap<String, Integer> getReservationStatistics() {
+        updateReservationStatistics();
         return reservationStatistics;
     }
 

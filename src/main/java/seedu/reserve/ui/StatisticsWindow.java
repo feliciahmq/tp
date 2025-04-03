@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -29,7 +31,7 @@ public class StatisticsWindow extends UiPart<Stage> {
     private Label statisticsMessage;
 
     @FXML
-    private PieChart pieChart;
+    private BarChart<String, Number> barChart;
 
     @FXML
     private VBox messageContainer;
@@ -43,7 +45,7 @@ public class StatisticsWindow extends UiPart<Stage> {
     public StatisticsWindow(Stage root) {
         super(FXML, root);
         statisticsMessage.setText(STATISTICS_MESSAGE);
-        configurePieChart();
+        configureBarChart();
     }
 
     /**
@@ -74,17 +76,17 @@ public class StatisticsWindow extends UiPart<Stage> {
     public void show(HashMap<String, Integer> reservationStatistics) {
         logger.fine("Showing statistics page of reservations.");
         Stage root = getRoot();
-        setPieChart(reservationStatistics);
+        setBarChart(reservationStatistics);
         root.show();
     }
 
     /**
      * Configures pie chart settings.
      */
-    private void configurePieChart() {
-        pieChart.setLegendVisible(true);
-        pieChart.setLabelsVisible(true);
-        pieChart.setTitle("Reservations by number of diners");
+    private void configureBarChart() {
+        barChart.setLegendVisible(false);
+        barChart.setAnimated(false);
+        barChart.setTitle("Reservations by number of diners");
     }
 
     /**
@@ -92,8 +94,8 @@ public class StatisticsWindow extends UiPart<Stage> {
      *
      * @param reservationStatistics HashMap of categories to numerical values.
      */
-    public void setPieChart(HashMap<String, Integer> reservationStatistics) {
-        pieChart.getData().clear();
+    public void setBarChart(HashMap<String, Integer> reservationStatistics) {
+        barChart.getData().clear();
 
         if (reservationStatistics == null || reservationStatistics.isEmpty()) {
             logger.info("No reservations found to display in chart.");
@@ -103,20 +105,34 @@ public class StatisticsWindow extends UiPart<Stage> {
 
         statisticsMessage.setText("Summary of reservations");
 
-        for (String numOfDiners : reservationStatistics.keySet()) {
-            Integer value = reservationStatistics.get(numOfDiners);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Reservations");
 
-            if (value != null && value > 0) {
-                PieChart.Data slice = new PieChart.Data(numOfDiners, value);
-                pieChart.getData().add(slice);
-            }
+        int maxCount = 1;
+        for (int i = 1; i <= 10; i++) {
+            String key = String.valueOf(i);
+            int value = reservationStatistics.getOrDefault(key, 0);
+            maxCount = Math.max(maxCount, value);
+            series.getData().add(new XYChart.Data<>(key, value));
         }
 
-        if (pieChart.getData().isEmpty()) {
-            logger.warning("No data was added to the PieChart.");
+        barChart.getData().add(series);
+
+        if (series.getData().isEmpty()) {
+            logger.warning("No data was added to the BarChart.");
         } else {
-            logger.fine("PieChart data set successfully.");
+            barChart.getData().add(series);
+            logger.fine("BarChart data set successfully.");
         }
+
+        NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(0);
+        yAxis.setTickUnit(1);
+
+        // Round up maxCount to the next nice value (e.g., +1 buffer or multiple of 5)
+        int paddedUpperBound = (maxCount <= 10) ? 10 : ((maxCount + 4) / 5) * 5;
+        yAxis.setUpperBound(paddedUpperBound);
 
     }
 

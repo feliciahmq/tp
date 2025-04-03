@@ -11,6 +11,7 @@ import seedu.reserve.MainApp;
 import seedu.reserve.commons.core.LogsCenter;
 import seedu.reserve.commons.util.StringUtil;
 import seedu.reserve.logic.Logic;
+import seedu.reserve.model.Model;
 
 /**
  * The manager of the UI component.
@@ -23,13 +24,15 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
+    private Model model;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, Model model) {
         this.logic = logic;
+        this.model = model;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
