@@ -43,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_FILTER_DATETIME = "2025-01-01 1400";
     private static final String VALID_OCCASION_1 = "Birthday";
     private static final String VALID_OCCASION_2 = "Anniversary";
+    private static final String VALID_OCCASION_SYMBOL = "pre-wedding!(b4 wedding) - ' . , & ! ( ) /.";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -227,6 +228,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseOccasion_validValueWithSymbols_returnsOccasion() throws Exception {
+        Occasion expectedOccasion = new Occasion(VALID_OCCASION_SYMBOL);
+        assertEquals(expectedOccasion, ParserUtil.parseOccasion(VALID_OCCASION_SYMBOL));
+    }
+
+    @Test
     public void parseOccasion_validValueWithWhitespace_returnsTrimmedOccasion() throws Exception {
         String occasionWithWhitespace = WHITESPACE + VALID_OCCASION_1 + WHITESPACE;
         Occasion expectedOccasion = new Occasion(VALID_OCCASION_1);
@@ -261,6 +268,30 @@ public class ParserUtilTest {
         Pair<Index, Boolean> result = ParserUtil.parseDeleteArgs(input);
         assertEquals(Index.fromOneBased(1), result.getKey()); // index 1
         assertTrue(result.getValue()); // confirmed is true
+    }
+
+    @Test
+    public void parseEditedDateTime_validInput_success() throws ParseException {
+        String validDateTime = "2025-12-31 1800";
+        DateTime expectedDateTime = DateTime.fromFileString(validDateTime);
+        assertEquals(expectedDateTime, ParserUtil.parseEditedDateTime(validDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_invalidInput_throwsParseException() {
+        String invalidDateTime = "30-12-2025 10"; // Wrong format
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditedDateTime(invalidDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_emptyInput_throwsParseException() {
+        String emptyDateTime = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditedDateTime(emptyDateTime));
+    }
+
+    @Test
+    public void parseEditedDateTime_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEditedDateTime(null));
     }
 
     @Test

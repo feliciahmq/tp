@@ -73,7 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_DATE_TIME).isPresent()) {
             editReservationDescriptor
-                    .setDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get()));
+                    .setDateTime(ParserUtil.parseEditedDateTime(argMultimap.getValue(PREFIX_DATE_TIME).get()));
         }
         parseOccasionsForEdit(argMultimap.getAllValues(PREFIX_OCCASION))
             .ifPresent(editReservationDescriptor::setOccasions);

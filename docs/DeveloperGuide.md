@@ -583,16 +583,6 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
    Use case ends.
 
-**Alternative Flow 1: View Preference**
-
-1. User requests to view a preference for a specific reservation by providing an index.
-
-2. ReserveMate retrieves the preference for the specified reservation.
-
-3. ReserveMate displays the preference.
-
-   Use case ends.
-
 **Extensions**
 
 * 1a. The user enters an invalid command format.
@@ -810,7 +800,7 @@ More information on usage:
 
 ## Managing preference
 
-Command: `pref show`, `pref save` <br>
+Command: `pref save` <br>
 More information on usage:
 [pref command](https://ay2425s2-cs2103-f08-1.github.io/tp/UserGuide.html#managing-reservation-preferences-pref)
 
@@ -828,21 +818,7 @@ More information on usage:
    4. Testcase: `pref save 2`<br>
       Expected: No preference is saved. Error details shown in the error message.
 
-2. Showing a saved preference.
-
-   1. Testcase: `pref show 1`<br>
-      Expected: Preference for reservation 1: Window seat preferred, allergic to nuts
-
-   2. Testcase: `pref show 3 (where no preference has been set)`<br>
-      Expected: Preference for reservation 3: None
-
-   3. Testcase: `pref show 10 (assuming there are only 5 reservations)`<br>
-      Expected: The reservation index provided is invalid.
-
-   4. Testcase: `pref show`<br>
-      Expected: No preference is shown. Error details displayed in an error message.
-
-3. Other incorrect commands to try
+2. Other incorrect commands to try
 
    1. Testcase: `pref update 1 Vegan menu`<br>
       Expected: Invalid command format. Error message displayed.

@@ -10,11 +10,12 @@ import static seedu.reserve.logic.parser.CliSyntax.PREFIX_OCCASION;
  */
 public class Occasion {
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String MESSAGE_OCCASION_CONSTRAINTS = "Please indicate an occasion: \n"
         + "Example: " + PREFIX_OCCASION + "Birthday \n"
         + "Example: " + PREFIX_OCCASION + "None \n"
-        + "Occasion name must not be empty and must be alphanumeric";
+        + "Occasion name must not be empty and can contain alphabets, numbers, spaces, and the following characters: "
+        + "- ' . , & ! ( ) /.";
+    private static final String VALIDATION_REGEX = "^[a-zA-Z0-9 \\-'.,&!()/]*$";
 
     public final String occasionName;
 

@@ -36,6 +36,7 @@ import seedu.reserve.model.Model;
 import seedu.reserve.model.ModelManager;
 import seedu.reserve.model.ReserveMate;
 import seedu.reserve.model.UserPrefs;
+import seedu.reserve.model.reservation.DateTime;
 import seedu.reserve.model.reservation.Reservation;
 import seedu.reserve.testutil.EditReservationDescriptorBuilder;
 import seedu.reserve.testutil.ReservationBuilder;
@@ -200,8 +201,19 @@ public class EditCommandTest {
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
 
+
+        Reservation editedReservation = new ReservationBuilder(pastReservation)
+                .withDateTime(LocalDateTime.now().plusDays(29).truncatedTo(ChronoUnit.HOURS).format(FORMATTER)).build();
+
+
+        Model expectedModel = new ModelManager(new ReserveMate(model.getReserveMate()),
+                new UserPrefs());
+        expectedModel.setReservation(pastReservation, editedReservation);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESERVATION_WARNING
+                        + EditCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, Messages.format(editedReservation));
         // Assert that the command fails with the correct error message
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -239,23 +251,27 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_clearOccasionsFromPastReservation_failure() {
-        // Create a past reservation with an occasion
-        Reservation pastReservationWithOccasion = new ReservationBuilder()
-            .withDateTime("2020-01-01 1200") // Past date
-            .withOccasions(VALID_OCCASION_BIRTHDAY)
-            .build();
+    public void execute_editFutureReservationToPastTime_failure() {
+        // Create a future reservation
+        Reservation futureReservation = new ReservationBuilder()
+                .withDateTime(LocalDateTime.now().plusDays(10)
+                        .truncatedTo(ChronoUnit.HOURS).format(FORMATTER)) // Future date
+                .build();
 
-        model.setReservation(model.getFilteredReservationList().get(0), pastReservationWithOccasion);
+        model.addReservation(futureReservation);
+        Index targetIndex = INDEX_FIRST_RESERVATION;
 
+        // Create descriptor with past date
         EditCommand.EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
-            .withOccasions().build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_RESERVATION, descriptor);
+                .withEditedDateTime("2022-01-01 1200") // Past date
+                .build();
 
-        // The command should fail because we can't edit past reservations
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FUTURE_RESERVATION_REQUIRED);
+        EditCommand editCommand = new EditCommand(targetIndex, descriptor);
+
+        // Expect failure due to past reservation edit restriction
+        assertCommandFailure(editCommand, model,
+                EditCommand.MESSAGE_CANNOT_CHANGE_FUTURE_TO_PAST + DateTime.MESSAGE_CONSTRAINTS);
     }
-
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_RESERVATION, DESC_AMY);
