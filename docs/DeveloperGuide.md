@@ -15,6 +15,8 @@
   - [Model component](#model-component)
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
+- [Implementation](#implementation)
+  - [[proposed] Undo/Redo](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#architecture)
