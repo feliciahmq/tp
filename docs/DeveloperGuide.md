@@ -967,3 +967,63 @@ More information on usage:
     3. Test case: Exit ReserveMate, then delete the config.json file. Reopen ReserveMate.
        Expected: ReserveMate starts as expected, with either the sample data provided or any previously saved data,
        if present. The size of the window should be the same as the previously saved user preference.
+
+## Appendix: Planned Enhancements
+
+1. **Support time range reservations instead of fixed 1-hour slots**: <br>
+**Current Issue**: The system currently allots only 1-hour reservation slots. To reserve a longer duration 
+(e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication 
+and inefficiency. <br>
+**Planed Enhancement**: We plan to support reservation commands that accept a time range,
+e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
+will auto-allocate the necessary consecutive slots without requiring the user to enter multiple commands.
+
+
+2. **Simplify preference saving by removing redundant 'save' keyword in `pref` command**: <br>
+**Current Issue**: The `pref` command currently requires users to type `pref save [index] [preference]`,
+e.g., `pref save 1 sitting outdoors`. Since the `pref` command only supports saving preferences, the inclusion of the
+`save` keyword is redundant and adds unnecessary typing for users. <br>
+**Planned Enhancement**: We plan to simplify the command format by removing the need for the `save` keyword.
+Users will be able to directly type `pref [index] [preference]`.
+
+
+3. **Prevents accidental updates due to shifting list indexes after sorting**: <br>
+**Current Issue**: After executing `pref save` for a person at a given index, the list re-sorts (by date, time and
+last insertion), which might cause indexes to change. If the user tries to update the same person again using the
+**previous index**, they may unintentionally modify a different person. This is not a bug but can lead to confusion and
+incorrect updates. <br>
+**Planned Enhancement**: W plan to improve the UX by making it clearer when the list has re-sorted after commands like
+`pref save`. Possible solutions include displaying a message uch as `List has been resorted. Please recheck indexes.`
+or visually highlighting the recently updated person. This wil help users avoid referencing outdated indexes.
+
+
+4. **Enforce maximum number of occasions per reservation to 1**: <br>
+**Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a 
+reservation. While the app handles scrolling and wrapping gracefully, allowing an **unlimited number** may encourage
+poor data entry practices.<br>
+**Planned Enhancement**: To maintain clean UI and enforce meaningful data, we will cap the number of `o/` fields to 1
+per reservation. If a user exceeds this limit, an error message will be shown:
+`You can only specify up to 1 occasions per reservation`.
+
+
+5. **Align `filter` command date range with reservation date limitations**: <br>
+**Current Issues**: The `filter` command allows users to input any date range using `sd/` (start date) and `ed/`
+(end date), including dates beyond the 60-day reservation limit. This is intentional, as it allows users to view **past
+reservations** and **plan ahead**, even outside the 60-day window.<br>
+However, this flexibility can be confusing when paired with the `add` or `edit` commands, which **restrict reservations
+to within the next 60 days**. The inconsistency may mislead users into thinking they can filter future dates for beyond
+60 days, when in reality, no such reservations can exist.<br>
+**Planned Enhancement**: We plan to update the message usage for `filter` command to include this clarification:
+`Note: Reservations can only exist within 60 days from today. Filtering beyond this range will not return future
+reservations.`
+
+
+6. **Display preference and occasion tags in customer reservation details to differentiate similar reservations**: <br>
+**Current Issues**: Currently, users have to manually type `show INDEX` each time they want to check the preferences
+and occasions associated with a reservation. This process can be time-consuming and inefficient, especially for
+managing a large number of reservations. Furthermore, there may be multiple reservations with similar names, which can
+make it difficult to differentiate between them. <br>
+**Planned Enhancement**: We will update the reservation details display to **include preference and occasion tags
+directly** in the reservation information. This allows users to quickly see preferences and occasions without having to
+run an addition command. By incorporating **preferences and occasions**, reservations with similar names can be easily
+differentiated. <br>
