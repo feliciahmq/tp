@@ -81,7 +81,7 @@ public class StatisticsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Configures pie chart settings.
+     * Configures bar chart settings.
      */
     private void configureBarChart() {
         barChart.setLegendVisible(false);
@@ -90,7 +90,7 @@ public class StatisticsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets pie chart data from reservation statistics.
+     * Sets bar chart data from reservation statistics.
      *
      * @param reservationStatistics HashMap of categories to numerical values.
      */

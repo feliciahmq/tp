@@ -130,7 +130,7 @@ The UI Component performs the following key functions:
 * Listening for Data Changes: It observes updates in the `Model` component to refresh the displayed data dynamically.
 * Maintaining a Reference to Logic: The UI keeps a direct reference to `Logic` component since it relies on
 it to execute commands.
-* Displaying Model Data: It depends on some classes from the `Model` component to render `Reservation` objets
+* Displaying Model Data: It depends on some classes from the `Model` component to render `Reservation` objects
 stored in memory.
 
 
@@ -161,9 +161,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 ![img.png](images/ParserClasses.png)
 
-<div markdown="span" class="alert alert-info">💡 **Note:** The lifeline for `DeleteCommandParser`
+💡 **Note:** The lifeline for `DeleteCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
 
 How the parsing works:
 * When called upon to parse a user command, the `ReserveMateParser` class creates an `XYZCommandPaser` (`XYZ` is a
@@ -190,14 +189,12 @@ bound to this list so that the UI automatically updates when the data in the lis
 * Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
 should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">💡 **Note:** An alternative (arguably, a more OOP)
+💡**Note:** An alternative (arguably, a more OOP)
 model is given below. It has a `Occasion` list in the `ReserveMate`, which `Reservation` references. This allows
 `ReserveMate` to only require one `Occasion` object per unique occasion, instead of each `Reservation` needing their
 own `Occasion` objects.<br>
 
 ![img.png](images/BetterModelClassDiagram.png)
-
-</div>
 
 
 ### Storage component
@@ -611,7 +608,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 1. User enters command to display reservation statistics.
 
-2. ReserveMate displays a new window containing the reservation statistics, a pie chart grouped by number of diners.
+2. ReserveMate displays a new window containing the reservation statistics, a bar chart grouped by number of diners.
 
    Use case ends.
 
@@ -659,11 +656,10 @@ system.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">💡 **Note:**
+💡 **Note:**
 These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
 
 ### Launch and shutdown
 
@@ -689,7 +685,7 @@ More information on usage:
 [help command](https://ay2425s2-cs2103-f08-1.github.io/tp/UserGuide.html#displaying-commands-help)
 
 1. Test case: `help` <br>
-   Expected: Help window with list of commands is displayed.
+   Expected: Displays a list of all commands in ReserveMate.
 
 ### Listing all reservations
 

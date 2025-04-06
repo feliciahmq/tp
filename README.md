@@ -97,7 +97,7 @@ Help
 ```
 
 ### Feature: Display statistics of reservations
-**Purpose:** Display the statistics of reservations: number of reservations per number of diners in a pie chart.
+**Purpose:** Display the statistics of reservations: number of reservations per number of diners in a bar chart.
 
 **Command format:** `stats`
 

@@ -124,16 +124,16 @@ The prefixes used in ReserveMate are universal across all commands.
 
 ---
 
-#### `n/` — Customer Name
+#### `n/` — Reservation Name
 
 - Names are **case-insensitive**:
-  `n/alex yeoh` is the same as `n/AlEx YeOh` they will be parsed to `n/Alex Yeoh`
+<code>n/alex yeoh</code> is the same as <code>n/AlEx YeOh</code> it will be parsed as <code>n/Alex Yeoh</code>
 
 - Names with **excessive leading/trailing spaces** are trimmed:
-  `n/   Alice Johnson   ` → `n/Alice Johnson`
+<code>n/   Alice Johnson</code> → <code>n/Alice Johnson</code>
 
 - Names with **excessive spaces in between** are trimmed:
-  `n/Alex     Yeoh` → `n/Alex Yeoh`
+<code>n/Alex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yeoh</code> → <code>n/Alex Yeoh</code>
 
 - Can be maximum 50 characters long. 
 
@@ -144,7 +144,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 ---
 
-#### `p/` — Contact Number
+#### `p/` — Reservation Contact Number
 
 - Phone numbers **must start with `8` or `9`** and be exactly 8 digits long.
 - Multiple reservations can share the **same phone number** and **different date-time** — duplicates allowed.
@@ -1329,7 +1329,7 @@ Format: `help`
 > List of Commands:
 > 1. add - Enter a reservation
 > 2. edit - Edit a reservation
-> 3. pref - Saves or displays a reservation preference
+> 3. pref - Saves a reservation preference
 > 4. delete - Delete a reservation
 > 5. show - Display reservation details
 > 6. list - Display a list of all reservations
@@ -1338,7 +1338,7 @@ Format: `help`
 > 9. stats - Display reservation statistics
 > 10. free - Display all free time slots to the user
 > 11. filter - Filters all reservations which are between the two dates provided by the user
-> 12. clear - Deletes all contacts
+> 12. clear - Deletes all reservations
 > 13. exit - Exit the program
 > ```
 
