@@ -127,19 +127,13 @@ The prefixes used in ReserveMate are universal across all commands.
 #### `n/` — Reservation Name
 
 - Names are **case-insensitive**:
-<pre>
-    n/alex yeoh is the same as n/AlEx YeOh they will be parsed to n/Alex Yeoh
-</pre>
+<code>n/alex yeoh</code> is the same as <code>n/AlEx YeOh</code> it will be parsed as <code>n/Alex Yeoh</code>
 
 - Names with **excessive leading/trailing spaces** are trimmed:
-<pre>
-    n/   Alice Johnson    → n/Alice Johnson
-</pre>
+<code>n/   Alice Johnson</code> → <code>n/Alice Johnson</code>
 
 - Names with **excessive spaces in between** are trimmed:
-<pre>
-    n/Alex      Yeoh → n/Alex Yeoh
-</pre>
+<code>n/Alex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yeoh</code> → <code>n/Alex Yeoh</code>
 
 - Can be maximum 50 characters long. 
 
