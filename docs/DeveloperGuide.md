@@ -250,7 +250,7 @@ saved in the `reserveMateStateList`, and the `currentStatePointer` is shifted to
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/John ...` to add a new reservation. The `add` command also calls 
+Step 3. The user executes `add n/John ...` to add a new reservation. The `add` command also calls
 `Model#commitReserveMate()` causing another modified reserve mate state to be saved into the `reserveMateStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
@@ -723,12 +723,12 @@ one which relies on the mouse.
 4) The system should use Gradle as a build automation tool, and it must run on any OS which has Java 17.
 5) All reservation details will be stored in a file saved locally which should allow read and write access to the
 system.
-6) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability. 
-7) The system is designed for a single-user. 
-8) The response to any commands carried out by the user should become visible within 5 seconds. 
-9) The user is not required to have an internet connection in order for the application to function. 
-10) Data should be stored consistently even after closing and reopening the app. 
-11) Should work on any mainstream OS as long as it has java 17 installed
+6) All code pushed into the repository must adhere to checkstyle to ensure readability and maintainability.
+7) The system is designed for a single-user.
+8) The response to any commands carried out by the user should become visible within 5 seconds.
+9) The user is not required to have an internet connection in order for the application to function.
+10) Data should be stored consistently even after closing and reopening the app.
+11) Should work on any mainstream OS as long as it has java 17+ installed
 
 ### Glossary
 
@@ -1057,8 +1057,8 @@ More information on usage:
 ## Appendix: Planned Enhancements
 
 1. **Support time range reservations instead of fixed 1-hour slots**: <br>
-**Current Issue**: The system currently allots only 1-hour reservation slots. To reserve a longer duration 
-(e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication 
+**Current Issue**: The system currently allots only 1-hour reservation slots. To reserve a longer duration
+(e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication
 and inefficiency. <br>
 **Planned Enhancement**: We plan to support reservation commands that accept a time range,
 e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
@@ -1083,7 +1083,7 @@ incorrect updates. <br>
 or visually highlighting the recently updated person. This will help users avoid referencing outdated indexes.
 
 4. **Enforce maximum number of occasions per reservation to 1**: <br>
-**Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a 
+**Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a
 reservation. While the app handles scrolling and wrapping gracefully, allowing an **unlimited number** may encourage
 poor data entry practices.<br>
 **Planned Enhancement**: To maintain clean UI and enforce meaningful data, we will cap the number of `o/` fields to 1
