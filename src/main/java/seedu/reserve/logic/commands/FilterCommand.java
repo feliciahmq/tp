@@ -22,7 +22,7 @@ public class FilterCommand extends Command {
             + "Parameters:\n"
             + "- " + PREFIX_START_DATE + "START DATE "
             + "- " + PREFIX_END_DATE + "END DATE \n\n"
-            + "Example: " + COMMAND_WORD + " sd/" + " 2025-04-01 1800 " + "ed/" + " 2025-06-31 1900";
+            + "Example: " + COMMAND_WORD + " sd/" + " 2025-04-01 1800 " + "ed/" + " 2025-04-28 1900";
 
     public static final String MESSAGE_SUCCESS = "Here are the available reservations for the date range.";
     public static final String MESSAGE_NO_RESERVATIONS_FILTER = "No reservations found for the date range.";

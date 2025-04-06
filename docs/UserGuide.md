@@ -1095,7 +1095,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 > Parameters:
 > - sd/START DATE - ed/END DATE
 >
-> Example: filter sd/ 2025-04-01 1800 ed/ 2025-06-31 1900
+> Example: filter sd/ 2025-04-01 1800 ed/ 2025-04-28 1900
 > ```
 >
 > ---
