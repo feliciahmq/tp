@@ -38,7 +38,7 @@ Generative AI tools (ChatGPT, GitHub Copilot and DeepSeek) were used for:
 - Generating method name suggestions
 - Writing detailed Javadoc comments
 
-* The format of the Developer Guide was inspired by the Developer Guide of the past project
+The format of the Developer Guide was inspired by the Developer Guide of the past project
   [ArchDuke](https://ay2122s2-cs2103-w16-3.github.io/tp/DeveloperGuide.html) and
   [InTrack](https://ay2223s1-cs2103t-t11-2.github.io/tp/DeveloperGuide.html).
 
@@ -385,7 +385,6 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 1. User requests to delete a reservation by providing an index and a confirmation.
 
 2. ReserveMate deletes the particular reservation.
-
     Use case ends.
 
 **Extensions**
@@ -974,7 +973,7 @@ More information on usage:
 **Current Issue**: The system currently allots only 1-hour reservation slots. To reserve a longer duration 
 (e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication 
 and inefficiency. <br>
-**Planed Enhancement**: We plan to support reservation commands that accept a time range,
+**Planned Enhancement**: We plan to support reservation commands that accept a time range,
 e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
 will auto-allocate the necessary consecutive slots without requiring the user to enter multiple commands.
 
@@ -992,10 +991,9 @@ Users will be able to directly type `pref [index] [preference]`.
 last insertion), which might cause indexes to change. If the user tries to update the same person again using the
 **previous index**, they may unintentionally modify a different person. This is not a bug but can lead to confusion and
 incorrect updates. <br>
-**Planned Enhancement**: W plan to improve the UX by making it clearer when the list has re-sorted after commands like
-`pref save`. Possible solutions include displaying a message uch as `List has been resorted. Please recheck indexes.`
-or visually highlighting the recently updated person. This wil help users avoid referencing outdated indexes.
-
+**Planned Enhancement**: We plan to improve the UX by making it clearer when the list has re-sorted after commands like
+`pref save`. Possible solutions include displaying a message such as `List has been resorted. Please recheck indexes.`
+or visually highlighting the recently updated person. This will help users avoid referencing outdated indexes.
 
 4. **Enforce maximum number of occasions per reservation to 1**: <br>
 **Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a 
@@ -1003,8 +1001,7 @@ reservation. While the app handles scrolling and wrapping gracefully, allowing a
 poor data entry practices.<br>
 **Planned Enhancement**: To maintain clean UI and enforce meaningful data, we will cap the number of `o/` fields to 1
 per reservation. If a user exceeds this limit, an error message will be shown:
-`You can only specify up to 1 occasions per reservation`.
-
+`You can only specify up to 1 occasion per reservation`.
 
 5. **Align `filter` command date range with reservation date limitations**: <br>
 **Current Issues**: The `filter` command allows users to input any date range using `sd/` (start date) and `ed/`
