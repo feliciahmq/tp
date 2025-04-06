@@ -158,7 +158,7 @@ API call.
 ![img.png](images/DeleteSequenceDiagram.png)
 
 💡 **Note:** The lifeline for `DeleteCommandParser`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -242,7 +242,76 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 Step 1. The user launches the application for the first time. The `VersionedReserveMate` will be initialized with the
 initial reserve mate state, and the `currentStatePointer` pointing to that single reserve mate state.
 
+![UndoRedoState0](images/UndoRedoState0.png)
 
+Step 2. The user executes `delete 5 cfm` command to delete the 5th person in reserve mate. The `delete` command calls
+`Model#commitReserveMate()`, causing the modified state of reserve mate after the `delete 5 cfm` command executes to be
+saved in the `reserveMateStateList`, and the `currentStatePointer` is shifted to the newly inserted reserve mate state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/John ...` to add a new reservation. The `add` command also calls 
+`Model#commitReserveMate()` causing another modified reserve mate state to be saved into the `reserveMateStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+> 💡 **Note:** If a command fails its execution, it will not call `Model#commitInTrack()`, so the reserve mate state
+> will not be saved into the `reserveMateStateList`.
+
+Step 4. The user now decides that adding the new reservation was a mistake, and decides to undo that action by executing
+the `undo` command. The `undo` command will call `Model#undoReserveMate()`, which will shift the `currentStatePointer`
+once to the left, pointing it to the previous reserve mate state, and restores reserve mate to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+> 💡 **Note:** If the `currentStatePointer` is at index 0, pointing to the initial reserve mate state, then there are no
+> previous reserve mate states to restore. The `undo` command uses `Model#canUndoReserveMate()` to check if this is the
+> case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+> 💡 **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
+> the lifeline reaches the end of the diagram.
+
+The `redo` command does the opposite - it calls `Model#redoReserveMate()`, which shifts the `currentStatePointer` once
+to the right, pointing to the previously undone state, and restores the address book to that state.
+
+> 💡 **Note:** If the `currentStatePointer` is at index `reservemateStateList.sze() - 1`, pointing to the latest
+> reserve mate state, then there are no undone reserve mate states to restore. The `redo` command uses
+> `Model#canRedoReserveMate()` to check if this is the case. If so, it will return an error to the user rather than
+> attempting to perform the redo.
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the reserve mate, such as
+`list`, will usually not call `Model#commitReserveMate()`, `Model#undoReserveMate()` or `Model#redoReserveMate()`. Thus,
+the `reserveMateStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitReserveMate()`. Since the `currentStatePointer` is not
+pointing at the end of the `reserveMateBookStateList`, all reserve mate states after the `currentStatePointer` will be
+purged. We designed it this way because it no longer makes sense to redo the `add n/John ...` command. This is the
+behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire reserve mate.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the reservation being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 
 --------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "clear"
+title After command "clear cfm"
 
 package States <<rectangle>> {
     class State1 as "<u>rm0:ReserveMate</u>"

@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ReserveMateParser" as ReserveMateParser LOGIC_COLOR
+participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":VersionedReserveMate" as VersionedReserveMate MODEL_COLOR
+end box
+[-> LogicManager : execute(undo)
+activate LogicManager
+
+LogicManager -> ReserveMateParser : parseCommand(undo)
+activate ReserveMateParser
+
+create UndoCommand
+ReserveMateParser -> UndoCommand
+activate UndoCommand
+
+UndoCommand --> ReserveMateParser
+deactivate UndoCommand
+
+ReserveMateParser --> LogicManager : u
+deactivate ReserveMateParser
+
+LogicManager -> UndoCommand : execute()
+activate UndoCommand
+
+UndoCommand -> Model : undoReserveMate()
+activate Model
+
+Model -> VersionedReserveMate : undo()
+activate VersionedReserveMate
+
+VersionedReserveMate -> VersionedReserveMate :resetData(ReadOnlyReserveMate)
+VersionedReserveMate --> Model :
+deactivate VersionedReserveMate
+
+Model --> UndoCommand
+deactivate Model
+
+UndoCommand --> LogicManager : result
+deactivate UndoCommand
+UndoCommand -[hidden]-> LogicManager : result
+destroy UndoCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
