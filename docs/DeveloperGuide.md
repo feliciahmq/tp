@@ -1002,8 +1002,7 @@ reservation. While the app handles scrolling and wrapping gracefully, allowing a
 poor data entry practices.<br>
 **Planned Enhancement**: To maintain clean UI and enforce meaningful data, we will cap the number of `o/` fields to 1
 per reservation. If a user exceeds this limit, an error message will be shown:
-`You can only specify up to 1 occasions per reservation`.
-
+`You can only specify up to 1 occasion per reservation`.
 
 5. **Align `filter` command date range with reservation date limitations**: <br>
 **Current Issues**: The `filter` command allows users to input any date range using `sd/` (start date) and `ed/`
