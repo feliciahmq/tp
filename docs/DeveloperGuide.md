@@ -38,7 +38,7 @@ Generative AI tools (ChatGPT, GitHub Copilot and DeepSeek) were used for:
 - Generating method name suggestions
 - Writing detailed Javadoc comments
 
-* The format of the Developer Guide was inspired by the Developer Guide of the past project
+The format of the Developer Guide was inspired by the Developer Guide of the past project
   [ArchDuke](https://ay2122s2-cs2103-w16-3.github.io/tp/DeveloperGuide.html) and
   [InTrack](https://ay2223s1-cs2103t-t11-2.github.io/tp/DeveloperGuide.html).
 
@@ -385,7 +385,6 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 1. User requests to delete a reservation by providing an index and a confirmation.
 
 2. ReserveMate deletes the particular reservation.
-
     Use case ends.
 
 **Extensions**
