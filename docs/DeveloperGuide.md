@@ -974,7 +974,7 @@ More information on usage:
 **Current Issue**: The system currently allots only 1-hour reservation slots. To reserve a longer duration 
 (e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication 
 and inefficiency. <br>
-**Planed Enhancement**: We plan to support reservation commands that accept a time range,
+**Planned Enhancement**: We plan to support reservation commands that accept a time range,
 e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
 will auto-allocate the necessary consecutive slots without requiring the user to enter multiple commands.
 
