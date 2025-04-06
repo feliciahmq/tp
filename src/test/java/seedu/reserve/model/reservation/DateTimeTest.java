@@ -92,7 +92,7 @@ public class DateTimeTest {
         assertFalse(DateTime.isValidDateTime(INVALID_DATE_TIME));
 
         assertThrows(IllegalArgumentException.class, () -> new DateTime(INVALID_DATE_TIME));
-        assertThrows(DateTimeException.class, () -> DateTime.fromFileString(INVALID_DATE_TIME));
+        assertThrows(IllegalArgumentException.class, () -> DateTime.fromFileString(INVALID_DATE_TIME));
     }
 
     @Test
