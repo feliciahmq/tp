@@ -157,12 +157,12 @@ API call.
 
 ![img.png](images/DeleteSequenceDiagram.png)
 
+💡 **Note:** The lifeline for `DeleteCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 ![img.png](images/ParserClasses.png)
-
-💡 **Note:** The lifeline for `DeleteCommandParser`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 How the parsing works:
 * When called upon to parse a user command, the `ReserveMateParser` class creates an `XYZCommandPaser` (`XYZ` is a
@@ -224,7 +224,25 @@ This section describes some noteworthy details on how certain features are imple
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **Inserts implementations here (TODO)**
+### [Proposed] Undo/redo feature
+
+The proposed undo/redo mechanism is facilitated by `VersionedReserveMate`. It extends `ReserveMate` with an undo/redo
+history, stored internally as an `reserveMateStateList` and `currentStatePointer`. Additionally, it implements the
+following operations:
+
+- VersionedReserveMate#commit() - Saves the current reserve mate state in its history.
+- VersionedReserveMate#undo() - Restores the previous reserve mate state from its history.
+- VersionedReserveMate#redo() - Restores a previously undone reserve mate state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitReserveMate()`, `Model#undoReserveMate()` and
+`Model#redoReserveMate()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedReserveMate` will be initialized with the
+initial reserve mate state, and the `currentStatePointer` pointing to that single reserve mate state.
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
