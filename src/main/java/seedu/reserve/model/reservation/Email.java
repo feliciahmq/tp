@@ -11,7 +11,7 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should follow the format local-part@domain and meet the"
+    public static final String MESSAGE_CONSTRAINTS = "Emails should follow the format local-part@domain and meet the "
             + "following rules:\n"
             + "1. The local-part may contain alphanumeric characters and these special characters"
             + "(excluding parentheses): "
