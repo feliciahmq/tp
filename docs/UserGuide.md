@@ -67,7 +67,8 @@ Commands in ReserveMate have the following structure:
 
 1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
 2. ReserveMate handles `INDEX` errors in two ways:
-   1. If the index is a valid positive integer but exceeds the size of the current reservation list or an invalid number (e.g. non-positive integer, non-integer or exceeds `Integer.MAX_VALUE`), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
+   1. The index is a valid positive integer but exceeds the size of the current reservation list 
+   2. The index is an invalid number (e.g. non-integer values, negative integers or zero), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
 
 #### Prefixes
 
@@ -88,7 +89,7 @@ They come in several variations, based on whether they are **mandatory**, **opti
 
 **Notes:**
 
-1. **Optional prefixes** can be omitted, and the command will still execute successfully _(assuming all required parts of hte command are provided and correctly formatted)_.
+1. **Optional prefixes** can be omitted, and the command will still execute successfully _(assuming all required parts of the command are provided and correctly formatted)_.
 2. **Variadic prefixes** allow you to provide **multiple values** for the same field in a single command by repeating the prefix with different values.
   For example:
    - `o/Birthday o/Anniversary` → Valid (multiple occasions)
