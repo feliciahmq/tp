@@ -124,16 +124,22 @@ The prefixes used in ReserveMate are universal across all commands.
 
 ---
 
-#### `n/` — Customer Name
+#### `n/` — Reservation Name
 
 - Names are **case-insensitive**:
-  `n/alex yeoh` is the same as `n/AlEx YeOh` they will be parsed to `n/Alex Yeoh`
+<pre>
+    n/alex yeoh is the same as n/AlEx YeOh they will be parsed to n/Alex Yeoh
+</pre>
 
 - Names with **excessive leading/trailing spaces** are trimmed:
-  `n/   Alice Johnson   ` → `n/Alice Johnson`
+<pre>
+    n/   Alice Johnson    → n/Alice Johnson
+</pre>
 
 - Names with **excessive spaces in between** are trimmed:
-  `n/Alex     Yeoh` → `n/Alex Yeoh`
+<pre>
+    n/Alex      Yeoh → n/Alex Yeoh
+</pre>
 
 - Can be maximum 50 characters long. 
 
@@ -144,7 +150,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 ---
 
-#### `p/` — Contact Number
+#### `p/` — Reservation Contact Number
 
 - Phone numbers **must start with `8` or `9`** and be exactly 8 digits long.
 - Multiple reservations can share the **same phone number** and **different date-time** — duplicates allowed.

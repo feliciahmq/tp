@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "List of Commands:\n"
         + "1. add - Enter a reservation \n"
         + "2. edit - Edit a reservation \n"
-        + "3. pref - Saves or displays a reservation preference \n"
+        + "3. pref - Saves a reservation preference \n"
         + "4. delete - Delete a reservation \n"
         + "5. show - Display reservation details \n"
         + "6. list - Display a list of all reservations \n"
@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
         + "9. stats - Display reservation statistics \n"
         + "10. free - Display all free time slots to the user \n"
         + "11. filter - Filters all reservations which are between the two dates provided by the user \n"
-        + "12. clear - Deletes all contacts \n"
+        + "12. clear - Deletes all reservations \n"
         + "13. exit - Exit the program";
 
     @Override
