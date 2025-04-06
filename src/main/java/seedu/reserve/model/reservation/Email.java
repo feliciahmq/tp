@@ -11,14 +11,18 @@ import static seedu.reserve.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should follow the format local-part@domain and meet the following rules:\n"
-            + "1. The local-part may contain alphanumeric characters and these special characters (excluding parentheses): "
-            + SPECIAL_CHARACTERS + ". It must not start or end with a special character, and be at most 64 characters long.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Emails should follow the format local-part@domain and meet the"
+            + "following rules:\n"
+            + "1. The local-part may contain alphanumeric characters and these special characters"
+            + "(excluding parentheses): "
+            + SPECIAL_CHARACTERS + ". It must not start or end with a special character,"
+            + "and be at most 64 characters long.\n"
             + "2. The domain must consist of labels separated by periods (e.g., 'example.com'), with the following:\n"
             + "   - Each label must start and end with an alphanumeric character\n"
             + "   - Labels may contain hyphens, but no other special characters\n"
             + "   - The domain must be at most 255 characters long\n"
-            + "   - The final label (e.g., '.com','.sg') must be at least 2 characters long and contain only letters (no digits)";
+            + "   - The final label (e.g., '.com','.sg') must be at least 2 characters"
+            + "long and contain only letters (no digits)";
 
 
     // alphanumeric and special characters
