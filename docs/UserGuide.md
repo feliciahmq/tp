@@ -545,7 +545,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 >    - Each label must start and end with an alphanumeric character
 >    - Labels may contain hyphens, but no other special characters
 >    - The domain must be at most 255 characters long
->    - The final label (e.g., '.com','.sg') must be at least 2 characters long and contain only letters (no digits).
+>    - The final label (e.g., '.com', '.sg') must be at least 2 characters long and contain only letters (no digits).
 > ```
 > ---
 

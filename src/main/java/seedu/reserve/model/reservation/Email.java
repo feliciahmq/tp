@@ -21,7 +21,7 @@ public class Email {
             + "   - Each label must start and end with an alphanumeric character\n"
             + "   - Labels may contain hyphens, but no other special characters\n"
             + "   - The domain must be at most 255 characters long\n"
-            + "   - The final label (e.g., '.com','.sg') must be at least 2 characters"
+            + "   - The final label (e.g., '.com', '.sg') must be at least 2 characters "
             + "long and contain only letters (no digits)";
 
 
