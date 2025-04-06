@@ -279,7 +279,7 @@ The following sequence diagram shows how the undo operation works:
 The `redo` command does the opposite - it calls `Model#redoReserveMate()`, which shifts the `currentStatePointer` once
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
-> 💡 **Note:** If the `currentStatePointer` is at index `reservemateStateList.sze() - 1`, pointing to the latest
+> 💡 **Note:** If the `currentStatePointer` is at index `reservemateStateList.size() - 1`, pointing to the latest
 > reserve mate state, then there are no undone reserve mate states to restore. The `redo` command uses
 > `Model#canRedoReserveMate()` to check if this is the case. If so, it will return an error to the user rather than
 > attempting to perform the redo.
@@ -291,7 +291,7 @@ the `reserveMateStateList` remains unchanged.
 ![UndoRedoState4](images/UndoRedoState4.png)
 
 Step 6. The user executes `clear`, which calls `Model#commitReserveMate()`. Since the `currentStatePointer` is not
-pointing at the end of the `reserveMateBookStateList`, all reserve mate states after the `currentStatePointer` will be
+pointing at the end of the `reserveMateStateList`, all reserve mate states after the `currentStatePointer` will be
 purged. We designed it this way because it no longer makes sense to redo the `add n/John ...` command. This is the
 behavior that most modern desktop applications follow.
 

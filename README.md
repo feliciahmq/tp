@@ -85,7 +85,7 @@ list
 List
 ```
 
-### Feature: View list of commands 
+### Feature: View list of commands
 **Purpose:** Display the available list of commands to the user.
 
 **Command format:** `help`
