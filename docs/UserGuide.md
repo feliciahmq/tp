@@ -1329,7 +1329,7 @@ Format: `help`
 > List of Commands:
 > 1. add - Enter a reservation
 > 2. edit - Edit a reservation
-> 3. pref - Saves or displays a reservation preference
+> 3. pref - Saves a reservation preference
 > 4. delete - Delete a reservation
 > 5. show - Display reservation details
 > 6. list - Display a list of all reservations
@@ -1338,7 +1338,7 @@ Format: `help`
 > 9. stats - Display reservation statistics
 > 10. free - Display all free time slots to the user
 > 11. filter - Filters all reservations which are between the two dates provided by the user
-> 12. clear - Deletes all contacts
+> 12. clear - Deletes all reservations
 > 13. exit - Exit the program
 > ```
 
