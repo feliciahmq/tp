@@ -74,8 +74,8 @@ public class FilterCommandTest {
 
     @Test
     public void filterCommand_someReservationsFound() {
-        DateTime startDate = DateTime.fromFileString("2025-04-12 1000");
-        DateTime endDate = DateTime.fromFileString("2025-04-18 1400");
+        DateTime startDate = DateTime.fromFileString("2025-05-12 1000");
+        DateTime endDate = DateTime.fromFileString("2025-05-18 1400");
 
         String expectedMessage = FilterCommand.MESSAGE_SUCCESS;
         ReservationBetweenDatePredicate predicate = new ReservationBetweenDatePredicate(startDate, endDate);

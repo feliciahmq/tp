@@ -29,7 +29,7 @@ public class TypicalReservation {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDiners("5")
-            .withDateTime("2025-04-10 1800")
+            .withDateTime("2025-05-10 1800")
             .withOccasions("friends")
             .withPreference("None")
             .build();
@@ -38,7 +38,7 @@ public class TypicalReservation {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDiners("3")
-            .withDateTime("2025-04-25 1200")
+            .withDateTime("2025-05-25 1200")
             .withOccasions("owesMoney", "friends")
             .withPreference("Extra spicy")
             .build();
@@ -47,7 +47,7 @@ public class TypicalReservation {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withDiners("2")
-            .withDateTime("2025-04-15 1400")
+            .withDateTime("2025-05-15 1400")
             .withOccasions("Birthday")
             .withPreference("No nuts")
             .build();
@@ -56,7 +56,7 @@ public class TypicalReservation {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withDiners("4")
-            .withDateTime("2025-04-20 1600")
+            .withDateTime("2025-05-20 1600")
             .withOccasions("friends")
             .withPreference("Likes window seats")
             .build();
@@ -65,7 +65,7 @@ public class TypicalReservation {
             .withPhone("94822241")
             .withEmail("werner@example.com")
             .withDiners("1")
-            .withDateTime("2025-04-05 1000")
+            .withDateTime("2025-05-30 1000")
             .withOccasions("Birthday")
             .withPreference("Less salty")
             .build();
@@ -74,7 +74,7 @@ public class TypicalReservation {
             .withPhone("94824272")
             .withEmail("lydia@example.com")
             .withDiners("7")
-            .withDateTime("2025-04-12 1100")
+            .withDateTime("2025-05-12 1100")
             .withOccasions("Birthday")
             .withPreference("None")
             .build();
@@ -83,7 +83,7 @@ public class TypicalReservation {
             .withPhone("94824423")
             .withEmail("anna@example.com")
             .withDiners("10")
-            .withDateTime("2025-04-18 1300")
+            .withDateTime("2025-05-18 1300")
             .withOccasions("Anniversary")
             .withPreference("More sugar")
             .build();
@@ -92,7 +92,7 @@ public class TypicalReservation {
             .withPhone("84824244")
             .withEmail("stefan@example.com")
             .withDiners("6")
-            .withDateTime("2025-04-07 0900")
+            .withDateTime("2025-05-07 0900")
             .withOccasions("Birthday")
             .withPreference("None")
             .build();
@@ -101,7 +101,7 @@ public class TypicalReservation {
             .withPhone("84821315")
             .withEmail("hans@example.com")
             .withDiners("8")
-            .withDateTime("2025-04-08 1700")
+            .withDateTime("2025-05-08 1700")
             .withOccasions("Birthday")
             .withPreference("None")
             .build();
