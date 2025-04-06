@@ -994,8 +994,7 @@ last insertion), which might cause indexes to change. If the user tries to updat
 incorrect updates. <br>
 **Planned Enhancement**: W plan to improve the UX by making it clearer when the list has re-sorted after commands like
 `pref save`. Possible solutions include displaying a message uch as `List has been resorted. Please recheck indexes.`
-or visually highlighting the recently updated person. This wil help users avoid referencing outdated indexes.
-
+or visually highlighting the recently updated person. This will help users avoid referencing outdated indexes.
 
 4. **Enforce maximum number of occasions per reservation to 1**: <br>
 **Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a 
