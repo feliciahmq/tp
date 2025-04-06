@@ -384,7 +384,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
 1. User requests to delete a reservation by providing an index and a confirmation.
 
-2. ReserveMate deletes the particular reservation.
+2. ReserveMate delete the particular reservation.
 
     Use case ends.
 

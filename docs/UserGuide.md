@@ -551,7 +551,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 
 ### Deleting a reservation : `delete`
 
-Deletes the specified `Reservation` from ReserveMate.
+Delete the specified `Reservation` from ReserveMate.
 
 Format: `delete <INDEX> cfm`
 
@@ -617,7 +617,7 @@ Format: `delete <INDEX> cfm`
 > **Output:**
 > ```
 > Invalid command format!
-> delete: Deletes the reservation identified by the index number used in the reservation list.
+> delete: Delete the reservation identified by the index number used in the reservation list.
 >
 > Parameters: INDEX (must be a positive integer)
 >
@@ -937,7 +937,7 @@ Finds `Reservation` with names that contain any of the specified keywords.
 Format: `find NAME [MORE_NAMES]`
 
 **Constraints**
-- The search is **case-insensitive**, similar to saerch platforms like Google or Contacts.
+- The search is **case-insensitive**, similar to search platforms like Google or Contacts.
 - The order of keywords does **not** matter.
 - Only **full words** will be matched (e.g., `Han` will not match `Hans`).
 - Searches are done on the **name field only**.
@@ -1356,7 +1356,7 @@ Format: `help`
 > 9. stats - Display reservation statistics
 > 10. free - Display all free time slots to the user
 > 11. filter - Filters all reservations which are between the two dates provided by the user
-> 12. clear - Deletes all reservations
+> 12. clear - Delete all reservations
 > 13. exit - Exit the program
 > ```
 
