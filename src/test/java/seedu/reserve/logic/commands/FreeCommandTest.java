@@ -42,7 +42,7 @@ public class FreeCommandTest {
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 1000"
                 + "\n- 2025-05-01 1100 to 2025-05-01 1400"
-                + "\n- 2025-05-01 1500 to 2025-05-01 2300";
+                + "\n- 2025-05-01 1500 to 2025-05-02 0000";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
@@ -72,7 +72,7 @@ public class FreeCommandTest {
         FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 1200"
-                + "\n- 2025-05-01 1300 to 2025-05-01 2300";
+                + "\n- 2025-05-01 1300 to 2025-05-02 0000";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }
@@ -87,7 +87,55 @@ public class FreeCommandTest {
         FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
         String expectedMessage = "Available free time slots:"
                 + "\n- 2025-05-01 0000 to 2025-05-01 0800"
-                + "\n- 2025-05-01 0900 to 2025-05-01 2300";
+                + "\n- 2025-05-01 0900 to 2025-05-02 0000";
+
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_singleReservationAtStartOfDay_showsCorrectSlots() {
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.format(FORMATTER)) // Exactly at start of day
+                .build();
+        model.addReservation(r1);
+
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0100 to 2025-05-02 0000";
+
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_singleReservationAtEndOfDay_showsCorrectSlots() {
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(23).format(FORMATTER)) // Last hour of day
+                .build();
+        model.addReservation(r1);
+
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0000 to 2025-05-01 2300";
+
+        assertCommandSuccess(freeCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_consecutiveReservations_showsSingleGap() {
+        // 10-11 and 11-12 (should show as one continuous free slot after)
+        Reservation r1 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(10).format(FORMATTER))
+                .build();
+        Reservation r2 = new ReservationBuilder()
+                .withDateTime(TEST_DATE.value.plusHours(11).format(FORMATTER))
+                .build();
+        model.addReservation(r1);
+        model.addReservation(r2);
+
+        FreeCommand freeCommand = new FreeCommand(new DateTime(TEST_DATE.toString()));
+        String expectedMessage = "Available free time slots:"
+                + "\n- 2025-05-01 0000 to 2025-05-01 1000"
+                + "\n- 2025-05-01 1200 to 2025-05-02 0000";
 
         assertCommandSuccess(freeCommand, model, expectedMessage, model);
     }

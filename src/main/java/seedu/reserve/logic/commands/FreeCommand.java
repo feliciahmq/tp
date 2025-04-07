@@ -32,6 +32,8 @@ public class FreeCommand extends Command {
     public static final String MESSAGE_ALL_FREE_SLOTS = "All timings are available on this date.";
     private static final Logger logger = LogsCenter.getLogger(FreeCommand.class);
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final int MIN_SLOT_DURATION_HOURS = 1;
+    private static final int DAYS_TO_ADD = 1;
 
     private final ReservationBetweenDatePredicate predicate;
     private final LocalDateTime searchStart;
@@ -45,7 +47,7 @@ public class FreeCommand extends Command {
     public FreeCommand(DateTime date) {
         requireNonNull(date);
         this.searchStart = date.value;
-        this.searchEnd = date.value.plusHours(23);
+        this.searchEnd = date.value.plusDays(DAYS_TO_ADD);
         this.predicate = new ReservationBetweenDatePredicate(date,
                 new DateTime(this.searchEnd.format(FORMATTER)));
         logger.fine("Created FreeCommand for date: " + date);
@@ -90,7 +92,7 @@ public class FreeCommand extends Command {
         addSlotIfValid(freeSlots, searchStart, firstReservationStart);
 
         // Check slots between reservations
-        LocalDateTime previousEnd = firstReservationStart.plusHours(1);
+        LocalDateTime previousEnd = firstReservationStart.plusHours(MIN_SLOT_DURATION_HOURS);
         for (int i = 1; i < reservations.size(); i++) {
             LocalDateTime currentStart = reservations.get(i).getDateTime().value;
             addSlotIfValid(freeSlots, previousEnd, currentStart);

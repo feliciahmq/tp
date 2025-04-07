@@ -45,10 +45,5 @@ public class FreeCommandParser implements Parser<FreeCommand> {
         }
 
         return new FreeCommand(date);
-
     }
-
-
-
-
 }
