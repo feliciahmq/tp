@@ -15,7 +15,6 @@ import seedu.reserve.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ShowCommand object
  */
 public class ShowCommandParser implements Parser<ShowCommand> {
-
     private static final Logger logger = LogsCenter.getLogger(ShowCommandParser.class);
 
     /**

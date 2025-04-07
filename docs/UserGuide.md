@@ -567,8 +567,8 @@ Format: `delete <INDEX> cfm`
 > **Use Case #1**: Deleting the 2nd reservation after listing all.
 >
 > **Input:**
-> `list`
-> `delete 2 cfm`
+> <br> 1. `list`
+> <br> 2. `delete 2 cfm`
 >
 > **Output:**
 > ```
@@ -580,8 +580,8 @@ Format: `delete <INDEX> cfm`
 > **Use Case #2**: Deleting a reservation found through a filtered list.
 >
 > **Input:**
-> `find Jane`
-> `delete 1 cfm`
+> <br> 1. `find Jane`
+> <br> 2. `delete 1 cfm`
 >
 > **Output:**
 > ```
@@ -1127,6 +1127,12 @@ Format: `free <DATE>`
 **Constraints**
 - Date must be in `YYYY-MM-DD` format. Do not include `HHmm`.
 
+**Note**
+- Each reservation is 1 hour long. For example, if a time slot ends at `2025-04-28 1800`, 
+it means the available <br> time is from `2025-04-28 1700` to `2025-04-28 1800`. 
+So, you can add a reservation at `2025-04-28 1700`.
+So, you can add a reservation at `2025-04-28 1700`.
+
 ---
 
 - **Successful Execution:**
@@ -1141,7 +1147,7 @@ Format: `free <DATE>`
 > ```
 > Available free time slots:
 > - 2025-04-28 0000 to 2025-04-28 1800
-> - 2025-04-28 1900 to 2025-04-28 2300
+> - 2025-04-28 1900 to 2025-04-29 0000
 > ```
 >
 > ---

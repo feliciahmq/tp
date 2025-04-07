@@ -226,6 +226,32 @@ This section describes some noteworthy details on how certain features are imple
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Delete feature
+
+The delete feature allows restaurant managers to delete any unwanted or accidental reservations. It is implemented 
+using the following
+components:
+
+### Implementation
+The delete functionality is implemented through the `DeleteCommand` class. The feature is primarily made up of the
+following components:
+
+1. `DeleteCommand` - Delete the reservation based on index shown on the list.
+2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object
+
+The feature works through the following process flow:
+
+1. The user enters a command in the format `delete 1 cfm`.
+2. The `LogicManager` passes the command string to `ReserveMateParser`.
+3. `ReserveMateParser` identifies the command as a `delete` command and delegates to `DeleteCommandParser`.
+4. `DeleteCommandParser` extracts and validates the index (must be shown on the reservation list).
+5. `LogicManager` calls the `execute()` method of the `DeleteCommand` object.
+6. The `DeleteCommand` will delete the reservation based on the index from the `Model` and return a `CommandResult`
+object with a success message.
+
+The following sequence diagram shows how the delete command works:
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
 ### [Proposed] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedReserveMate`. It extends `ReserveMate` with an undo/redo
@@ -313,7 +339,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the reservation being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the un of each individual command are correct.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -615,7 +641,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
     Use Case ends.
 
 * 2a. The reservation list is empty.
-
+ 
   * 2a1. ReserveMate shows an error message.
 
     Use case ends.
@@ -1066,14 +1092,12 @@ and inefficiency. <br>
 e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
 will auto-allocate the necessary consecutive slots without requiring the user to enter multiple commands.
 
-
 2. **Simplify preference saving by removing redundant 'save' keyword in `pref` command**: <br>
 **Current Issue**: The `pref` command currently requires users to type `pref save [index] [preference]`,
 e.g., `pref save 1 sitting outdoors`. Since the `pref` command only supports saving preferences, the inclusion of the
 `save` keyword is redundant and adds unnecessary typing for users. <br>
 **Planned Enhancement**: We plan to simplify the command format by removing the need for the `save` keyword.
 Users will be able to directly type `pref [index] [preference]`.
-
 
 3. **Prevents accidental updates due to shifting list indexes after sorting**: <br>
 **Current Issue**: After executing `pref save` for a person at a given index, the list re-sorts (by date, time and
@@ -1103,7 +1127,6 @@ to within the next 60 days**. The inconsistency may mislead users into thinking 
 `Note: Reservations can only exist within 60 days from today. Filtering beyond this range will not return future
 reservations.`
 
-
 6. **Display preference and occasion tags in customer reservation details to differentiate similar reservations**: <br>
 **Current Issues**: Currently, users have to manually type `show INDEX` each time they want to check the preferences
 and occasions associated with a reservation. This process can be time-consuming and inefficient, especially for
@@ -1113,3 +1136,31 @@ make it difficult to differentiate between them. <br>
 directly** in the reservation information. This allows users to quickly see preferences and occasions without having to
 run an addition command. By incorporating **preferences and occasions**, reservations with similar names can be easily
 differentiated. <br>
+
+7. **Let users define the maximum number of reservations per hourly slot**: <br>
+**Current Issue**: ReserveMate currently does not enforce a maximum number of reservations per time slot, which may not fit 
+the needs of all use cases. For instance, a venue with limited capacity might want to only allow a certain number of concurrent reservations
+during peak hours. <br>
+**Planned Enhancement**: We plan to introduce a configurable setting that allows admins or users (with the right 
+permissions) to define the maximum number of reservations allowed per hour slot. This offers greater flexibility for 
+different reservation scenarios and business rules.
+
+8. **Change free command output format to show each available hour instead of a continuous range**: <br>
+**Current Issue**: The `free` command currently displays available time in continuous ranges, e.g., `2025-04-28 0000 to 2025-04-28 1800`. While concise, this format may confuse users. They might interpret it as a single large continuous block rather than individual 1-hour slots, or be uncertain whether a reservation can be made at the ending time. <br>
+**Planned Enhancement**: We plan to revise the output format of the free command to explicitly show each available starting 
+reservation slot. For example:
+```
+Available free time slots:
+- 2025-04-28 0000
+- 2025-04-28 0100
+  ...
+- 2025-04-28 1700
+```
+
+9. **Relax phone number constraints to support international numbers for tourists**: <br>
+**Current Issue**: The current phone number validation only accepts Singaporean numbers (8-digit numbers starting with
+8 or 9), which excludes valid international phone numbers commonly used by tourists. This limitation may prevent
+tourists from making reservations using the system. <br> **Planned Enhancement**: We plan to relax the phone number 
+format to allow valid international formats, such as +44 7123 456789 or +1-202-555-0191. Validation will ensure proper
+structure but allow flexibility in country codes. This makes the system more inclusive and tourist-friendly.
+
