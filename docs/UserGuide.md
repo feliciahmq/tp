@@ -6,7 +6,7 @@
 
 # User Guide
 
-ReserveMate is a **desktop application** designed for restaurant managers to manage reservations. It is optimized for use via a **Command Line Interface** (CLI), while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate helps you complete reservation management tasks quicker and more efficiently than traditional GUI apps!
+ReserveMate is a **desktop application** designed for restaurant managers to manage reservations. It is optimized for use via a **Command Line Interface** (CLI), while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate helps you complete reservation management tasks more quickly and efficiently than traditional GUI apps!
 
 With ReserveMate, managing reservations becomes faster, more organized, and less error-prone. You can quickly locate bookings, and ensure customer preferences are met, helping you deliver a smooth and personalized dining experience.
 
