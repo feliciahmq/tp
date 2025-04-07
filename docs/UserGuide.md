@@ -151,7 +151,7 @@ The prefixes used in ReserveMate are universal across all commands.
 #### `p/` — Reservation Contact Number
 
 - Phone numbers **must start with `8` or `9`** and be exactly 8 digits long (only Singapore phone numbers).
-- Multiple reservations can share the **same phone number** and **different date-time** — duplicates allowed.
+- Multiple reservations can share the **same phone number** and **different date-time**.
 
 ---
 
@@ -160,7 +160,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Emails must match a **basic regex pattern**, but:
     - Technically valid emails may be **functionally incorrect** (e.g., `123@123`).
     - Strange but valid domains (e.g., `user@x-y.com`, `a@123.co`) are allowed.
-    - Multiple reservations can share the **same email** and **different date-time** — duplicates allowed.
+    - Multiple reservations can share the **same email** and **different date-time**.
 
 ---
 
