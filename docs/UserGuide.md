@@ -228,6 +228,17 @@ To get started with ReserveMate, type the command in the command box and press `
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+**Notes on Execution Inputs and outputs:**
+
+* The results of executing a command may **vary depending on the current state** of the reservation list.
+* This includes both:
+  * The **complete reservation list** (all reservations stored), and 
+  * The **filtered reservation list** (what is currently visible after a find or list command). 
+* For example, commands like `delete 1` or `edit 2` act on the filtered list, not the full list — so the same index may refer to different reservations depending on filters.
+
+
+
+
 ### Viewing User Guide : `User Guide`
 
 Refers user to GitHub ReserveMate user guide documentation.
@@ -245,6 +256,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 * A reservation can have any number of occasion (including 0)
 * Phone number should start with either 8 or 9 and must be 8 digits.
 * Date time should be after current time but within 60 days from it.
+
+Notes:
+* ReserveMate allows users to add multiple reservations. 
+* However, duplicate reservations are not allowed.
+* A reservation is considered a **duplicate** if:
+  * It has the (same phone number OR email address), AND the (same date and time) as an existing reservation. 
+* This ensures no overlapping bookings are made for the same contact at the same time.
 
 - **Successful Execution:**
 > ---
@@ -469,7 +487,9 @@ Format: `delete <INDEX> cfm`
 > **Use Case #1**: Deleting the 2nd reservation after listing all.
 >
 > **Input:**
+> 
 > `list`
+> 
 > `delete 2 cfm`
 >
 > **Output:**
@@ -482,7 +502,9 @@ Format: `delete <INDEX> cfm`
 > **Use Case #2**: Deleting a reservation found through a filtered list.
 >
 > **Input:**
+> 
 > `find Jane`
+> 
 > `delete 1 cfm`
 >
 > **Output:**
@@ -1286,7 +1308,6 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 

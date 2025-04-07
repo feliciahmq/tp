@@ -46,6 +46,7 @@ public class StatisticsWindow extends UiPart<Stage> {
         super(FXML, root);
         statisticsMessage.setText(STATISTICS_MESSAGE);
         configureBarChart();
+        getRoot().setResizable(true);
     }
 
     /**
