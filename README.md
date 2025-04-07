@@ -165,15 +165,15 @@ Exit
 ## Command Summary
 | Feature                     | Command Format                                                                              | Purpose                                                                               |
 |-----------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| Create a new reservation    | `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [o/OCCASION]…​`         | Add new reservation to ReserveMate                                                    |
-| Editing a reservation       | `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [o/OCCASION]…​` | Edit existing details of a reservation                                                |
+| Create a new reservation    | `add n/<NAME> p/<PHONE> e/<EMAIL> x/<NUMBER_OF_DINERS> d/<DATETIME> [o/OCCASION]…`          | Add new reservation to ReserveMate                                                    |
+| Editing a reservation       | `edit <INDEX> [n/NAME] [p/PHONE] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATETIME] [o/OCCASION]…` | Edit existing details of a reservation                                                |
 | Delete reservation          | `delete <INDEX>`                                                                            | Remove a reservation from ReserveMate                                                 |
 | Show Reservation details    | `show <INDEX>`                                                                              | Show details of reservation to user                                                   |
 | View all free time slots    | `free`                                                                                      | View all free time slots for reservation within a window of 60days from current time. |
 | View reservation list       | `list`                                                                                      | View the entire reservation schedule                                                  |
 | View help list              | `help`                                                                                      | Display the available list of commands to the user                                    |
 | Find reservation by name    | `find <RESERVATION NAME>`                                                                   | Retrieve reservation information                                                      |
-| Manage preferences          | `pref save <INDEX> <PREFERENCE_TEXT>`                               | Saves reservation preferences                                                         |
+| Manage preferences          | `pref save <INDEX> <PREFERENCE_TEXT>`                                                       | Saves reservation preferences                                                         |
 | Clearing all reservations   | `clear`                                                                                     | Deletes all reservations in ReserveMate                                               |
 | View reservation statistics | `stats`                                                                                     | Display reservation statistics of ReserveMate                                         |
 | Filter reservations by date | `filter sd/<DATETIME> ed/<DATETIME>`                                                        | Display reservations between given dates                                              |

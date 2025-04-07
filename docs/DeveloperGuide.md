@@ -126,7 +126,7 @@ commonalities between different UI elements.
 The UI is built using the **JavaFx UI framework**. The layout of UI elements defined in .fxml is located in the
 `src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWinow.fxml`.
 
-**Reponsibilities**
+**Responsibilities**
 
 The UI Component performs the following key functions:
 * Executing User Commands: It forwards user input to the `Logic` component for processing.
@@ -150,7 +150,7 @@ between `UI`, `Model`, and `Storage` components. Its API is defined in
 1. The UI component calls the `Logic` interface when a user enters a command.
 2. `LogicManager` delegates the command parsing to an `ReserveaMateParser` object which in turn creates a parser that
 matches the command (e.g, `DeleteCommandPaser`) and uses it to parse the command.
-3. Once parsed, `LogicManger` exeutes the `Command` object, which may interact with the `Model` component to
+3. Once parsed, `LogicManger` executes the `Command` object, which may interact with the `Model` component to
 update reservation data.
 4. The `Command` object returns a `CommandResult`, encapsulating feedback on the execution outcome.
 5. `LogicManager` forwards the `CommandResult` to the UI component, which updates the display accordingly.
@@ -169,7 +169,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `ReserveMateParser` class creates an `XYZCommandPaser` (`XYZ` is a
-placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown aboev to parse
+placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
 the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ReservateMateParser` returns back as
 a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteComandParser`,...) inherits from the `Parser`
@@ -185,7 +185,7 @@ The `Model` component,
 * Stores the reserve mate data i.e, all `Reservation` objects (which are contained in a
 `UniqueReservationList` object).
 * Stores the currently 'selected' `Reservation` object (e.g., results of a search query) as a separate *filtered* list
-which is exposed to outsiders as an unmodifiable `ObservableList<Reservation>` that can be 'observed' e.g the UI can be
+which is exposed to outsiders as an unmodifiable `ObservableList<Reservation>` that can be 'observed' e.g. the UI can be
 bound to this list so that the UI automatically updates when the data in the list change.
 * Stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a
 `ReadOnlyUserPref` object.
@@ -241,7 +241,7 @@ adds the `Reservation` into the reservation list.
 1) The user inputs the `add` command.
 2) The `ReserveMateParser` creates a `AddCommandParser` and calls its `parse` method.
 3) The `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract out relevant arguments. If any of 
-the compulsary arguments are missing a `ParseException` detailing the expected format is thrown.
+the compulsory arguments are missing a `ParseException` detailing the expected format is thrown.
 4) The `Name`, `Phone`, `Email`, `Diners`, `DateTime` and `Occasion` parsers would check the validity of the inputs. If any of the inputs are invalid,
 a `ParseException` detailing why the given argument is invalid is thrown. If all the relevant inputs are valid, a new `Reservation` object is created.
 5) The `AddCommandParser#parse(String args)` creates a `AddCommand` object with the new `Reservation` object.
@@ -270,7 +270,7 @@ The following activity diagram shows what happens when a user executes a `add` c
 ##### Making occasion tag optional
 
 While occasion tag is useful for some reservations, there will be others which do not require it. Instead of making the user
-add a occasions when not needed, it was made optional to improve user experience.
+add an occasions when not needed, it was made optional to improve user experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -414,7 +414,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 | `* *`    | Frequent user      | Sort reservations by table type (e.g. window seat, private room)                       | View reservations by seating preference                             |
 | `* *`    | Long-time user     | Occasion reservations by special request (e.g. Birthday, Allergy)                      | Handle them accordingly                                             |
 | `* *`    | Forgetful user     | Automatically record customer preferences (e.g. dietary restrictions, seating choices) | Provide better service without relying on memory                    |
-| `* *`    | Cost-conscious user | Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
+| `* *`    | Cost-conscious user| Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
 | `* *`    | Overwhelmed user   | Automatically decline overbooking requests                                             | Don’t have to manually reject customers                             |
 | `*`      | Advanced user      | Export reservation data to a CSV file                                                  | Review past bookings or analyse trends                              |
 | `*`      | Overwhelmed user   | Archive reservations                                                                   | Gather insights on customers                                        |
@@ -783,7 +783,7 @@ system.
 ### Glossary
 
 * **User**: Restaurant manager using ReserveMates
-* **Mainstream OS**: Windows, MacOS, Linux, Unix
+* **Mainstream OS**: Windows, macOS, Linux, Unix
 * **Reservation**: Reservation details of the customer
 
 --------------------------------------------------------------------------------------------------------------------
