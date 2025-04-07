@@ -67,7 +67,7 @@ Commands in ReserveMate have the following structure:
 
 1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
 2. ReserveMate handles `INDEX` errors in two ways:
-   1. The index is a valid positive integer but exceeds the size of the current reservation list 
+   1. The index is a valid positive integer but exceeds the size of the current reservation list
    2. The index is an invalid number (e.g. non-integer values, negative integers or zero), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
 
 #### Prefixes
@@ -135,7 +135,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Names with **excessive spaces in between** are trimmed:
 <code>n/Alex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yeoh</code> → <code>n/Alex Yeoh</code>
 
-- Can be maximum 50 characters long. 
+- Can be maximum 50 characters long.
 
 - Names should contain only (english) characters and spaces
 
@@ -174,7 +174,7 @@ The prefixes used in ReserveMate are universal across all commands.
     - Within the next **60 days**
     - Cannot be a past date-time
     - Time must be in hourly increments, ending with `00` (e.g., `1400`).
-    - For the `free` command, `HHmm` is omitted. 
+    - For the `free` command, `HHmm` is omitted.
     - For the `edit` command, the date & time cannot be in the past.
 
 ---
@@ -557,7 +557,7 @@ Format: `delete <INDEX> cfm`
 
 **Constraints**
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* A confirmation flag 'cfm' is **required** **and case-sensitive** to successfully delete the reservation. 
+* A confirmation flag 'cfm' is **required** **and case-sensitive** to successfully delete the reservation.
 
 ---
 
@@ -817,7 +817,7 @@ Format: `list`
 > ```
 >
 > ---
-> 
+---
 
 ### Showing reservation details : `show`
 
@@ -1100,7 +1100,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 >
 > **Output:**
 > ```
-> DateTime must be in the format YYYY-MM-DD HHmm, must be a valid calendar date and the time must be in hourly increments. 
+> DateTime must be in the format YYYY-MM-DD HHmm, must be a valid calendar date and the time must be in hourly increments.
 > ```
 >
 > ---
@@ -1130,7 +1130,7 @@ Displays all available `Reservation` time slots in user specified day.
 Format: `free <DATE>`
 
 **Constraints**
-- Date must be in `YYYY-MM-DD` format. Do not include `HHmm`. 
+- Date must be in `YYYY-MM-DD` format. Do not include `HHmm`.
 
 ---
 

@@ -7,14 +7,14 @@ skinparam ClassBackgroundColor #FFFFAA
 title Initial state
 
 package States {
-    class State1 as "<u>ab0:AddressBook</u>"
-    class State2 as "<u>ab1:AddressBook</u>"
-    class State3 as "<u>ab2:AddressBook</u>"
+    class State1 as "<u>rm0:ReserveMate</u>"
+    class State2 as "<u>rm1:ReserveMate</u>"
+    class State3 as "<u>rm2:ReserveMate</u>"
 }
 State1 -[hidden]right-> State2
 State2 -[hidden]right-> State3
-hide State2
-hide State3
+hide States.State2
+hide States.State3
 
 class Pointer as "Current State" #FFFFFF
 Pointer -up-> State1
