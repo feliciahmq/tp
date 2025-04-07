@@ -234,7 +234,7 @@ To get started with ReserveMate, type the command in the command box and press `
 * This includes both:
   * The **complete reservation list** (all reservations stored), and 
   * The **filtered reservation list** (what is currently visible after a find or list command). 
-* For example, commands like `delete 1` or `edit 2` act on the filtered list, not the full list — so the same index may refer to different reservations depending on filters.
+* For example, commands like `delete 1 cfm` or `edit 2` act on the filtered list, not the full list — so the same index may refer to different reservations depending on filters.
 
 
 
@@ -261,8 +261,8 @@ Notes:
 * ReserveMate allows users to add multiple reservations. 
 * However, duplicate reservations are not allowed.
 * A reservation is considered a **duplicate** if:
-  * It has the (same phone number OR email address), AND the (same date and time) as an existing reservation. 
-* This ensures no overlapping bookings are made for the same contact at the same time.
+  * It has the same phone number or email address, and the same date and time as an existing reservation. 
+* This ensures no overlapping reservations are made for the same person at the same time.
 
 - **Successful Execution:**
 > ---
