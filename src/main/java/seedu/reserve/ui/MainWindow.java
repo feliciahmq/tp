@@ -157,11 +157,17 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
+        Stage helpStage = helpWindow.getRoot();
+
+        if (!helpStage.isShowing()) {
             helpWindow.show();
         } else {
+            if (helpStage.isIconified()) {
+                helpStage.setIconified(false);
+            }
             helpWindow.focus();
         }
+
     }
 
     /**
@@ -169,11 +175,17 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStatistics() {
-        if (!statisticsWindow.isShowing()) {
+        Stage statsStage = statisticsWindow.getRoot();
+
+        if (!statsStage.isShowing()) {
             statisticsWindow.show(logic.getReservationStatistics());
         } else {
+            if (statsStage.isIconified()) {
+                statsStage.setIconified(false);
+            }
             statisticsWindow.focus();
         }
+
     }
 
     void show() {

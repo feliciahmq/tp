@@ -17,6 +17,7 @@
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
   - [Delete](#Delete-feature)
+  - [Add Reservation Feature](#add-reservation-feature)
   - [[proposed] Undo/Redo](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
@@ -126,7 +127,7 @@ commonalities between different UI elements.
 The UI is built using the **JavaFx UI framework**. The layout of UI elements defined in .fxml is located in the
 `src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWinow.fxml`.
 
-**Reponsibilities**
+**Responsibilities**
 
 The UI Component performs the following key functions:
 * Executing User Commands: It forwards user input to the `Logic` component for processing.
@@ -143,14 +144,14 @@ The **Logic Component** is responsible for interpreting user input, executing co
 between `UI`, `Model`, and `Storage` components. Its API is defined in
 [`Logic.java`]().
 
-<img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="500"/>
+<img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="551"/>
 
 
 **Command Execution Flow**
 1. The UI component calls the `Logic` interface when a user enters a command.
 2. `LogicManager` delegates the command parsing to an `ReserveaMateParser` object which in turn creates a parser that
 matches the command (e.g, `DeleteCommandPaser`) and uses it to parse the command.
-3. Once parsed, `LogicManger` exeutes the `Command` object, which may interact with the `Model` component to
+3. Once parsed, `LogicManger` executes the `Command` object, which may interact with the `Model` component to
 update reservation data.
 4. The `Command` object returns a `CommandResult`, encapsulating feedback on the execution outcome.
 5. `LogicManager` forwards the `CommandResult` to the UI component, which updates the display accordingly.
@@ -169,7 +170,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `ReserveMateParser` class creates an `XYZCommandPaser` (`XYZ` is a
-placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown aboev to parse
+placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
 the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ReservateMateParser` returns back as
 a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteComandParser`,...) inherits from the `Parser`
@@ -185,7 +186,7 @@ The `Model` component,
 * Stores the reserve mate data i.e, all `Reservation` objects (which are contained in a
 `UniqueReservationList` object).
 * Stores the currently 'selected' `Reservation` object (e.g., results of a search query) as a separate *filtered* list
-which is exposed to outsiders as an unmodifiable `ObservableList<Reservation>` that can be 'observed' e.g the UI can be
+which is exposed to outsiders as an unmodifiable `ObservableList<Reservation>` that can be 'observed' e.g. the UI can be
 bound to this list so that the UI automatically updates when the data in the list change.
 * Stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a
 `ReadOnlyUserPref` object.
@@ -224,6 +225,53 @@ Classes used by multiple components are in the `seedu.reserve.commons` package.
 ## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Reservation Feature
+
+The add reservation feature allows users to add reservations easily via the command `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…`.
+
+#### How it is implemented
+
+The `add` command utilizes `AddCommand` and `AddCommandParser`. `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)`
+to extract the relevant inputs for each field. A new `Reservation` object is then created with the corresponding reservation name, phone number, email, date,
+number of diners and occasion(s) if provided. If occasion(s) are not provided, it would be initialized to an empty set. The `ModelManager#addReservation(Reservation reservation)`, which implements the `Model` interface, 
+adds the `Reservation` into the reservation list. 
+
+#### Parsing the user input
+
+1) The user inputs the `add` command.
+2) The `ReserveMateParser` creates a `AddCommandParser` and calls its `parse` method.
+3) The `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract out relevant arguments. If any of 
+the compulsory arguments are missing, a `ParseException` detailing the expected format is thrown.
+4) The `Name`, `Phone`, `Email`, `Diners`, `DateTime` and `Occasion` parsers would check the validity of the inputs. If any of the inputs are invalid,
+a `ParseException` detailing why the given argument is invalid is thrown. If all the relevant inputs are valid, a new `Reservation` object is created.
+5) The `AddCommandParser#parse(String args)` creates a `AddCommand` object with the new `Reservation` object.
+
+#### Command Execution
+1) The `LogicManager#execute(String commandText)` executes the `AddCommand`.
+2) The `AddCommand` calls `ModelManager#addReservation(Reservation reservation)` to add the reservation into the reservation list. If the provided reservation
+is already present in the reservation list, a `CommandException` is thrown.
+
+#### Displaying the result
+1) If successful, a new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
+
+The following sequence diagram shows how the `add` command works:
+
+![AddCommandSequenceDiagram.png](images/AddCommandSequenceDiagram.png)
+
+> 💡 **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+> the lifeline reaches the end of the diagram.
+
+The following activity diagram shows what happens when a user executes a `add` command:
+
+![AddCommandActivityDiagram.png](images/AddCommandActivityDiagram.png)
+
+#### Design Considerations
+
+##### Making occasion tag optional
+
+While occasion tag is useful for some reservations, there will be others which do not require it. Instead of making the user
+add occasions when not needed, it was made optional to improve user experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -411,7 +459,7 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 | `* *`    | Frequent user      | Sort reservations by table type (e.g. window seat, private room)                       | View reservations by seating preference                             |
 | `* *`    | Long-time user     | Occasion reservations by special request (e.g. Birthday, Allergy)                      | Handle them accordingly                                             |
 | `* *`    | Forgetful user     | Automatically record customer preferences (e.g. dietary restrictions, seating choices) | Provide better service without relying on memory                    |
-| `* *`    | Cost-conscious user | Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
+| `* *`    | Cost-conscious user| Set up reservation deposit requirements                                                | Reduce cancellations and ensure customer commitment                 |
 | `* *`    | Overwhelmed user   | Automatically decline overbooking requests                                             | Don’t have to manually reject customers                             |
 | `*`      | Advanced user      | Export reservation data to a CSV file                                                  | Review past bookings or analyse trends                              |
 | `*`      | Overwhelmed user   | Archive reservations                                                                   | Gather insights on customers                                        |
@@ -780,7 +828,7 @@ system.
 ### Glossary
 
 * **User**: Restaurant manager using ReserveMates
-* **Mainstream OS**: Windows, MacOS, Linux, Unix
+* **Mainstream OS**: Windows, macOS, Linux, Unix
 * **Reservation**: Reservation details of the customer
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1119,13 +1167,15 @@ e.g., `pref save 1 sitting outdoors`. Since the `pref` command only supports sav
 Users will be able to directly type `pref [index] [preference]`.
 
 3. **Prevents accidental updates due to shifting list indexes after sorting**: <br>
-**Current Issue**: After executing `pref save` for a person at a given index, the list re-sorts (by date, time and
-last insertion), which might cause indexes to change. If the user tries to update the same person again using the
-**previous index**, they may unintentionally modify a different person. This is not a bug but can lead to confusion and
-incorrect updates. <br>
-**Planned Enhancement**: We plan to improve the UX by making it clearer when the list has re-sorted after commands like
-`pref save`. Possible solutions include displaying a message such as `List has been resorted. Please recheck indexes.`
-or visually highlighting the recently updated person. This will help users avoid referencing outdated indexes.
+   **Current Issue**: After executing `pref save` or `edit` for a reservation at a given index, the list re-sorts
+   (by date, time and last insertion), which might cause indexes to change. If the user tries to update the same reservation
+   again using the
+   **previous index**, they may unintentionally modify a different reservation. This is not a bug but can lead to confusion and
+   incorrect updates. <br>
+   **Planned Enhancement**: We plan to improve the UX by making it clearer when the list has re-sorted after commands like
+   `pref save` or `edit`. Possible solutions include displaying a message such as
+   `List has been resorted. Please recheck indexes.`
+   or visually highlighting the recently updated reservation. This will help users avoid referencing outdated indexes.
 
 4. **Enforce maximum number of occasions per reservation to 1**: <br>
 **Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a

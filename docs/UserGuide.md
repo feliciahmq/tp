@@ -6,7 +6,11 @@
 
 # User Guide
 
-ReserveMate is a **desktop application for managing reservations, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate can get your reservation management tasks done faster than traditional GUI apps.
+ReserveMate is a **desktop application** designed for restaurant managers to manage reservations. It is optimized for use via a **Command Line Interface** (CLI), while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, ReserveMate helps you complete reservation management tasks more quickly and efficiently than traditional GUI apps!
+
+With ReserveMate, managing reservations becomes faster, more organized, and less error-prone. You can quickly locate bookings, and ensure customer preferences are met, helping you deliver a smooth and personalized dining experience.
+
+This guide assumes you're comfortable using a computer and does not require any programming knowledge.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -53,14 +57,14 @@ Commands in ReserveMate have the following structure:
 </p>
 <br>
 
-| command_word                                                         | REFERENCE                                                 | PARAMETERS                                                       |
+| command_word                                                         | REFERENCE                                                 | PARAMETERS                                                     |
 |----------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|
 | The command to be performed. Command words are **case-insensitive**. | Often used to reference an index in the reservation list. | Used to specify additional details for a given `command_word`. |
 
 #### Reference Types
 
-| Reference             | Meaning                                  | Constraints                                                                         | Remarks                                                                      |
-|-----------------------|------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| Reference             | Meaning                                  | Constraints                       | Remarks                                                                      |
+|-----------------------|------------------------------------------|-----------------------------------|------------------------------------------------------------------------------|
 | `INDEX`<sup>1,2</sup> | Index of reservation in reservation list | Must be a positive integer `>= 1` | Used in commands like `edit` and `delete` to refer to a specific reservation |
 
 **Notes:**
@@ -82,9 +86,9 @@ Prefixes are in the format:
 They come in several variations, based on whether they are **mandatory**, **optional**, or **repeatable** (variadic):
 
 |                          | **Mandatory**        | **Optional<sup>1</sup>**     |
-|--------------------------|----------------------|-------------------------------|
-| **Not variadic**         | `prefix/Value`       | `[prefix/Value]`              |
-| **Variadic<sup>2</sup>** | `prefix/Value...`    | `[prefix/Value]...`           |
+|--------------------------|----------------------|------------------------------|
+| **Not variadic**         | `prefix/Value`       | `[prefix/Value]`             |
+| **Variadic<sup>2</sup>** | `prefix/Value...`    | `[prefix/Value]...`          |
 ---
 
 **Notes:**
@@ -101,7 +105,7 @@ The prefixes used in ReserveMate are universal across all commands.
 | Prefix | Description             | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Valid                                      | Invalid                                       |
 |--------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|-----------------------------------------------|
 | `n/`   | Customer Name           | 2–50 characters, only `alphanumeric` characters and `spaces`. Case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                | `n/John Doe`, `n/Mary-Anne`, `n/Bobby Tan` | `n/J0hn`, `n/`, `n/@John`                     |
-| `p/`   | Contact Number          | Exactly 8 digits and must start with `8` or `9`.                                                                                                                                                                                                                                                                                                                                                                                                                               | `p/91234567`, `p/87654321`                 | `p/1234567`, `p/01234567`, `p/`               |
+| `p/`   | Contact Number          | Exactly 8 digits and must start with `8` or `9`. It must be a Singapore phone number.                                                                                                                                                                                                                                                                                                                                                                                          | `p/91234567`, `p/87654321`                 | `p/1234567`, `p/01234567`, `p/`               |
 | `e/`   | Email Address           | Must be a valid email format of `local-part@domain`. The local-part should only contain `alphanumeric` characters and these special characters, excluding the parentheses, `(+_.-)`. The local-part cannot start or end with any special characters. This is followed by a `@` and then a domain name. The domain name is made up of domain labels separated by periods. The final label (e.g., .com) must be at least 2 characters long and contain only letters (no digits). | `e/john@example.com`                       | `e/`, `e/john@.com`                           |
 | `x/`   | Number of Diners        | Integer from 1 to 10 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                | `x/1`, `x/5`, `x/10`                       | `x/0`, `x/11`, `x/-2`, `x/ten`                |
 | `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days. For `free` HHmm need not be included. For reservations, HHmm must be on the hour (e.g., 0000, 0100, etc.).                                                                                                                                                                                                                                                                                                             | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
@@ -146,8 +150,8 @@ The prefixes used in ReserveMate are universal across all commands.
 
 #### `p/` — Reservation Contact Number
 
-- Phone numbers **must start with `8` or `9`** and be exactly 8 digits long.
-- Multiple reservations can share the **same phone number** and **different date-time** — duplicates allowed.
+- Phone numbers **must start with `8` or `9`** and be exactly 8 digits long (only Singapore phone numbers).
+- Multiple reservations can share the **same phone number** and **different date-time**.
 
 ---
 
@@ -156,7 +160,7 @@ The prefixes used in ReserveMate are universal across all commands.
 - Emails must match a **basic regex pattern**, but:
     - Technically valid emails may be **functionally incorrect** (e.g., `123@123`).
     - Strange but valid domains (e.g., `user@x-y.com`, `a@123.co`) are allowed.
-    - Multiple reservations can share the **same email** and **different date-time** — duplicates allowed.
+    - Multiple reservations can share the **same email** and **different date-time**.
 
 ---
 
@@ -229,6 +233,17 @@ To get started with ReserveMate, type the command in the command box and press `
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+**Notes on Execution Inputs and outputs:**
+
+* The results of executing a command may **vary depending on the current state** of the reservation list.
+* This includes both:
+  * The **complete reservation list** (all reservations stored), and 
+  * The **filtered reservation list** (what is currently visible after a find or list command). 
+* For example, commands like `delete 1 cfm` or `edit 2` may be acting on the filtered list, depending on your previous commands.
+
+
+
+
 ### Viewing User Guide : `User Guide`
 
 Refers user to GitHub ReserveMate user guide documentation.
@@ -246,6 +261,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 * A reservation can have any number of occasion (including 0)
 * Phone number should start with either 8 or 9 and must be 8 digits.
 * Date time should be after current time but within 60 days from it.
+
+Notes:
+* ReserveMate allows users to add multiple reservations. 
+* However, duplicate reservations are not allowed.
+* A reservation is considered a **duplicate** if:
+  * It has the same phone number or email address, and the same date and time as an existing reservation. 
+* This ensures no overlapping reservations are made for the same person at the same time.
 
 - **Successful Execution:**
 > ---
@@ -567,6 +589,7 @@ Format: `delete <INDEX> cfm`
 > **Use Case #1**: Deleting the 2nd reservation after listing all.
 >
 > **Input:**
+>
 > <br> 1. `list`
 > <br> 2. `delete 2 cfm`
 >
@@ -580,8 +603,10 @@ Format: `delete <INDEX> cfm`
 > **Use Case #2**: Deleting a reservation found through a filtered list.
 >
 > **Input:**
+> 
 > <br> 1. `find Jane`
 > <br> 2. `delete 1 cfm`
+>
 >
 > **Output:**
 > ```
@@ -1037,6 +1062,11 @@ Filters `Reservation` between the specified date and time range.
 
 Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
+**Notes**:
+* `filter` accepts **any date range** .
+* Reservations can only be made for dates within the next 60 days from the current date.
+  * This means filtering for future dates beyond 60 days will not return upcoming reservations but can still be used to view historical data.
+
 **Constraints**
 - Filters all reservations between the given `DATE_TIME`s, inclusive of the `DATE_TIME` provided.
 -`DATE_TIME` provided must be valid and follow the format: `YYYY-MM-DD HHmm`.
@@ -1435,7 +1465,6 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
