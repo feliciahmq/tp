@@ -1037,6 +1037,11 @@ Filters `Reservation` between the specified date and time range.
 
 Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
+**Notes**:
+* `filter` accepts **any date range** .
+* Reservations can only be made for dates within the next 60 days from the current date.
+  * This means filtering for future dates beyond 60 days will not return upcoming reservations but can still be used to view historical data.
+
 **Constraints**
 - Filters all reservations between the given `DATE_TIME`s, inclusive of the `DATE_TIME` provided.
 -`DATE_TIME` provided must be valid and follow the format: `YYYY-MM-DD HHmm`.
