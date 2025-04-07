@@ -270,7 +270,7 @@ The following activity diagram shows what happens when a user executes a `add` c
 ##### Making occasion tag optional
 
 While occasion tag is useful for some reservations, there will be others which do not require it. Instead of making the user
-add an occasions when not needed, it was made optional to improve user experience.
+add occasions when not needed, it was made optional to improve user experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
