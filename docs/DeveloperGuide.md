@@ -232,7 +232,7 @@ The add reservation feature allows users to add reservations easily via the comm
 
 The `add` command utilizes `AddCommand` and `AddCommandParser`. `AddCommandParser#parse(String args)` uses the `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)`
 to extract the relevant inputs for each field. A new `Reservation` object is then created with the corresponding reservation name, phone number, email, date,
-number of diners and occasion(s) if provided. If occasion(s) are not provided, it would be initialized to null. The `ModelManager#addReservation(Reservation reservation)` 
+number of diners and occasion(s) if provided. If occasion(s) are not provided, it would be initialized to an empty set. The `ModelManager#addReservation(Reservation reservation)` 
 adds the `Reservation` into the reservation list. 
 
 ### Parsing the user input
