@@ -87,9 +87,6 @@ public class FreeCommandParserTest {
         String invalidDateStr = today.plusDays(61).format(FORMATTER);
         String boundaryDateStr = today.plusDays(59).format(FORMATTER);
 
-        System.out.println(invalidDateStr);
-        System.out.println(boundaryDateStr + " 0000");
-
         // Test invalid case (61 days)
         assertParseFailure(parser, " d/" + invalidDateStr,
                 DateTime.MESSAGE_CONSTRAINTS_FREE);

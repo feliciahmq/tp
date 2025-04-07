@@ -1131,7 +1131,6 @@ Format: `free <DATE>`
 - Each reservation is 1 hour long. For example, if a time slot ends at `2025-04-28 1800`, 
 it means the available <br> time is from `2025-04-28 1700` to `2025-04-28 1800`. 
 So, you can add a reservation at `2025-04-28 1700`.
-So, you can add a reservation at `2025-04-28 1700`.
 
 ---
 

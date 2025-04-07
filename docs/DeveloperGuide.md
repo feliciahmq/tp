@@ -339,7 +339,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the reservation being deleted).
-  * Cons: We must ensure that the un of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 
 --------------------------------------------------------------------------------------------------------------------
