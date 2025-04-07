@@ -1124,15 +1124,15 @@ Users will be able to directly type `pref [index] [preference]`.
 
 
 3. **Prevents accidental updates due to shifting list indexes after sorting**: <br>
-   **Current Issue**: After executing `pref save` or `edit` for a person at a given index, the list re-sorts
-   (by date, time and last insertion), which might cause indexes to change. If the user tries to update the same person
+   **Current Issue**: After executing `pref save` or `edit` for a reservation at a given index, the list re-sorts
+   (by date, time and last insertion), which might cause indexes to change. If the user tries to update the same reservation
    again using the
-   **previous index**, they may unintentionally modify a different person. This is not a bug but can lead to confusion and
+   **previous index**, they may unintentionally modify a different reservation. This is not a bug but can lead to confusion and
    incorrect updates. <br>
    **Planned Enhancement**: We plan to improve the UX by making it clearer when the list has re-sorted after commands like
    `pref save` or `edit`. Possible solutions include displaying a message such as
    `List has been resorted. Please recheck indexes.`
-   or visually highlighting the recently updated person. This will help users avoid referencing outdated indexes.
+   or visually highlighting the recently updated reservation. This will help users avoid referencing outdated indexes.
 
 4. **Enforce maximum number of occasions per reservation to 1**: <br>
 **Current Issues**: ReserveMate currently allows users to input any number of `o/occasion` fields when adding a
