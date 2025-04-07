@@ -234,7 +234,7 @@ To get started with ReserveMate, type the command in the command box and press `
 * This includes both:
   * The **complete reservation list** (all reservations stored), and 
   * The **filtered reservation list** (what is currently visible after a find or list command). 
-* For example, commands like `delete 1 cfm` or `edit 2` act on the filtered list, not the full list — so the same index may refer to different reservations depending on filters.
+* For example, commands like `delete 1 cfm` or `edit 2` may be acting on the filtered list, depending on your previous commands.
 
 
 
