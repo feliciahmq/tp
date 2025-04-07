@@ -241,7 +241,7 @@ adds the `Reservation` into the reservation list.
 1) The user inputs the `add` command.
 2) The `ReserveMateParser` creates a `AddCommandParser` and calls its `parse` method.
 3) The `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract out relevant arguments. If any of 
-the compulsory arguments are missing a `ParseException` detailing the expected format is thrown.
+the compulsory arguments are missing, a `ParseException` detailing the expected format is thrown.
 4) The `Name`, `Phone`, `Email`, `Diners`, `DateTime` and `Occasion` parsers would check the validity of the inputs. If any of the inputs are invalid,
 a `ParseException` detailing why the given argument is invalid is thrown. If all the relevant inputs are valid, a new `Reservation` object is created.
 5) The `AddCommandParser#parse(String args)` creates a `AddCommand` object with the new `Reservation` object.
