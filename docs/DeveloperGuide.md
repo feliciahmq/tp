@@ -16,6 +16,7 @@
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Delete](#Delete-feature)
   - [[proposed] Undo/Redo](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
@@ -228,29 +229,47 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete feature
 
-The delete feature allows restaurant managers to delete any unwanted or accidental reservations. It is implemented 
-using the following
-components:
+The delete feature allows restaurant managers to delete any unwanted or accidental reservations via the command `delete
+<INDEX> cfm`.
 
-### Implementation
+#### How is it implemented
+
 The delete functionality is implemented through the `DeleteCommand` class. The feature is primarily made up of the
 following components:
 
 1. `DeleteCommand` - Delete the reservation based on index shown on the list.
 2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object
 
-The feature works through the following process flow:
+#### Parsing the user input
 
 1. The user enters a command in the format `delete 1 cfm`.
 2. The `LogicManager` passes the command string to `ReserveMateParser`.
 3. `ReserveMateParser` identifies the command as a `delete` command and delegates to `DeleteCommandParser`.
-4. `DeleteCommandParser` extracts and validates the index (must be shown on the reservation list).
-5. `LogicManager` calls the `execute()` method of the `DeleteCommand` object.
-6. The `DeleteCommand` will delete the reservation based on the index from the `Model` and return a `CommandResult`
-object with a success message.
+4. `DeleteCommandParser` extracts and validates the index. If the index or `cfm` is missing, a parse
+exception will be thrown.
+5. `DeleteCommandParser` will create `DeleteCommand` object with the index. 
+
+#### Command execution
+
+1. `LogicManager` calls the `execute()` method of the `DeleteCommand` object.
+2. The `DeleteCommand` will delete the reservation based on the index from the `Model`.
+
+#### Displaying the result
+
+A new `commandResult` with the success message is created and is returned to the `LogicManager`. The GUI would be
+updated.
+
+![DeleteCommandResult](images/deleteCommandResult.png)
 
 The following sequence diagram shows how the delete command works:
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+#### Design Considerations
+
+##### Making user type `cfm`
+
+To prevent accidental deletions due to typing the wrong index, users are required to confirm their action by entering
+an additional 'cfm'. This extra step gives them time to double-check the index they’ve entered.
 
 ### [Proposed] Undo/redo feature
 
@@ -1138,17 +1157,19 @@ run an addition command. By incorporating **preferences and occasions**, reserva
 differentiated. <br>
 
 7. **Let users define the maximum number of reservations per hourly slot**: <br>
-**Current Issue**: ReserveMate currently does not enforce a maximum number of reservations per time slot, which may not fit 
-the needs of all use cases. For instance, a venue with limited capacity might want to only allow a certain number of concurrent reservations
-during peak hours. <br>
+**Current Issue**: ReserveMate currently does not enforce a maximum number of reservations per time slot, which may not
+fit the needs of all use cases. For instance, a venue with limited capacity might want to only allow a certain number 
+of concurrent reservations during peak hours. <br>
 **Planned Enhancement**: We plan to introduce a configurable setting that allows admins or users (with the right 
 permissions) to define the maximum number of reservations allowed per hour slot. This offers greater flexibility for 
 different reservation scenarios and business rules.
 
 8. **Change free command output format to show each available hour instead of a continuous range**: <br>
-**Current Issue**: The `free` command currently displays available time in continuous ranges, e.g., `2025-04-28 0000 to 2025-04-28 1800`. While concise, this format may confuse users. They might interpret it as a single large continuous block rather than individual 1-hour slots, or be uncertain whether a reservation can be made at the ending time. <br>
-**Planned Enhancement**: We plan to revise the output format of the free command to explicitly show each available starting 
-reservation slot. For example:
+**Current Issue**: The `free` command currently displays available time in continuous ranges, e.g., `2025-04-28 0000 to
+2025-04-28 1800`. While concise, this format may confuse users. They might interpret it as a single large continuous
+block rather than individual 1-hour slots, or be uncertain whether a reservation can be made at the ending time. <br>
+**Planned Enhancement**: We plan to revise the output format of the free command to explicitly show each available 
+starting reservation slot. For example:
 ```
 Available free time slots:
 - 2025-04-28 0000
@@ -1160,7 +1181,8 @@ Available free time slots:
 9. **Relax phone number constraints to support international numbers for tourists**: <br>
 **Current Issue**: The current phone number validation only accepts Singaporean numbers (8-digit numbers starting with
 8 or 9), which excludes valid international phone numbers commonly used by tourists. This limitation may prevent
-tourists from making reservations using the system. <br> **Planned Enhancement**: We plan to relax the phone number 
+tourists from making reservations using the system. <br> 
+**Planned Enhancement**: We plan to relax the phone number 
 format to allow valid international formats, such as +44 7123 456789 or +1-202-555-0191. Validation will ensure proper
 structure but allow flexibility in country codes. This makes the system more inclusive and tourist-friendly.
 
