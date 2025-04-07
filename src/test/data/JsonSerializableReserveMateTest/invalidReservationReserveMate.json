@@ -1,0 +1,9 @@
+{
+  "reservations": [ {
+    "name": "Hans Muster",
+    "phone": "94824242",
+    "email": "invalid@email!3e",
+    "diners": "5",
+    "dateTime": "2025-04-25 1200"
+  } ]
+}

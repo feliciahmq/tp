@@ -1,0 +1,9 @@
+{
+  "reservations": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "phone": "94824242",
+    "email": "hans@example.com",
+    "diners": "3",
+    "dateTime": "2025-04-25 1200"
+  } ]
+}

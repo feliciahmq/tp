@@ -1,0 +1,68 @@
+{
+  "_comment": "ReserveMate save file which contains the same Customer values as in TypicalPersons#getTypicalReserveMate()",
+  "reservations": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "diners": "5",
+      "dateTime": "2025-05-10 1800",
+      "occasions": ["friends"],
+      "preference": "None"
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "diners": "3",
+      "dateTime": "2025-05-25 1200",
+      "occasions": ["owesMoney", "friends"],
+      "preference": "Extra spicy"
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "diners": "2",
+      "dateTime": "2025-05-15 1400",
+      "occasions": ["Birthday"],
+      "preference": "No nuts"
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "diners": "4",
+      "dateTime": "2025-05-20 1600",
+      "occasions": ["friends"],
+      "preference": "Likes window seats"
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "94822241",
+      "email": "werner@example.com",
+      "diners": "1",
+      "dateTime": "2025-05-30 1000",
+      "occasions": ["Birthday"],
+      "preference": "Less salty"
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "94824272",
+      "email": "lydia@example.com",
+      "diners": "7",
+      "dateTime": "2025-05-12 1100",
+      "occasions": ["Birthday"],
+      "preference": "None"
+    },
+    {
+      "name": "George Best",
+      "phone": "94824423",
+      "email": "anna@example.com",
+      "diners": "10",
+      "dateTime": "2025-05-18 1300",
+      "occasions": ["Anniversary"],
+      "preference": "More sugar"
+    }
+  ]
+}
