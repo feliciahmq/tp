@@ -57,14 +57,14 @@ Commands in ReserveMate have the following structure:
 </p>
 <br>
 
-| command_word                                                         | REFERENCE                                                 | PARAMETERS                                                       |
+| command_word                                                         | REFERENCE                                                 | PARAMETERS                                                     |
 |----------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|
 | The command to be performed. Command words are **case-insensitive**. | Often used to reference an index in the reservation list. | Used to specify additional details for a given `command_word`. |
 
 #### Reference Types
 
-| Reference             | Meaning                                  | Constraints                                                                         | Remarks                                                                      |
-|-----------------------|------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| Reference             | Meaning                                  | Constraints                       | Remarks                                                                      |
+|-----------------------|------------------------------------------|-----------------------------------|------------------------------------------------------------------------------|
 | `INDEX`<sup>1,2</sup> | Index of reservation in reservation list | Must be a positive integer `>= 1` | Used in commands like `edit` and `delete` to refer to a specific reservation |
 
 **Notes:**
@@ -86,9 +86,9 @@ Prefixes are in the format:
 They come in several variations, based on whether they are **mandatory**, **optional**, or **repeatable** (variadic):
 
 |                          | **Mandatory**        | **Optional<sup>1</sup>**     |
-|--------------------------|----------------------|-------------------------------|
-| **Not variadic**         | `prefix/Value`       | `[prefix/Value]`              |
-| **Variadic<sup>2</sup>** | `prefix/Value...`    | `[prefix/Value]...`           |
+|--------------------------|----------------------|------------------------------|
+| **Not variadic**         | `prefix/Value`       | `[prefix/Value]`             |
+| **Variadic<sup>2</sup>** | `prefix/Value...`    | `[prefix/Value]...`          |
 ---
 
 **Notes:**
