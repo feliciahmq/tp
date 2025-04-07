@@ -1,0 +1,50 @@
+@startuml
+start
+:User executes add command;
+
+if () then ([command is in an invalid format])
+    :Show invalid command
+    error message;
+
+else ([else])
+    if () then ([name is invalid])
+    :Show invalid name
+    error message;
+
+    else ([else])
+        if () then ([datetime is invalid])
+            :Show invalid datetime
+            error message;
+
+        else ([else])
+            if () then ([email is invalid])
+                :Show invalid email
+                error message;
+
+            else ([else])
+                if () then ([diners is invalid])
+                    :Show invalid diners
+                    error message;
+
+                else ([else])
+                    if () then ([phone number is invalid])
+                        :Show invalid phone number
+                        error message;
+
+                    else ([else])
+                        if () then ([occasion is invalid])
+                            :Show invalid occasion
+                            error message;
+
+                        else ([else])
+                        :Add new reservation to list of
+                        reservation applications;
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+stop
+@enduml
