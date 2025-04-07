@@ -143,7 +143,7 @@ The **Logic Component** is responsible for interpreting user input, executing co
 between `UI`, `Model`, and `Storage` components. Its API is defined in
 [`Logic.java`]().
 
-<img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="500"/>
+<img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="551"/>
 
 
 **Command Execution Flow**
