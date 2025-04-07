@@ -730,7 +730,7 @@ system.
 8) The response to any commands carried out by the user should become visible within 5 seconds.
 9) The user is not required to have an internet connection in order for the application to function.
 10) Data should be stored consistently even after closing and reopening the app.
-11) Should work on any mainstream OS as long as it has java 17+ installed
+11) Should work on any mainstream OS as long as it has java 17 installed
 
 ### Glossary
 
