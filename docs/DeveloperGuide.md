@@ -16,6 +16,7 @@
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Add Reservation Feature](#add-reservation-feature)
   - [[proposed] Undo/Redo](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
@@ -228,45 +229,48 @@ This section describes some noteworthy details on how certain features are imple
 
 The add reservation feature allows users to add reservations easily via the command `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…`.
 
-### How it is implemented
+#### How it is implemented
 
-The `add` command utilizes `AddCommand` and `AddCommandParser`. `AddCommandParser#parse(String args)` uses the `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)`
+The `add` command utilizes `AddCommand` and `AddCommandParser`. `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)`
 to extract the relevant inputs for each field. A new `Reservation` object is then created with the corresponding reservation name, phone number, email, date,
-number of diners and occasion(s) if provided. If occasion(s) are not provided, it would be initialized to an empty set. The `ModelManager#addReservation(Reservation reservation)` 
+number of diners and occasion(s) if provided. If occasion(s) are not provided, it would be initialized to an empty set. The `ModelManager#addReservation(Reservation reservation)`, which implements the `Model` interface, 
 adds the `Reservation` into the reservation list. 
 
-### Parsing the user input
+#### Parsing the user input
 
 1) The user inputs the `add` command.
 2) The `ReserveMateParser` creates a `AddCommandParser` and calls its `parse` method.
-3) The `AddCommandParser#parse(String args)` uses the `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract out relevant arguments. If any of 
+3) The `AddCommandParser#parse(String args)` uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract out relevant arguments. If any of 
 the compulsary arguments are missing a `ParseException` detailing the expected format is thrown.
-4) The `Name`, `Phone`, `Email`, `Diners`, `DateTime` and `Occasion` constructors would check the validity of the inputs. If any of the inputs are invalid,
+4) The `Name`, `Phone`, `Email`, `Diners`, `DateTime` and `Occasion` parsers would check the validity of the inputs. If any of the inputs are invalid,
 a `ParseException` detailing why the given argument is invalid is thrown. If all the relevant inputs are valid, a new `Reservation` object is created.
 5) The `AddCommandParser#parse(String args)` creates a `AddCommand` object with the new `Reservation` object.
 
-### Command Execution
+#### Command Execution
 1) The `LogicManager#execute(String commandText)` executes the `AddCommand`.
 2) The `AddCommand` calls `ModelManager#addReservation(Reservation reservation)` to add the reservation into the reservation list. If the provided reservation
 is already present in the reservation list, a `CommandException` is thrown.
 
-### Displaying the result
-1) If successful, a `CommandResult` with the success message is displayed to the user.
+#### Displaying the result
+1) If successful, a new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
 
 The following sequence diagram shows how the `add` command works:
 
 ![AddCommandSequenceDiagram.png](images/AddCommandSequenceDiagram.png)
 
+> 💡 **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+> the lifeline reaches the end of the diagram.
+
 The following activity diagram shows what happens when a user executes a `add` command:
 
 ![AddCommandActivityDiagram.png](images/AddCommandActivityDiagram.png)
 
-### Design Considerations
+#### Design Considerations
 
-#### Making occasion tag optional
+##### Making occasion tag optional
 
-While occasion tag is useful for some reservation, there will be others which do not require it. Instead of making the user,
-add a reservation when not needed, it was made optional to improve the user experience.
+While occasion tag is useful for some reservations, there will be others which do not require it. Instead of making the user
+add a occasions when not needed, it was made optional to improve user experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
