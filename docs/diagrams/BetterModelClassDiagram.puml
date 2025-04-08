@@ -17,7 +17,7 @@ Reservation -up-> "*" Occasion
 Reservation *--> Name
 Reservation *--> Phone
 Reservation *--> Email
-Reservation *--> Number_of_Diners
-Reservation *--> Date_Time
+Reservation *--> Diners
+Reservation *--> DateTime
 Reservation *--> Preference
 @enduml

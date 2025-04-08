@@ -198,7 +198,7 @@ model is given below. It has a `Occasion` list in the `ReserveMate`, which `Rese
 `ReserveMate` to only require one `Occasion` object per unique occasion, instead of each `Reservation` needing their
 own `Occasion` objects.<br>
 
-![img.png](images/BetterModelClassDiagram.png)
+![BetterModelClassDiagram.png](images/BetterModelClassDiagram.png)
 
 
 ### Storage component
@@ -253,7 +253,7 @@ a `ParseException` detailing why the given argument is invalid is thrown. If all
 is already present in the reservation list, a `CommandException` is thrown.
 
 #### Displaying the result
-1) If successful, a new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
+A new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
 
 The following sequence diagram shows how the `add` command works:
 
@@ -286,11 +286,11 @@ The delete functionality is implemented through the `DeleteCommand` class. The f
 following components:
 
 1. `DeleteCommand` - Delete the reservation based on index shown on the list.
-2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object
+2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object.
 
 #### Parsing the user input
 
-1. The user enters a command in the format `delete 1 cfm`.
+1. The user enters a command in the format `delete <INDEX> cfm`.
 2. The `LogicManager` passes the command string to `ReserveMateParser`.
 3. `ReserveMateParser` identifies the command as a `delete` command and delegates to `DeleteCommandParser`.
 4. `DeleteCommandParser` extracts and validates the index. If the index or `cfm` is missing, a parse
@@ -304,13 +304,16 @@ exception will be thrown.
 
 #### Displaying the result
 
-A new `commandResult` with the success message is created and is returned to the `LogicManager`. The GUI would be
+A new `CommandResult` with the success message is created and is returned to the `LogicManager`. The GUI would be
 updated.
 
 ![DeleteCommandResult](images/deleteCommandResult.png)
 
 The following sequence diagram shows how the delete command works:
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+> 💡 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+> the lifeline reaches the end of the diagram.
 
 #### Design Considerations
 
@@ -372,7 +375,7 @@ The following sequence diagram shows how the undo operation works:
 > the lifeline reaches the end of the diagram.
 
 The `redo` command does the opposite - it calls `Model#redoReserveMate()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+to the right, pointing to the previously undone state, and restores the reservemate to that state.
 
 > 💡 **Note:** If the `currentStatePointer` is at index `reservemateStateList.size() - 1`, pointing to the latest
 > reserve mate state, then there are no undone reserve mate states to restore. The `redo` command uses
@@ -429,7 +432,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target User Profile**: Our application is designed for small restaurant owners who have to manage numerous customer reservations and contact details. These users often operate in fast-paced environments and need a simple yet effective system to organize all reservations.
 
 
-**Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to customer contact details.
+**Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to reservation details.
 
 
 ### User stories
