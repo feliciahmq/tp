@@ -110,7 +110,7 @@ system, including their responsibilities and how they interact with other parts 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
 [`Ui.java`]()
 
-<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1156" />
+<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1000" />
 
 The UI consists of a `MainWindow` that is composed of multiple subcomponents, including:
 * `CommandBox`
@@ -1202,7 +1202,7 @@ However, this flexibility can be confusing when paired with the `add` or `edit` 
 to within the next 60 days**. The inconsistency may mislead users into thinking they can filter future dates for beyond
 60 days, when in reality, no such reservations can exist.<br>
 **Planned Enhancement**: We plan to update the message usage for `filter` command to include this clarification:
-`Note: Reservations can only exist within 60 days from today. Filtering beyond this range will not return future
+`Note: Reservations can only exist within 60 days from today, excluding the 60th day. Filtering beyond this range will not return future
 reservations.`
 
 6. **Display preference and occasion tags in customer reservation details to differentiate similar reservations**: <br>

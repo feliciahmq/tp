@@ -108,7 +108,7 @@ The prefixes used in ReserveMate are universal across all commands.
 | `p/`   | Contact Number          | Exactly 8 digits and must start with `8` or `9`. It must be a Singapore phone number.                                                                                                                                                                                                                                                                                                                                                                                          | `p/91234567`, `p/87654321`                 | `p/1234567`, `p/01234567`, `p/`               |
 | `e/`   | Email Address           | Must be a valid email format of `local-part@domain`. The local-part should only contain `alphanumeric` characters and these special characters, excluding the parentheses, `(+_.-)`. The local-part cannot start or end with any special characters. This is followed by a `@` and then a domain name. The domain name is made up of domain labels separated by periods. The final label (e.g., .com) must be at least 2 characters long and contain only letters (no digits). | `e/john@example.com`                       | `e/`, `e/john@.com`                           |
 | `x/`   | Number of Diners        | Integer from 1 to 10 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                | `x/1`, `x/5`, `x/10`                       | `x/0`, `x/11`, `x/-2`, `x/ten`                |
-| `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days. For `free` HHmm need not be included. For reservations, HHmm must be on the hour (e.g., 0000, 0100, etc.).                                                                                                                                                                                                                                                                                                             | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
+| `d/`   | Reservation Date & Time | Format: `YYYY-MM-DD HHmm`. Must be within next 60 days, excluding the 60th day. For `free` HHmm need not be included. For reservations, HHmm must be on the hour (e.g., 0000, 0100, etc.).                                                                                                                                                                                                                                                                                       | `d/2025-05-11 1800`, `d/2025-04-30 1000`   | `d/2023-02-21`, `d/2028-02-21 0900`, `d/past` |
 | `sd/`  | Start Date (Filter)     | Format: `YYYY-MM-DD HHmm`. Must be earlier than `ed/`.                                                                                                                                                                                                                                                                                                                                                                                                                         | `sd/2025-05-01 1800`                       | `sd/2025-13-01`, `sd/invalid`, `sd/`          |
 | `ed/`  | End Date (Filter)       | Format: `YYYY-MM-DD HHmm`. Must be later than `sd/`.                                                                                                                                                                                                                                                                                                                                                                                                                           | `ed/2025-05-15 2200`                       | `ed/2025-01-01`, `ed/late`, `ed/`             |
 | `o/`   | Occasion                | 2–50 characters, only `Alphanumeric` and common symbols (`- ' . , & ! ( ) /.`. It is `variadic`                                                                                                                                                                                                                                                                                                                                                                                | `o/Birthday`, `o/Anniversary o/VIP`        | `o/`, `o/@celebration`                        |
@@ -260,7 +260,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCA
 **Constraints**
 * A reservation can have any number of occasion (including 0).
 * Phone number should start with either 8 or 9 and must be 8 digits.
-* Date time should be after current time but within 60 days from it.
+* Date time should be after current time but within 60 days from it, excluding the 60th day.
 
 Notes:
 * ReserveMate allows users to add multiple reservations. 
@@ -272,9 +272,9 @@ Notes:
 - **Successful Execution:**
 > ---
 >
-> **Use Case #1**: Adding a reservation under `John Doe` with phone number `98765432`, email `johnd@example.com`, diner size of `5` on `2025-04-12 1800` for a `birthday`.
+> **Use Case #1**: Adding a reservation under `John Doe` with phone number `98765432`, email `johnd@example.com`, diner size of `5` on `2025-05-12 1800` for a `birthday`.
 >
-> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-05-12 1800 o/BIRTHDAY`
 >
 > **Output**: <br>
 > ```
@@ -283,15 +283,15 @@ Notes:
 > Phone: 98765432
 > Email: johnd@example.com
 > Number of Diners: 5
-> Date/Time: 2025-04-12 1800
+> Date/Time: 2025-05-12 1800
 > Preference: None
 > Occasion: [BIRTHDAY]
 >```
 > ---
 >
-> **Use Case #2**: Adding a reservation under `Jane Doe` with phone number `81234567`, email `betsycrowe@example.com`, diner size of `3` on `2025-04-20 1800` for a `graduation`.
+> **Use Case #2**: Adding a reservation under `Jane Doe` with phone number `81234567`, email `betsycrowe@example.com`, diner size of `3` on `2025-05-20 1800` for a `graduation`.
 >
-> **Input**: `add n/Jane Doe e/betsycrowe@example.com x/3 p/81234567 o/GRADUATION d/2025-04-20 1800`
+> **Input**: `add n/Jane Doe e/betsycrowe@example.com x/3 p/81234567 o/GRADUATION d/2025-05-20 1800`
 >
 > **Output**: <br>
 > ```
@@ -300,7 +300,7 @@ Notes:
 > Phone: 81234567
 > Email: betsycrowe@example.com
 > Number of Diners: 3
-> Date/Time: 2025-04-20 1800
+> Date/Time: 2025-05-20 1800
 > Preference: None
 > Occasion: [GRADUATION]
 > ```
@@ -402,7 +402,7 @@ Notes:
 >
 > **User Error #5**: Reservation already exists (duplicates)
 >
-> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`
+> **Input**: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-05-12 1800 o/BIRTHDAY`
 >
 > **Output**:
 > ```A reservation already exists for this customer (same email or phone) at the chosen date-time.```
@@ -420,7 +420,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
 * At least one of field (prefix) must be provided.
 * Editing occasion replaces the existing list of occasions. Use `o/` or `o/<WHITE_SPACE>` with no value to clear.
-* Date and time must be within 60 days from now and in the future, time must be in hourly increments.
+* Date and time must be within 60 days, excluding the 60th day, from now and in the future, time must be in hourly increments.
 * When editing a future reservation, the new date-time cannot be in the past.
 
 - **Successful Execution:**
@@ -438,7 +438,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 > Phone: 91234567
 > Email: johndoe@example.com
 > Number of Diners: 5
-> Date/Time: 2025-04-05 0800
+> Date/Time: 2025-05-05 0800
 > Preference: Less Salt
 > Occasion: [Anniversary], [Birthday]
 > ```
@@ -457,7 +457,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE_TIME] [x/NUMBER_OF_DINE
 > Phone: 98765432
 > Email: johnd@example.com
 > Number of Diners: 5
-> Date/Time: 2025-04-12 1800
+> Date/Time: 2025-05-12 1800
 > Preference: None
 > Occasion:
 > ```
@@ -1077,7 +1077,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 
 **Notes**:
 * `filter` accepts **any date range** .
-* Reservations can only be made for dates within the next 60 days from the current date.
+* Reservations can only be made for dates within the next 60 days from the current date, excluding the 60th day.
   * This means filtering for future dates beyond 60 days will not return upcoming reservations but can still be used to view historical data.
 
 **Constraints**
@@ -1122,7 +1122,7 @@ Format: `filter sd/ DATE_TIME ed/ DATE_TIME`
 > **User Error #1**: Start date is after end date.
 >
 > **Input:**
-> `filter sd/ 2025-05-20 1400 ed/ 2025-04-18 1400`
+> `filter sd/ 2025-05-20 1400 ed/ 2025-05-18 1400`
 >
 > **Output:**
 > ```
@@ -1485,7 +1485,7 @@ _Details coming soon ..._
 
 | Action         | Format, Examples                                                                                                                                                           |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`<br>e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-16 1800 o/Birthday` |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…​`<br>e.g., `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-05-16 1800 o/Birthday` |
 | **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [x/NUMBER_OF_DINERS] [d/DATE_TIME] [o/OCCASION]…​`<br>e.g., `edit 2 n/James Lee e/jameslee@example.com`                    |
 | **Delete**     | `delete INDEX cfm`<br>e.g., `delete 3 cfm`                                                                                                                                 |
 | **Preference** | `pref save INDEX PREFERENCE_TEXT`<br>e.g., `pref save 1 Window seat preferred`                                                                                             |
