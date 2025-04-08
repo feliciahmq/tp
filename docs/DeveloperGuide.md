@@ -772,15 +772,21 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
     Use case resumes at step 1.
 
-* 1b. The specified index is invalid.
+* 2a. The specified index is invalid.
 
-  * 1b1. ReserveMate shows an invalid reservation index error message.
+  * 2a1. ReserveMate shows an invalid reservation index error message.
 
     Use case resumes at step 1.
+  
+* 3a. Preference text description exceeds 50 characters.
 
-* 2a. No preference has been set for the reservation.
+  * 3a1. ReserveMate displays an error message indicating preference text must be less than 50 characters.
 
-  * 2a1. ReserveMate displays a message indicating no preference set.
+    Use case resumes at step 1.
+  
+* 4a. No preference has been set for the reservation.
+
+  * 4a1. ReserveMate displays "None", indicating no preference has been set.
 
     Use case ends
 
