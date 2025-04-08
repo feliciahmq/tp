@@ -71,7 +71,7 @@ The ***Architecture Diagram*** below illustrates the high-level structure of the
 * Application Startup: Ensuring all components are initialized in the correct order and properly linked.
 * At shut down: Managing the termination of components and executing necessary cleanup operations.
 
-[**`Commons`**]() serves as a collections of shared classes that are utilized by multiple components
+[**`Commons`**]() serves as a collection of shared classes that are utilized by multiple components
 within the application.
 
 The Application is further structured into four core components:
@@ -92,8 +92,8 @@ Each of the four components (illustrated in the diagram above) follows a structu
 
 * Each component defines its `interface`, ensuring a well-defined *API* for interaction.
 * The implementation of each component follows this interface using a corresponding **manager class**.
-* For instance, the `Logic` component defines its interface in `logic.java` and implements its functionality in
-`logicManage.java`.
+* For instance, the `Logic` component defines its interface in `Logic.java` and implements its functionality in
+`LogicManager.java`.
 * Other components interact with a given component through its interface rather than its concrete
 implementation. This approach minimizes coupling, making the system more modular and maintainable, as illustrated
 in the (partial) class diagram below.
@@ -103,12 +103,12 @@ in the (partial) class diagram below.
 **Detailed overview of Components**
 
 The following sections provide an in-depth explanation of each major component in the
-system, including their responsibilities and how they interact with other parts of the application
+system, including their responsibilities and how they interact with other parts of the application.
 
 ### UI Component
 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
-[`UI.java`]()
+[`Ui.java`]()
 
 <img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1156" />
 
@@ -141,7 +141,7 @@ stored in memory.
 ### Logic Component
 
 The **Logic Component** is responsible for interpreting user input, executing commands, and managing interactions
-between `UI`, `Model`, and `Storage` components. Its API is defined in
+between `Ui`, `Model`, and `Storage` components. Its API is defined in
 [`Logic.java`]().
 
 <img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="551"/>
@@ -210,10 +210,10 @@ Its API is defined in: [`Storage.java`]()
 The `Storage` component,
 * Can save both reserve mate data and user preference data in JSON format, and read them back into corresponding
 objects.
-* Inherits from both `ReserveMateStorage` and `userPrefStorage`, which means it can be treated as either one (if
+* Inherits from both `ReserveMateStorage` and `UserPrefsStorage`, which means it can be treated as either one (if
 only the functionality of only one is needed).
 * Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-that belong to the `model`)
+that belong to the `Model`)
 
 
 ### Common classes
@@ -1121,7 +1121,7 @@ More information on usage:
 
 1. Dealing with missing/corrupted data files.
 
-   1. Open reserveMate.jar and make any changes to the reservation list with the commands provided,
+   1. Open reservemate.jar and make any changes to the reservation list with the commands provided,
    being sure to leave at least one reservation in the list
 
    2. Edit the data/reservemate.json file by making any one of the following changes before saving the file and
