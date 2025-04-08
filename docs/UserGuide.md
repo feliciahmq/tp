@@ -175,7 +175,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Format: `YYYY-MM-DD HHmm`
 - Date must be:
-    - Within the next **60 days**.
+    - Within the next **60 days**, excluding the 60th day.
     - Cannot be a past date-time.
     - Time must be in hourly increments, ending with `00` (e.g., `1400`).
     - For the `free` command, `HHmm` is omitted.
