@@ -1245,3 +1245,9 @@ tourists from making reservations using the system. <br>
 format to allow valid international formats, such as +44 7123 456789 or +1-202-555-0191. Validation will ensure proper
 structure but allow flexibility in country codes. This makes the system more inclusive and tourist-friendly.
 
+
+10. **Add `clear past` command to remove all past reservations:** <br> **Current Issue:** The app accumulates past
+    reservations over time, which may clutter the interface and degrade user experience, especially for frequent users.
+    Currently, there is no easy way to bulk-remove outdated entries. <br> **Planned Enhancement:**
+    We will introduce a new command clear past that allows users to automatically remove all reservations
+    dated before today. This helps keep the app clean and focused on upcoming reservations. A confirmation prompt may be added to prevent accidental data loss.
