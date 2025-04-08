@@ -18,7 +18,7 @@
 - [Implementation](#implementation)
   - [Delete Feature](#delete-feature)
   - [Add Reservation Feature](#add-reservation-feature)
-  - [Proposed Undo/Redo Feature](#proposed-undoredo-feature)
+  - [\[Proposed\] Undo/Redo Feature](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#architecture)
@@ -324,7 +324,7 @@ The following sequence diagram shows how the delete command works:
 To prevent accidental deletions due to typing the wrong index, users are required to confirm their action by entering
 an additional 'cfm'. This extra step gives them time to double-check the index they’ve entered.
 
-### [Proposed] Undo/redo feature
+### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedReserveMate`. It extends `ReserveMate` with an undo/redo
 history, stored internally as an `reserveMateStateList` and `currentStatePointer`. Additionally, it implements the
