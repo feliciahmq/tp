@@ -826,11 +826,11 @@ system.
 8) The response to any commands carried out by the user should become visible within 5 seconds.
 9) The user is not required to have an internet connection in order for the application to function.
 10) Data should be stored consistently even after closing and reopening the app.
-11) Should work on any mainstream OS as long as it has java 17 installed
+11) Should work on any mainstream OS as long as it has Java 17 installed.
 
 ### Glossary
 
-* **User**: Restaurant manager using ReserveMates
+* **User**: Restaurant manager using ReserveMate
 * **Mainstream OS**: Windows, macOS, Linux, Unix
 * **Reservation**: Reservation details of the customer
 
@@ -933,7 +933,7 @@ More information on usage:
 
    2. Test case: `delete 1 cfm`<br>
       Expected: First reservation is deleted from the list. Index of the deleted reservation is shown in the success
-   message
+   message.
 
    3. Test case: `delete 1`<br>
       Expected: No reservation deleted. An Error confirmation prompt shown in the error message.
@@ -948,8 +948,8 @@ More information on usage:
 
    1. Prerequisites: Filter the reservation list using either `find` command. Multiple reservations in the list.
 
-   2. Test case: Similar to previous<br>
-      Expected: Similar to previous
+   2. Test case: Similar to previous.<br>
+      Expected: Similar to previous.
 
 
 ### Editing a reservation
@@ -971,10 +971,10 @@ More information on usage:
       Email: johnny@example.com; Number of Diners: 1; Occasion:
 
    4. Test case: `edit 1` <br>
-      Expected: No reservation is edited. Error details shown in error message
+      Expected: No reservation is edited. Error details shown in error message.
 
    5. Other incorrect edit commands to try: `edit`, `edit 0 n/john`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 
 ## Managing preference
@@ -1027,8 +1027,8 @@ More information on usage:
    4. Testcase: `show 0`<br>
       Expected: No reservation shown. Error details shown in error message.
 
-   5. Other incorrect show commands to try: `show`, `show first`
-      Expected: Similar to previous
+   5. Other incorrect show commands to try: `show`, `show first`<br>
+      Expected: Similar to previous.
 
 ## Find reservations
 
@@ -1054,7 +1054,7 @@ More information on usage:
       Expected: Invalid command format. Error message displayed.
 
    6. Other incorrect find commands to try: `find 1`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Filter reservations
 
@@ -1083,7 +1083,7 @@ More information on usage:
       Expected:  Invalid command format. Error message displayed.
 
    7. Other incorrect filter commands to try: `filter`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Find Free time slots
 
@@ -1102,7 +1102,7 @@ More information on usage:
       Expected: Invalid command format. Error message displayed.
 
    4. Other incorrect free commands to try: `free`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Clearing data
 
@@ -1110,14 +1110,14 @@ command: `clear`<br>
 More information on usage:
 [clear command](https://ay2425s2-cs2103-f08-1.github.io/tp/UserGuide.html#clearing-all-entries-clear)
 
-1. Test case: `clear cfm`
+1. Test case: `clear cfm`<br>
    Expected: Reservation book has been cleared!
 
-2. Test case: `clear`
+2. Test case: `clear`<br>
    Expected: Reservation book not cleared. An Error confirmation prompt shown in the error message.
 
-3. Other incorrect clear command: `clear confirm`, `clear cFM`
-   Expected: Similar to previous
+3. Other incorrect clear command: `clear confirm`, `clear cFM`<br>
+   Expected: Similar to previous.
 
 
 ## Saving data
@@ -1125,30 +1125,30 @@ More information on usage:
 1. Dealing with missing/corrupted data files.
 
    1. Open reservemate.jar and make any changes to the reservation list with the commands provided,
-   being sure to leave at least one reservation in the list
+   being sure to leave at least one reservation in the list.
 
    2. Edit the data/reservemate.json file by making any one of the following changes before saving the file and
-   reopening reserveMate.jar
+   reopening reservemate.jar.
 
       1. Test case: Edit the phone field of the first reservation to `invaild`.<br>
       Expected: ReserveMate starts with an empty reservation list.
 
       2. Test case: Edit the dateTime field of the first reservation to `invalid`.<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
       3. Test case: Edit the diners field of the first reservation to `invalid`.<br>
-         Expected: Similar to previous
+         Expected: Similar to previous.
 
 2. Dealing with missing files.
 
-    1. Test case: Exit ReserveMate, then delete the `data/reservemate.json` file. Reopen ReserveMate.
+    1. Test case: Exit ReserveMate, then delete the `data/reservemate.json` file. Reopen ReserveMate.<br>
        Expected: All reservations are deleted. ReserveMate will start as expected with sample data provided.
 
-    2. Test case: Exit ReserveMate, then delete `preferences.json`. Reopen ReserveMate.
+    2. Test case: Exit ReserveMate, then delete `preferences.json`. Reopen ReserveMate.<br>
        Expected: The previous user preferences such as the size of the window will be deleted. ReserveMate starts
        with default settings.
 
-    3. Test case: Exit ReserveMate, then delete the config.json file. Reopen ReserveMate.
+    3. Test case: Exit ReserveMate, then delete the config.json file. Reopen ReserveMate.<br>
        Expected: ReserveMate starts as expected, with either the sample data provided or any previously saved data,
        if present. The size of the window should be the same as the previously saved user preference.
 
