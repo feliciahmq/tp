@@ -125,7 +125,7 @@ commonalities between different UI elements.
 **Framework and layout**
 
 The UI is built using the **JavaFx UI framework**. The layout of UI elements defined in .fxml is located in the
-`src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWinow.fxml`.
+`src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWindow.fxml`.
 
 **Responsibilities**
 
