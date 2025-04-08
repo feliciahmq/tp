@@ -1003,7 +1003,7 @@ More information on usage:
       Expected: Saved preference for reservation: 3
 
    4. Testcase: `pref save 2`<br>
-      Expected: No preference is saved. Error details shown in the error message.
+      Expected: Invalid command format. Error message displayed.
 
 2. Other incorrect commands to try
 
