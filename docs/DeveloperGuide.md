@@ -18,7 +18,7 @@
 - [Implementation](#implementation)
   - [Delete Feature](#delete-feature)
   - [Add Reservation Feature](#add-reservation-feature)
-  - [Proposed Undo/Redo Feature](#proposed-undoredo-feature)
+  - [[proposed] Undo/Redo Feature](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#architecture)
