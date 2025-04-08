@@ -110,7 +110,7 @@ system, including their responsibilities and how they interact with other parts 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
 [`Ui.java`](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/ui/Ui.java)
 
-<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1000" />
+<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="950" />
 
 The UI consists of a `MainWindow` that is composed of multiple subcomponents, including:
 * `CommandBox`
@@ -915,11 +915,11 @@ More information on usage:
 
 1. Adding a reservation to ReserveMate.
 
-   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-04-12 1800 o/BIRTHDAY`<br>
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com x/5 d/2025-05-12 1800 o/BIRTHDAY`<br>
       Expected: New reservation added: John Doe; Phone: 98765432;
       Email: johnd@example.com; Number of Diners: 5; Occasion: [BIRTHDAY]
 
-   2. Test case: `add n/Jane Doe e/betsycrowe@example.com x/3 p/81234567 o/GRADUATION d/2025-04-20 1800`<br>
+   2. Test case: `add n/Jane Doe e/betsycrowe@example.com x/3 p/81234567 o/GRADUATION d/2025-05-20 1800`<br>
       Expected: New reservation added: Jane Doe; Phone: 81234567;
       Email: betsycrowe@example.com; Number of Diners: 3; Occasion: [GRADUATION]
 
@@ -1049,11 +1049,11 @@ More information on usage:
    1. Prerequisites: There exists a reservation in ReserveMate.
 
    2. Testcase: `find john`<br>
-      Expected: 1 reservations listed! 1. John Doe (5 diners) - 2025-04-12 1800
+      Expected: 1 reservations listed! 1. John Doe (5 diners) - 2025-05-12 1800
 
    3. Testcase `find john jane`<br>
-      Expected: 2 reservations listed! 1. John Doe (5 diners) - 2025-04-12 1800 2. Jane Doe
-      (3 diners) - 2025-04-20 1800
+      Expected: 2 reservations listed! 1. John Doe (5 diners) - 2025-05-12 1800 2. Jane Doe
+      (3 diners) - 2025-05-20 1800
 
    4. Testcase: `find Michael`<br>
       Expected: No reservation shown.
@@ -1074,14 +1074,14 @@ More information on usage:
 
    1. Prerequisites: There exists a reservation in ReserveMate.
 
-   2. Testcase: `filter sd/ 2025-04-12 1400 ed/ 2025-05-15 1400`<br>
+   2. Testcase: `filter sd/ 2025-05-12 1400 ed/ 2025-05-25 1400`<br>
       Expected: Here are the available reservations for the date range: 1. John Doe
-      (5 diners) - 2025-04-12 1800 2. Jane Doe (3 diners) - 2025-04-20 1800
+      (5 diners) - 2025-05-12 1800 2. Jane Doe (3 diners) - 2025-05-20 1800
 
    3. Testcase `filter sd/ 2026-12-20 1200 ed/ 2026-12-22 1200`<br>
       Expected: No reservations found for the date range.
 
-   4. Testcase: `filter sd/ 2025-05-20 1400 ed/ 2025-04-18 1400`<br>
+   4. Testcase: `filter sd/ 2025-05-20 1400 ed/ 2025-05-18 1400`<br>
       Expected: No reservations shown as user input an invalid date, an error message is displayed.
 
    5. Testcase: `filter sd/ 2026/12/12 1400 ed/ 2026-12-15 1400`<br>
@@ -1167,7 +1167,7 @@ More information on usage:
 (e.g., 2 hours), users must create multiple consecutive reservations manually. This results in duplication
 and inefficiency. <br>
 **Planned Enhancement**: We plan to support reservation commands that accept a time range,
-e.g., `d/2025-04-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
+e.g., `d/2025-05-20 1800-2000`, allowing users to create a single reservation for multiple hours. Internally, the system
 will auto-allocate the necessary consecutive slots without requiring the user to enter multiple commands.
 
 2. **Simplify preference saving by removing redundant 'save' keyword in `pref` command**: <br>
