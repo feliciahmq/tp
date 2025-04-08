@@ -71,7 +71,7 @@ The ***Architecture Diagram*** below illustrates the high-level structure of the
 * Application Startup: Ensuring all components are initialized in the correct order and properly linked.
 * At shut down: Managing the termination of components and executing necessary cleanup operations.
 
-[**`Commons`**]() serves as a collections of shared classes that are utilized by multiple components
+[**`Commons`**]() serves as a collection of shared classes that are utilized by multiple components
 within the application.
 
 The Application is further structured into four core components:
@@ -92,8 +92,8 @@ Each of the four components (illustrated in the diagram above) follows a structu
 
 * Each component defines its `interface`, ensuring a well-defined *API* for interaction.
 * The implementation of each component follows this interface using a corresponding **manager class**.
-* For instance, the `Logic` component defines its interface in `logic.java` and implements its functionality in
-`logicManager.java`.
+* For instance, the `Logic` component defines its interface in `Logic.java` and implements its functionality in
+`LogicManager.java`.
 * Other components interact with a given component through its interface rather than its concrete
 implementation. This approach minimizes coupling, making the system more modular and maintainable, as illustrated
 in the (partial) class diagram below.
@@ -103,12 +103,12 @@ in the (partial) class diagram below.
 **Detailed overview of Components**
 
 The following sections provide an in-depth explanation of each major component in the
-system, including their responsibilities and how they interact with other parts of the application
+system, including their responsibilities and how they interact with other parts of the application.
 
 ### UI Component
 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
-[`UI.java`]()
+[`Ui.java`]()
 
 <img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1000" />
 
@@ -141,7 +141,7 @@ stored in memory.
 ### Logic Component
 
 The **Logic Component** is responsible for interpreting user input, executing commands, and managing interactions
-between `UI`, `Model`, and `Storage` components. Its API is defined in
+between `Ui`, `Model`, and `Storage` components. Its API is defined in
 [`Logic.java`]().
 
 <img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="551"/>
@@ -198,7 +198,7 @@ model is given below. It has a `Occasion` list in the `ReserveMate`, which `Rese
 `ReserveMate` to only require one `Occasion` object per unique occasion, instead of each `Reservation` needing their
 own `Occasion` objects.<br>
 
-![img.png](images/BetterModelClassDiagram.png)
+![BetterModelClassDiagram.png](images/BetterModelClassDiagram.png)
 
 
 ### Storage component
@@ -210,10 +210,10 @@ Its API is defined in: [`Storage.java`]()
 The `Storage` component,
 * Can save both reserve mate data and user preference data in JSON format, and read them back into corresponding
 objects.
-* Inherits from both `ReserveMateStorage` and `userPrefStorage`, which means it can be treated as either one (if
+* Inherits from both `ReserveMateStorage` and `UserPrefsStorage`, which means it can be treated as either one (if
 only the functionality of only one is needed).
 * Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-that belong to the `model`)
+that belong to the `Model`)
 
 
 ### Common classes
@@ -253,7 +253,7 @@ a `ParseException` detailing why the given argument is invalid is thrown. If all
 is already present in the reservation list, a `CommandException` is thrown.
 
 #### Displaying the result
-1) If successful, a new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
+A new `CommandResult` with the success message is created and is returned to `LogicManager`. The GUI would be updated.
 
 The following sequence diagram shows how the `add` command works:
 
@@ -286,11 +286,11 @@ The delete functionality is implemented through the `DeleteCommand` class. The f
 following components:
 
 1. `DeleteCommand` - Delete the reservation based on index shown on the list.
-2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object
+2. `DeleteCommandParser` - Parses and validates the user input into a `DeleteCommand` object.
 
 #### Parsing the user input
 
-1. The user enters a command in the format `delete 1 cfm`.
+1. The user enters a command in the format `delete <INDEX> cfm`.
 2. The `LogicManager` passes the command string to `ReserveMateParser`.
 3. `ReserveMateParser` identifies the command as a `delete` command and delegates to `DeleteCommandParser`.
 4. `DeleteCommandParser` extracts and validates the index. If the index or `cfm` is missing, a parse
@@ -304,13 +304,16 @@ exception will be thrown.
 
 #### Displaying the result
 
-A new `commandResult` with the success message is created and is returned to the `LogicManager`. The GUI would be
+A new `CommandResult` with the success message is created and is returned to the `LogicManager`. The GUI would be
 updated.
 
 ![DeleteCommandResult](images/deleteCommandResult.png)
 
 The following sequence diagram shows how the delete command works:
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+> 💡 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+> the lifeline reaches the end of the diagram.
 
 #### Design Considerations
 
@@ -372,7 +375,7 @@ The following sequence diagram shows how the undo operation works:
 > the lifeline reaches the end of the diagram.
 
 The `redo` command does the opposite - it calls `Model#redoReserveMate()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+to the right, pointing to the previously undone state, and restores the reservemate to that state.
 
 > 💡 **Note:** If the `currentStatePointer` is at index `reservemateStateList.size() - 1`, pointing to the latest
 > reserve mate state, then there are no undone reserve mate states to restore. The `redo` command uses
@@ -429,7 +432,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target User Profile**: Our application is designed for small restaurant owners who have to manage numerous customer reservations and contact details. These users often operate in fast-paced environments and need a simple yet effective system to organize all reservations.
 
 
-**Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to customer contact details.
+**Value Proposition**: ReserveMate provides small restaurant owners with a fast and intuitive way to manage reservation and customer contact details through a Command Line Interface (CLI). This enhances operational efficiency by streamlining organisation and ensuring easy access to reservation details.
 
 
 ### User stories
@@ -769,15 +772,21 @@ Priorities: High (Must have) - `* * *`, Medium (Good to have) - `* *`, Low (Exte
 
     Use case resumes at step 1.
 
-* 1b. The specified index is invalid.
+* 2a. The specified index is invalid.
 
-  * 1b1. ReserveMate shows an invalid reservation index error message.
+  * 2a1. ReserveMate shows an invalid reservation index error message.
 
     Use case resumes at step 1.
+  
+* 3a. Preference text description exceeds 50 characters.
 
-* 2a. No preference has been set for the reservation.
+  * 3a1. ReserveMate displays an error message indicating preference text must be less than 50 characters.
 
-  * 2a1. ReserveMate displays a message indicating no preference set.
+    Use case resumes at step 1.
+  
+* 4a. No preference has been set for the reservation.
+
+  * 4a1. ReserveMate displays "None", indicating no preference has been set.
 
     Use case ends
 
@@ -823,11 +832,11 @@ system.
 8) The response to any commands carried out by the user should become visible within 5 seconds.
 9) The user is not required to have an internet connection in order for the application to function.
 10) Data should be stored consistently even after closing and reopening the app.
-11) Should work on any mainstream OS as long as it has java 17 installed
+11) Should work on any mainstream OS as long as it has Java 17 installed.
 
 ### Glossary
 
-* **User**: Restaurant manager using ReserveMates
+* **User**: Restaurant manager using ReserveMate
 * **Mainstream OS**: Windows, macOS, Linux, Unix
 * **Reservation**: Reservation details of the customer
 
@@ -930,7 +939,7 @@ More information on usage:
 
    2. Test case: `delete 1 cfm`<br>
       Expected: First reservation is deleted from the list. Index of the deleted reservation is shown in the success
-   message
+   message.
 
    3. Test case: `delete 1`<br>
       Expected: No reservation deleted. An Error confirmation prompt shown in the error message.
@@ -945,8 +954,8 @@ More information on usage:
 
    1. Prerequisites: Filter the reservation list using either `find` command. Multiple reservations in the list.
 
-   2. Test case: Similar to previous<br>
-      Expected: Similar to previous
+   2. Test case: Similar to previous.<br>
+      Expected: Similar to previous.
 
 
 ### Editing a reservation
@@ -968,10 +977,10 @@ More information on usage:
       Email: johnny@example.com; Number of Diners: 1; Occasion:
 
    4. Test case: `edit 1` <br>
-      Expected: No reservation is edited. Error details shown in error message
+      Expected: No reservation is edited. Error details shown in error message.
 
    5. Other incorrect edit commands to try: `edit`, `edit 0 n/john`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 
 ## Managing preference
@@ -1024,8 +1033,8 @@ More information on usage:
    4. Testcase: `show 0`<br>
       Expected: No reservation shown. Error details shown in error message.
 
-   5. Other incorrect show commands to try: `show`, `show first`
-      Expected: Similar to previous
+   5. Other incorrect show commands to try: `show`, `show first`<br>
+      Expected: Similar to previous.
 
 ## Find reservations
 
@@ -1051,7 +1060,7 @@ More information on usage:
       Expected: Invalid command format. Error message displayed.
 
    6. Other incorrect find commands to try: `find 1`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Filter reservations
 
@@ -1080,7 +1089,7 @@ More information on usage:
       Expected:  Invalid command format. Error message displayed.
 
    7. Other incorrect filter commands to try: `filter`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Find Free time slots
 
@@ -1099,7 +1108,7 @@ More information on usage:
       Expected: Invalid command format. Error message displayed.
 
    4. Other incorrect free commands to try: `free`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ## Clearing data
 
@@ -1107,45 +1116,45 @@ command: `clear`<br>
 More information on usage:
 [clear command](https://ay2425s2-cs2103-f08-1.github.io/tp/UserGuide.html#clearing-all-entries-clear)
 
-1. Test case: `clear cfm`
+1. Test case: `clear cfm`<br>
    Expected: Reservation book has been cleared!
 
-2. Test case: `clear`
+2. Test case: `clear`<br>
    Expected: Reservation book not cleared. An Error confirmation prompt shown in the error message.
 
-3. Other incorrect clear command: `clear confirm`, `clear cFM`
-   Expected: Similar to previous
+3. Other incorrect clear command: `clear confirm`, `clear cFM`<br>
+   Expected: Similar to previous.
 
 
 ## Saving data
 
 1. Dealing with missing/corrupted data files.
 
-   1. Open reserveMate.jar and make any changes to the reservation list with the commands provided,
-   being sure to leave at least one reservation in the list
+   1. Open reservemate.jar and make any changes to the reservation list with the commands provided,
+   being sure to leave at least one reservation in the list.
 
    2. Edit the data/reservemate.json file by making any one of the following changes before saving the file and
-   reopening reserveMate.jar
+   reopening reservemate.jar.
 
       1. Test case: Edit the phone field of the first reservation to `invaild`.<br>
       Expected: ReserveMate starts with an empty reservation list.
 
       2. Test case: Edit the dateTime field of the first reservation to `invalid`.<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
       3. Test case: Edit the diners field of the first reservation to `invalid`.<br>
-         Expected: Similar to previous
+         Expected: Similar to previous.
 
 2. Dealing with missing files.
 
-    1. Test case: Exit ReserveMate, then delete the `data/reservemate.json` file. Reopen ReserveMate.
+    1. Test case: Exit ReserveMate, then delete the `data/reservemate.json` file. Reopen ReserveMate.<br>
        Expected: All reservations are deleted. ReserveMate will start as expected with sample data provided.
 
-    2. Test case: Exit ReserveMate, then delete `preferences.json`. Reopen ReserveMate.
+    2. Test case: Exit ReserveMate, then delete `preferences.json`. Reopen ReserveMate.<br>
        Expected: The previous user preferences such as the size of the window will be deleted. ReserveMate starts
        with default settings.
 
-    3. Test case: Exit ReserveMate, then delete the config.json file. Reopen ReserveMate.
+    3. Test case: Exit ReserveMate, then delete the config.json file. Reopen ReserveMate.<br>
        Expected: ReserveMate starts as expected, with either the sample data provided or any previously saved data,
        if present. The size of the window should be the same as the previously saved user preference.
 
@@ -1236,3 +1245,9 @@ tourists from making reservations using the system. <br>
 format to allow valid international formats, such as +44 7123 456789 or +1-202-555-0191. Validation will ensure proper
 structure but allow flexibility in country codes. This makes the system more inclusive and tourist-friendly.
 
+
+10. **Add `clear past` command to remove all past reservations:** <br> **Current Issue:** The app accumulates past
+    reservations over time, which may clutter the interface and degrade user experience, especially for frequent users.
+    Currently, there is no easy way to bulk-remove outdated entries. <br> **Planned Enhancement:**
+    We will introduce a new command clear past that allows users to automatically remove all reservations
+    dated before today. This helps keep the app clean and focused on upcoming reservations. A confirmation prompt may be added to prevent accidental data loss.

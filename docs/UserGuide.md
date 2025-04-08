@@ -24,7 +24,7 @@ This guide assumes you're comfortable using a computer and does not require any 
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F08-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate
+3. Copy the file to the folder you want to use as the _home folder_ for your ReserveMate.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar reservemate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. <br>
@@ -71,7 +71,7 @@ Commands in ReserveMate have the following structure:
 
 1. `INDEX` is **one-based** (i.e. starts from 1 not 0) and must fall within the range of the current reservation list.
 2. ReserveMate handles `INDEX` errors in two ways:
-   1. The index is a valid positive integer but exceeds the size of the current reservation list
+   1. The index is a valid positive integer but exceeds the size of the current reservation list.
    2. The index is an invalid number (e.g. non-integer values, negative integers or zero), it is treated as an invalid index. Only values within the range `[1, reservation list size]` are supported.
 
 #### Prefixes
@@ -141,7 +141,7 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Can be maximum 50 characters long.
 
-- Names should contain only (english) characters and spaces
+- Names should contain only (english) characters and spaces.
 
 - Names can be:
     - A **single character or initial** (e.g., `n/A`) — valid but potentially confusing in lists.
@@ -175,8 +175,8 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Format: `YYYY-MM-DD HHmm`
 - Date must be:
-    - Within the next **60 days**
-    - Cannot be a past date-time
+    - Within the next **60 days**.
+    - Cannot be a past date-time.
     - Time must be in hourly increments, ending with `00` (e.g., `1400`).
     - For the `free` command, `HHmm` is omitted.
     - For the `edit` command, the date & time cannot be in the past.
@@ -187,9 +187,9 @@ The prefixes used in ReserveMate are universal across all commands.
 
 - Prefix is **optional and variadic** (can appear multiple times).
 - Must be between 2 and 50 characters long.
-- Accepts only alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)
+- Accepts only alphanumeric values and common symbols (`- ' . , & ! ( ) /.`).
 - Blank values (e.g., `o/`) will clear the occasions for the specific reservation when used in `edit` command it will
-result in an error when used in `add` command
+result in an error when used in `add` command.
 - `o/birthday` and `o/Birthday` are treated differently.
 
 ---
@@ -219,7 +219,7 @@ To get started with ReserveMate, type the command in the command box and press `
   e.g. in `edit <INDEX> p/96214711`, `PHONE_NUMBER` is a parameter which can be used as `add n/John Doe p/96214711`.
 
 * Items with `…` are variadic, meaning they can be used zero or more times.<br>
-  e.g. `[o/OCCASION]…​` can be used as ` ` (i.e. 0 times), `o/Birthday`, `o/Birthday o/Graduation` etc.
+  e.g. `[o/OCCASION]…​` can be used as (i.e. 0 times), `o/Birthday`, `o/Birthday o/Graduation` etc.
 
 * Prefix order does not matter. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -258,7 +258,7 @@ Adds a new `Reservation` to ReserveMate.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL x/NUMBER_OF_DINER d/DATE_TIME [o/OCCASION]…`
 
 **Constraints**
-* A reservation can have any number of occasion (including 0)
+* A reservation can have any number of occasion (including 0).
 * Phone number should start with either 8 or 9 and must be 8 digits.
 * Date time should be after current time but within 60 days from it, excluding the 60th day.
 
@@ -683,11 +683,11 @@ Format: `delete <INDEX> cfm`
 Saves a `Reservation` preference in ReserveMate.
 
 Format:
-* To save a preference: `pref save <INDEX> <PREFERENCE_DESCRIPTION>`
+* To save a preference: `pref save <INDEX> <PREFERENCE_TEXT>`
 
 **Notes**:
 * `INDEX` **must be a positive integer** referring to a valid reservation in the list.
-* `PREFERENCE_DESCRIPTION` can contain alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)(E.g. include dietary needs, seating
+* `PREFERENCE_TEXT` can contain alphanumeric values and common symbols (`- ' . , & ! ( ) /.`)(E.g. include dietary needs, seating
   preferences, or other customer requests).
 * Preference would be `None` by default.
 
@@ -712,7 +712,7 @@ Format:
 - **Failed Execution:**
 > ---
 >
-> **User Error #1**: Saving without providing a preference description.
+> **User Error #1**: Saving without providing a preference text description.
 >
 > **Input:**
 > `pref save 2`
@@ -722,7 +722,7 @@ Format:
 > Invalid command format!
 > pref: Saves customer preferences for the reservation identified by the index number.
 >
-> Parameters for saving: pref save <INDEX> <PREFERENCE>
+> Parameters for saving: pref save <INDEX> <PREFERENCE_TEXT>
 >
 > Ensure all parameters are entered and valid
 > Example: pref save 1 No nuts, allergic to seafood
@@ -753,10 +753,22 @@ Format:
 > ```
 > The reservation index must be within the reservation list range
 > ```
->
+> 
 > ---
 >
-> **User Error #4**: Invalid command.
+> > **User Error #4**: Preference text exceeds 50 characters 
+>
+> **Input:**
+> `pref save 10 longerthanfiftycharacterslongerthanfiftycharacterslongerthanfiftycharacters
+>
+> **Output:**
+> ```
+> Preference text cannot exceed 50 characters.
+> ```
+> 
+> ---
+> 
+> **User Error #5**: Invalid command.
 >
 > **Input:**
 > `pref update 1 Vegan menu`
@@ -771,6 +783,7 @@ Format:
 > Ensure all parameters are entered and valid
 > Example: pref save 1 No nuts, allergic to seafood
 > ```
+> 
 > ---
 
 ### Listing all reservations : `list`
