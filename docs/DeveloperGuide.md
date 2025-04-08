@@ -93,7 +93,7 @@ Each of the four components (illustrated in the diagram above) follows a structu
 * Each component defines its `interface`, ensuring a well-defined *API* for interaction.
 * The implementation of each component follows this interface using a corresponding **manager class**.
 * For instance, the `Logic` component defines its interface in `logic.java` and implements its functionality in
-`logicManage.java`.
+`logicManager.java`.
 * Other components interact with a given component through its interface rather than its concrete
 implementation. This approach minimizes coupling, making the system more modular and maintainable, as illustrated
 in the (partial) class diagram below.
@@ -110,7 +110,7 @@ system, including their responsibilities and how they interact with other parts 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
 [`UI.java`]()
 
-<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1156" />
+<img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1000" />
 
 The UI consists of a `MainWindow` that is composed of multiple subcomponents, including:
 * `CommandBox`
@@ -125,7 +125,7 @@ commonalities between different UI elements.
 **Framework and layout**
 
 The UI is built using the **JavaFx UI framework**. The layout of UI elements defined in .fxml is located in the
-`src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWinow.fxml`.
+`src/main/resources/view` folder. For example, the layout for `MainWindow` is specified in `MainWindow.fxml`.
 
 **Responsibilities**
 
@@ -1193,7 +1193,7 @@ However, this flexibility can be confusing when paired with the `add` or `edit` 
 to within the next 60 days**. The inconsistency may mislead users into thinking they can filter future dates for beyond
 60 days, when in reality, no such reservations can exist.<br>
 **Planned Enhancement**: We plan to update the message usage for `filter` command to include this clarification:
-`Note: Reservations can only exist within 60 days from today. Filtering beyond this range will not return future
+`Note: Reservations can only exist within 60 days from today, excluding the 60th day. Filtering beyond this range will not return future
 reservations.`
 
 6. **Display preference and occasion tags in customer reservation details to differentiate similar reservations**: <br>
