@@ -16,9 +16,9 @@
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
-  - [Delete](#Delete-feature)
+  - [Delete Feature](#delete-feature)
   - [Add Reservation Feature](#add-reservation-feature)
-  - [[proposed] Undo/Redo](#proposed-undoredo-feature)
+  - [[proposed] Undo/Redo Feature](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#architecture)
@@ -66,20 +66,20 @@ The ***Architecture Diagram*** below illustrates the high-level structure of the
 **Overview of Main Components of the architecture**
 
 **`Main`** contains two key classes:
-[Main]() and
-[MainApp](), which are responsible for,
+[Main](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/Main.java) and
+[MainApp](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/MainApp.java), which are responsible for,
 * Application Startup: Ensuring all components are initialized in the correct order and properly linked.
 * At shut down: Managing the termination of components and executing necessary cleanup operations.
 
-[**`Commons`**]() serves as a collection of shared classes that are utilized by multiple components
+[**`Commons`**](#common-classes) serves as a collection of shared classes that are utilized by multiple components
 within the application.
 
 The Application is further structured into four core components:
 
-* [**`UI`**](): The UI of the Application.
-* [**`Logic`**](): Processes User commands.
-* [**`Model`**](): Manages in-memory application data.
-* [**`Storage`**](): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): The UI of the Application.
+* [**`Logic`**](#logic-component): Processes User commands.
+* [**`Model`**](#model-component): Manages in-memory application data.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 **Interaction between Architecture Components**
 
@@ -108,7 +108,7 @@ system, including their responsibilities and how they interact with other parts 
 ### UI Component
 
 The **UI Component** is responsible for handling user interactions. Its API is defined in
-[`Ui.java`]()
+[`Ui.java`](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/ui/Ui.java)
 
 <img src="images/UIClassDiagram.png" alt = "UI Class Diagram" width="1000" />
 
@@ -142,7 +142,7 @@ stored in memory.
 
 The **Logic Component** is responsible for interpreting user input, executing commands, and managing interactions
 between `Ui`, `Model`, and `Storage` components. Its API is defined in
-[`Logic.java`]().
+[`Logic.java`](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/logic/Logic.java).
 
 <img src="images/LogicClassDiagram.png" alt = "Logic Class Diagram" width="551"/>
 
@@ -178,7 +178,8 @@ interface so that they can be treated similarly where possible e.g, during testi
 
 ### Model Component
 
-Its API is defined in: [`Model.java`]()
+Its API is defined in:
+[`Model.java`](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/model/Model.java)
 
 ![img.png](images/ModelClassDiagram.png)
 
@@ -203,7 +204,8 @@ own `Occasion` objects.<br>
 
 ### Storage component
 
-Its API is defined in: [`Storage.java`]()
+Its API is defined in:
+[`Storage.java`](https://github.com/AY2425S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/reserve/storage/Storage.java)
 
 ![img.png](images/StorageClassDiagram.png)
 
